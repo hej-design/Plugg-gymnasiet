@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<style>[hidden]{display:none!important}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
+<title>Studiepodd om antiken</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<style>
+/* Samma upplägg som Week 5-podden: fast spelare överst, avsnitten som kort under. Marias färger, ett ljust tema med avsikt. */
+:root{
+  --navy:#182851; --gold:#b4975a; --brown:#362b25; --taupe:#7c675c; --warm:#e3dedd;
+  --paper:#f7f4f2; --white:#fffdfb; --line:#d6cfcc; --hl:#efe4cf; --onnavy:#ece6df;
+  --serif:"EB Garamond", Garamond, "Garamond Premier Pro", Georgia, serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+body{margin:0; background:var(--paper); color:var(--brown); font-family:var(--serif); font-size:19px; line-height:1.55}
+.wrap{max-width:720px; margin:0 auto; padding-block:2.5rem 5rem; padding-inline:16px}
+.eyebrow{font-size:.8rem; letter-spacing:.14em; text-transform:uppercase; color:var(--taupe)}
+h1{font-weight:500; font-size:2.4rem; line-height:1.1; color:var(--navy); margin:.3rem 0 .6rem; text-wrap:balance}
+.lede{color:var(--taupe); margin:0 0 1.6rem; max-width:60ch}
+.player{position:sticky; top:env(safe-area-inset-top,0px); z-index:5; background:var(--navy); color:#fff; border-radius:10px; padding:.9rem 1rem; display:flex; flex-wrap:wrap; gap:.6rem .8rem; align-items:center; margin-bottom:1.6rem; box-shadow:0 6px 20px rgba(24,40,81,.18)}
+.player .now{flex:1 1 100%; font-size:.95rem; color:var(--onnavy); min-height:1.4em}
+.player .now strong{color:var(--gold); font-weight:600}
+.ctrls{display:flex; flex-wrap:wrap; gap:.5rem .6rem; align-items:center; flex:1 1 100%}
+.player button{font-family:inherit; font-size:1rem; border-radius:999px; border:1px solid var(--gold); background:transparent; color:#fff; padding:.35rem 1rem; cursor:pointer; min-height:2.2rem}
+.player button.primary{background:var(--gold); color:var(--navy); font-weight:600; min-width:6.2rem}
+.player label{font-size:.9rem; color:var(--onnavy); display:flex; align-items:center; gap:.4rem}
+.player select{font-family:inherit; font-size:.95rem; border-radius:6px; border:1px solid var(--gold); background:var(--navy); color:#fff; padding:.2rem .4rem}
+button:focus-visible, select:focus-visible, .bar:focus-visible, .line:focus-visible{outline:2px solid var(--gold); outline-offset:2px}
+.bar-wrap{flex:1 1 100%; display:flex; align-items:center; gap:.6rem; margin-top:.2rem}
+.t{font-size:.9rem; color:var(--onnavy); min-width:2.9rem; text-align:center; font-variant-numeric:tabular-nums}
+.bar{position:relative; flex:1; height:10px; border-radius:99px; background:rgba(255,255,255,.18); cursor:pointer; touch-action:none}
+.bar::before{content:""; position:absolute; left:0; right:0; top:-12px; bottom:-12px}
+.fill{position:absolute; left:0; top:0; bottom:0; width:0; border-radius:99px; background:var(--gold)}
+.ticks span{position:absolute; top:-3px; width:2px; height:16px; background:rgba(255,255,255,.6); margin-left:-1px}
+.knob{position:absolute; top:50%; left:0; width:20px; height:20px; margin:-10px 0 0 -10px; border-radius:50%; background:#fff; border:3px solid var(--gold); box-shadow:0 1px 4px rgba(0,0,0,.3)}
+.resume{flex:1 1 100%; font-size:.95rem; color:var(--onnavy); display:flex; flex-wrap:wrap; align-items:center; gap:.4rem .6rem}
+.tip{font-size:.95rem; color:var(--taupe); margin:-.6rem 0 1.4rem}
+.ep{background:var(--white); border:1px solid var(--line); border-radius:10px; margin-bottom:.9rem; overflow:hidden}
+.ep.playing{border-color:var(--gold); box-shadow:0 0 0 2px rgba(180,151,90,.25)}
+.ep-head{display:flex; align-items:center; gap:.9rem; padding:.9rem 1rem}
+.ep-play{flex-shrink:0; width:2.8rem; height:2.8rem; border-radius:50%; border:none; background:var(--navy); color:var(--gold); font-size:1rem; cursor:pointer}
+.ep.playing .ep-play{background:var(--gold); color:var(--navy)}
+.ep-titles{flex:1; min-width:0}
+.ep-num{font-size:.78rem; letter-spacing:.1em; text-transform:uppercase; color:var(--taupe)}
+.ep h2{margin:.05rem 0 0; font-weight:600; font-size:1.3rem; color:var(--navy); line-height:1.2; text-wrap:balance}
+.ep-sub{font-size:.95rem; color:var(--taupe); font-style:italic}
+.ep-toggle{flex-shrink:0; font-family:inherit; font-size:.95rem; border-radius:999px; border:1px solid var(--navy); background:var(--white); color:var(--navy); padding:.25rem .8rem; cursor:pointer}
+.ep-text{padding:0 1.2rem 1rem 4.7rem}
+.line{margin:0 0 .7rem; border-radius:4px; padding:.1rem .3rem; cursor:pointer; transition:background .2s}
+.line:hover{background:var(--warm)}
+.line.speaking{background:var(--hl); color:var(--navy)}
+footer{margin-top:2rem; font-size:.95rem; color:var(--taupe)}
+@media (max-width:520px){
+  h1{font-size:2rem}
+  .ep-text{padding-left:1.2rem}
+  .ep-head{flex-wrap:wrap}
+  .ep-titles{flex:1 1 calc(100% - 4rem)}
+  .ep-toggle{margin-left:3.7rem}
+  .player button{padding:.35rem .8rem}
+}
+@media (prefers-reduced-motion:reduce){ .line{transition:none} }
+</style>
+</head>
+<body>
+
+
+<div class="wrap">
+<div class="eyebrow">Historia 1b · Antiken · Grekland och Rom</div>
+<h1>Studiepodd om antiken</h1>
+<p class="lede">Elva korta avsnitt, ungefär 15 minuter totalt. Tryck på Spela för att lyssna. Ljudet fortsätter när skärmen släcks, och tidslinjen visar var du slutade.</p>
+
+<div class="player" role="region" aria-label="Spelare">
+  <audio id="audio" preload="metadata" src="podd.mp3"></audio>
+  <div class="now" id="now">Redo. Tryck på Spela, eller starta från ett avsnitt nedan.</div>
+  <div class="ctrls">
+    <button type="button" class="primary" id="play" aria-label="Spela">▶ Spela</button>
+    <button type="button" id="back" aria-label="Bakåt 15 sekunder">↺ 15 s</button>
+    <button type="button" id="fwd" aria-label="Framåt 15 sekunder">15 s ↻</button>
+    <button type="button" id="next" aria-label="Nästa avsnitt">Nästa ⏭</button>
+    <label for="rate">Hastighet <select id="rate"><option value="0.85">0,85×</option><option value="1" selected>1×</option><option value="1.15">1,15×</option><option value="1.3">1,3×</option></select></label>
+  </div>
+  <div class="bar-wrap">
+    <span class="t" id="cur">0:00</span>
+    <div class="bar" id="bar" role="slider" tabindex="0" aria-label="Position i podden" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-valuetext="0:00">
+      <div class="fill" id="fill"></div><div class="ticks" id="ticks"></div><div class="knob" id="knob"></div>
+    </div>
+    <span class="t" id="dur">0:00</span>
+  </div>
+  <div class="resume" id="resume" hidden></div>
+</div>
+<p class="tip">Du kan också styra podden från låsskärmen. Den vita pricken visar var du är, och du kan dra i den. De tunna strecken visar var varje avsnitt börjar. Tryck på en mening i texten för att hoppa dit.</p>
+
+<article class="ep" id="ep0">
+<header class="ep-head">
+<button type="button" class="ep-play" data-ep="0" aria-label="Spela från avsnitt 1"><span aria-hidden="true">▶</span></button>
+<div class="ep-titles"><div class="ep-num">Avsnitt 1 · cirka 1 min</div><h2>Vad är antiken?</h2><div class="ep-sub">Tiden, synen genom tiderna och fyra förändringar</div></div>
+<button type="button" class="ep-toggle" data-ep="0" aria-expanded="false">Visa text</button>
+</header>
+<div class="ep-text" hidden><p class="line" data-ep="0" data-ln="0">Välkommen till studiepodden om antiken och Romarriket. Elva korta avsnitt, bara det viktigaste.</p><p class="line" data-ep="0" data-ln="1">Antiken varar ungefär från 700 f.Kr. till 476 e.Kr.</p><p class="line" data-ep="0" data-ln="2">Den handlar främst om Grekland och Rom.</p><p class="line" data-ep="0" data-ln="3">Under renässansen sågs antiken som den bästa tiden någonsin, ett ideal att ta efter.</p><p class="line" data-ep="0" data-ln="4">Under upplysningen, på 1700-talet, sågs den som vacker men ganska ociviliserad.</p><p class="line" data-ep="0" data-ln="5">Efter andra världskriget såg historiker med marxistisk inriktning antiken som ett slavsamhälle.</p><p class="line" data-ep="0" data-ln="6">Det kallas historiebruk. Varje tid tolkar antiken utifrån sina egna värderingar.</p><p class="line" data-ep="0" data-ln="7">Under antiken sker fyra sorters förändringar.</p><p class="line" data-ep="0" data-ln="8">Politiskt kommer demokrati och lagar. Ekonomiskt kommer penningekonomi och mynt.</p><p class="line" data-ep="0" data-ln="9">Kulturellt kommer litteratur, teater och byggnader. Och inom filosofin kommer tankar om samhället och människan.</p></div>
+</article>
+<article class="ep" id="ep1">
+<header class="ep-head">
+<button type="button" class="ep-play" data-ep="1" aria-label="Spela från avsnitt 2"><span aria-hidden="true">▶</span></button>
+<div class="ep-titles"><div class="ep-num">Avsnitt 2 · cirka 1,5 min</div><h2>Stadsstater och kolonier</h2><div class="ep-sub">Högkulturerna, topografin och koloniseringen</div></div>
+<button type="button" class="ep-toggle" data-ep="1" aria-expanded="false">Visa text</button>
+</header>
+<div class="ep-text" hidden><p class="line" data-ep="1" data-ln="0">Avsnitt två. Grekland växer fram.</p><p class="line" data-ep="1" data-ln="1">De två första högkulturerna var den minoiska på Kreta och den mykenska på fastlandet.</p><p class="line" data-ep="1" data-ln="2">Runt 700 f.Kr. kommer antiken igång.</p><p class="line" data-ep="1" data-ln="3">Grekland delades upp i hundratals stadsstater. Det berodde på topografin, alltså landskapet med berg, dalar och öar.</p><p class="line" data-ep="1" data-ln="4">En stadsstat var en stad med landsbygden runt omkring. Den fungerade som ett eget land.</p><p class="line" data-ep="1" data-ln="5">Ändå fanns en gemenskap. Grekerna pratade samma språk och hade samma religion och kultur.</p><p class="line" data-ep="1" data-ln="6">Från 700-talet f.Kr. började grekerna kolonisera runt Medelhavet och Svarta havet.</p><p class="line" data-ep="1" data-ln="7">Handeln ökade och penningekonomin växte fram.</p><p class="line" data-ep="1" data-ln="8">Den importerade spannmålen blev billigare. Många bönder klarade sig inte och blev arbetslösa.</p><p class="line" data-ep="1" data-ln="9">De flyttade in till städerna och blev hantverkare. Det kallas urbanisering. Och kulturen växte.</p><p class="line" data-ep="1" data-ln="10">Antiken var också ett slavsamhälle. Med billig arbetskraft fanns litet behov av nya maskiner.</p><p class="line" data-ep="1" data-ln="11">Det brukar användas för att förklara den svaga tekniska utvecklingen.</p></div>
+</article>
+<article class="ep" id="ep2">
+<header class="ep-head">
+<button type="button" class="ep-play" data-ep="2" aria-label="Spela från avsnitt 3"><span aria-hidden="true">▶</span></button>
+<div class="ep-titles"><div class="ep-num">Avsnitt 3 · cirka 1 min</div><h2>Fem sätt att styra</h2><div class="ep-sub">Styrelseskicken</div></div>
+<button type="button" class="ep-toggle" data-ep="2" aria-expanded="false">Visa text</button>
+</header>
+<div class="ep-text" hidden><p class="line" data-ep="2" data-ln="0">Avsnitt tre. Det antika Grekland har stått modell för fem styrelseskick.</p><p class="line" data-ep="2" data-ln="1">Monarki. En kung eller drottning styr. Makten ärvs.</p><p class="line" data-ep="2" data-ln="2">Aristokrati. Ett fåtal styr för att de anses bäst lämpade, oftast för att de är rika eller kloka.</p><p class="line" data-ep="2" data-ln="3">Oligarki. Ett fåtal styr och håller fast vid makten med hjälp av tvång och våld.</p><p class="line" data-ep="2" data-ln="4">Tyranni. En person har tagit makten på egen hand, ofta med våld, och styr ensam.</p><p class="line" data-ep="2" data-ln="5">Tyrannerna hade ofta stöd från vanligt folk mot adeln.</p><p class="line" data-ep="2" data-ln="6">Demokrati. Folket styr.</p><p class="line" data-ep="2" data-ln="7">Lägg märke till skillnaden mellan aristokrati och oligarki. Båda är ett fåtal, men i en oligarki hålls makten med tvång.</p></div>
+</article>
+<article class="ep" id="ep3">
+<header class="ep-head">
+<button type="button" class="ep-play" data-ep="3" aria-label="Spela från avsnitt 4"><span aria-hidden="true">▶</span></button>
+<div class="ep-titles"><div class="ep-num">Avsnitt 4 · cirka 1,5 min</div><h2>Atens demokrati</h2><div class="ep-sub">Vilka som fick delta, och hur den växte fram</div></div>
+<button type="button" class="ep-toggle" data-ep="3" aria-expanded="false">Visa text</button>
+</header>
+<div class="ep-text" hidden><p class="line" data-ep="3" data-ln="0">Avsnitt fyra. Atens demokrati.</p><p class="line" data-ep="3" data-ln="1">Aten hade ungefär 400 000 invånare. Men bara en liten del fick vara med och bestämma.</p><p class="line" data-ep="3" data-ln="2">Kvinnor fick inte delta. Inte heller slavar, som var ungefär en fjärdedel av befolkningen.</p><p class="line" data-ep="3" data-ln="3">Inte heller icke-medborgare, till exempel inflyttade. Och inte unga män.</p><p class="line" data-ep="3" data-ln="4">Först styrde en kung. Kungen ersattes av en aristokrati.</p><p class="line" data-ep="3" data-ln="5">Runt 594 f.Kr. genomförde Solon reformer som lade grunden för demokratin.</p><p class="line" data-ep="3" data-ln="6">Sedan tog en tyrann makten, med stöd av folket mot adeln.</p><p class="line" data-ep="3" data-ln="7">Den siste tyrannen störtades 510 f.Kr. Och 508 till 507 f.Kr. införde Kleisthenes demokratin genom sina reformer.</p><p class="line" data-ep="3" data-ln="8">Varför just då? Handeln och penningekonomin gav nya grupper, som hantverkare och köpmän, som ville vara med och bestämma.</p><p class="line" data-ep="3" data-ln="9">Senare, på 400-talet f.Kr., behövde flottan vanliga män som roddare. Därför fick de mer inflytande, och demokratin stärktes.</p><p class="line" data-ep="3" data-ln="10">Alla fria, vuxna manliga medborgare fick rösta i folkförsamlingen. Det var en direktdemokrati.</p><p class="line" data-ep="3" data-ln="11">Ett råd på 500 män förberedde frågorna och såg till att besluten genomfördes. Rådets medlemmar lottades fram.</p><p class="line" data-ep="3" data-ln="12">Det fanns också folkdomstolar.</p></div>
+</article>
+<article class="ep" id="ep4">
+<header class="ep-head">
+<button type="button" class="ep-play" data-ep="4" aria-label="Spela från avsnitt 5"><span aria-hidden="true">▶</span></button>
+<div class="ep-titles"><div class="ep-num">Avsnitt 5 · cirka 2 min</div><h2>Krig och storhetstid i Grekland</h2><div class="ep-sub">Sparta, perserkrigen och Alexander</div></div>
+<button type="button" class="ep-toggle" data-ep="4" aria-expanded="false">Visa text</button>
+</header>
+<div class="ep-text" hidden><p class="line" data-ep="4" data-ln="0">Avsnitt fem. Krig och storhetstid.</p><p class="line" data-ep="4" data-ln="1">De två största stadsstaterna var Aten och Sparta. Sparta var känt för sin starka armé och militära uppfostran.</p><p class="line" data-ep="4" data-ln="2">I Sparta togs pojkarna från familjen vid sju års ålder och fick hård militär träning och disciplin.</p><p class="line" data-ep="4" data-ln="3">Flickorna tränade också, för att bli starka mödrar. Ofria heloter gjorde jordbruksarbetet.</p><p class="line" data-ep="4" data-ln="4">I perserkrigen försvarade grekerna sig mot Perserriket. Två berömda slag är Marathon 490 och Salamis 480 f.Kr.</p><p class="line" data-ep="4" data-ln="5">År 478 f.Kr. bildades attiska sjöförbundet, för att skydda stadsstaterna mot perserna med en gemensam flotta. Aten ledde förbundet.</p><p class="line" data-ep="4" data-ln="6">Den klassiska tiden, ungefär 500 till 300 f.Kr., var Greklands storhetstid.</p><p class="line" data-ep="4" data-ln="7">En byggnad, en författare, en politiker och en filosof från den tiden: Parthenon, Sofokles, Perikles och Sokrates.</p><p class="line" data-ep="4" data-ln="8">I peloponnesiska kriget, 431 till 404 f.Kr., stred Aten och dess allierade mot Sparta och dess allierade. Sparta vann.</p><p class="line" data-ep="4" data-ln="9">År 338 f.Kr. besegrade Makedonien Aten. Makedonien leddes då av kung Filip II, Alexander den stores far.</p><p class="line" data-ep="4" data-ln="10">Demokratin avskaffades 322 f.Kr., året efter Alexanders död.</p><p class="line" data-ep="4" data-ln="11">Hellenismen är perioden efter Alexander den stores erövringar, då grekisk kultur spreds och blandades med andra kulturer i Mellanöstern och Egypten.</p></div>
+</article>
+<article class="ep" id="ep5">
+<header class="ep-head">
+<button type="button" class="ep-play" data-ep="5" aria-label="Spela från avsnitt 6"><span aria-hidden="true">▶</span></button>
+<div class="ep-titles"><div class="ep-num">Avsnitt 6 · cirka 1,5 min</div><h2>Rom växer fram</h2><div class="ep-sub">Etruskerna, expansionen och de puniska krigen</div></div>
+<button type="button" class="ep-toggle" data-ep="5" aria-expanded="false">Visa text</button>
+</header>
+<div class="ep-text" hidden><p class="line" data-ep="5" data-ln="0">Avsnitt sex. Rom växer fram.</p><p class="line" data-ep="5" data-ln="1">Enligt sägnen grundades Rom 753 f.Kr.</p><p class="line" data-ep="5" data-ln="2">Före Rom dominerade etruskerna i mellersta Italien. Enligt traditionen var Roms sista kungar etrusker, och romarna lånade mycket av deras kultur.</p><p class="line" data-ep="5" data-ln="3">När Aten blomstrade, på 400-talet f.Kr., var Rom en obetydlig stadsstat.</p><p class="line" data-ep="5" data-ln="4">Sedan börjar Rom expandera. Genom krig, och genom diplomati, där andra stadsstater gick med på att låta sig styras av Rom.</p><p class="line" data-ep="5" data-ln="5">Runt 270 f.Kr. styrdes hela den italienska halvön från Rom.</p><p class="line" data-ep="5" data-ln="6">Sedan kom de puniska krigen, tre krig mot Kartago i Nordafrika.</p><p class="line" data-ep="5" data-ln="7">Orsaken var att Rom och Kartago var två stormakter som tävlade om handeln och kontrollen över västra Medelhavet.</p><p class="line" data-ep="5" data-ln="8">I det andra kriget gick Kartagos fältherre Hannibal över Alperna med elefanter, år 218 f.Kr.</p><p class="line" data-ep="5" data-ln="9">År 146 f.Kr. förstördes Kartago.</p><p class="line" data-ep="5" data-ln="10">Följderna? Rom fick sina första provinser och blev Medelhavets stormakt.</p><p class="line" data-ep="5" data-ln="11">Rikedomar och slavar strömmade till Rom. Stora gods drevs med slavar, och småbönder slogs ut.</p></div>
+</article>
+<article class="ep" id="ep6">
+<header class="ep-head">
+<button type="button" class="ep-play" data-ep="6" aria-label="Spela från avsnitt 7"><span aria-hidden="true">▶</span></button>
+<div class="ep-titles"><div class="ep-num">Avsnitt 7 · cirka 1,5 min</div><h2>Så styrde Rom sitt rike</h2><div class="ep-sub">Söndra och härska, handel och slaveri</div></div>
+<button type="button" class="ep-toggle" data-ep="6" aria-expanded="false">Visa text</button>
+</header>
+<div class="ep-text" hidden><p class="line" data-ep="6" data-ln="0">Avsnitt sju. Så styrde Rom sitt rike.</p><p class="line" data-ep="6" data-ln="1">År 117 e.Kr. var romarriket som störst, under kejsar Trajanus.</p><p class="line" data-ep="6" data-ln="2">Riket omgav hela Medelhavet, från Britannien i nordväst till Nordafrika och Egypten i söder.</p><p class="line" data-ep="6" data-ln="3">När Rom växte styrdes allt från staden Rom, genom att söndra och härska.</p><p class="line" data-ep="6" data-ln="4">Söndra och härska betyder att ge olika områden olika villkor, så att de inte går samman mot den som styr.</p><p class="line" data-ep="6" data-ln="5">De som låg närmast staden Rom hade samma rättigheter som romarna.</p><p class="line" data-ep="6" data-ln="6">Resten av Italien blev bundsförvanter. De slapp betala skatt till Rom, men måste ställa upp med soldater.</p><p class="line" data-ep="6" data-ln="7">Övriga områden blev provinser. De styrdes av en romersk ståthållare och måste betala skatt.</p><p class="line" data-ep="6" data-ln="8">Man handlade med spannmål, olivolja och vin, och med lyxvaror som siden från Kina och kryddor från Indien.</p><p class="line" data-ep="6" data-ln="9">Slaveriet var viktigt. Slavarna gjorde mycket av arbetet på de stora godsen, i gruvorna och i hushållen.</p><p class="line" data-ep="6" data-ln="10">Krigsfångar blev slavar, så erövringarna gav allt fler slavar. Den billiga arbetskraften gjorde att det fanns litet behov av ny teknik.</p></div>
+</article>
+<article class="ep" id="ep7">
+<header class="ep-head">
+<button type="button" class="ep-play" data-ep="7" aria-label="Spela från avsnitt 8"><span aria-hidden="true">▶</span></button>
+<div class="ep-titles"><div class="ep-num">Avsnitt 8 · cirka 1,5 min</div><h2>Republiken</h2><div class="ep-sub">Senaten, ämbetena, patricier och plebejer</div></div>
+<button type="button" class="ep-toggle" data-ep="7" aria-expanded="false">Visa text</button>
+</header>
+<div class="ep-text" hidden><p class="line" data-ep="7" data-ln="0">Avsnitt åtta. Republiken.</p><p class="line" data-ep="7" data-ln="1">Till en början var Rom en monarki. År 509 f.Kr. avsattes kungen och Rom blev republik.</p><p class="line" data-ep="7" data-ln="2">En republik är en stat utan kung. I praktiken styrdes den av en aristokrati, genom senaten.</p><p class="line" data-ep="7" data-ln="3">Senaten hade 300 medlemmar som satt på livstid. Vart femte år togs nya medlemmar in. De fick ingen lön.</p><p class="line" data-ep="7" data-ln="4">Senaten skötte utrikespolitiken och statens pengar, och gav råd till konsulerna.</p><p class="line" data-ep="7" data-ln="5">Arbetet leddes av två konsuler, som valdes för ett år i taget av folkförsamlingen. Så skulle ingen få för mycket makt.</p><p class="line" data-ep="7" data-ln="6">Vid fara kunde en diktator utses, som fick styra ensam i högst sex månader.</p><p class="line" data-ep="7" data-ln="7">Patricierna var Roms gamla förnäma och rika släkter, överklassen som satt i senaten.</p><p class="line" data-ep="7" data-ln="8">Plebejerna var de vanliga fria medborgarna, som bönder, hantverkare och köpmän.</p><p class="line" data-ep="7" data-ln="9">Med tiden fick plebejerna mer inflytande. Rom behövde dem som soldater, och genom att hota att vägra krigstjänst kunde de pressa patricierna.</p><p class="line" data-ep="7" data-ln="10">De fick folktribuner, som kunde stoppa beslut med veto.</p><p class="line" data-ep="7" data-ln="11">Omkring 450 f.Kr. skrevs lagarna ner i tolvtavlelagen. Då kunde alla veta vad som gällde, och patricierna kunde inte tolka lagarna som de ville.</p><p class="line" data-ep="7" data-ln="12">Med tiden fick plebejerna också rätt att bli konsuler.</p></div>
+</article>
+<article class="ep" id="ep8">
+<header class="ep-head">
+<button type="button" class="ep-play" data-ep="8" aria-label="Spela från avsnitt 9"><span aria-hidden="true">▶</span></button>
+<div class="ep-titles"><div class="ep-num">Avsnitt 9 · cirka 1,5 min</div><h2>Caesar och kejsarna</h2><div class="ep-sub">Yrkesarmén, Caesar, Augustus och Pax Romana</div></div>
+<button type="button" class="ep-toggle" data-ep="8" aria-expanded="false">Visa text</button>
+</header>
+<div class="ep-text" hidden><p class="line" data-ep="8" data-ln="0">Avsnitt nio. Caesar och kejsarna.</p><p class="line" data-ep="8" data-ln="1">Omkring 100 f.Kr. gick armén från värnplikt till yrkesarmé. Då blev soldaterna lojala mot sin befälhavare, i stället för mot staten.</p><p class="line" data-ep="8" data-ln="2">Julius Caesar var fältherre och politiker.</p><p class="line" data-ep="8" data-ln="3">Han erövrade Gallien, och det gav honom pengar, ära och popularitet.</p><p class="line" data-ep="8" data-ln="4">När senaten krävde att han skulle lämna armén gick han över floden Rubicon med sina soldater, år 49 f.Kr.</p><p class="line" data-ep="8" data-ln="5">Han vann inbördeskriget mot Pompejus och lät utse sig till diktator på livstid.</p><p class="line" data-ep="8" data-ln="6">Caesar mördades av senatorer år 44 f.Kr. Det ledde till inbördeskrig.</p><p class="line" data-ep="8" data-ln="7">År 31 f.Kr. vann Octavianus, Caesars adoptivson, det nya inbördeskriget.</p><p class="line" data-ep="8" data-ln="8">År 27 f.Kr. fick han namnet Augustus och blev Roms förste kejsare. Rom var sedan ett kejsardöme.</p><p class="line" data-ep="8" data-ln="9">Sedan följde Pax Romana, romersk fred, ungefär 200 år av fred och handel.</p><p class="line" data-ep="8" data-ln="10">Tre berömda kejsare. Augustus, den förste kejsaren. Trajanus, då riket var som störst. Och Konstantin den store, som tillät kristendomen.</p></div>
+</article>
+<article class="ep" id="ep9">
+<header class="ep-head">
+<button type="button" class="ep-play" data-ep="9" aria-label="Spela från avsnitt 10"><span aria-hidden="true">▶</span></button>
+<div class="ep-titles"><div class="ep-num">Avsnitt 10 · cirka 1,5 min</div><h2>Kristendomen och Roms fall</h2><div class="ep-sub">Varför kristendomen spreds, och varför Västrom föll</div></div>
+<button type="button" class="ep-toggle" data-ep="9" aria-expanded="false">Visa text</button>
+</header>
+<div class="ep-text" hidden><p class="line" data-ep="9" data-ln="0">Avsnitt tio. Kristendomen och Roms fall.</p><p class="line" data-ep="9" data-ln="1">Varför blev kristendomen så framgångsrik? Budskapet att alla människor är lika inför Gud, och löftet om ett liv efter döden, lockade fattiga, slavar och kvinnor.</p><p class="line" data-ep="9" data-ln="2">Romarrikets vägar, fred och gemensamma språk gjorde att tron kunde spridas snabbt, bland annat genom Paulus resor.</p><p class="line" data-ep="9" data-ln="3">Förföljelserna stärkte gemenskapen.</p><p class="line" data-ep="9" data-ln="4">År 313 tillät kejsar Konstantin kristendomen, och år 380 blev den statsreligion.</p><p class="line" data-ep="9" data-ln="5">År 395 dog kejsar Theodosius, och riket delades mellan hans två söner i Västrom och Östrom.</p><p class="line" data-ep="9" data-ln="6">Varför föll Västrom? Det fanns inre och yttre orsaker.</p><p class="line" data-ep="9" data-ln="7">Inre orsaker var maktstrider där många kejsare mördades, ekonomiska problem med höga skatter, och ett rike som var för stort att försvara.</p><p class="line" data-ep="9" data-ln="8">Yttre orsaker var folkvandringarna, där germanska folk, pressade av hunnerna, trängde in i riket.</p><p class="line" data-ep="9" data-ln="9">Rom plundrades år 410. År 476 avsattes den siste kejsaren i väst, av den germanske härföraren Odoaker.</p><p class="line" data-ep="9" data-ln="10">Östrom levde kvar till 1453, då osmanerna erövrade Konstantinopel.</p><p class="line" data-ep="9" data-ln="11">Att Östrom överlevde så länge tyder på att det inte bara var anfallen som avgjorde, utan också hur starkt riket var inifrån.</p></div>
+</article>
+<article class="ep" id="ep10">
+<header class="ep-head">
+<button type="button" class="ep-play" data-ep="10" aria-label="Spela från avsnitt 11"><span aria-hidden="true">▶</span></button>
+<div class="ep-titles"><div class="ep-num">Avsnitt 11 · cirka 1,5 min</div><h2>Tio saker att komma ihåg</h2><div class="ep-sub">Fem om Grekland och fem om Rom</div></div>
+<button type="button" class="ep-toggle" data-ep="10" aria-expanded="false">Visa text</button>
+</header>
+<div class="ep-text" hidden><p class="line" data-ep="10" data-ln="0">Sista avsnittet. Tio saker att komma ihåg.</p><p class="line" data-ep="10" data-ln="1">Ett. Synen på antiken har skiftat genom tiderna. Det kallas historiebruk.</p><p class="line" data-ep="10" data-ln="2">Två. Topografin gav stadsstater, och koloniseringen gav penningekonomi och urbanisering.</p><p class="line" data-ep="10" data-ln="3">Tre. De fem styrelseskicken är monarki, aristokrati, oligarki, tyranni och demokrati.</p><p class="line" data-ep="10" data-ln="4">Fyra. Kleisthenes införde demokratin i Aten 508 till 507 f.Kr. Men kvinnor, slavar och inflyttade fick inte delta.</p><p class="line" data-ep="10" data-ln="5">Fem. Alexanders erövringar ledde till hellenismen, då grekisk kultur spreds och blandades med andra kulturer.</p><p class="line" data-ep="10" data-ln="6">Sex. Rom blev Medelhavets stormakt genom de puniska krigen och var som störst år 117.</p><p class="line" data-ep="10" data-ln="7">Sju. Rom styrde sitt rike genom att söndra och härska, med bundsförvanter och provinser.</p><p class="line" data-ep="10" data-ln="8">Åtta. I republiken valdes konsulerna av folkförsamlingen, och plebejerna fick inflytande genom folktribunerna.</p><p class="line" data-ep="10" data-ln="9">Nio. Yrkesarmén gjorde soldaterna lojala mot sin befälhavare, och det banade väg för Caesar och Augustus.</p><p class="line" data-ep="10" data-ln="10">Tio. Västrom föll 476 av både inre och yttre orsaker. Östrom levde kvar till 1453.</p><p class="line" data-ep="10" data-ln="11">Det var allt om antiken och Romarriket. Lycka till på provet.</p></div>
+</article>
+
+<footer>Uppläst med en syntetisk svensk röst. Byggd från anteckningar från genomgångarna och instuderingsfrågorna i Samband Historia Plus.</footer>
+</div>
+
+<script>
+(function(){
+var CH = {"chapters": [{"start": 0.4, "lines": [0.4, 8.11, 16.44, 19.57, 26.48, 33.13, 40.08, 47.01, 50.62, 57.28]}, {"start": 66.77, "lines": [66.77, 70.66, 76.78, 81.04, 90.23, 96.94, 104.16, 111.97, 115.49, 122.7, 130.62, 137.36]}, {"start": 142.56, "lines": [142.56, 148.31, 154.54, 162.73, 169.21, 175.87, 179.84, 182.79]}, {"start": 192.82, "lines": [192.82, 196.37, 203.68, 210.2, 215.9, 220.54, 229.01, 233.63, 245.67, 254.98, 265.38, 272.26, 280.56]}, {"start": 284.11, "lines": [284.11, 288.04, 296.51, 303.05, 309.34, 321.61, 332.37, 340.12, 348.26, 361.66, 372.79, 379.93]}, {"start": 392.65, "lines": [392.65, 396.25, 401.61, 412.83, 419.08, 428.24, 435.1, 440.16, 448.1, 455.61, 460.27, 465.77]}, {"start": 474.03, "lines": [474.03, 477.8, 483.7, 490.64, 495.73, 503.75, 508.67, 516.68, 523.62, 531.39, 539.75]}, {"start": 550.28, "lines": [550.28, 553.54, 561.56, 568.68, 577.39, 583.25, 590.87, 596.55, 602.45, 608.31, 618.78, 622.68, 635.03]}, {"start": 639.85, "lines": [639.85, 643.07, 654.05, 657.51, 662.2, 670.87, 676.89, 683.76, 691.12, 699.17, 705.25]}, {"start": 717.13, "lines": [717.13, 721.56, 733.7, 742.52, 745.69, 754.82, 763.88, 768.69, 777.5, 784.07, 795.27, 801.07]}, {"start": 810.46, "lines": [810.46, 814.68, 821.33, 828.71, 837.01, 848.32, 857.86, 865.13, 871.64, 879.85, 890.15, 900.31]}], "total": 906.46};
+var a=document.getElementById('audio'), play=document.getElementById('play'), now=document.getElementById('now');
+var bar=document.getElementById('bar'), fill=document.getElementById('fill'), knob=document.getElementById('knob');
+var cur=document.getElementById('cur'), dur=document.getElementById('dur'), rate=document.getElementById('rate'), resume=document.getElementById('resume');
+var TOTAL=CH.total, KEY='antikpodd-pos', pending=null, lastKey='', dragging=false;
+function fmt(s){s=Math.max(0,Math.floor(s));return Math.floor(s/60)+':'+String(s%60).padStart(2,'0');}
+function total(){return (isFinite(a.duration)&&a.duration>0)?a.duration:TOTAL;}
+function pos(){return pending!==null?pending:(a.currentTime||0);}
+dur.textContent=fmt(TOTAL);
+var ticks=document.getElementById('ticks');
+CH.chapters.forEach(function(c,i){if(i===0)return;var s=document.createElement('span');s.style.left=(c.start/TOTAL*100)+'%';ticks.appendChild(s);});
+function where(t){var e=0;for(var i=0;i<CH.chapters.length;i++){if(t>=CH.chapters[i].start-0.05)e=i;}var L=CH.chapters[e].lines,l=0;for(var j=0;j<L.length;j++){if(t>=L[j]-0.05)l=j;}return [e,l];}
+function title(i){return document.querySelector('#ep'+i+' h2').textContent;}
+function meta(e){
+  if(!('mediaSession' in navigator))return;
+  try{navigator.mediaSession.metadata=new MediaMetadata({title:'Avsnitt '+(e+1)+': '+title(e),artist:'Studiepodd om antiken',album:'Historia 1b'});}catch(err){}
+}
+function render(){
+  var t=pos(), p=Math.min(1,t/total());
+  fill.style.width=(p*100)+'%'; knob.style.left=(p*100)+'%';
+  bar.setAttribute('aria-valuenow',Math.round(p*100)); bar.setAttribute('aria-valuetext',fmt(t)); cur.textContent=fmt(t);
+  var w=where(t), k=w[0]+'-'+w[1]+(a.paused?'p':'');
+  if(k===lastKey)return; lastKey=k;
+  document.querySelectorAll('.line.speaking').forEach(function(x){x.classList.remove('speaking');});
+  document.querySelectorAll('.ep.playing').forEach(function(x){x.classList.remove('playing');});
+  var ep=document.getElementById('ep'+w[0]);
+  if(t>0.2||!a.paused){ep.classList.add('playing');var ln=ep.querySelector('.line[data-ln="'+w[1]+'"]');if(ln)ln.classList.add('speaking');}
+  if(a.paused&&t<0.2){now.textContent='Redo. Tryck på Spela, eller starta från ett avsnitt nedan.';}
+  else{now.innerHTML=(a.paused?'Pausad · ':'')+'Avsnitt '+(w[0]+1)+': <strong>'+title(w[0])+'</strong>';}
+  meta(w[0]);
+}
+function save(){try{localStorage.setItem(KEY,String(pos()));}catch(e){}}
+function setPlayLabel(){play.textContent=a.paused?'▶ Spela':'❚❚ Paus';play.setAttribute('aria-label',a.paused?'Spela':'Pausa');}
+function hideResume(){resume.hidden=true;}
+function go(t,start){
+  t=Math.max(0,Math.min(total()-0.1,t));
+  if(a.readyState>=1){a.currentTime=t;pending=null;}else{pending=t;}
+  lastKey='';render();save();
+  if(start)startPlay();
+}
+function startPlay(){
+  var p=a.play();
+  if(p&&p.catch)p.catch(function(){now.textContent='Tryck på Spela igen för att starta.';});
+}
+play.addEventListener('click',function(){hideResume();if(a.paused){startPlay();}else{a.pause();}});
+document.getElementById('back').addEventListener('click',function(){go(pos()-15,false);});
+document.getElementById('fwd').addEventListener('click',function(){go(pos()+15,false);});
+function nextEp(){var e=where(pos())[0];if(e<CH.chapters.length-1){hideResume();go(CH.chapters[e+1].start,true);}}
+document.getElementById('next').addEventListener('click',nextEp);
+rate.addEventListener('change',function(){a.playbackRate=parseFloat(rate.value)||1;try{localStorage.setItem(KEY+'-rate',rate.value);}catch(e){}});
+try{var r=localStorage.getItem(KEY+'-rate');if(r&&rate.querySelector('option[value="'+r+'"]'))rate.value=r;}catch(e){}
+a.addEventListener('loadedmetadata',function(){if(pending!==null){a.currentTime=pending;pending=null;}dur.textContent=fmt(total());lastKey='';render();});
+a.addEventListener('play',function(){a.playbackRate=parseFloat(rate.value)||1;setPlayLabel();lastKey='';render();});
+a.addEventListener('pause',function(){setPlayLabel();lastKey='';render();save();});
+var lastSave=0;
+a.addEventListener('timeupdate',function(){if(!dragging)render();var n=Date.now();if(n-lastSave>4000){lastSave=n;save();}
+  if('mediaSession' in navigator&&navigator.mediaSession.setPositionState&&isFinite(a.duration)){try{navigator.mediaSession.setPositionState({duration:a.duration,playbackRate:a.playbackRate,position:Math.min(a.currentTime,a.duration)});}catch(e){}}});
+a.addEventListener('ended',function(){setPlayLabel();now.textContent='Slut på podden. Bra jobbat.';try{localStorage.removeItem(KEY);}catch(e){}});
+document.addEventListener('visibilitychange',function(){if(document.hidden)save();});
+function seekFromEvent(ev){var r=bar.getBoundingClientRect();var x=ev.clientX-r.left;var t=Math.max(0,Math.min(1,x/r.width))*total();
+  if(a.readyState>=1){a.currentTime=t;pending=null;}else{pending=t;} lastKey='';render();}
+bar.addEventListener('pointerdown',function(e){dragging=true;hideResume();try{bar.setPointerCapture(e.pointerId);}catch(_){}seekFromEvent(e);});
+bar.addEventListener('pointermove',function(e){if(dragging)seekFromEvent(e);});
+function endDrag(){if(dragging){dragging=false;save();}}
+bar.addEventListener('pointerup',endDrag); bar.addEventListener('pointercancel',endDrag);
+bar.addEventListener('keydown',function(e){if(e.key==='ArrowRight'){go(pos()+5,false);e.preventDefault();}if(e.key==='ArrowLeft'){go(pos()-5,false);e.preventDefault();}});
+document.querySelectorAll('.ep-play').forEach(function(b){b.addEventListener('click',function(){var i=+b.dataset.ep, w=where(pos());
+  hideResume(); if(!a.paused&&w[0]===i){a.pause();return;} go(CH.chapters[i].start,true);});});
+document.querySelectorAll('.line').forEach(function(l){l.setAttribute('tabindex','0');l.setAttribute('role','button');
+  var jump=function(){hideResume();go(CH.chapters[+l.dataset.ep].lines[+l.dataset.ln],true);};
+  l.addEventListener('click',jump); l.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();jump();}});});
+document.querySelectorAll('.ep-toggle').forEach(function(b){b.addEventListener('click',function(){var t=document.querySelector('#ep'+b.dataset.ep+' .ep-text');t.hidden=!t.hidden;b.textContent=t.hidden?'Visa text':'Dölj text';b.setAttribute('aria-expanded',String(!t.hidden));});});
+if('mediaSession' in navigator){try{
+  navigator.mediaSession.setActionHandler('play',function(){startPlay();});
+  navigator.mediaSession.setActionHandler('pause',function(){a.pause();});
+  navigator.mediaSession.setActionHandler('seekbackward',function(){go(pos()-15,false);});
+  navigator.mediaSession.setActionHandler('seekforward',function(){go(pos()+15,false);});
+  navigator.mediaSession.setActionHandler('nexttrack',nextEp);
+  navigator.mediaSession.setActionHandler('previoustrack',function(){var t=pos(),e=where(t)[0];go(CH.chapters[(t-CH.chapters[e].start>3)?e:Math.max(0,e-1)].start,true);});
+  try{navigator.mediaSession.setActionHandler('seekto',function(d){if(d&&typeof d.seekTime==='number')go(d.seekTime,false);});}catch(e){}
+}catch(e){}}
+var saved=0;try{saved=parseFloat(localStorage.getItem(KEY))||0;}catch(e){}
+if(saved>5&&saved<TOTAL-3){
+  var w=where(saved);
+  go(saved,false);
+  resume.innerHTML='<span>Du slutade vid '+fmt(saved)+' i avsnitt '+(w[0]+1)+'. Tryck på Spela för att fortsätta.</span><button type="button" id="restart">Börja om</button>';
+  resume.hidden=false;
+  document.getElementById('restart').addEventListener('click',function(){hideResume();go(0,false);});
+}
+render();
+})();
+</script>
+
+</body>
+</html>
