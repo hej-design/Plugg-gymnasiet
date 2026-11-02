@@ -42,6 +42,14 @@ h1{font-family:var(--f-display);font-weight:500;color:var(--ink);font-size:clamp
 .tl .nm{font-family:var(--f-display);font-weight:600;font-size:clamp(12px,3.4vw,15px);line-height:1.15;margin-top:7px;color:var(--c);overflow-wrap:anywhere}
 .tl .yr{font-family:var(--f-mono);font-size:11px;line-height:1.35;color:var(--muted)}
 .tl .ct{font-size:12px;color:var(--muted)}
+.watch{margin-top:22px;display:flex;flex-direction:column;gap:10px}
+.watch h2{font-weight:500}
+.watch .small{margin:0}
+.watch-links{display:flex;flex-wrap:wrap;gap:8px}
+.wl{display:inline-flex;align-items:center;gap:7px;padding:8px 14px;min-height:40px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);text-decoration:none;font-size:15px;font-weight:700}
+.wl .dot{width:8px;height:8px;border-radius:50%;background:var(--c)}
+.wl:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+@media (hover:hover){.wl:hover{border-color:var(--muted)}}
 .tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;padding:4px;background:var(--soft);border-radius:14px}
 .tabs button{font:inherit;font-weight:700;font-size:15px;padding:10px 4px;border:0;border-radius:10px;background:transparent;color:var(--muted);cursor:pointer}
 .tabs button[aria-selected="true"]{background:var(--surface);color:var(--ink);box-shadow:0 1px 3px rgb(0 0 0 / .12)}
@@ -137,6 +145,15 @@ p.tid{margin:0}
     <h1>Den tidiga europeiska historien</h1>
     <p class="lead">Alla begrepp från provets lista, från Hammurabis lagar till upplysningen. Öva på vilken epok varje begrepp hör till och ungefär när det hände.</p>
     <ol class="tl" id="tl" aria-label="Epokerna i tidsordning"></ol>
+    <section class="watch" aria-labelledby="watch-h">
+      <h2 id="watch-h" class="eyebrow">Titta först · Historia förklarad på UR Play</h2>
+      <div class="watch-links">
+        <a class="wl e-A" href="https://urplay.se/program/224188-historia-forklarad-antiken" target="_blank" rel="noopener"><span class="dot"></span>Antiken <span aria-hidden="true">↗</span></a>
+        <a class="wl e-M" href="https://urplay.se/program/224193-historia-forklarad-medeltiden" target="_blank" rel="noopener"><span class="dot"></span>Medeltiden <span aria-hidden="true">↗</span></a>
+        <a class="wl e-T" href="https://urplay.se/program/224190-historia-forklarad-tidigmodern-tid" target="_blank" rel="noopener"><span class="dot"></span>Tidigmodern tid <span aria-hidden="true">↗</span></a>
+      </div>
+      <p class="small">I boken Samband historia PLUS läser du från sidan 39 i det gula bandet.</p>
+    </section>
   </header>
 
   <nav class="tabs" role="tablist" aria-label="Övningssätt">
