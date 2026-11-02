@@ -1,0 +1,566 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<style>[hidden]{display:none!important}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}</style>
+</head>
+<body>
+<title>Den tidiga europeiska historien</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=EB+Garamond:wght@500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: en smal kolumn – tidslinje med epokerna överst, flikar och filter, sedan ett arbetskort i taget. Samma färger som resten av plugg-sajten, ett ljust tema med avsikt. */
+:root{
+  --bg:#F7F4F2; --surface:#FFFDFB; --text:#362B25; --ink:#182851; --muted:#7C675C; --line:#D6CFCC; --soft:#ECE6E2; --on-ink:#FFFDFB;
+  --forn:#8A6116; --antik:#146C7A; --medel:#83356C; --tidig:#3349B8;
+  --forn-bg:#F4EAD7; --antik-bg:#DAEEF1; --medel-bg:#F3DFEB; --tidig-bg:#E0E5FA;
+  --ok:#1A7A44; --ok-bg:#DBF1E3; --bad:#B93127; --bad-bg:#F9DEDA; --warn:#935D00; --warn-bg:#FAEDD2;
+  --f-display:"EB Garamond",Garamond,Georgia,serif;
+  --f-body:"Atkinson Hyperlegible","Segoe UI",system-ui,-apple-system,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,monospace;
+  color-scheme:light;
+}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--f-body);font-size:16px;line-height:1.5;-webkit-text-size-adjust:100%}
+.wrap{max-width:720px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:24px 56px;display:flex;flex-direction:column;gap:18px}
+.e-F{--c:var(--forn);--cb:var(--forn-bg)}
+.e-A{--c:var(--antik);--cb:var(--antik-bg)}
+.e-M{--c:var(--medel);--cb:var(--medel-bg)}
+.e-T{--c:var(--tidig);--cb:var(--tidig-bg)}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0}
+h1{font-family:var(--f-display);font-weight:500;color:var(--ink);font-size:clamp(2.1rem,8vw,2.9rem);line-height:1.05;letter-spacing:-.01em;margin:6px 0 10px;text-wrap:balance}
+.lead{margin:0;color:var(--muted);max-width:60ch}
+.tl{list-style:none;margin:20px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px}
+.tl li{min-width:0;display:flex;flex-direction:column;gap:1px}
+.tl-bar{display:block;height:8px;background:var(--c);border-radius:2px}
+.tl li:first-child .tl-bar{border-radius:6px 2px 2px 6px}
+.tl li:last-child .tl-bar{border-radius:2px 6px 6px 2px}
+.tl .nm{font-family:var(--f-display);font-weight:600;font-size:clamp(12px,3.4vw,15px);line-height:1.15;margin-top:7px;color:var(--c);overflow-wrap:anywhere}
+.tl .yr{font-family:var(--f-mono);font-size:11px;line-height:1.35;color:var(--muted)}
+.tl .ct{font-size:12px;color:var(--muted)}
+.tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;padding:4px;background:var(--soft);border-radius:14px}
+.tabs button{font:inherit;font-weight:700;font-size:15px;padding:10px 4px;border:0;border-radius:10px;background:transparent;color:var(--muted);cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--surface);color:var(--ink);box-shadow:0 1px 3px rgb(0 0 0 / .12)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font:inherit;font-size:14px;line-height:1.2;padding:7px 12px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);display:inline-flex;align-items:center;gap:6px;cursor:pointer}
+.chip .dot{width:8px;height:8px;border-radius:50%;background:var(--c)}
+.chip .n{font-family:var(--f-mono);font-size:12px;color:var(--muted)}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--on-ink);border-color:var(--ink)}
+.chip[aria-pressed="true"] .n{color:inherit;opacity:.75}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:20px}
+.meta,.qhead{display:flex;justify-content:space-between;gap:12px;font-family:var(--f-mono);font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.meta{margin-bottom:8px}
+.fhead{display:flex;justify-content:space-between;align-items:center;gap:10px;min-height:24px}
+.nr{font-family:var(--f-mono);font-size:12px;color:var(--muted);white-space:nowrap}
+.term{font-family:var(--f-display);font-weight:600;color:var(--ink);font-size:clamp(1.8rem,7vw,2.4rem);line-height:1.1;letter-spacing:0;margin:8px 0 4px;text-wrap:balance;overflow-wrap:break-word}
+.hint{color:var(--muted);margin:8px 0 0}
+.tag{font-size:12px;font-weight:700;padding:2px 8px;border-radius:6px;white-space:nowrap}
+.tag.weak{background:var(--warn-bg);color:var(--warn)}
+.tag.known{background:var(--ok-bg);color:var(--ok)}
+.ans{margin-top:14px;padding-top:14px;border-top:1px dashed var(--line);display:flex;flex-direction:column;gap:8px}
+.eprow{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.pill{display:inline-block;font-size:13px;font-weight:700;line-height:1.4;padding:2px 10px;border-radius:999px;background:var(--cb);color:var(--c);white-space:nowrap}
+.join{color:var(--muted);font-size:13px}
+.tid{font-family:var(--f-mono);font-size:14px;font-variant-numeric:tabular-nums}
+p.tid{margin:0}
+.desc{margin:0;max-width:62ch}
+.btn{font:inherit;font-weight:700;font-size:16px;padding:12px 16px;min-height:48px;border-radius:12px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
+.btn:disabled{opacity:.45;cursor:default}
+.btn.primary{background:var(--ink);color:var(--on-ink);border-color:var(--ink)}
+.btn.ok{background:var(--ok-bg);border-color:var(--ok)}
+.btn.weak{background:var(--warn-bg);border-color:var(--warn)}
+.wide{width:100%;margin-top:18px}
+.judge{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}
+.navrow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:12px}
+.navrow .btn{font-size:15px;padding:10px 6px}
+.prog{height:6px;border-radius:3px;background:var(--soft);overflow:hidden;margin:8px 0 16px}
+.prog span{display:block;height:100%;background:var(--ink)}
+.prompt{font-size:19px;line-height:1.4;margin-top:6px}
+.clue{margin:0;padding:12px 14px;border-left:4px solid var(--line);background:var(--soft);border-radius:0 10px 10px 0;font-size:17px}
+.opts{display:flex;flex-direction:column;gap:10px;margin-top:16px}
+.opt{font:inherit;font-size:16px;line-height:1.4;text-align:left;width:100%;padding:13px 14px;min-height:52px;border:1.5px solid var(--line);border-radius:12px;background:var(--surface);color:var(--ink);cursor:pointer;display:flex;align-items:flex-start;gap:12px}
+.opt .txt{flex:1;min-width:0}
+.opt .mk{font-family:var(--f-mono);font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.05em;align-self:center;white-space:nowrap}
+.opt.is-right{border-color:var(--ok);background:var(--ok-bg)}
+.opt.is-right .mk,.opt.is-missed .mk{color:var(--ok)}
+.opt.is-wrong{border-color:var(--bad);background:var(--bad-bg)}
+.opt.is-wrong .mk{color:var(--bad)}
+.opt.is-missed{border-color:var(--ok);border-style:dashed}
+.opt.is-dim{opacity:.55}
+.opt:disabled,.opt.done{cursor:default}
+.chk input{width:22px;height:22px;margin:0;flex:none;accent-color:var(--ink)}
+@media (hover:hover){.opt:not(:disabled):not(.done):hover,.chip:hover{border-color:var(--muted)}}
+.btn:focus-visible,.opt:focus-visible,.chip:focus-visible,.tabs button:focus-visible,.search:focus-visible,.chk:focus-within{outline:3px solid var(--ink);outline-offset:2px}
+.fb{margin-top:16px;border-radius:14px;padding:14px 16px;background:var(--soft)}
+.fb h3{margin:0 0 4px;font-family:var(--f-display);font-weight:600;font-size:19px}
+.fb.good h3{color:var(--ok)}
+.fb.bad h3{color:var(--bad)}
+.fb .desc{margin-top:8px}
+.small{font-size:14px;color:var(--muted);margin:8px 0 0}
+.facts{list-style:none;margin:8px 0 0;padding:0;display:flex;flex-direction:column;gap:8px}
+.facts li{display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px}
+.ctrl{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.ctrl .btn{flex:1 1 160px}
+.score{font-family:var(--f-display);font-weight:600;font-size:48px;line-height:1;margin:8px 0}
+.score span{font-family:var(--f-body);font-size:18px;color:var(--muted)}
+.result h3,.empty h3{font-family:var(--f-display);font-weight:600;font-size:18px;margin:18px 0 4px}
+.empty h3{margin-top:0}
+.empty p{margin:0 0 14px;color:var(--muted)}
+.lhead{display:flex;flex-direction:column;gap:10px}
+.search{width:100%;font:inherit;font-size:16px;padding:12px 14px;border:1.5px solid var(--line);border-radius:12px;background:var(--surface);color:var(--ink)}
+.sort{display:flex;flex-wrap:wrap;gap:8px}
+#items{display:flex;flex-direction:column;gap:14px;margin-top:14px}
+.group{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px 16px 2px}
+.group h2{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:4px 12px;margin:0 0 10px;font-family:var(--f-display);font-weight:600;font-size:21px;color:var(--c,var(--ink))}
+.rng{font-family:var(--f-mono);font-size:12px;font-weight:500;color:var(--muted)}
+.row{padding:14px 0;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:6px;min-width:0}
+.row .hd{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.row .t{font-weight:700;font-size:17px;min-width:0}
+.row .ln{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px}
+.row p{margin:0}
+.none{color:var(--muted);margin:0}
+.foot{font-size:13px;color:var(--muted);max-width:62ch;margin:6px 0 0}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media (prefers-reduced-motion:no-preference){
+  .ans,.fb{animation:rise .22s ease-out}
+  @keyframes rise{from{transform:translateY(4px);opacity:.35}to{transform:none;opacity:1}}
+}
+</style>
+
+<div class="wrap" lang="sv">
+  <header>
+    <p class="eyebrow">Historia · prov vecka 45</p>
+    <h1>Den tidiga europeiska historien</h1>
+    <p class="lead">Alla begrepp från provets lista, från Hammurabis lagar till upplysningen. Öva på vilken epok varje begrepp hör till och ungefär när det hände.</p>
+    <ol class="tl" id="tl" aria-label="Epokerna i tidsordning"></ol>
+  </header>
+
+  <nav class="tabs" role="tablist" aria-label="Övningssätt">
+    <button role="tab" data-act="tab" data-v="kort" aria-selected="true">Kort</button>
+    <button role="tab" data-act="tab" data-v="fv" aria-selected="false">Flerval</button>
+    <button role="tab" data-act="tab" data-v="kr" aria-selected="false">Kryss</button>
+    <button role="tab" data-act="tab" data-v="lista" aria-selected="false">Lista</button>
+  </nav>
+
+  <div class="chips" id="chips" role="group" aria-label="Vilka begrepp vill du öva på?"></div>
+
+  <main id="panel" aria-live="polite"></main>
+
+  <p class="foot">Gränserna mellan epokerna är ungefärliga, och olika böcker drar dem lite olika. Begrepp som ligger på en gräns visas med två epoker. Lärarens lista har 80 nummer, men några står två gånger, så här finns 74 begrepp.</p>
+</div>
+
+<script>
+const E={
+  F:{n:"Forntiden",l:"forntiden",r:"till ca 800 f.Kr."},
+  A:{n:"Antiken",l:"antiken",r:"800 f.Kr.–500 e.Kr."},
+  M:{n:"Medeltiden",l:"medeltiden",r:"500–1500"},
+  T:{n:"Tidigmodern tid",l:"tidigmodern tid",r:"1500–1800"}
+};
+const ORDER=["F","A","M","T"];
+
+const D=[
+{n:[1],t:"Gustav Vasa",e:"T",tid:"1496–1560",f:1496,s:1560,g:["vasa","reform"],x:"Blev Sveriges kung 1523 när landet lämnade Kalmarunionen och var kung till sin död 1560. Han gjorde kungamakten stark, gjorde Sverige till ett arvrike och genomförde reformationen i landet."},
+{n:[2],t:"Hammurabis lagar",e:"F",tid:"ca 1750 f.Kr.",f:-1760,s:-1750,x:"En av världens äldsta bevarade lagsamlingar, från Babylon i Mesopotamien. Lagarna höggs in på en stenpelare och bygger på principen öga för öga, tand för tand."},
+{n:[3],t:"Renässansen",e:"M",a:["T"],tid:"ca 1300–1600",f:1300,s:1600,g:["ren"],x:"Ordet betyder pånyttfödelse. Antikens konst och idéer fick nytt liv, först i Italien och sedan i resten av Europa, och humanismen satte människan i centrum."},
+{n:[4],t:"Hannibal",e:"A",tid:"247–183 f.Kr.",f:-247,s:-183,g:["punisk"],x:"Karthagisk fältherre och en av Roms farligaste fiender. Han tog sig över Alperna med elefanter och anföll Italien under andra puniska kriget."},
+{n:[5],t:"Westfaliska freden",e:"T",tid:"1648",f:1648,s:1648,g:["trettio"],x:"Fredsavtalet som avslutade trettioåriga kriget. Sverige fick land i norra Tyskland, och avtalet lade grunden för tanken på självständiga stater med egna gränser."},
+{n:[6,73],t:"Kristendomens uppkomst",e:"A",tid:"första århundradet e.Kr.",f:30,s:100,g:["krist"],x:"Religionen växte fram ur judendomen och bygger på läran om Jesus. Den spreds i Romarriket och blev statsreligion där år 380."},
+{n:[7],t:"Peter den store",e:"T",tid:"1672–1725",f:1672,s:1725,x:"Rysk tsar som moderniserade Ryssland efter västeuropeisk förebild och gjorde landet till en stormakt. Han besegrade Karl XII i stora nordiska kriget och grundade Sankt Petersburg."},
+{n:[8,71],t:"Den grekiska kolonisationen",e:"A",tid:"ca 750–550 f.Kr.",f:-750,s:-550,x:"Grekiska stadsstater som Korinth grundade nya städer runt Medelhavet och Svarta havet. Grekisk kultur, handel och språk spreds långt utanför Grekland."},
+{n:[9],t:"Digerdöden",e:"M",tid:"1347–1351",f:1347,s:1351,g:["agrar"],x:"Pestepidemi som spreds över hela Europa och dödade mellan 30 och 50 procent av befolkningen. Den nådde Sverige 1350."},
+{n:[10],t:"Julius Caesar",e:"A",tid:"100–44 f.Kr.",f:-100,s:-44,g:["repfall"],x:"Romersk fältherre och politiker som erövrade Gallien och gjorde sig till diktator i Rom. Han mördades år 44 f.Kr. och var aldrig kejsare."},
+{n:[11],t:"Karl den store",e:"M",tid:"ca 747–814",f:747,s:814,g:["karl"],x:"Frankernas kung, även kallad Charlemagne, som samlade stora delar av Västeuropa i ett rike. Han kröntes till kejsare av påven i Rom år 800."},
+{n:[12],t:"Triangelhandeln",e:"T",tid:"ca 1500–1850",f:1520,s:1850,g:["kolon"],x:"Handel i tre led över Atlanten: varor från Europa till Afrika, förslavade afrikaner till Amerika och socker, bomull och tobak tillbaka till Europa. Den var störst på 1700-talet."},
+{n:[13],t:"Kyros den store",e:"A",tid:"ca 600–530 f.Kr.",f:-600,s:-530,g:["pers"],x:"Persisk kung som grundade det persiska storriket och erövrade bland annat Babylon. Han är känd för att låta erövrade folk behålla sin religion."},
+{n:[14],t:"Boktryckarkonsten",e:"M",a:["T"],tid:"ca 1450",f:1440,s:1455,g:["gutenberg","reform"],x:"Johannes Gutenberg uppfann ett sätt att trycka med lösa metallbokstäver. Böcker blev billigare och nya idéer kunde spridas snabbt, vilket bland annat hjälpte reformationen."},
+{n:[15],t:"Det peloponnesiska kriget",e:"A",tid:"431–404 f.Kr.",f:-431,s:-404,g:["grekkrig"],x:"Krig mellan Aten och Sparta med deras allierade. Sparta vann, och Atens tid som stormakt tog slut."},
+{n:[16],t:"Birger jarl",e:"M",tid:"ca 1210–1266",f:1210,s:1266,x:"Svensk jarl som styrde landet i mitten av 1200-talet. Han stärkte kungamakten, stiftade lagar om frid och räknas som Stockholms grundare."},
+{n:[17],t:"Vasco da Gama",e:"T",a:["M"],tid:"ca 1460–1524",f:1460,s:1524,g:["upptackt"],x:"Portugisisk sjöfarare som först seglade från Europa runt Afrikas sydspets till Indien, 1497–1499. Han öppnade en sjöväg för handeln med kryddor."},
+{n:[18],t:"Folkvandringstiden",e:"A",a:["M"],tid:"ca 375–568",f:375,s:568,x:"Germanska och andra folk flyttade in i Romarriket, bland annat när hunnerna trängde in från öster. Det bidrog till att Västrom föll år 476."},
+{n:[19],t:"Religionskrigen",e:"T",tid:"1500- och 1600-talet",f:1546,s:1648,g:["trettio","reform"],x:"Krig i Europa efter reformationen mellan katoliker och protestanter, bland annat i Frankrike och Tyskland. Det sista och största var trettioåriga kriget."},
+{n:[20],t:"Hellenismen",e:"A",tid:"323–31 f.Kr.",f:-323,s:-31,g:["alex"],x:"Tiden efter Alexander den stores död, när grekisk kultur och språk spreds och blandades med andra kulturer från Egypten till Indien. Den slutar ungefär när Rom tar över Egypten."},
+{n:[21],t:"Konstantin den store",e:"A",tid:"ca 272–337",f:272,s:337,g:["krist"],x:"Romersk kejsare från år 306 som var först med att gynna kristendomen. Han grundade en ny huvudstad vid Bosporen som invigdes år 330 och fick hans namn."},
+{n:[22],t:"Upptäckten av Amerika",e:"T",a:["M"],tid:"1492",f:1492,s:1492,g:["columbus","upptackt","vik"],x:"Columbus kom till öarna i Västindien år 1492 när han letade efter en sjöväg till Asien. Kontinenten var redan befolkad av ursprungsfolk, och vikingar hade varit där omkring år 1000."},
+{n:[23],t:"Agrarkrisen",e:"M",tid:"ca 1300–1450",f:1300,s:1450,g:["agrar"],x:"En kris för jordbruket i Europa under senmedeltiden. Digerdöden och andra pestutbrott gjorde att många gårdar övergavs och lämnades öde."},
+{n:[24],t:"Augustus",e:"A",tid:"63 f.Kr.–14 e.Kr.",f:-63,s:14,g:["repfall","pax"],x:"Romarrikets första kejsare, från år 27 f.Kr. Han var Julius Caesars adoptivson, och med honom började en lång period av fred."},
+{n:[25],t:"Korstågen",e:"M",tid:"1096–1291",f:1096,s:1291,g:["kors"],x:"Krigståg som påven och kristna i Europa organiserade för att erövra Jerusalem och andra platser i Mellanöstern från muslimska härskare."},
+{n:[26],t:"Leonardo da Vinci",e:"M",a:["T"],tid:"1452–1519",f:1452,s:1519,g:["ren"],x:"Italiensk konstnär, uppfinnare och forskare under renässansen. Han målade Mona Lisa och Nattvarden och skissade på flygmaskiner."},
+{n:[27],t:"Romarrikets expansion",e:"A",tid:"ca 500 f.Kr.–117 e.Kr.",f:-500,s:117,g:["romrike"],x:"Rom växte från en stadsstat i Italien till ett av historiens största riken, runt hela Medelhavet. Riket var som störst år 117."},
+{n:[28],t:"Städernas och handelns framväxt",e:"M",tid:"ca 1000–1300",f:1000,s:1300,g:["hog"],x:"Städer och marknader växte fram i Europa under högmedeltiden. Handeln ökade kraftigt, till exempel genom Hansan, och fler försörjde sig på hantverk och handel."},
+{n:[29,64],t:"Reformationen",e:"T",tid:"1500-talet, från 1517",f:1517,s:1600,g:["reform"],x:"Kyrkan i Västeuropa splittrades i en katolsk och en protestantisk del. Det började när Martin Luther kritiserade den katolska kyrkan år 1517."},
+{n:[30],t:"Scipio Africanus",e:"A",tid:"236–183 f.Kr.",f:-236,s:-183,g:["punisk"],x:"Romersk fältherre som besegrade Hannibal i slaget vid Zama år 202 f.Kr. och vann därmed andra puniska kriget."},
+{n:[31],t:"Sidenvägens guldålder",e:"M",tid:"ca 600–1400",f:600,s:1400,x:"Handelsvägarna över land mellan Kina och Medelhavet blomstrade. Siden, kryddor och idéer fördes mellan Asien, Mellanöstern och Europa."},
+{n:[32,74],t:"Alexander den stores erövringskrig",e:"A",tid:"334–323 f.Kr.",f:-334,s:-323,g:["alex"],x:"Den makedoniske kungen erövrade på drygt tio år Persiska riket, Egypten och områden ända bort till Indien. Riket splittrades efter hans död."},
+{n:[33],t:"Galileo Galilei",e:"T",tid:"1564–1642",f:1564,s:1642,g:["vet"],x:"Italiensk astronom och fysiker under den vetenskapliga revolutionen. Han studerade himlen med teleskop och försvarade idén att jorden kretsar runt solen, och kyrkan dömde honom för det."},
+{n:[34],t:"Justinianska pesten",e:"M",a:["A"],tid:"541–ca 750",f:541,s:750,x:"Pestpandemi som bröt ut i Östrom år 541 och kom tillbaka i omgångar i nästan 200 år. Den drabbade Medelhavsområdet, Europa och Mellanöstern."},
+{n:[35],t:"Den vetenskapliga revolutionen",e:"T",tid:"ca 1500–1700",f:1543,s:1700,g:["vet"],x:"Forskare började pröva idéer med observationer, experiment och matematik i stället för att lita på gamla auktoriteter. Det förändrade synen på naturen och universum."},
+{n:[36],t:"Pax Romana",e:"A",tid:"27 f.Kr.–180 e.Kr.",f:-27,s:180,g:["romrike","pax"],x:"Betyder den romerska freden. En lång period av fred, stabilitet och ekonomisk tillväxt i Romarriket som började med kejsar Augustus."},
+{n:[37],t:"Karl den stores kröning",e:"M",tid:"år 800",f:800,s:800,g:["karl"],x:"Påven krönte frankernas kung till kejsare i Rom på juldagen år 800. Västeuropa fick då en kejsare igen, drygt 300 år efter Västroms fall."},
+{n:[38],t:"Ludvig XIV",e:"T",tid:"1638–1715",f:1638,s:1715,g:["stat"],x:"Kung i Frankrike 1643–1715, kallad solkungen, som styrde med envälde. Han byggde slottet i Versailles och sägs ha sagt: Staten, det är jag."},
+{n:[39],t:"De puniska krigen",e:"A",tid:"264–146 f.Kr.",f:-264,s:-146,g:["punisk"],x:"Tre krig mellan Rom och Karthago om makten i västra Medelhavet. Rom vann och förstörde Karthago år 146 f.Kr."},
+{n:[40],t:"Olof Skötkonung",e:"M",tid:"ca 980–1022",f:980,s:1022,g:["sverkrist"],x:"Den förste kung som styrde över både svear och götar, och Sveriges förste kristne kung. Han lät prägla de första svenska mynten i Sigtuna."},
+{n:[41,72],t:"Koloniseringen",e:"T",tid:"från ca 1500",f:1500,s:1800,g:["kolon","upptackt"],x:"Europeiska länder tog kontroll över land och människor i Amerika, Afrika och Asien för att få råvaror, handel och makt. Det började med upptäcktsresorna runt år 1500."},
+{n:[42],t:"Kleopatra",e:"A",tid:"69–30 f.Kr.",f:-69,s:-30,g:["repfall"],x:"Egyptens sista drottning. Hon hade förbindelser med Julius Caesar och Marcus Antonius, och efter hennes död blev Egypten en romersk provins."},
+{n:[43],t:"Pippin den lille",e:"M",tid:"kung 751–768",f:751,s:768,g:["karl"],x:"Frankernas kung och far till Karl den store. Han tog makten med påvens stöd och gav påven ett eget område i Italien, Kyrkostaten."},
+{n:[44],t:"Frihetstiden",e:"T",tid:"1719–1772",f:1719,s:1772,x:"Period i Sverige efter Karl XII:s död när riksdagen hade störst makt och kungen hade lite att säga till om. Den tog slut när Gustav III gjorde en statskupp."},
+{n:[45],t:"Romarrikets höjdpunkt",e:"A",tid:"ca 27 f.Kr.–180 e.Kr.",f:-27,s:180,g:["romrike","pax"],x:"Tiden när Romarriket var som störst och mäktigast, under de första kejsarna. År 117 sträckte sig riket från Britannien till Mesopotamien."},
+{n:[46],t:"Konstantinopels fall",e:"M",tid:"1453",f:1453,s:1453,x:"Osmanska riket erövrade Östroms huvudstad år 1453, och det östromerska riket tog slut. Händelsen brukar räknas som en av medeltidens slutpunkter."},
+{n:[47],t:"Vikingarnas resor",e:"M",tid:"ca 800–1050",f:800,s:1050,g:["vik"],x:"Människor från Skandinavien reste för att handla, plundra och bosätta sig. De tog sig västerut till England, Island och Nordamerika och österut längs floderna i nuvarande Ryssland."},
+{n:[48],t:"Martin Luther",e:"T",tid:"1483–1546",f:1483,s:1546,g:["reform"],x:"Tysk munk och präst som 1517 kritiserade den katolska kyrkan, bland annat handeln med avlatsbrev, i sina 95 teser. Han startade reformationen och översatte Bibeln till tyska."},
+{n:[49],t:"Dareios den store",e:"A",tid:"ca 550–486 f.Kr.",f:-550,s:-486,g:["pers"],x:"Persisk kung som gjorde riket ännu större och delade in det i provinser med vägar emellan. Han försökte erövra Grekland men förlorade vid Marathon år 490 f.Kr."},
+{n:[50,61],t:"Den romerska republikens fall",e:"A",tid:"133–27 f.Kr.",f:-133,s:-27,g:["repfall"],x:"En lång period av inbördeskrig och maktkamp i Rom, där republiken till slut ersattes av ett kejsardöme. Den slutade när Augustus blev kejsare år 27 f.Kr."},
+{n:[51],t:"Niccolò Machiavelli",e:"T",a:["M"],tid:"1469–1527",f:1469,s:1527,g:["ren"],x:"Italiensk filosof och diplomat under renässansen. Han skrev boken Fursten, om hur en härskare kan vinna och behålla makten."},
+{n:[52],t:"Sveriges kristnande",e:"M",tid:"ca 800–1100",f:829,s:1100,g:["sverkrist","krist"],x:"Den långa övergången från asatro till kristendom i Sverige. Den började med missionären Ansgar i Birka på 800-talet och var i stort sett klar omkring år 1100."},
+{n:[53],t:"Häxprocesserna",e:"T",a:["M"],tid:"ca 1450–1750",f:1450,s:1750,x:"Människor i Europa, oftast kvinnor, anklagades för häxeri och trolldom, och många avrättades. I Sverige var de värst 1668–1676, under det stora oväsendet."},
+{n:[54],t:"Djingis khan",e:"M",tid:"ca 1162–1227",f:1162,s:1227,x:"Mongolisk ledare som enade de mongoliska stammarna och erövrade stora delar av Asien. Han grundade Mongolriket, historiens största sammanhängande landrike."},
+{n:[55],t:"30-åriga kriget",e:"T",tid:"1618–1648",f:1618,s:1648,g:["trettio"],x:"Krig i Europa som började som ett religionskrig mellan katoliker och protestanter i Tyskland och blev en kamp om makten. Sverige deltog under Gustav II Adolf, och kriget avslutades med Westfaliska freden."},
+{n:[56],t:"Islams grundande och utbredning",e:"M",tid:"600- och 700-talet",f:610,s:750,x:"Religionen grundades av profeten Muhammed på Arabiska halvön på 600-talet. Den spreds snabbt, och inom hundra år sträckte sig det muslimska riket från Spanien till Indusfloden."},
+{n:[57],t:"Christofer Columbus",e:"T",a:["M"],tid:"ca 1451–1506",f:1451,s:1506,g:["columbus","upptackt"],x:"Italiensk sjöfarare i spansk tjänst som seglade västerut för att hitta en sjöväg till Asien. Han kom till Västindien år 1492 och trodde att han hade nått Indien."},
+{n:[58],t:"Feodalismens uppkomst",e:"M",tid:"ca 800–1000",f:800,s:1000,g:["stand"],x:"Ett samhällssystem där kungen gav land till adelsmän i utbyte mot trohet och krigstjänst, medan bönderna arbetade på jorden åt sina herrar. Det växte fram i Västeuropa under 800- och 900-talet."},
+{n:[59],t:"Upplysningen",e:"T",tid:"1700-talet",f:1690,s:1800,x:"En idérörelse som betonade förnuft, kunskap och mänskliga rättigheter. Tänkare som Voltaire och Montesquieu kritiserade envälde och kyrkans makt och ville att människor skulle tänka själva."},
+{n:[60],t:"Krigen mellan de grekiska stadsstaterna",e:"A",tid:"400- och 300-talet f.Kr.",f:-460,s:-338,g:["grekkrig"],x:"Stadsstaterna i Grekland, som Aten, Sparta och Thebe, krigade ofta mot varandra om makten. Krigen försvagade dem, och Makedonien kunde ta kontroll över Grekland år 338 f.Kr."},
+{n:[62],t:"Det romerska inbördeskriget",e:"A",tid:"ca 49–30 f.Kr.",f:-49,s:-30,g:["repfall"],x:"Krig om makten inom Rom, mest känt mellan Julius Caesar och Pompejus 49–45 f.Kr. Senare vann Octavianus, som blev Augustus, över Marcus Antonius och Kleopatra, och republiken tog slut."},
+{n:[63],t:"Högmedeltiden",e:"M",tid:"ca 1000–1300",f:1000,s:1300,g:["hog"],x:"Medeltidens mittperiod, när befolkningen växte, städer och handel växte fram och kyrkan och påven hade stor makt. Då byggdes också många stora katedraler."},
+{n:[65],t:"Gutenbergs bibel",e:"M",a:["T"],tid:"ca 1455",f:1454,s:1455,g:["gutenberg"],x:"Den första stora boken som trycktes i Europa med lösa metallbokstäver, i Mainz i Tyskland. Den blev en symbol för boktryckarkonstens genombrott."},
+{n:[66],t:"Persiska krigen",e:"A",tid:"499–449 f.Kr.",f:-499,s:-449,g:["pers"],x:"Krig mellan Persiska riket och de grekiska stadsstaterna. Grekerna vann bland annat vid Marathon år 490 och vid Salamis år 480 f.Kr."},
+{n:[67],t:"Urban II",e:"M",tid:"påve 1088–1099",f:1088,s:1099,g:["kors"],x:"Påve som år 1095 uppmanade kristna i Europa att ge sig av och erövra Jerusalem. Det blev starten på korstågen."},
+{n:[68],t:"Isaac Newton",e:"T",tid:"1643–1727",f:1643,s:1727,g:["vet"],x:"Engelsk fysiker och matematiker under den vetenskapliga revolutionen. Han beskrev gravitationen och rörelselagarna, som förklarar hur planeter och föremål rör sig."},
+{n:[69],t:"Sjöröveriets guldålder",e:"T",tid:"ca 1650–1730",f:1650,s:1730,g:["kolon"],x:"Tiden när pirater var som flest i Karibien och längs handelsvägarna till kolonierna. De anföll fartyg lastade med silver, socker och andra varor, och en av de mest kända var Svartskägg."},
+{n:[70],t:"Ståndssamhället",e:"M",a:["T"],tid:"medeltiden till 1800-talet",f:1000,s:1866,notid:true,g:["stand"],x:"Ett samhälle där människor delades in i stånd efter vilken grupp de föddes i: adel, präster, borgare och bönder. Varje stånd hade egna rättigheter och skyldigheter, och i Sverige fanns ståndsriksdagen kvar till 1866."},
+{n:[75],t:"Upptäcktsresornas tid",e:"T",a:["M"],tid:"ca 1400–1600",f:1415,s:1600,g:["upptackt"],x:"Europeiska sjöfarare, först från Portugal och Spanien, letade efter nya sjövägar till Asiens kryddor och guld. Columbus, Vasco da Gama och Magellan är några av de mest kända."},
+{n:[76],t:"Byråkratiseringen (centraliseringen av staterna)",e:"T",tid:"1500- och 1600-talet",f:1520,s:1700,g:["stat","vasa"],x:"Kungarna samlade makten hos sig och byggde upp ämbetsverk med tjänstemän som skötte skatter, lagar och krigsmakt. Staterna blev mer centralstyrda, och i Sverige började det med Gustav Vasa."},
+{n:[77],t:"Absolutismen",e:"T",tid:"1600- och 1700-talet",f:1650,s:1789,g:["stat"],x:"Ett styre där kungen eller drottningen har all makt, ett envälde. Ludvig XIV i Frankrike är det mest kända exemplet, och i Sverige styrde Karl XI och Karl XII med envälde."},
+{n:[78],t:"Merkantilismen (och bullionismen)",e:"T",tid:"1500- till 1700-talet",f:1550,s:1750,x:"En ekonomisk idé om att ett land blir rikt genom att exportera mer än det importerar och samla guld och silver. En tidig variant räknade mängden ädelmetall i landet som själva rikedomen."},
+{n:[79],t:"Den stora schismen",e:"M",tid:"1054",f:1054,s:1054,x:"Kyrkan splittrades år 1054 i den katolska kyrkan i väst och den ortodoxa kyrkan i öst. Ibland används samma namn för perioden 1378–1417, när det fanns två eller tre påvar samtidigt."},
+{n:[80],t:"Kalmarunionens bildande",e:"M",tid:"1397",f:1397,s:1397,g:["vasa"],x:"Danmark, Norge och Sverige förenades i en union under drottning Margareta. Unionen höll med avbrott till 1523, när Sverige bröt sig ur under Gustav Vasa."}
+];
+
+const byK={};
+D.forEach(function(d){
+  d.a=d.a||[]; d.g=d.g||[]; d.k=d.n[0];
+  d.acc=ORDER.filter(function(e){return e===d.e||d.a.indexOf(e)>-1;});
+  d.mid=(d.f+d.s)/2; byK[d.k]=d;
+});
+
+const S={tab:"kort",filter:"alla",weak:new Set(),known:new Set(),kort:null,fv:null,kr:null,lq:"",ls:"tid"};
+const KEY="tidig-historia-v45";
+
+/* ---------- hjälpfunktioner ---------- */
+const $=s=>document.querySelector(s);
+const rnd=n=>Math.floor(Math.random()*n);
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=rnd(i+1);const t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function compat(a,b){return a!==b&&!a.g.some(g=>b.g.indexOf(g)>-1);}
+function overlap(a,b,m){return !(a.s+m<b.f||b.s+m<a.f);}
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
+function sentences(x){return x.replace(/([.!?])\s+(?=[A-ZÅÄÖ])/g,"$1\u0001").split("\u0001");}
+function short(d){const s=sentences(d.x);let o=s[0];if(o.length<45&&s[1])o+=" "+s[1];return o;}
+function nrLabel(d){return "Nr "+d.n.join(" och ");}
+function pills(d){
+  if(d.acc.length===1)return `<span class="pill e-${d.e}">${E[d.e].n}</span>`;
+  return d.acc.map(e=>`<span class="pill e-${e}">${E[e].n}</span>`).join(`<span class="join" aria-hidden="true">→</span>`)+`<span class="sr">, ligger på gränsen</span>`;
+}
+function epochPhrase(d){return d.acc.length===1?E[d.e].l:"övergången mellan "+E[d.acc[0]].l+" och "+E[d.acc[1]].l;}
+function fact(d){return `<li><b>${d.t}</b> ${pills(d)} <span class="tid">${d.tid}</span></li>`;}
+function reduce(){try{return window.matchMedia("(prefers-reduced-motion: reduce)").matches;}catch(e){return false;}}
+function load(){try{const r=JSON.parse(localStorage.getItem(KEY)||"null");if(r){S.weak=new Set((r.weak||[]).filter(k=>byK[k]));S.known=new Set((r.known||[]).filter(k=>byK[k]));}}catch(e){}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify({weak:Array.from(S.weak),known:Array.from(S.known)}));}catch(e){}}
+function pool(){
+  if(S.filter==="alla")return D.slice();
+  if(S.filter==="weak")return D.filter(d=>S.weak.has(d.k));
+  return D.filter(d=>d.acc.indexOf(S.filter)>-1);
+}
+
+/* ---------- flervalsfrågor ---------- */
+function genEpok(q){
+  const wrong=shuffle(ORDER.filter(e=>q.acc.indexOf(e)<0)).slice(0,3);
+  const opts=shuffle([{t:E[q.e].n,r:true}].concat(wrong.map(e=>({t:E[e].n,r:false}))));
+  return {k:"one",lab:"Vilken epok?",pr:`I vilken epok hör <b>${q.t}</b> hemma?`,opts,weak:[q.k],
+    ex:`<ul class="facts">${fact(q)}</ul><p class="desc">${q.x}</p>`};
+}
+function genTid(q){
+  if(q.notid)return null;
+  const c=shuffle(D.filter(d=>!d.notid&&d!==q&&d.tid!==q.tid&&Math.abs(d.mid-q.mid)>150&&!overlap(d,q,30)));
+  const pick=[];
+  for(const d of c){if(pick.every(p=>Math.abs(p.mid-d.mid)>100&&p.tid!==d.tid))pick.push(d);if(pick.length===3)break;}
+  if(pick.length<3)return null;
+  const opts=shuffle([{t:q.tid,r:true}].concat(pick.map(d=>({t:d.tid,r:false,k:d.k}))));
+  return {k:"one",lab:"Vilken tid?",pr:`Vilken tid passar <b>${q.t}</b>?`,opts,mono:true,weak:[q.k],
+    ex:`<ul class="facts">${fact(q)}</ul><p class="desc">${q.x}</p><p class="small">De andra tiderna hör till:</p><ul class="facts">${pick.map(fact).join("")}</ul>`};
+}
+function genVem(q){
+  const same=shuffle(D.filter(d=>compat(q,d)&&d.e===q.e)).slice(0,2);
+  const other=shuffle(D.filter(d=>compat(q,d)&&d.e!==q.e));
+  const pick=same.concat(other).slice(0,3);
+  if(pick.length<3)return null;
+  const opts=shuffle([{t:q.t,r:true}].concat(pick.map(d=>({t:d.t,r:false,k:d.k}))));
+  return {k:"one",lab:"Vem eller vad beskrivs?",pr:`<blockquote class="clue">${q.x}</blockquote>`,opts,weak:[q.k],
+    ex:`<ul class="facts">${fact(q)}</ul>`};
+}
+function genForst(q){
+  if(q.notid)return null;
+  const c=shuffle(D.filter(d=>!d.notid&&compat(q,d)&&Math.abs(d.f-q.f)>=120));
+  const pick=[q];
+  for(const d of c){if(pick.every(p=>Math.abs(p.f-d.f)>=120&&compat(p,d)))pick.push(d);if(pick.length===3)break;}
+  if(pick.length<3)return null;
+  const sorted=pick.slice().sort((a,b)=>a.f-b.f);
+  const first=sorted[0];
+  const opts=shuffle(pick.map(d=>({t:d.t,r:d===first,k:d.k})));
+  return {k:"one",lab:"Vad kommer först?",pr:"Vilket av de här kommer först i tiden?",opts,weak:[first.k],
+    ex:`<p class="small">I tidsordning:</p><ul class="facts">${sorted.map(fact).join("")}</ul>`};
+}
+const FV=[genEpok,genTid,genVem,genForst];
+function genFlerval(q){for(const g of shuffle(FV)){const r=g(q);if(r)return r;}return genEpok(q);}
+
+/* ---------- kryssfrågor ---------- */
+function genKE(q){
+  const opts=[];
+  const wrongE=shuffle(ORDER.filter(e=>q.acc.indexOf(e)<0))[0];
+  if(Math.random()<.75)opts.push({t:`Hör till ${epochPhrase(q)}`,r:true});
+  opts.push({t:`Hör till ${E[wrongE].l}`,r:false});
+  if(!q.notid){
+    if(Math.random()<.6)opts.push({t:`Tid: ${q.tid}`,r:true});
+    const ft=shuffle(D.filter(d=>!d.notid&&d.tid!==q.tid&&!overlap(d,q,80)&&Math.abs(d.mid-q.mid)>250))[0];
+    if(ft)opts.push({t:`Tid: ${ft.tid}`,r:false});
+  }
+  if(Math.random()<.75)opts.push({t:short(q),r:true});
+  const fd=shuffle(D.filter(d=>compat(q,d)&&!d.acc.some(e=>q.acc.indexOf(e)>-1)))[0];
+  if(fd)opts.push({t:short(fd),r:false});
+  if(!opts.some(o=>o.r))opts.push({t:short(q),r:true});
+  return {k:"many",lab:"Kryssa allt som stämmer",pr:`Vad stämmer om <b>${q.t}</b>? Kryssa alla rätta.`,opts:shuffle(opts),weak:[q.k],
+    ex:`<ul class="facts">${fact(q)}</ul><p class="desc">${q.x}</p>`};
+}
+function genKA(target){
+  const yes=shuffle(D.filter(d=>d.acc.length===1&&d.e===target));
+  const no=shuffle(D.filter(d=>d.acc.length===1&&d.e!==target));
+  const k=2+rnd(3);
+  const items=shuffle(yes.slice(0,k).concat(no.slice(0,6-k)));
+  return {k:"many",lab:"Kryssa rätt epok",pr:`Kryssa alla som hör till <b>${E[target].l}</b>.`,
+    opts:items.map(d=>({t:d.t,r:d.e===target,k:d.k})),perItem:true,
+    ex:`<ul class="facts">${items.slice().sort((a,b)=>a.f-b.f).map(fact).join("")}</ul>`};
+}
+const YS=[0,500,1000,1500];
+function genKB(){
+  for(let t=0;t<12;t++){
+    const Y=YS[rnd(YS.length)];
+    const win=D.filter(d=>!d.notid&&(d.s<Y-15||d.f>Y+15)&&Math.abs(d.mid-Y)<900);
+    const yes=shuffle(win.filter(d=>d.s<Y));
+    const no=shuffle(win.filter(d=>d.f>Y));
+    const k=2+rnd(3);
+    if(yes.length<k||no.length<6-k)continue;
+    const items=shuffle(yes.slice(0,k).concat(no.slice(0,6-k)));
+    const pr=Y===0?"Kryssa alla som hör till tiden <b>före Kristi födelse</b>, alltså f.Kr.":`Kryssa alla som hör till tiden <b>före år ${Y}</b>.`;
+    return {k:"many",lab:"Före eller efter?",pr,opts:items.map(d=>({t:d.t,r:d.s<Y,k:d.k})),perItem:true,
+      ex:`<p class="small">I tidsordning:</p><ul class="facts">${items.slice().sort((a,b)=>a.f-b.f).map(fact).join("")}</ul>`};
+  }
+  return null;
+}
+function genKryss(q){
+  const r=Math.random();
+  if(S.filter==="weak"&&r<.75)return genKE(q);
+  if(r<.45)return genKE(q);
+  if(r<.75){const t=["A","M","T"].indexOf(S.filter)>-1?S.filter:["A","M","T"][rnd(3)];return genKA(t);}
+  return genKB()||genKE(q);
+}
+
+function newRound(kind){
+  const p=pool();
+  const R={qs:[],i:0,score:0,done:false,miss:new Set(),ans:null};
+  if(!p.length)return R;
+  const subs=shuffle(p);
+  for(let i=0;R.qs.length<10&&i<80;i++){
+    const q=subs[i%subs.length];
+    const g=kind==="fv"?genFlerval(q):genKryss(q);
+    if(g)R.qs.push(g);
+  }
+  return R;
+}
+
+/* ---------- rendering ---------- */
+const panel=$("#panel");
+
+function renderTimeline(){
+  $("#tl").innerHTML=ORDER.map(e=>{
+    const c=D.filter(d=>d.e===e).length;
+    return `<li class="e-${e}"><span class="tl-bar"></span><span class="nm">${E[e].n}</span><span class="yr">${E[e].r}</span><span class="ct">${c} begrepp</span></li>`;
+  }).join("");
+}
+function renderChips(){
+  const defs=[["alla","Alla",D.length],["A",E.A.n,D.filter(d=>d.acc.indexOf("A")>-1).length],["M",E.M.n,D.filter(d=>d.acc.indexOf("M")>-1).length],["T",E.T.n,D.filter(d=>d.acc.indexOf("T")>-1).length],["weak","Öva mer",S.weak.size]];
+  $("#chips").innerHTML=defs.map(function(x){
+    const v=x[0],ep=["A","M","T"].indexOf(v)>-1;
+    return `<button class="chip${ep?" e-"+v:""}" data-act="filter" data-v="${v}" aria-pressed="${S.filter===v}">${ep?'<span class="dot"></span>':""}${x[1]} <span class="n">${x[2]}</span></button>`;
+  }).join("");
+}
+function emptyWeak(){
+  return `<section class="card empty"><h3>Inget i Öva mer ännu</h3><p>När du trycker Öva mer på ett kort, eller svarar fel i Flerval eller Kryss, hamnar begreppet här.</p><button class="btn" data-act="alla">Visa alla begrepp</button></section>`;
+}
+
+function newDeck(){S.kort={deck:shuffle(pool()).map(d=>d.k),i:0,open:false,end:false};}
+function renderKort(){
+  const K=S.kort;
+  if(!K.deck.length){panel.innerHTML=emptyWeak();return;}
+  const p=pool();
+  const right=S.filter==="weak"?`${S.weak.size} kvar i Öva mer`:`Kan ${p.filter(x=>S.known.has(x.k)).length} av ${p.length}`;
+  if(K.end){
+    panel.innerHTML=`<div class="meta"><span>Klart</span><span>${right}</span></div><article class="card flash"><p class="eyebrow">Alla kort är genomgångna</p><h2 class="term">${K.deck.length} kort klara</h2><p class="hint">${S.weak.size?S.weak.size+" begrepp ligger i Öva mer.":"Inget ligger i Öva mer just nu."}</p><div class="judge"><button class="btn primary" data-act="mix">Börja om</button>${S.weak.size&&S.filter!=="weak"?`<button class="btn" data-act="weakdeck">Bara Öva mer</button>`:`<button class="btn" data-act="prev">Förra kortet</button>`}</div></article>`;
+    return;
+  }
+  const d=byK[K.deck[K.i]];
+  const st=S.weak.has(d.k)?`<span class="tag weak">Öva mer</span>`:S.known.has(d.k)?`<span class="tag known">Kan</span>`:"";
+  const body=K.open
+    ?`<div class="ans"><div class="eprow">${pills(d)}</div><p class="tid">${d.tid}</p><p class="desc">${d.x}</p></div><div class="judge"><button class="btn weak" data-act="ova">Öva mer</button><button class="btn ok" data-act="kan">Kan det</button></div>`
+    :`<p class="hint">Vilken epok, och ungefär när? Säg svaret för dig själv och vänd sedan kortet.</p><button class="btn primary wide" data-act="visa">Visa svar</button>`;
+  panel.innerHTML=`<div class="meta"><span>Kort ${K.i+1} av ${K.deck.length}</span><span>${right}</span></div><article class="card flash"><div class="fhead"><span class="nr">${nrLabel(d)}</span>${st}</div><h2 class="term">${d.t}</h2>${body}</article><div class="navrow"><button class="btn" data-act="prev" ${K.i===0?"disabled":""}>Förra</button><button class="btn" data-act="mix">Blanda om</button><button class="btn" data-act="skip">Nästa</button></div>`;
+}
+
+function resultHTML(R){
+  const n=R.qs.length,s=R.score;
+  const msg=s>=n-1?"Det sitter riktigt bra.":s>=Math.ceil(n*.6)?"Bra jobbat. Titta igenom det du missade en gång till.":"Kör en runda i korten med Öva mer och försök sedan igen.";
+  const miss=Array.from(R.miss).map(k=>byK[k]).sort((a,b)=>a.f-b.f);
+  return `<section class="card result"><p class="eyebrow">Omgången är klar</p><p class="score">${s} <span>av ${n} rätt</span></p><p>${msg}</p>${miss.length?`<h3>Lagt i Öva mer</h3><ul class="facts">${miss.map(fact).join("")}</ul>`:""}<div class="ctrl"><button class="btn primary" data-act="again">Ny omgång</button>${miss.length?`<button class="btn" data-act="gokort">Öva i korten</button>`:""}</div></section>`;
+}
+function renderQuiz(kind){
+  const R=S[kind];
+  if(!R.qs.length){panel.innerHTML=emptyWeak();return;}
+  if(R.done){panel.innerHTML=resultHTML(R);return;}
+  const q=R.qs[R.i],n=R.qs.length;
+  if(q.k==="many"&&!R.ans)R.ans={ch:q.opts.map(()=>false),sub:false};
+  const a=R.ans;
+  let opts;
+  if(q.k==="one"){
+    opts=q.opts.map(function(o,i){
+      let cls="opt",mk="";
+      if(a){if(o.r){cls+=" is-right";mk=a.c===i?"Rätt":"Rätt svar";}else if(a.c===i){cls+=" is-wrong";mk="Ditt svar";}else cls+=" is-dim";}
+      return `<button class="${cls}" data-act="pick" data-i="${i}" ${a?"disabled":""}><span class="txt${q.mono?" tid":""}">${o.t}</span>${mk?`<span class="mk">${mk}</span>`:""}</button>`;
+    }).join("");
+  }else{
+    opts=q.opts.map(function(o,i){
+      const ch=a.ch[i];let cls="opt chk",mk="";
+      if(a.sub){cls+=" done";if(o.r&&ch){cls+=" is-right";mk="Rätt";}else if(!o.r&&ch){cls+=" is-wrong";mk="Fel";}else if(o.r&&!ch){cls+=" is-missed";mk="Missad";}else cls+=" is-dim";}
+      return `<label class="${cls}" for="k${i}"><input type="checkbox" id="k${i}" data-act="tick" data-i="${i}" ${ch?"checked":""} ${a.sub?"disabled":""}><span class="txt">${o.t}</span>${mk?`<span class="mk">${mk}</span>`:""}</label>`;
+    }).join("");
+  }
+  const answered=q.k==="one"?!!a:a.sub;
+  let fb="",ctrl;
+  if(answered){
+    fb=`<div class="fb ${a.ok?"good":"bad"}" role="status"><h3>${a.ok?"Rätt":"Inte rätt"}</h3>${q.k==="many"&&!a.ok?`<p class="small">Missad betyder att det stämmer men inte kryssades.</p>`:""}${q.ex}</div>`;
+    ctrl=`<button class="btn primary" data-act="next">${R.i+1<n?"Nästa fråga":"Se resultat"}</button>`;
+  }else if(q.k==="many"){
+    ctrl=`<button class="btn primary" data-act="check" id="checkBtn" ${a.ch.some(Boolean)?"":"disabled"}>Rätta</button>`;
+  }else ctrl="";
+  panel.innerHTML=`<section class="card quiz"><div class="qhead"><span>Fråga ${R.i+1} av ${n}</span><span>${R.score} rätt</span></div><div class="prog"><span style="width:${Math.round(R.i/n*100)}%"></span></div><p class="eyebrow">${q.lab}</p><div class="prompt">${q.pr}</div><div class="opts">${opts}</div>${fb}${ctrl?`<div class="ctrl">${ctrl}</div>`:""}</section>`;
+}
+
+function row(d){
+  return `<div class="row"><div class="hd"><span class="t">${d.t}</span><span class="nr">${nrLabel(d)}</span></div><div class="ln">${pills(d)}<span class="tid">${d.tid}</span>${S.weak.has(d.k)?`<span class="tag weak">Öva mer</span>`:""}</div><p>${d.x}</p></div>`;
+}
+function renderLista(){
+  panel.innerHTML=`<div class="lhead"><label class="sr" for="sok">Sök bland begreppen</label><input type="search" id="sok" class="search" placeholder="Sök begrepp, årtal eller ord" value="${esc(S.lq)}" autocomplete="off"><div class="sort" role="group" aria-label="Ordning"><button class="chip" data-act="sort" data-v="tid" aria-pressed="${S.ls==="tid"}">Tidsordning</button><button class="chip" data-act="sort" data-v="nr" aria-pressed="${S.ls==="nr"}">Listans nummer</button></div></div><div id="items"></div>`;
+  fillLista();
+}
+function fillLista(){
+  const q=S.lq.trim().toLowerCase();
+  let it=pool();
+  if(q)it=it.filter(d=>(d.t+" "+d.x+" "+d.tid+" "+d.n.join(" ")).toLowerCase().indexOf(q)>-1);
+  const box=$("#items");
+  if(!it.length){box.innerHTML=S.filter==="weak"&&!q?emptyWeak():`<p class="none">Inga begrepp matchar ${q?"”"+esc(S.lq)+"”":"det här urvalet"}.</p>`;return;}
+  if(S.ls==="nr"){
+    it.sort((a,b)=>a.k-b.k);
+    box.innerHTML=`<section class="group">${it.map(row).join("")}</section>`;
+  }else{
+    box.innerHTML=ORDER.map(function(e){
+      const g=it.filter(d=>d.e===e).sort((a,b)=>a.f-b.f||a.s-b.s);
+      if(!g.length)return "";
+      return `<section class="group e-${e}"><h2><span>${E[e].n}</span><span class="rng">${E[e].r}</span></h2>${g.map(row).join("")}</section>`;
+    }).join("");
+  }
+}
+
+function render(){
+  renderChips();
+  document.querySelectorAll(".tabs [role=tab]").forEach(b=>b.setAttribute("aria-selected",String(b.dataset.v===S.tab)));
+  if(S.tab==="kort"){if(!S.kort)newDeck();renderKort();}
+  else if(S.tab==="fv"){if(!S.fv)S.fv=newRound("fv");renderQuiz("fv");}
+  else if(S.tab==="kr"){if(!S.kr)S.kr=newRound("kr");renderQuiz("kr");}
+  else renderLista();
+}
+function toTop(){
+  const top=panel.getBoundingClientRect().top;
+  if(top<0)window.scrollTo({top:window.scrollY+top-12,behavior:reduce()?"auto":"smooth"});
+}
+function showCtrl(){
+  const c=panel.querySelector(".ctrl");
+  if(c&&c.scrollIntoView)c.scrollIntoView({block:"nearest",behavior:reduce()?"auto":"smooth"});
+}
+
+/* ---------- handlingar ---------- */
+function addWeak(k,R){S.weak.add(k);S.known.delete(k);if(R)R.miss.add(k);}
+function advance(){const K=S.kort;if(K.i<K.deck.length-1){K.i++;K.open=false;}else K.end=true;render();}
+function mark(kan){
+  const d=byK[S.kort.deck[S.kort.i]];
+  if(kan){S.known.add(d.k);S.weak.delete(d.k);}else{S.weak.add(d.k);S.known.delete(d.k);}
+  save();advance();
+}
+function pick(i){
+  const R=S[S.tab];if(!R||R.ans)return;
+  const q=R.qs[R.i],o=q.opts[i];
+  R.ans={c:i,ok:o.r};
+  if(o.r)R.score++;else{q.weak.forEach(k=>addWeak(k,R));if(o.k!=null)addWeak(o.k,R);}
+  save();render();showCtrl();
+}
+function check(){
+  const R=S[S.tab];const q=R.qs[R.i],a=R.ans;
+  if(!a||a.sub||!a.ch.some(Boolean))return;
+  a.sub=true;a.ok=q.opts.every((o,i)=>o.r===a.ch[i]);
+  if(a.ok)R.score++;
+  else if(q.perItem)q.opts.forEach((o,i)=>{if(o.r!==a.ch[i])addWeak(o.k,R);});
+  else q.weak.forEach(k=>addWeak(k,R));
+  save();render();showCtrl();
+}
+function next(){const R=S[S.tab];R.i++;R.ans=null;if(R.i>=R.qs.length)R.done=true;render();toTop();}
+function resetAll(){S.kort=null;S.fv=null;S.kr=null;}
+
+document.addEventListener("click",function(ev){
+  const b=ev.target.closest("[data-act]");
+  if(!b||b.disabled)return;
+  const act=b.dataset.act,v=b.dataset.v;
+  switch(act){
+    case "tab":S.tab=v;render();break;
+    case "filter":if(S.filter!==v){S.filter=v;resetAll();}render();break;
+    case "visa":S.kort.open=true;renderKort();break;
+    case "kan":mark(true);break;
+    case "ova":mark(false);break;
+    case "prev":{const K=S.kort;if(K.end)K.end=false;else if(K.i>0){K.i--;K.open=false;}renderKort();break;}
+    case "skip":advance();break;
+    case "mix":newDeck();render();break;
+    case "weakdeck":case "gokort":S.filter="weak";resetAll();S.tab="kort";render();toTop();break;
+    case "alla":S.filter="alla";resetAll();render();break;
+    case "pick":pick(+b.dataset.i);break;
+    case "check":check();break;
+    case "next":next();break;
+    case "again":S[S.tab]=newRound(S.tab);render();toTop();break;
+    case "sort":S.ls=v;renderLista();break;
+  }
+});
+document.addEventListener("change",function(ev){
+  const t=ev.target;
+  if(!t.dataset||t.dataset.act!=="tick")return;
+  const R=S[S.tab];if(!R||!R.ans||R.ans.sub)return;
+  R.ans.ch[+t.dataset.i]=t.checked;
+  const b=$("#checkBtn");if(b)b.disabled=!R.ans.ch.some(Boolean);
+});
+document.addEventListener("input",function(ev){
+  if(ev.target.id==="sok"){S.lq=ev.target.value;fillLista();}
+});
+
+load();
+renderTimeline();
+render();
+</script>
+
+</body>
+</html>
