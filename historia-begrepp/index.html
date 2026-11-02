@@ -48,6 +48,7 @@ h1{font-family:var(--f-display);font-weight:500;color:var(--ink);font-size:clamp
 .watch-links{display:flex;flex-wrap:wrap;gap:8px}
 .wl{display:inline-flex;align-items:center;gap:7px;padding:8px 14px;min-height:40px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);text-decoration:none;font-size:15px;font-weight:700}
 .wl .dot{width:8px;height:8px;border-radius:50%;background:var(--c)}
+.wl-none{border-style:dashed;background:transparent;color:var(--muted);font-weight:400}
 .wl:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
 @media (hover:hover){.wl:hover{border-color:var(--muted)}}
 .tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;padding:4px;background:var(--soft);border-radius:14px}
@@ -148,10 +149,12 @@ p.tid{margin:0}
     <section class="watch" aria-labelledby="watch-h">
       <h2 id="watch-h" class="eyebrow">Titta först · Historia förklarad på UR Play</h2>
       <div class="watch-links">
+        <span class="wl wl-none e-F"><span class="dot"></span>Forntiden, ingen film</span>
         <a class="wl e-A" href="https://urplay.se/program/224188-historia-forklarad-antiken" target="_blank" rel="noopener"><span class="dot"></span>Antiken <span aria-hidden="true">↗</span></a>
         <a class="wl e-M" href="https://urplay.se/program/224193-historia-forklarad-medeltiden" target="_blank" rel="noopener"><span class="dot"></span>Medeltiden <span aria-hidden="true">↗</span></a>
         <a class="wl e-T" href="https://urplay.se/program/224190-historia-forklarad-tidigmodern-tid" target="_blank" rel="noopener"><span class="dot"></span>Tidigmodern tid <span aria-hidden="true">↗</span></a>
       </div>
+      <p class="small">Forntiden har ingen film i läsanvisningen. Den täcks av instuderingsfrågan om forntidens utmärkande drag: människor började odla och blev bofasta, de första städerna och skriften kom till, kungar och präster styrde och religionen fick stor betydelse.</p>
       <p class="small">I boken Samband historia PLUS läser du från sidan 39 i det gula bandet.</p>
     </section>
   </header>
