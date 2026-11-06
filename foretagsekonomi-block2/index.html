@@ -1,0 +1,1260 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>FE nivå 1 block 2 – plugg</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F8FAF6; --grid:rgba(40,120,90,.12); --ink:#1D2B3A; --soft:#56627a;
+  --hl:#FFE066; --hl-ink:#1D2B3A; --tab:#9EDFC0; --red:#B0263C; --card:#ffffff;
+  --line:rgba(29,43,58,.16); --ok:#2F7D4F; --warn:#9A5B00; --blue:#2F5FA8;
+  --head:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --body:"Atkinson Hyperlegible","Segoe UI",system-ui,sans-serif;
+  --hand:"Caveat","Comic Sans MS",cursive;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --paper:#111B1E; --grid:rgba(140,220,190,.07); --ink:#E7EEF2; --soft:#A5B2BE;
+    --hl:#E9C846; --hl-ink:#111B1E; --tab:#4FAF85; --red:#FF8597; --card:#18252A;
+    --line:rgba(231,238,242,.15); --ok:#6FD39A; --warn:#F2B654; --blue:#8DB4F0;
+  }
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 64px)}
+body{
+  margin:0; color:var(--ink); font-family:var(--body); font-size:17px; line-height:1.55;
+  background-color:var(--paper);
+}
+.wrap{max-width:720px; margin:0 auto; padding:0 18px 60px}
+header.hero{padding:34px 0 10px; position:relative}
+.hero h1{font-family:var(--head); font-weight:800; font-size:clamp(2.1rem,8vw,3.3rem); line-height:1.02; margin:0; letter-spacing:-.02em}
+.hero h1 span{background:linear-gradient(transparent 38%,var(--hl) 38%,var(--hl) 88%,transparent 88%); color:var(--ink); padding:0 .12em; -webkit-box-decoration-break:clone; box-decoration-break:clone}
+.hero p{margin:14px 0 0; color:var(--soft); max-width:34em}
+.tabnote{position:absolute; right:0; top:22px; background:var(--tab); color:#0f2a20; font-family:var(--hand); font-weight:700; font-size:1.35rem; padding:4px 12px 2px; transform:rotate(3deg); border-radius:2px}
+nav.tabs{position:sticky; top:env(safe-area-inset-top,0px); z-index:5; background:var(--paper); border-bottom:2px solid var(--ink); display:flex; gap:4px; overflow-x:auto; margin:14px -18px 0; padding:8px 18px 0}
+nav.tabs button{font-family:var(--head); font-weight:700; font-size:1rem; color:var(--ink); background:transparent; border:2px solid transparent; border-bottom:none; padding:9px 14px; border-radius:8px 8px 0 0; cursor:pointer; white-space:nowrap}
+nav.tabs button[aria-selected="true"]{background:var(--card); border-color:var(--ink); margin-bottom:-2px}
+button:focus-visible,summary:focus-visible,input:focus-visible,textarea:focus-visible,a:focus-visible,.flash:focus-visible{outline:3px solid var(--red); outline-offset:2px}
+section.panel{display:none; padding-top:22px}
+section.panel.active{display:block}
+h2{font-family:var(--head); font-size:1.5rem; margin:0 0 6px}
+.lead{color:var(--soft); margin:0 0 18px}
+a{color:inherit; text-decoration-color:var(--red); text-underline-offset:3px}
+.small{font-size:.88rem; color:var(--soft)}
+
+/* Boxar */
+.box{background:var(--card); border:1.5px solid var(--line); border-radius:6px; padding:14px 16px; margin:0 0 14px}
+.box h3{font-family:var(--head); font-size:1.15rem; margin:0 0 6px}
+.box p{margin:6px 0}
+.fast{background:var(--card); border:2px solid var(--ink); border-radius:6px; padding:14px 16px; margin:0 0 18px; box-shadow:5px 5px 0 var(--tab)}
+.fast h3{font-family:var(--head); font-size:1.15rem; margin:0 0 8px}
+.steps{margin:0; padding:0; list-style:none; counter-reset:s}
+.steps li{counter-increment:s; position:relative; padding:8px 0 8px 40px; border-top:1px dashed var(--line)}
+.steps li:first-child{border-top:none}
+.steps li::before{content:counter(s); position:absolute; left:0; top:7px; width:28px; height:28px; border-radius:50%; background:var(--hl); color:var(--hl-ink); font-family:var(--head); font-weight:800; display:flex; align-items:center; justify-content:center}
+.steps b{font-family:var(--head)}
+.steps .t{color:var(--soft); font-size:.88rem; white-space:nowrap}
+.steps .done{display:flex; gap:8px; align-items:center; margin-top:4px; font-size:.92rem; color:var(--ok); cursor:pointer; width:max-content}
+.steps .done input{width:18px; height:18px; accent-color:var(--ok)}
+.steps li.isdone b{text-decoration:line-through; text-decoration-color:var(--ok)}
+.lnk{font:inherit; color:var(--ink); background:none; border:none; padding:0; cursor:pointer; text-decoration:underline; text-decoration-color:var(--red); text-underline-offset:3px; font-weight:700}
+.status{background:var(--card); border:1.5px solid var(--line); border-radius:6px; padding:12px 14px; margin:0 0 18px}
+.status h3{font-family:var(--head); font-size:1.05rem; margin:0 0 8px}
+.strow{display:flex; justify-content:space-between; align-items:center; gap:10px; padding:6px 0; border-top:1px dashed var(--line)}
+.strow:first-of-type{border-top:none}
+.strow button{font:inherit; color:var(--ink); background:none; border:none; padding:0; text-align:left; cursor:pointer; text-decoration:underline; text-decoration-color:var(--line); text-underline-offset:3px}
+.pill{font-size:.82rem; border-radius:99px; padding:2px 10px; border:1.5px solid currentColor; white-space:nowrap}
+.pill.ok{color:var(--ok)} .pill.work{color:var(--warn)} .pill.none{color:var(--soft)}
+.star{color:var(--red); font-family:var(--hand); font-size:1.15rem; font-weight:700; white-space:nowrap}
+
+/* Kapitel */
+details.topic{background:var(--card); border:1.5px solid var(--line); border-radius:6px; margin:0 0 12px}
+details.topic>summary{list-style:none; cursor:pointer; padding:14px 16px; font-family:var(--head); font-weight:700; font-size:1.15rem; display:flex; justify-content:space-between; gap:12px; align-items:baseline}
+details.topic>summary::-webkit-details-marker{display:none}
+details.topic>summary small{font-family:var(--body); font-weight:400; font-size:.85rem; color:var(--soft); white-space:nowrap}
+details.topic[open]>summary{border-bottom:1.5px dashed var(--line)}
+.tbody{padding:6px 16px 16px}
+.tbody h4{font-family:var(--head); font-size:1.05rem; margin:22px 0 4px}
+.tbody p{margin:6px 0}
+.term{background:var(--hl); color:var(--hl-ink); padding:0 4px; border-radius:2px; font-weight:700}
+.ex{border-left:4px solid var(--hl); background:var(--paper); padding:8px 12px; margin:10px 0}
+.ex p{margin:0 0 4px}
+.tip{font-family:var(--hand); font-size:1.4rem; color:var(--red); line-height:1.2; margin:14px 0 2px}
+.tag{display:inline-block; font-size:.78rem; color:var(--blue); border:1.5px dashed var(--blue); border-radius:4px; padding:1px 7px; margin:2px 0 4px}
+.four{display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:10px 0}
+.four div{background:var(--paper); border:1.5px solid var(--ink); border-radius:6px; padding:8px 10px; font-size:.95rem; line-height:1.35}
+.four b{font-family:var(--head); display:block; font-size:1.05rem}
+.swot{display:grid; grid-template-columns:1fr 1fr; gap:6px; margin:10px 0}
+.swot div{border-radius:6px; padding:8px 10px; font-size:.92rem; line-height:1.3; border:1.5px solid var(--ink)}
+.swot b{font-family:var(--head); display:block; font-size:1.05rem}
+.swot .in{background:color-mix(in srgb,var(--tab) 22%,var(--card))}
+.swot .out{background:color-mix(in srgb,var(--hl) 22%,var(--card))}
+.two{display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:10px 0}
+.two>div{background:var(--paper); border:1.5px solid var(--line); border-radius:6px; padding:8px 10px; font-size:.95rem; line-height:1.4}
+.two b{font-family:var(--head); display:block}
+dl.defs{margin:8px 0}
+dl.defs dt{font-weight:700; margin-top:8px}
+dl.defs dd{margin:0 0 0 0; color:var(--ink)}
+.tblwrap{overflow-x:auto; margin:10px 0}
+table.tbl{border-collapse:collapse; width:100%; font-size:.92rem; min-width:420px}
+table.tbl th,table.tbl td{border:1px solid var(--line); padding:6px 8px; text-align:left; vertical-align:top}
+table.tbl th{font-family:var(--head); background:var(--paper)}
+.forms{display:grid; gap:10px; margin:10px 0}
+.form{border:1.5px solid var(--ink); border-radius:6px; padding:10px 12px; background:var(--paper)}
+.form h5{font-family:var(--head); font-size:1.05rem; margin:0 0 4px}
+.form dl{display:grid; grid-template-columns:max-content 1fr; gap:2px 10px; margin:0; font-size:.93rem}
+.form dt{color:var(--soft)}
+.form dd{margin:0}
+.phases{display:grid; gap:8px; margin:10px 0}
+.phase{display:flex; gap:10px; align-items:flex-start; border:1.5px solid var(--ink); border-radius:6px; padding:8px 10px; background:var(--paper)}
+.phase .n{font-family:var(--hand); font-weight:700; font-size:1.6rem; color:var(--red); line-height:1; min-width:28px}
+.phase b{font-family:var(--head)}
+.flow{display:flex; align-items:center; gap:6px; flex-wrap:wrap; margin:10px 0}
+.flow span{border:1.5px solid var(--ink); border-radius:6px; padding:6px 10px; background:var(--paper); font-weight:700}
+.flow i{font-style:normal; font-size:1.3rem}
+.sk{background:color-mix(in srgb,var(--tab) 14%,var(--card)); border:1.5px solid var(--ink); border-radius:6px; padding:12px 14px; margin:8px 0 6px}
+.sk h4{margin:0 0 2px; font-family:var(--head)}
+.ovn ul{list-style:none; padding:0; margin:6px 0}
+.ovn li{margin:4px 0}
+.ovn label{display:flex; gap:9px; align-items:center; cursor:pointer}
+.ovn input{width:18px; height:18px; accent-color:var(--ok)}
+.cls{font-size:.78rem; color:var(--soft); border:1px solid var(--line); border-radius:99px; padding:0 7px}
+details.notes{margin:16px 0 0; border:1.5px dashed var(--ink); border-radius:6px; background:var(--paper)}
+details.notes>summary{cursor:pointer; padding:10px 12px; font-family:var(--hand); font-size:1.4rem; font-weight:700; color:var(--red)}
+details.notes .nb{padding:0 12px 10px; font-size:.95rem}
+details.notes .nb p{margin:6px 0}
+.fixd{display:block; margin:4px 0 8px; padding:6px 10px; border-left:4px solid var(--red); background:var(--card); font-size:.9rem}
+.fixd b{color:var(--red)}
+
+/* Flerval */
+.q{background:var(--card); border:1.5px solid var(--line); border-radius:6px; padding:12px 14px; margin:0 0 12px}
+.q.right{border-color:var(--ok)} .q.wrong{border-color:var(--red)}
+.q .where{font-size:.82rem; color:var(--soft); margin:0}
+.q .qt{font-weight:700; margin:2px 0 8px; line-height:1.4}
+.opts{display:grid; gap:6px}
+.opt{font:inherit; font-size:1rem; text-align:left; color:var(--ink); background:var(--paper); border:1.5px solid var(--line); border-radius:6px; padding:9px 12px; cursor:pointer; line-height:1.35}
+.opt:hover{border-color:var(--ink)}
+.opt.isright{border-color:var(--ok); background:color-mix(in srgb,var(--ok) 12%,var(--card)); font-weight:700}
+.opt.iswrong{border-color:var(--red); background:color-mix(in srgb,var(--red) 10%,var(--card))}
+.opt:disabled{cursor:default}
+.why{margin:8px 0 0; padding:8px 12px; border-left:4px solid var(--hl); background:var(--paper); font-size:.95rem}
+.why b{font-family:var(--head)}
+.again{font:inherit; font-size:.88rem; background:none; border:none; color:var(--soft); text-decoration:underline; cursor:pointer; padding:0; margin-top:6px}
+
+/* Knappar */
+.chip{font:inherit; font-size:.9rem; border:1.5px solid var(--ink); background:transparent; color:var(--ink); border-radius:99px; padding:5px 12px; cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink); color:var(--paper)}
+.cardbar{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:14px}
+.btn{font-family:var(--head); font-weight:700; font-size:1rem; padding:9px 15px; border-radius:6px; border:2px solid var(--ink); background:var(--card); color:var(--ink); cursor:pointer}
+.btn.primary{background:var(--ink); color:var(--paper)}
+.btn.good{border-color:var(--ok); color:var(--ok)}
+.btn.slim{padding:6px 12px; font-size:.92rem}
+.row{display:flex; gap:8px; margin-top:10px; flex-wrap:wrap; align-items:center}
+.progress{font-family:var(--head); font-weight:700; margin:0 0 12px}
+.empty{background:var(--card); border:1.5px dashed var(--ink); border-radius:6px; padding:14px 16px}
+
+/* Case */
+.case{background:var(--card); border:2px solid var(--ink); border-radius:6px; padding:14px 16px; margin:0 0 22px; box-shadow:5px 5px 0 var(--tab)}
+.case h3{font-family:var(--head); font-size:1.25rem; margin:0}
+.case .kap{font-size:.85rem; color:var(--soft); margin:0 0 8px}
+.bg{background:var(--paper); border-radius:6px; padding:10px 12px; margin:8px 0 12px}
+.bg p{margin:4px 0}
+.part{border-top:1.5px dashed var(--line); padding:12px 0 4px}
+.part .pq{font-weight:700; margin:0 0 6px}
+.part textarea{width:100%; min-height:96px; font:inherit; font-size:16px; color:var(--ink); background:var(--paper); border:1.5px solid var(--line); border-radius:6px; padding:9px 11px; resize:vertical}
+.checks{margin:8px 0 0; padding:0; list-style:none}
+.checks li{margin:6px 0}
+.checks label{display:flex; gap:9px; align-items:flex-start; cursor:pointer}
+.checks input{margin-top:5px; width:18px; height:18px; accent-color:var(--ok); flex:none}
+.model{margin:10px 0 0; padding:10px 12px; border-left:4px solid var(--hl); background:var(--paper); font-size:.95rem}
+.model b{font-family:var(--head)}
+.score{font-family:var(--head); font-weight:700; color:var(--ok); margin:8px 0 0}
+
+/* Kort */
+.flash{min-height:220px; background:var(--card); border:2px solid var(--ink); border-radius:6px; padding:30px 22px 26px; display:flex; flex-direction:column; justify-content:center; cursor:pointer; position:relative; box-shadow:5px 5px 0 var(--tab)}
+.flash .side{font-size:.85rem; color:var(--soft); position:absolute; top:10px; left:14px}
+.flash .fq{font-family:var(--head); font-size:1.45rem; font-weight:700; line-height:1.25}
+.flash .fa{font-size:1.12rem}
+.flashnav{display:flex; justify-content:space-between; align-items:center; gap:8px; margin-top:16px; flex-wrap:wrap}
+.count{color:var(--soft); font-size:.95rem}
+
+/* Vanliga fel */
+.fix{background:var(--card); border:1.5px solid var(--line); border-radius:6px; padding:14px 16px; margin:0 0 12px}
+.fix .wh{font-size:.82rem; color:var(--soft); margin:0 0 4px}
+.fix .was{color:var(--soft); text-decoration:line-through; text-decoration-color:var(--red); margin:0}
+.fix .is{margin:6px 0 0; font-weight:700}
+.fix .note{font-family:var(--hand); font-size:1.3rem; color:var(--red); margin:6px 0 0; line-height:1.2}
+
+/* Röda tråden */
+.mapwrap{margin:0 0 18px; background:var(--card); border:2px solid var(--ink); border-radius:6px; padding:10px 6px; box-shadow:5px 5px 0 var(--tab)}
+.map{display:block; width:100%; max-width:440px; height:auto; margin:0 auto}
+.map .bx{fill:var(--card); stroke:var(--ink); stroke-width:2}
+.map .t-h{font-family:var(--head); font-weight:700; font-size:14px; fill:var(--ink)}
+.map .t-n{font-family:var(--hand); font-weight:700; font-size:20px; fill:var(--red)}
+.map .t-s{font-family:var(--body); font-size:11.5px; fill:var(--ink)}
+.map .t-q{font-family:var(--hand); font-size:16px; fill:var(--red)}
+.map .side{fill:none; stroke:var(--ok); stroke-width:2; stroke-dasharray:5 4}
+.map .t-side{font-family:var(--head); font-weight:700; font-size:12px; fill:var(--ok)}
+.story p{margin:0 0 12px}
+footer{margin-top:40px; font-size:.85rem; color:var(--soft)}
+@media (max-width:420px){ .four,.two{grid-template-columns:1fr} }
+@media (prefers-reduced-motion:no-preference){ .flash{transition:transform .18s ease} .flash:active{transform:scale(.99)} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+    <div class="tabnote">block 2</div>
+    <h1><span>FE-plugg</span><br>för Meja</h1>
+    <p>Företagsekonomi nivå 1, kapitel 3–7: affärsidé, företagsformer, finansiering, organisation och ledarskap, avtal och lagar. Byggd på dina anteckningar, lärarens sammanfattning och provlistan.</p>
+  </header>
+
+  <nav class="tabs" role="tablist" aria-label="Delar">
+    <button role="tab" aria-selected="true" data-tab="las">Start</button>
+    <button role="tab" aria-selected="false" data-tab="kap">Läs</button>
+    <button role="tab" aria-selected="false" data-tab="case">Case</button>
+    <button role="tab" aria-selected="false" data-tab="quiz">Quiz</button>
+    <button role="tab" aria-selected="false" data-tab="kort">Kort</button>
+    <button role="tab" aria-selected="false" data-tab="fel">Vanliga fel</button>
+    <button role="tab" aria-selected="false" data-tab="trad">Röda tråden</button>
+  </nav>
+
+  <!-- START -->
+  <section class="panel active" id="las">
+    <h2>Provet i korthet</h2>
+    <p class="lead">Provet har korta kunskapsfrågor på kapitel 3–7 och längre casefrågor om tre saker: affärsidé och intressenter (kap 3), juridiska företagsformer (kap 4) och finansieringsalternativ (kap 5).</p>
+
+    <div class="fast">
+      <h3>Fyra pass till provet</h3>
+      <p class="small" style="margin:0 0 6px">Ungefär 45–60 minuter per pass. Börja varje kapitel med snabbkollen. Klarar du alla tre frågorna kan du skumma texten och gå direkt till caset.</p>
+      <ol class="steps" id="passes">
+        <li><b>Pass 1: Affärsidén.</b> Läs <button class="lnk" data-go="3">kapitel 3</button> och gör caset <button class="lnk" data-gocase="c1">Bowl &amp; Go</button>. <span class="t">ca 50 min</span><label class="done"><input type="checkbox" data-pass="1"> Klart</label></li>
+        <li><b>Pass 2: Företagsformerna.</b> Läs <button class="lnk" data-go="4">kapitel 4</button> och gör caset <button class="lnk" data-gocase="c2">Nyskick</button>. <span class="t">ca 50 min</span><label class="done"><input type="checkbox" data-pass="2"> Klart</label></li>
+        <li><b>Pass 3: Pengar och ledarskap.</b> Läs <button class="lnk" data-go="5">kapitel 5</button> och gör caset <button class="lnk" data-gocase="c3">Nyskick ett år senare</button>. Läs sedan <button class="lnk" data-go="6">kapitel 6</button>, med fokus på ledarstilarna, teori X och Y och diskrimineringslagen. <span class="t">ca 60 min</span><label class="done"><input type="checkbox" data-pass="3"> Klart</label></li>
+        <li><b>Pass 4: Avtal och repetition.</b> Läs <button class="lnk" data-go="7">kapitel 7</button>, gå igenom <button class="lnk" data-gotab="fel">Vanliga fel</button> och kör <button class="lnk" data-gotab="quiz">quizet</button> tills Mina fel är tomt. <span class="t">ca 45 min</span><label class="done"><input type="checkbox" data-pass="4"> Klart</label></li>
+      </ol>
+      <p class="small">Korten är extra träning, till exempel på bussen eller kvällen före provet.</p>
+    </div>
+
+    <div class="status" id="status"></div>
+
+    <div class="box">
+      <h3>Det här bygger sidan på</h3>
+      <p>Dina anteckningar från lektionerna, lärarens sammanfattning av kapitel 3–7 från Teams, provlistan och utvalda sidor ur faktaboken. Allt är förklarat med egna ord.</p>
+      <p>Delar märkta <span class="tag">stäms av mot faktaboken</span> fanns inte i lektionsmaterialet. De bygger på lagen och vanlig kunskap i ämnet och kontrolleras mot faktaboken.</p>
+    </div>
+  </section>
+
+  <!-- LÄS -->
+  <section class="panel" id="kap">
+    <h2>Läs</h2>
+    <p class="lead">Varje kapitel börjar med en snabbkoll. Längst ner finns lärarens övningar att bocka av och dina egna anteckningar, där det som var fel är rättat.</p>
+    <div id="topics"></div>
+  </section>
+
+  <!-- CASE -->
+  <section class="panel" id="case">
+    <h2>Case</h2>
+    <p class="lead">Så här ser de långa frågorna ut. Skriv ditt svar först, gärna i stödord. Tryck sedan på knappen och bocka av det du fick med. Svaren sparas på den här enheten.</p>
+    <div class="box"><p><b>Så skriver du ett bra casesvar:</b> använd begreppen från kapitlet, koppla alltid till just företaget i caset och motivera varför. "Aktiebolag, eftersom ägarna då bara riskerar sin insats" är bättre än bara "aktiebolag".</p></div>
+    <div id="cases"></div>
+  </section>
+
+  <!-- QUIZ -->
+  <section class="panel" id="quiz">
+    <h2>Quiz</h2>
+    <p class="lead">Korta kunskapsfrågor som på provet. Du ser direkt om du svarade rätt och varför.</p>
+    <div class="cardbar" id="qfilter"></div>
+    <p class="progress" id="qprogress"></p>
+    <div id="qlist"></div>
+    <div class="row"><button class="btn slim" id="qreset">Nollställ quizet</button></div>
+  </section>
+
+  <!-- KORT -->
+  <section class="panel" id="kort">
+    <h2>Kort</h2>
+    <p class="lead">Begrepp att kunna. Tryck på kortet för att vända det. Kort du kan hamnar sist i högen.</p>
+    <div class="cardbar" id="cfilter"></div>
+    <div class="flash" id="flash" tabindex="0" role="button" aria-label="Vänd kortet">
+      <span class="side" id="fside"></span>
+      <div id="fcontent"></div>
+    </div>
+    <div class="flashnav">
+      <button class="btn" id="fprev">Förra</button>
+      <span class="count" id="fcount"></span>
+      <button class="btn primary" id="fnext">Nästa</button>
+    </div>
+    <div class="row">
+      <button class="btn good" id="fknow"></button>
+      <button class="btn" id="freset">Börja om</button>
+    </div>
+  </section>
+
+  <!-- VANLIGA FEL -->
+  <section class="panel" id="fel">
+    <h2>Vanliga fel</h2>
+    <p class="lead">Saker som är lätta att blanda ihop och som kostar poäng. Läs det överstrukna, fundera på vad som är fel och kolla sedan den rätta versionen.</p>
+    <div id="fixes"></div>
+  </section>
+
+  <!-- RÖDA TRÅDEN -->
+  <section class="panel" id="trad">
+    <h2>Röda tråden</h2>
+    <p class="lead">Kapitel 3–7 följer en och samma resa: från idé till ett företag som fungerar. Varje kapitel svarar på nästa fråga man måste ställa sig.</p>
+    <figure class="mapwrap">
+<svg class="map" viewBox="0 0 360 900" role="img" aria-labelledby="mapt mapd" xmlns="http://www.w3.org/2000/svg">
+<title id="mapt">Röda tråden i block 2</title>
+<desc id="mapd">Från idé till affärsidé, marknadsundersökning och SWOT, affärsmodell och affärsplan i kapitel 3. Sedan val av företagsform och registrering i kapitel 4, finansiering i kapitel 5, organisation och ledarskap i kapitel 6 och avtal och lagar i kapitel 7. Intressenterna finns runt företaget hela vägen.</desc>
+<defs><marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--ink)"/></marker></defs>
+<rect x="318" y="20" width="30" height="860" rx="6" class="side"/>
+<text x="338" y="450" class="t-side" transform="rotate(90 338 450)" text-anchor="middle">Intressenterna finns runt företaget hela vägen</text>
+
+<rect x="20" y="20" width="280" height="66" rx="6" class="bx"/>
+<text x="34" y="46" class="t-n">3</text><text x="58" y="46" class="t-h">Idé och entreprenör</text>
+<text x="34" y="68" class="t-s">Någon ser en affärsmöjlighet och tar initiativ</text>
+<line x1="160" y1="86" x2="160" y2="120" style="stroke:var(--ink);stroke-width:2" marker-end="url(#ar)"/>
+<text x="170" y="108" class="t-q">Vad är tanken?</text>
+
+<rect x="20" y="124" width="280" height="66" rx="6" class="bx"/>
+<text x="34" y="150" class="t-n">3</text><text x="58" y="150" class="t-h">Affärsidé</text>
+<text x="34" y="172" class="t-s">Varför finns vi, vem, vad och hur?</text>
+<line x1="160" y1="190" x2="160" y2="224" style="stroke:var(--ink);stroke-width:2" marker-end="url(#ar)"/>
+<text x="170" y="212" class="t-q">Finns det kunder?</text>
+
+<rect x="20" y="228" width="280" height="66" rx="6" class="bx"/>
+<text x="34" y="254" class="t-n">3</text><text x="58" y="254" class="t-h">Marknaden och SWOT</text>
+<text x="34" y="276" class="t-s">Skrivbord, fält, omvärld, styrkor och hot</text>
+<line x1="160" y1="294" x2="160" y2="328" style="stroke:var(--ink);stroke-width:2" marker-end="url(#ar)"/>
+<text x="170" y="316" class="t-q">Hur tjänar vi pengar?</text>
+
+<rect x="20" y="332" width="280" height="66" rx="6" class="bx"/>
+<text x="34" y="358" class="t-n">3</text><text x="58" y="358" class="t-h">Affärsmodell och affärsplan</text>
+<text x="34" y="380" class="t-s">Hur det fungerar, och kartan framåt</text>
+<line x1="160" y1="398" x2="160" y2="432" style="stroke:var(--ink);stroke-width:2" marker-end="url(#ar)"/>
+<text x="170" y="420" class="t-q">Hur många ägare? Hur stor risk?</text>
+
+<rect x="20" y="436" width="280" height="66" rx="6" class="bx"/>
+<text x="34" y="462" class="t-n">4</text><text x="58" y="462" class="t-h">Företagsform och registrering</text>
+<text x="34" y="484" class="t-s">EF, HB, KB, AB eller ekonomisk förening</text>
+<line x1="160" y1="502" x2="160" y2="536" style="stroke:var(--ink);stroke-width:2" marker-end="url(#ar)"/>
+<text x="170" y="524" class="t-q">Var kommer pengarna ifrån?</text>
+
+<rect x="20" y="540" width="280" height="66" rx="6" class="bx"/>
+<text x="34" y="566" class="t-n">5</text><text x="58" y="566" class="t-h">Finansiering</text>
+<text x="34" y="588" class="t-s">Start-, tillväxt- och rörelsekapital</text>
+<line x1="160" y1="606" x2="160" y2="640" style="stroke:var(--ink);stroke-width:2" marker-end="url(#ar)"/>
+<text x="170" y="628" class="t-q">Vem gör vad, och hur leder vi?</text>
+
+<rect x="20" y="644" width="280" height="66" rx="6" class="bx"/>
+<text x="34" y="670" class="t-n">6</text><text x="58" y="670" class="t-h">Organisera och leda</text>
+<text x="34" y="692" class="t-s">Organisationsschema, mål, kultur, ledarstil</text>
+<line x1="160" y1="710" x2="160" y2="744" style="stroke:var(--ink);stroke-width:2" marker-end="url(#ar)"/>
+<text x="170" y="732" class="t-q">Vilka regler gäller?</text>
+
+<rect x="20" y="748" width="280" height="66" rx="6" class="bx"/>
+<text x="34" y="774" class="t-n">7</text><text x="58" y="774" class="t-h">Avtal och lagar</text>
+<text x="34" y="796" class="t-s">Anbud + accept, köplagen, konsumentköplagen</text>
+<text x="34" y="852" class="t-q">Nu kan företaget göra affärer.</text>
+</svg>
+    </figure>
+    <div class="story">
+      <p>Allt börjar med en <b>entreprenör</b> som ser en möjlighet. Tanken formuleras som en <b>affärsidé</b>, och innan man satsar undersöker man om det finns kunder och sammanfattar läget i en <b>SWOT</b>. <b>Affärsmodellen</b> visar hur företaget ska tjäna pengar, och <b>affärsplanen</b> samlar allt i en karta som man kan visa för bank och investerare.</p>
+      <p>Sedan måste man välja <b>företagsform</b>. Valet hänger ihop med hur många som ska äga företaget, hur stor risk ägarna vill ta och hur mycket pengar de har. Därför leder kapitel 4 rakt in i kapitel 5 om <b>finansiering</b>, där pengarna ska räcka till starten, till att växa och till den dagliga driften.</p>
+      <p>När företaget väl är igång behöver det <b>organiseras och ledas</b> mot gemensamma mål, och det måste följa lagarna när det gör <b>affärer och avtal</b>. Intressenterna finns med hela vägen: ägare, anställda, kunder, leverantörer, bank och samhälle.</p>
+      <p class="tip">Kan du berätta den här resan med egna ord har du ryggraden i hela provet.</p>
+    </div>
+  </section>
+
+  <footer>Gjord för Mejas plugg inför provet i företagsekonomi nivå 1, block 2. Bok: E4000 Företagsekonomi nivå 1 (Liber).</footer>
+</div>
+
+<script>
+/* ---------- Innehåll ---------- */
+const CH = [
+{n:3, title:"Affärsidé och affärsmodell", pages:"Faktaboken s. 41–55", op:"s. 32–40", star:true,
+ snabb:["q3a","q3c","q3e"],
+ ovn:["3:1","3:3","3:4","3:5","3:10","3:11","3:14"], cls:["3:1","3:11","3:14"],
+ body:`
+<h4>Varför startar inte fler företag?</h4>
+<p>Många vill starta eget men låter bli. De vanligaste skälen är krångliga regler, att det är svårt att få ihop startkapital och rädslan för att inte ha en säker inkomst.</p>
+
+<h4>Entreprenören</h4>
+<p>En <span class="term">entreprenör</span> är en person som tar initiativ till och utvecklar en verksamhet. Entreprenörer ser affärsmöjligheter där andra inte gör det, hittar nya infallsvinklar, är kreativa och vågar experimentera, även om det kan misslyckas.</p>
+<p>Det som driver dem är ofta pengar, frihetskänslan, passionen, stoltheten och att det är roligt att se en idé bli verklighet.</p>
+
+<h4>Affärsidén <span class="star">viktig till case</span></h4>
+<p>Affärsidén är den drivande tanken bakom ett företag. En bra affärsidé är kort och slagkraftig och svarar på fyra frågor:</p>
+<div class="four">
+ <div><b>Varför</b>finns vi? Vilket behov eller problem löser vi?</div>
+ <div><b>Vem</b>är kunden?</div>
+ <div><b>Vad</b>erbjuder vi?</div>
+ <div><b>Hur</b>gör vi? Vilka resurser har vi?</div>
+</div>
+<p>Bakom frågorna finns affärsidéns fyra grundstenar: kundbehov, kundgrupp, produktidé och resurser.</p>
+<div class="ex"><p><b>Exempel från lektionen</b></p><p>H&amp;M vill erbjuda mode och kvalitet till bästa pris på ett hållbart sätt.</p></div>
+
+<h4>Målgrupp och hisspitch</h4>
+<p>Affärsidén ska visa vilken <span class="term">målgrupp</span> företaget siktar på, alltså den avgränsade grupp människor som är mest intressanta som köpare av företagets produkter.</p>
+<p>En <span class="term">hisspitch</span> är en kort och tydlig presentation av affärsidén, så kort att den hinns med under en hissresa, ungefär 30–60 sekunder. Syftet är att väcka intresse hos till exempel en investerare så att man får ett riktigt möte.</p>
+<p>En affärsidé behöver inte vara unik. Det kan räcka att göra samma sak som andra fast lite bättre, eller att finnas på plats när kunderna behöver det. Det som ofta avgör är entreprenörens förmåga att lära av motgångar, vara flexibel och lyssna på kunderna.</p>
+<div class="ex"><p><b>Exempel från faktaboken</b></p><p>Ikeas affärsidé handlar om att sälja snygg och praktisk inredning så billigt att nästan alla har råd. Sellpy gör det enkelt att sälja begagnade kläder och saker på nätet, så att produkterna används längre.</p></div>
+
+<h4>Intressenter <span class="star">viktig till case</span></h4>
+<p>En <span class="term">intressent</span> är en aktör runt företaget som är intresserad av eller beroende av företaget och dess verksamhet. Affärsidén måste gå att förklara för de viktigaste intressenterna, till exempel banken eller en investerare.</p>
+<p>I faktabokens bild över företagets intressenter står företaget och dess affärsidé i mitten. Runt omkring finns ägare, anställda, kunder, leverantörer, långivare, stat och kommun samt konkurrenter. Varje intressent har en relation till företaget, och de flesta bidrar med något och vill ha något tillbaka.</p>
+<span class="tag">faktaboken s. 44</span>
+<div class="tblwrap"><table class="tbl">
+<tr><th>Intressent</th><th>Bidrar med</th><th>Vill ha</th></tr>
+<tr><td>Ägare</td><td>Pengar (kapital)</td><td>Vinst och att företaget växer</td></tr>
+<tr><td>Anställda</td><td>Arbete och kunskap</td><td>Lön, trygg anställning, bra arbetsmiljö</td></tr>
+<tr><td>Kunder</td><td>Betalning</td><td>Bra varor och tjänster till rätt pris</td></tr>
+<tr><td>Leverantörer</td><td>Varor och material</td><td>Betalt i tid och fler affärer</td></tr>
+<tr><td>Långivare, till exempel banken</td><td>Lån</td><td>Ränta och att lånet betalas tillbaka</td></tr>
+<tr><td>Stat och kommun</td><td>Regler, vägar, utbildad arbetskraft</td><td>Skatt och arbetstillfällen</td></tr>
+<tr><td>Konkurrenter</td><td>Konkurrens som tvingar företaget att bli bättre</td><td>Egna kunder och större del av marknaden</td></tr>
+</table></div>
+<p class="tip">Case-tips: säg alltid både vad intressenten ger och vad den vill ha tillbaka.</p>
+
+<h4>Finns det en marknad? <span class="star">viktig till case</span></h4>
+<p>Många nystartade företag misslyckas, och en vanlig orsak är att det inte finns något verkligt kundbehov bakom idén. Därför ska man undersöka marknaden innan man satsar. Det kallas en <span class="term">omvärlds- och marknadsanalys</span>.</p>
+<span class="tag">faktaboken s. 46–47</span>
+<div class="two">
+ <div><b>Skrivbordsundersökning</b>Man samlar information som redan finns för att få en överblick: hur stor marknaden är, hur kunderna brukar köpa, hur marknaden utvecklas och vilka konkurrenterna är. Det är den naturliga starten.</div>
+ <div><b>Fältundersökning</b>Man går ut "i fältet" och frågar människor, till exempel förbipasserande, möjliga kunder eller kunniga personer i branschen. Resultatet kan övertyga banken om att idén är värd att satsa på.</div>
+</div>
+<p>Omvärldsanalysen tittar också på det som påverkar hela branschen nu och framåt. Faktaboken har en checklista med sex områden:</p>
+<dl class="defs">
+ <dt>Kunderna</dt><dd>Hur förändras deras behov och köpvanor, och varför väljer de en viss produkt?</dd>
+ <dt>Konkurrenterna</dt><dd>Vilka är starkast, vad erbjuder de och hur marknadsför de sig?</dd>
+ <dt>Leverantörerna</dt><dd>Vilka är viktigast, var finns de och vill de anpassa sig till ett litet nytt företag?</dd>
+ <dt>Politiska och juridiska faktorer</dt><dd>Till exempel miljölagar, arbetsmarknadslagar, konsumentlagar, skatter och tullar.</dd>
+ <dt>Sociala faktorer</dt><dd>Trender i attityder och värderingar, till exempel kring miljö och hälsa, och hur befolkningen förändras.</dd>
+ <dt>Tekniska faktorer</dt><dd>Ny teknik i branschen, digitalisering och AI.</dd>
+</dl>
+
+<h4>Metoder för frågeundersökningar</h4>
+<div class="tblwrap"><table class="tbl">
+<tr><th>Metod</th><th>Fördel</th><th>Nackdel</th></tr>
+<tr><td>Enkät</td><td>Ganska billig</td><td>Många svarar inte, och svaren blir sällan djupa</td></tr>
+<tr><td>Personlig intervju</td><td>Man kan ställa följdfrågor och se kroppsspråket</td><td>Dyr och tar lång tid</td></tr>
+<tr><td>Telefonintervju</td><td>Snabb, och man kan ställa följdfrågor</td><td>Man ser inte kroppsspråket, och den passar sämre för känsliga frågor</td></tr>
+<tr><td>Webbenkät</td><td>Enkel och snabb, når många</td><td>Man vet inte vem som svarar, så urvalet kan bli snett</td></tr>
+<tr><td>Fokusgrupp (gruppintervju)</td><td>Deltagarna diskuterar med varandra, vilket ger djupare förståelse</td><td>Kräver en skicklig samtalsledare, och en dominant deltagare kan styra gruppen</td></tr>
+<tr><td>Observation</td><td>Den som undersöker påverkar inte resultatet, och man kan upptäcka oväntade saker</td><td>Ofta svår och krävande att genomföra</td></tr>
+</table></div>
+<p class="tip">Case-tips: nämn både metoden och en fördel eller nackdel med den.</p>
+
+<h4>SWOT-analysen</h4>
+<div class="swot">
+ <div class="in"><b>S – Styrkor</b>strengths, internt</div>
+ <div class="in"><b>W – Svagheter</b>weaknesses, internt</div>
+ <div class="out"><b>O – Möjligheter</b>opportunities, externt</div>
+ <div class="out"><b>T – Hot</b>threats, externt</div>
+</div>
+<p>Styrkor och svagheter handlar om det egna företaget jämfört med konkurrenterna, till exempel varumärke, sortiment, kvalitet, service, kompetens och lönsamhet. Möjligheter och hot finns på marknaden och i omvärlden. Dem kan företaget inte påverka, bara reagera på.</p>
+<p class="tip">Internt = inne i företaget. Externt = ute i världen.</p>
+
+<h4>Affärsmodellen</h4>
+<p>Affärsmodellen beskriver hur företaget ska fungera i praktiken och hur det ska tjäna pengar. Den är mer detaljerad än affärsidén, och därför mer intressant för investerare och långivare.</p>
+<p>Kort sagt är affärsidén <i>tanken</i> och affärsmodellen <i>hur man genomför den</i>.</p>
+<dl class="defs">
+ <dt>Freemium</dt><dd>Grundtjänsten är gratis, men man betalar för att få mer. Exempel Spotify.</dd>
+ <dt>Delningsekonomi</dt><dd>Man delar, lånar eller hyr i stället för att äga, till exempel bilpooler.</dd>
+ <dt>On-demand</dt><dd>Kunden får tjänsten direkt när den behövs, ofta via en app, till exempel matleverans.</dd>
+ <dt>Dropshipping</dt><dd>Butiken säljer utan eget lager. Leverantören skickar varan direkt till kunden.</dd>
+ <dt>Franchise</dt><dd>En lokal företagare får använda ett färdigt koncept och varumärke mot en avgift till varumärkesägaren. Exempel McDonald's. Fördelen är ett känt varumärke och ett koncept som redan fungerar. Nackdelen är avgifterna och att man måste följa kedjans regler.</dd>
+</dl>
+<p>Affärsmodeller behöver ändras när omvärlden ändras, till exempel genom digitaliseringen och utvecklingen av AI.</p>
+
+<h4>Affärsplanen</h4>
+<p>Affärsplanen fungerar som en karta: var vill företaget vara om några år, och hur ska det ta sig dit? Den är viktig i kontakten med bank, investerare och samarbetspartner.</p>
+<p>En affärsplan innehåller ofta affärsidé, vision och mål, marknad, affärsmodell, marknadsföring, organisation och ledning, ekonomisk plan och budget samt en riskanalys.</p>
+<p class="tip">Idé = tanken. Modell = hur pengarna kommer in. Plan = hela kartan.</p>`,
+ notes:`
+<p><b>Genomgång block 2.</b> Varför startar inte fler företag? Regler. Svårigheter att få startkapital, 25 tusen för aktiebolag. Rädsla för ekonomisk otrygghet.</p>
+<p>Entreprenör = en person som tar initiativ till och utvecklar en verksamhet. Modig, kreativ, våga prova och misslyckas.</p>
+<p>Affärsidé = drivande tanken bakom ett företag. Problem? Varför? Vem är kunden? Vad erbjuder vi? Hur gör vi?</p>
+<p>Intressent = aktörer runt ett företag som är intresserade eller beroende av företaget och dess verksamhet.</p>
+<p>Innan man startar ett företag: marknadsundersökning (vad vill kunderna ha). Skrivbordsundersökning och fältundersökning.</p>
+<p>SWOT. Internt: styrkor och svagheter, det egna företaget. Externt: möjligheter och hot, marknaden och omvärlden.</p>
+<p><b>3:1 c–g.</b> c) Affärsidé är den drivande tanken bakom ett företag. d) Affärsidé är tanken och affärsmodellen hur man genomför den. e) Entreprenörer drivs av pengar, passionen, frihetskänslan, stoltheten och att det är roligt att se idéer bli verklighet. f) Genom att göra en marknadsanalys och/eller en skrivbordsundersökning. g) S = styrkor, W = svagheter, O = möjligheter, T = hot. Det är bra att använda en SWOT-matris för att få en tydlig överblick.</p>
+<p><b>3:1 j–l.</b> j) Franchise = när lokala företag köper upp färdiga koncept (exempelvis McDonald's). k) Freemium = har en bastjänst, men man måste betala för en premiumtjänst om man vill få mer (exempelvis Spotify). l) Digitaliseringen, utvecklingen av AI.</p>
+<p><b>3:11 a)</b> Lokala företagare får tillgång till ett färdigt koncept och varumärke, mot en avgift till varumärkesägaren. b–c och 3:14 är inte gjorda än.</p>`},
+
+{n:4, title:"Välj företagsform och registrera företaget", pages:"Faktaboken s. 57–67", op:"s. 41–48", star:true,
+ snabb:["q4a","q4c","q4f"],
+ ovn:["4:1","4:3","4:4","4:5","4:6","4:7","4:8","4:10","4:11"], cls:["4:1","4:5","4:6","4:8"],
+ body:`
+<h4>Vem får starta företag?</h4>
+<p>Enligt lektionen ska man vara 18 år, men en enskild firma går att starta från 16 år om föräldrarna godkänner det. Man får inte vara försatt i konkurs, ha förvaltare eller ha näringsförbud.</p>
+
+<h4>Fysisk och juridisk person</h4>
+<p>En <span class="term">fysisk person</span> är en människa. Hon har personnummer.</p>
+<p>En <span class="term">juridisk person</span> är ett företag, en organisation eller en förening som kan sluta avtal, äga saker, ha skulder och bli stämd i domstol. Den har organisationsnummer och företräds av en eller flera fysiska personer.</p>
+<p>Handelsbolag, kommanditbolag, aktiebolag och ekonomiska föreningar är juridiska personer. En enskild firma är det inte, eftersom ägaren och firman är samma person.</p>
+
+<h4>Fyra frågor när man väljer företagsform <span class="star">viktig till case</span></h4>
+<p>Hur många ägare blir ni? Hur stor risk vill ni ta, alltså vem ansvarar för skulderna? Hur mycket kapital har ni att starta med? Hur blir det med skatten?</p>
+
+<h4>De fem företagsformerna <span class="star">viktig till case</span></h4>
+<div class="forms">
+ <div class="form"><h5>Enskild firma</h5><dl>
+  <dt>Ägare</dt><dd>En. Kallas också enskild näringsidkare.</dd>
+  <dt>Juridisk person</dt><dd>Nej</dd>
+  <dt>Ansvar</dt><dd>Obegränsat. Ägaren ansvarar personligen för alla skulder.</dd>
+  <dt>Startkapital</dt><dd>Inget krav</dd>
+  <dt>Skatt</dt><dd>Vinsten räknas som ägarens inkomst.</dd>
+  <dt>Passar</dt><dd>Den som startar själv i liten skala. Enkel att starta.</dd></dl></div>
+ <div class="form"><h5>Handelsbolag (HB)</h5><dl>
+  <dt>Ägare</dt><dd>Minst två</dd>
+  <dt>Juridisk person</dt><dd>Ja</dd>
+  <dt>Ansvar</dt><dd>Obegränsat och solidariskt. Varje delägare kan få betala hela bolagets skulder med sina privata pengar.</dd>
+  <dt>Startkapital</dt><dd>Inget krav</dd>
+  <dt>Skatt</dt><dd>Vinsten räknas som delägarnas inkomst, och de betalar vanlig inkomstskatt.</dd>
+  <dt>Risk</dt><dd>Riskfyllt vid stora investeringar.</dd></dl></div>
+ <div class="form"><h5>Kommanditbolag (KB)</h5><dl>
+  <dt>Ägare</dt><dd>Minst två: minst en komplementär och minst en kommanditdelägare.</dd>
+  <dt>Juridisk person</dt><dd>Ja</dd>
+  <dt>Ansvar</dt><dd>Komplementären har obegränsat ansvar. Kommanditdelägarna ansvarar bara med sin insats.</dd>
+  <dt>Skatt</dt><dd>Som i handelsbolaget, vinsten är delägarnas inkomst.</dd></dl></div>
+ <div class="form"><h5>Aktiebolag (AB)</h5><dl>
+  <dt>Ägare</dt><dd>En eller flera</dd>
+  <dt>Juridisk person</dt><dd>Ja</dd>
+  <dt>Ansvar</dt><dd>Begränsat. Ägarna riskerar bara pengarna de har satsat.</dd>
+  <dt>Startkapital</dt><dd>25 000 kr för privat AB, 500 000 kr för publikt AB.</dd>
+  <dt>Skatt</dt><dd>Bolaget betalar bolagsskatt på vinsten, 20,6 %.</dd>
+  <dt>Övrigt</dt><dd>Aktier är bevis på att man äger en del av företaget. Ett publikt AB får erbjuda aktier på den öppna marknaden. Högre krav på redovisning än i en enskild firma.</dd></dl></div>
+ <div class="form"><h5>Ekonomisk förening</h5><dl>
+  <dt>Ägare</dt><dd>Minst tre medlemmar, som kan vara kunder, leverantörer eller anställda.</dd>
+  <dt>Juridisk person</dt><dd>Ja</dd>
+  <dt>Ansvar</dt><dd>Begränsat till insatsen.</dd>
+  <dt>Syfte</dt><dd>Att gynna medlemmarnas intressen. Exempel Coop.</dd>
+  <dt>Överskott</dt><dd>Kan delas ut som återbäring till medlemmarna.</dd>
+  <dt>Skatt</dt><dd>Föreningen betalar själv skatt på vinsten. <span class="tag">stäms av mot faktaboken</span></dd></dl></div>
+</div>
+<p class="tip">Juridisk person betyder inte begränsat ansvar. Handelsbolaget är en juridisk person, men delägarna ansvarar ändå med allt de äger.</p>
+
+<h4>Registrera företaget</h4>
+<p>Företaget registreras hos <b>Bolagsverket</b>, som ger organisationsnummer, och hos <b>Skatteverket</b>, där man ansöker om F-skatt. Allt går att göra på verksamt.se, som är ett samarbete mellan Bolagsverket, Skatteverket och Tillväxtverket.</p>
+
+<h4>Företagsnamnet</h4>
+<p>Namnet får inte gå att förväxla med ett namn som redan är registrerat. Påhittade ord, personnamn, ortnamn och kombinationer av bokstäver och siffror brukar godkännas, till exempel Emmas designbyrå eller Bergslagens åkeri. Handelsbolag, kommanditbolag och aktiebolag måste ha HB, KB eller AB i namnet.</p>
+<p>Ett registrerat aktiebolags namn är skyddat i hela Sverige. Handelsbolag, kommanditbolag och enskilda firmor får skydd i det län där de är registrerade.</p>
+<span class="tag">stäms av mot faktaboken s. 64–66</span>
+
+<h4>Domännamn och hemsida</h4>
+<p>Registrera ett domännamn hos ett webbhotell och skaffa e-post på samma domän. Går företagsnamnet inte att få som domän får man hitta en variant, till exempel en förkortning.</p>
+<p>En första hemsida visar finansiärer, leverantörer och andra intressenter att företaget finns på riktigt. Den brukar innehålla affärsidé och vision, fakta om företaget och grundarna, kontaktuppgifter och logotyp.</p>
+
+<h4>Hjälp att starta</h4>
+<p>Man kan få hjälp av kommunens näringslivssekreterare, banker, revisorer och inkubatorer. Verksamt.se samlar det mesta om att starta och driva företag.</p>`,
+ notes:`
+<p>Fysisk person: en människa, har ett personnummer.</p>
+<p>Juridisk person: är ett företag, organisation eller förening med organisationsnummer, företräds av flera fysiska personer. Exempel aktiebolag.</p>
+<p>Enskild firma: en ägare, enkelt att starta, ej juridisk person.</p>
+<p>Handelsbolag/kommanditbolag: minst två ägare, är en juridisk person. Kommanditbolag = som handelsbolag men en delägare (komplementär).</p>
+<p>Aktiebolag: en eller flera ägare, startkapital på 25 tusen, juridisk person, oftast privat. Aktier = ägarbevis.</p>
+<p>Ekonomisk förening: minst 3 ägare, juridisk person, eventuellt överskott delas ut till medlemmarna.</p>
+<span class="fixd"><b>Rättat:</b> i anteckningen såg det ut att stå "till anställda". Överskottet delas ut som återbäring till medlemmarna, vilket lärarens presentation också säger.</span>
+<p>Bolagsverket = registrera ditt bolag. Företagsnamn: aktiebolag har namnet helt skyddat. Domännamn = namn.se.</p>
+<p><b>4.4</b> a) Enskild firma, aktiebolag och handelsbolag. b) Enskild firma har en ägare, är enkel att starta och är ej juridisk person. Handelsbolag kräver minst två ägare och är juridisk person. Aktiebolag har startkapital på minst 25 tusen, en eller flera ägare, är juridisk person, oftast privat, och aktier är bevis på att man äger en del. c) Aktiebolag, för att långsiktigt kunna växa sig större.</p>
+<p><b>4.7</b> Minsta antal ägare: EF 1, HB 2, KB 2, AB 1+, ek. förening 3. Juridisk person: EF nej, övriga ja. Tredje raden: EF nej, HB nej, KB nej, AB ja, ek. förening ja.</p>
+<span class="fixd"><b>Rättat:</b> du skrev ja för handelsbolag och kommanditbolag. Gäller raden skatt på företagets vinst ska det vara nej, eftersom vinsten räknas som delägarnas inkomst. Kolla rubriken på raden i övningsboken.</span>
+<p><b>4.8</b> Aktiebolag, just eftersom de ska anställa en massa fler.</p>`},
+
+{n:5, title:"Olika sätt att finansiera verksamheten", pages:"Faktaboken s. 69–79", op:"s. 49–56", star:true,
+ snabb:["q5a","q5c","q5d"],
+ ovn:["5:1","5:3","5:4","5:5","5:7","5:10"], cls:["5:1","5:3","5:4","5:7"],
+ body:`
+<h4>Varför behövs finansiering?</h4>
+<p>Ett nytt företag behöver pengar innan intäkterna kommer in: till lokal, utrustning, varor och löner. Bank och investerare vill se affärsplanen innan de satsar.</p>
+<p><b>Eget kapital</b> är pengar som ägarna själva satsar. <b>Lånat kapital</b> måste betalas tillbaka, oftast med ränta.</p>
+
+<h4>Finansieringsalternativen <span class="star">viktig till case</span></h4>
+<dl class="defs">
+ <dt>Eget kapital</dt><dd>Ägarnas egna pengar. Ingen ränta, men ägarna kan förlora dem.</dd>
+ <dt>Banklån</dt><dd>Lån från banken som betalas tillbaka med ränta och amortering. Banken vill se affärsplanen och ofta någon säkerhet.</dd>
+ <dt>Lån från andra kreditinstitut</dt><dd>Lån från andra än bankerna, till exempel statligt ägda Almi som lånar ut till småföretag.</dd>
+ <dt>Riskkapital</dt><dd>Investerare satsar pengar mot en del av ägandet. Pengarna behöver inte betalas tillbaka, men ägarna lämnar ifrån sig en del av företaget.</dd>
+ <dt>Affärsänglar</dt><dd>Privatpersoner, ofta erfarna företagare, som satsar både pengar och kunskap i ett tidigt skede mot en ägarandel.</dd>
+ <dt>Crowdfunding</dt><dd>Många personer bidrar med små belopp, ofta via en plattform på nätet, till exempel mot en belöning eller produkten i förväg.</dd>
+ <dt>Leasing</dt><dd>Att hyra utrustning, till exempel bilar eller maskiner, i stället för att köpa. Man slipper en stor utgift på en gång.</dd>
+ <dt>Factoring (fakturabelåning)</dt><dd>Företaget får pengar för sina kundfakturor direkt, mot en avgift, i stället för att vänta på att kunden betalar.</dd>
+ <dt>Checkkredit</dt><dd>En kredit kopplad till företagskontot som kan användas när kassan tillfälligt är tom.</dd>
+</dl>
+
+<h4>Rätt pengar i rätt fas <span class="star">viktig till case</span></h4>
+<div class="phases">
+ <div class="phase"><span class="n">1</span><div><b>Startkapital</b> – för att komma igång. Eget kapital, crowdfunding eller affärsänglar.</div></div>
+ <div class="phase"><span class="n">2</span><div><b>Tillväxtkapital</b> – för att växa. Riskkapital och lån från bank och andra kreditinstitut.</div></div>
+ <div class="phase"><span class="n">3</span><div><b>Rörelsekapital</b> – för den dagliga driften. Företagets eget kassaflöde, checkkredit, factoring eller leasing.</div></div>
+</div>
+<p>Investerare vill att deras pengar ska skapa tillväxt, inte betala löpande kostnader. Innan de satsar större belopp vill de se att affärsmodellen fungerar.</p>
+
+<h4>Begrepp att kunna</h4>
+<dl class="defs">
+ <dt>Såddfinansiering</dt><dd>Pengar i ett tidigt skede för att utveckla affärsidén, till exempel för en prototyp eller en marknadsundersökning. Kommer ofta från affärsänglar mot en ägarandel.</dd>
+ <dt>Bryggfinansiering</dt><dd>Ett tillfälligt tillskott för att ta nästa steg, till exempel lansera en ny produkt. Ofta ett kort lån eller extra pengar från ägarna.</dd>
+ <dt>Skalbar affärsmodell</dt><dd>Försäljningen kan öka och företaget kan växa till nya marknader utan att kostnaderna ökar lika mycket. Lockar riskkapital.</dd>
+ <dt>Kassaflöde</dt><dd>Skillnaden mellan pengar som kommer in och pengar som går ut under en period. Mer in än ut är ett positivt kassaflöde.</dd>
+ <dt>Utspädning</dt><dd>Varje ägares andel blir mindre när nya aktier ges ut, till exempel till en ny investerare.</dd>
+</dl>
+
+<h4>Starta utan stora lån</h4>
+<p>Vid en <span class="term">kundfinansierad start</span> har företaget en kund redan från början och kan fakturera direkt. Det är vanligt bland konsulter. Förskottsbetalning och abonnemang minskar också behovet av lån, eftersom pengarna kommer in tidigt.</p>
+<p class="tip">Fundera alltid: vilken fas är företaget i, och vad kostar pengarna? Ränta eller ägande.</p>`,
+ notes:`
+<p>Start av företag: Fas 1, startkapital, eget kapital. Fas 2, tillväxtkapital, riskkapital. Fas 3, rörelsekapital, företagets egna kassaflöde.</p>
+<p><b>5:4</b> (s. 51) Banklån = E. Riskkapital = inte ifyllt. Crowdfunding = A. Eget kapital = B.</p>`},
+
+{n:6, title:"Organisera, styra och leda företaget", pages:"Faktaboken s. 81–93", op:"s. 57–64",
+ snabb:["q6b","q6e","q6g"],
+ ovn:["6:1 (A–I)","6:2 (A–B)","6:3","6:6","6:8","6:9","6:10","6:12"], cls:["6:1 (A–I)","6:2 (A–B)","6:3","6:6","6:8","6:9","6:10","6:12"],
+ body:`
+<h4>Vad är organisation?</h4>
+<p>Organisation handlar om hur verksamheten planeras och struktureras för att nå målen. Ett <span class="term">organisationsschema</span>, eller organogram, är en bild av hur företaget är uppbyggt och vem som är chef över vad.</p>
+<svg viewBox="0 0 320 150" style="max-width:360px;width:100%;display:block;margin:10px 0" role="img" aria-label="Organisationsschema: VD överst, personal som stab vid sidan, under VD marknadsföring, inköp, administration och ekonomi samt produktion">
+ <g style="font-family:var(--body);font-size:11px;fill:var(--ink)">
+ <rect x="125" y="6" width="70" height="26" rx="4" style="fill:var(--hl);stroke:var(--ink);stroke-width:1.5"/><text x="160" y="23" text-anchor="middle" style="fill:var(--hl-ink);font-weight:700">VD</text>
+ <line x1="160" y1="32" x2="160" y2="96" style="stroke:var(--ink);stroke-width:1.5"/>
+ <line x1="160" y1="56" x2="110" y2="56" style="stroke:var(--ink);stroke-width:1.5"/>
+ <rect x="12" y="44" width="98" height="24" rx="4" style="fill:var(--card);stroke:var(--ink);stroke-width:1.5;stroke-dasharray:4 3"/><text x="61" y="60" text-anchor="middle">Personal (stab)</text>
+ <line x1="40" y1="96" x2="280" y2="96" style="stroke:var(--ink);stroke-width:1.5"/>
+ <line x1="40" y1="96" x2="40" y2="110" style="stroke:var(--ink);stroke-width:1.5"/><line x1="120" y1="96" x2="120" y2="110" style="stroke:var(--ink);stroke-width:1.5"/><line x1="200" y1="96" x2="200" y2="110" style="stroke:var(--ink);stroke-width:1.5"/><line x1="280" y1="96" x2="280" y2="110" style="stroke:var(--ink);stroke-width:1.5"/>
+ <rect x="2" y="110" width="76" height="30" rx="4" style="fill:var(--card);stroke:var(--ink);stroke-width:1.5"/><text x="40" y="129" text-anchor="middle">Marknad</text>
+ <rect x="82" y="110" width="76" height="30" rx="4" style="fill:var(--card);stroke:var(--ink);stroke-width:1.5"/><text x="120" y="129" text-anchor="middle">Inköp</text>
+ <rect x="162" y="110" width="76" height="30" rx="4" style="fill:var(--card);stroke:var(--ink);stroke-width:1.5"/><text x="200" y="129" text-anchor="middle">Ekonomi</text>
+ <rect x="242" y="110" width="76" height="30" rx="4" style="fill:var(--card);stroke:var(--ink);stroke-width:1.5"/><text x="280" y="129" text-anchor="middle">Produktion</text>
+ </g>
+</svg>
+
+<h4>Organisationen beror på omständigheterna</h4>
+<p>Den som startar ett företag ensam gör oftast allt själv, och då behövs ingen organisation. De flesta svenska företag är faktiskt enmansföretag. När företaget växer blir uppgifterna fler och fler personer anställs. Då behövs en tydlig arbetsfördelning, och de anställda specialiserar sig, till exempel på inköp eller marknadsföring.</p>
+<p>Växer företaget ännu mer behövs fler chefer, och personalen delas in i arbetsgrupper eller avdelningar. Att organisera handlar om att hitta den arbetsfördelning och det samarbete som passar just det företaget. Överst sitter företagsledningen, alltså VD och eventuellt en styrelse.</p>
+<span class="tag">faktaboken s. 82–83</span>
+
+<h4>Organisationsformer</h4>
+<dl class="defs">
+ <dt>Funktionsorganisation</dt><dd>Indelning efter arbetsuppgift, till exempel marknadsföring, inköp, administration och ekonomi samt produktion. Varje funktion kan ha en egen chef. Vanligast i mindre företag.</dd>
+ <dt>Produktorganisation</dt><dd>Varje avdelning ansvarar för sina egna produkter eller produktområden och sköter själv inköp, tillverkning och marknadsföring inom sitt område. Exempel: en avdelning för astmamedicin, en för diabetesmedicin och en för värktabletter.</dd>
+ <dt>Kundindelad organisation</dt><dd>Avdelningarna arbetar med olika typer av kunder, till exempel privatkunder, mindre företag och större företag.</dd>
+ <dt>Geografisk indelning</dt><dd>Företagets område delas upp i mindre delar, där varje del blir en avdelning, till exempel norra, mellersta och södra regionen. En mäklarbyrå kan vara organiserad så.</dd>
+</dl>
+<p>En <b>stab</b> är en stödfunktion till VD, till exempel personal eller juridik. Staben ger råd och hjälp men är inte chef över de andra avdelningarna.</p>
+
+<h4>Kompetenser och roller</h4>
+<p>En <span class="term">kompetens</span> är en förmåga som är viktig i en viss yrkesroll, till exempel att kunna samarbeta eller kommunicera. Vilka kompetenser ett företag behöver beror på verksamheten.</p>
+<p>Vissa roller finns i nästan alla större företag. Den som ansvarar för <b>försäljning och marknadsföring</b> gör marknadsundersökningar, sköter reklam och sociala medier, följer försäljningen och har hand om kundkontakterna. Den som ansvarar för <b>inköp</b> sköter kontakten med leverantörerna och ser till att rätt produkter köps in vid rätt tidpunkt. Inköpen är ofta en stor del av företagets kostnader.</p>
+
+<h4>Gemensamma mål</h4>
+<p>Företagets mål bestäms i affärsplanen, och alla i företaget ska arbeta mot dem. Bra mål är <span class="term">SMARTA</span>: specifika, mätbara, accepterade, realistiska och tidsbestämda.</p>
+<div class="ex"><p><b>Exempel från lektionen</b></p><p>Intäkterna ska vara över 10 miljoner kr. Medarbetarnöjdheten ska vara över 85 %. Koldioxidutsläppen ska minska med 5 %.</p></div>
+
+<h4>Företagskultur</h4>
+<p>Företagskulturen är de värderingar, regler och normer som personalen arbetar efter. Läraren beskriver den som viktigare än hur personalen är organiserad, och som det enda konkurrensmedel som inte går att kopiera.</p>
+<p>Kulturen byggs med personalhandböcker, ledare som lever som de lär, introduktion för nyanställda, chefsutbildningar, personalträffar, events, filmer och <b>storytelling</b>, alltså berättelser som visar vad företaget står för. Många företag sammanfattar sina värderingar i några få ord.</p>
+
+<h4>Ledarskap och chefskap</h4>
+<div class="two">
+ <div><b>Ledarskap</b>Förmågan att få människor med sig mot ett mål: kommunicera, motivera, skapa laganda och lösa konflikter.</div>
+ <div><b>Chefskap</b>En formell position. Man är utnämnd och har befogenheter och viss makt, till exempel att belöna och bestraffa.</div>
+</div>
+<p class="tip">En chef blir utnämnd. En ledare blir följd.</p>
+
+<h4>Kurt Lewins tre ledarstilar</h4>
+<dl class="defs">
+ <dt>Auktoritär</dt><dd>Fattar alla beslut och delegerar uppgifterna. Maktorienterad och hård.</dd>
+ <dt>Demokratisk</dt><dd>Fattar beslut tillsammans med gruppen och är "en i gruppen".</dd>
+ <dt>Passiv</dt><dd>Håller sig i bakgrunden och låter saker gå. Kallas också låt-gå-ledare.</dd>
+</dl>
+<p>Idag är <b>situationsanpassat ledarskap</b> vanligt. Ledaren byter stil efter situationen och vad medarbetarna behöver, mer auktoritär ibland och mer demokratisk eller passiv i andra lägen.</p>
+
+<h4>McGregors teori X och Y</h4>
+<p>McGregor menade att chefens syn på människor styr hur chefen leder.</p>
+<div class="two">
+ <div><b>Teori X</b>Chefen tror att människor är lata, saknar initiativ och smiter undan ansvar. Därför styr X-ledaren med order, hårda regler och kontroll.</div>
+ <div><b>Teori Y</b>Chefen tror att människor vill göra sitt bästa och kan ta ansvar. Y-ledaren sätter mål och låter medarbetarna själva välja hur målet ska nås.</div>
+</div>
+
+<h4>En välmående arbetsplats</h4>
+<p>En god arbetsmiljö och värderingar som faktiskt följs gör att människor trivs. <span class="term">Diskrimineringslagen</span> ska förebygga diskriminering. Ledningen ska bland annat arbeta för en jämn könsfördelning och ta fram riktlinjer mot trakasserier. Diskriminering kan anmälas till Diskrimineringsombudsmannen, DO.</p>
+<p>De sju diskrimineringsgrunderna är kön, könsöverskridande identitet eller uttryck, etnisk tillhörighet, religion eller annan trosuppfattning, funktionsnedsättning, sexuell läggning och ålder.</p>
+<div class="ex"><p><b>Lektionens tre case</b></p><p>Ett företag nekar en rullstolsburen sökande för att lokalerna saknar hiss. Det kan vara diskriminering på grund av funktionsnedsättning, eftersom arbetsgivaren ska göra skäliga anpassningar.</p><p>Erik får sämre uppdrag och ingen löneökning efter föräldraledighet. Det kan vara diskriminering på grund av kön.</p><p>En restaurang söker "unga, pigga tjejer 18–25 år". Annonsen diskriminerar på grund av kön och ålder.</p></div>`,
+ notes:`
+<p>Organisationsschema = organogram, man ser hur företaget är strukturerat. Dela in i funktioner.</p>
+<p>Geografisk indelning: chef, sedan norra, mellan och södra, som säljer samma produkt.</p>
+<p>Produktorganisation: chef, sedan astma, diabetes och värktabletter.</p>
+<span class="fixd"><b>Rättat:</b> du skrev "Produktions". I faktaboken heter indelningen efter vad som säljs produktorganisation.</span>
+<p>SMARTA mål: specifikt, mätbart, accepterat, realistiskt, tidsbegränsat.</p>
+<p>Företagskultur = personalhandböcker, företagets värderingar.</p>
+<p>Ledarskap: leda människor, förmågor. Chefskap: makt.</p>
+<p>Auktoritära = fattar alla beslut och delegerar (sjukhus, polis). Demokratiska = fattar beslut tillsammans. Passiva = inte ifyllt.</p>
+<p>Teori X: dåliga, kontrollerande, lata. Teori Y: bra, människan kan, tror gott om alla.</p>
+<p>God arbetsmiljö! (rubrik utan innehåll)</p>`},
+
+{n:7, title:"Affärsavtal och lagar", pages:"Faktaboken s. 95–102", op:"från s. 65",
+ snabb:["q7a","q7d","q7f"],
+ ovn:["7:1","7:3","7:4","7:5","7:6","7:7","7:8","7:9","7:10"], cls:["7:1","7:3","7:4","7:8"],
+ body:`
+<h4>Varför behövs avtal?</h4>
+<p>Avtal skapar trygghet och förtroende mellan parterna. De klargör vad som ska göras, när och till vilket pris, och skyddar båda parter om något går fel. Det gäller både stora och små affärer.</p>
+
+<h4>Vad är ett avtal?</h4>
+<p>Ett avtal är en överenskommelse mellan två eller flera parter, till exempel ett köpeavtal, ett anställningsavtal eller ett hyresavtal. Det kan vara muntligt eller skriftligt.</p>
+<div class="two">
+ <div><b>Muntligt</b>Snabbt och enkelt, men svårt att bevisa.</div>
+ <div><b>Skriftligt</b>Tydligt och går att bevisa, men tar längre tid.</div>
+</div>
+<p>Företag bör alltid skriva ner viktiga avtal.</p>
+
+<h4>Anbud + accept = avtal</h4>
+<div class="flow"><span>Anbud</span><i>+</i><span>Accept</span><i>=</i><span>Bindande avtal</span></div>
+<p>Ett <span class="term">anbud</span> är ett erbjudande. En <span class="term">accept</span> är när den andra parten tackar ja. När båda är överens har det uppstått ett bindande avtal. Det regleras i avtalslagen från 1915.</p>
+
+<h4>Ogiltiga avtal</h4>
+<p>Ett avtal kan bli ogiltigt om någon har blivit lurad, har blivit tvingad, har missförstått villkoren eller om en av parterna är minderårig.</p>
+
+<h4>Tvingande och dispositiva lagar</h4>
+<p>En <span class="term">dispositiv</span> lag gäller bara om parterna inte har kommit överens om något annat. Köplagen är dispositiv.</p>
+<p>En <span class="term">tvingande</span> lag går inte att avtala bort till konsumentens nackdel. Konsumentköplagen är tvingande. Står det något sämre för konsumenten i avtalet gäller lagen ändå.</p>
+<p class="tip">Tvingande lag är inte samma sak som att bli tvingad att skriva på. Ett avtal som någon har tvingats till är ogiltigt.</p>
+
+<h4>Lagarna att kunna</h4>
+<div class="tblwrap"><table class="tbl">
+<tr><th>Lag</th><th>Gäller</th><th>Typ</th></tr>
+<tr><td>Avtalslagen</td><td>Hur avtal blir till och blir giltiga</td><td></td></tr>
+<tr><td>Köplagen</td><td>Köp mellan företag, och även mellan privatpersoner</td><td>Dispositiv</td></tr>
+<tr><td>Konsumentköplagen</td><td>Företag säljer en vara till en privatperson</td><td>Tvingande</td></tr>
+<tr><td>Konsumenttjänstlagen</td><td>Företag utför en tjänst åt en privatperson, till exempel en reparation</td><td>Tvingande</td></tr>
+</table></div>
+<p>Konsumentlagarna finns för att skydda konsumenten, som är den svagare parten.</p>
+
+<h4>Köplagen och ansvaret för varan</h4>
+<span class="tag">faktaboken s. 98–99</span>
+<p>Ett företag som köper av ett annat företag förväntas kunna mer än en privatperson. Därför är köplagen dispositiv, och företag skriver ofta egna avtal. Finns inget avtal gäller lagen.</p>
+<p>En viktig fråga vid varje köp är när ansvaret för varan går över från säljaren till köparen. Det kallas <span class="term">besittningsövergång</span>. Köplagen skiljer på två sorters köp:</p>
+<div class="two">
+ <div><b>Hämtningsköp</b>Köparen hämtar varan hos säljaren. Ansvaret går över när varan lämnas över.</div>
+ <div><b>Transportköp</b>Varan transporteras till köparen. Används ett transportföretag går ansvaret över när säljaren lämnar varan till transportföretaget, om inget annat har avtalats.</div>
+</div>
+<p>Vid köp från ett företag till en konsument är det annorlunda. Enligt konsumentköplagen har säljaren ansvaret ända tills varan har kommit fram till konsumenten, även om ett transportföretag kör den.</p>
+<div class="ex"><p><b>Exempel</b></p><p>En soffa som en möbelbutik säljer till en privatperson blir skadad under leveransen. Butiken har fortfarande ansvaret och måste leverera en hel soffa.</p></div>
+
+<h4>Felaktig vara och reklamation</h4>
+<span class="tag">faktaboken s. 99</span>
+<p>Reglerna om <span class="term">felaktig vara</span> är kanske de viktigaste i konsumentköplagen. En vara är felaktig om den inte stämmer med avtalet när det gäller sort, kvalitet, mängd eller andra egenskaper. Den kan också vara felaktig om förpackningen inte är den som man kom överens om, eller om varan inte fungerar för det som konsumenten rimligen kunde räkna med.</p>
+<p>Att <span class="term">reklamera</span> betyder att säga till säljaren, muntligt eller skriftligt, att varan är felaktig. Det ska göras inom skälig tid, och två månader från att man upptäckt felet räknas alltid som skälig tid. Man kan reklamera upp till tre år efter köpet.</p>
+<p><span class="term">Bevisbörda</span> betyder att man måste kunna bevisa det man påstår. I grunden är det köparen som ska bevisa att felet fanns redan vid köpet. Men om felet visar sig inom två år efter leveransen räknas det som att det fanns från början, och då slipper konsumenten bevisa det.</p>
+<h4>Vad kan konsumenten kräva? <span class="tag">faktaboken s. 100–101</span></h4>
+<p>När konsumenten har reklamerat en felaktig vara finns flera åtgärder, i ungefär den här ordningen:</p>
+<div class="phases">
+ <div class="phase"><span class="n">1</span><div><b>Vänta med att betala.</b> Går bara om köpet är gjort på kredit och inte är betalt än.</div></div>
+ <div class="phase"><span class="n">2</span><div><b>Ny vara eller reparation.</b> Företaget ska först få chansen att laga felet eller byta varan.</div></div>
+ <div class="phase"><span class="n">3</span><div><b>Prisavdrag.</b> Om felet inte är så allvarligt kan konsumenten leva med det mot ett lägre pris.</div></div>
+ <div class="phase"><span class="n">4</span><div><b>Ersättning för reparation.</b> Konsumenten låter någon annan laga felet, till exempel en lackskada på en cykel, och får tillbaka kostnaden.</div></div>
+ <div class="phase"><span class="n">5</span><div><b>Häva köpet.</b> Varan lämnas tillbaka och pengarna betalas tillbaka. Kräver att felet är väsentligt för köparen.</div></div>
+ <div class="phase"><span class="n">6</span><div><b>Skadestånd.</b> Ersättning för kostnader som felet har orsakat, till exempel telefon, porto, resor eller förlorad inkomst.</div></div>
+</div>
+<div class="ex"><p><b>Exempel</b></p><p>Någon beställer kakel i en viss storlek men får en annan storlek, och rätt storlek går inte längre att få tag på. Felet är väsentligt, så köpet kan hävas.</p></div>
+
+<h4>Om varan levereras för sent</h4>
+<p>Har köparen och säljaren inte bestämt någon leveranstid ska varan levereras utan onödig fördröjning, och senast 30 dagar efter köpet. Om ett avtalat leveransdatum inte hålls kan konsumenten vänta med att betala, kräva att få varan, häva köpet eller begära skadestånd.</p>
+<p>För att häva köpet måste förseningen vara väsentlig, alltså att köparen har fått vänta orimligt länge. Skadestånd kan till exempel gälla kostnader för tvättstuga om en beställd tvättmaskin inte kommer i tid.</p>`,
+ notes:`
+<p>Avtal = vad ska göras, muntligt eller skriftligt. Skriftligt = bevis. Muntligt = inte lika lätt att bevisa.</p>
+<p>1. Erbjudande, anbud. 2. Accept, den andra parten tackar ja. 3. När båda tackat ja = avtal.</p>
+<p>Tvingad = ogiltigt avtal.</p>
+<p>Avtalslagen: hur avtal blir giltiga. Köplagen: köp mellan företag (och privat som köper av privat). Konsumentköplagen: köp mellan företag och privat (tvingande). Konsumenttjänstlagen: privat köper tjänster av företag. För att skydda konsumenten.</p>`}
+];
+
+const Q = [
+/* Kap 3 */
+{id:"q3a",ch:3,q:"Vilka fyra frågor ska en bra affärsidé svara på?",o:["Vem äger företaget, vad kostar det, när startar vi och var ligger vi?","Varför finns vi, vem är kunden, vad erbjuder vi och hur gör vi?","Vilka är konkurrenterna, hur stor är marknaden, vad är priset och vem är VD?"],a:1,w:"Affärsidén är den drivande tanken. Den ska kort förklara behovet (varför), kundgruppen (vem), produkten (vad) och resurserna (hur)."},
+{id:"q3b",ch:3,q:"Vad är skillnaden mellan affärsidé och affärsmodell?",o:["Affärsidén är tanken. Affärsmodellen beskriver hur företaget ska fungera i praktiken och tjäna pengar.","Det är samma sak med olika namn.","Affärsmodellen är en kortare version av affärsidén."],a:0,w:"Affärsmodellen är mer detaljerad och visar hur pengarna kommer in. Därför är den extra intressant för investerare och långivare."},
+{id:"q3c",ch:3,q:"Vilka delar av en SWOT-analys handlar om det egna företaget?",o:["Möjligheter och hot","Styrkor och möjligheter","Styrkor och svagheter"],a:2,w:"Styrkor och svagheter är interna. Möjligheter och hot är externa och finns på marknaden och i omvärlden."},
+{id:"q3d",ch:3,q:"Ett nytt köpcentrum öppnar bredvid ett café och lockar många nya besökare. Var hamnar det i caféets SWOT?",o:["Styrka","Möjlighet","Svaghet"],a:1,w:"Köpcentrumet finns utanför caféet och caféet kan inte styra över det. Därför är det externt, och eftersom det är bra blir det en möjlighet."},
+{id:"q3e",ch:3,q:"Du läser statistik om hur mycket svenskar lägger på kaffe varje år. Vilken sorts undersökning gör du?",o:["Skrivbordsundersökning","Fältundersökning","Omvärldsanalys av konkurrenterna"],a:0,w:"Du använder information som redan finns. Det är en skrivbordsundersökning. Om du själv hade frågat folk på stan hade det varit en fältundersökning."},
+{id:"q3f",ch:3,q:"Vad är en intressent?",o:["En person som har köpt aktier i företaget","En aktör som är intresserad av eller beroende av företaget","En konkurrent som vill ta över företagets kunder"],a:1,w:"Intressenter är till exempel ägare, anställda, kunder, leverantörer, bank, stat och kommun. Alla ger något till företaget och vill ha något tillbaka."},
+{id:"q3g",ch:3,q:"Vad vill banken ha tillbaka när den har lånat ut pengar till ett företag?",o:["En del av ägandet i företaget","Ränta och att lånet betalas tillbaka","Att företaget anställer fler"],a:1,w:"Banken är en långivare. Den tar inget ägande utan vill ha ränta och att lånet amorteras. Det är riskkapitalister och affärsänglar som vill ha ägarandelar."},
+{id:"q3h",ch:3,q:"En nätbutik säljer kläder men har inget eget lager. Leverantören skickar varorna direkt till kunden. Vilken affärsmodell är det?",o:["Franchise","Freemium","Dropshipping"],a:2,w:"Vid dropshipping säljer butiken utan att själv lagerhålla varorna."},
+{id:"q3i",ch:3,q:"Vad är en affärsplan?",o:["En karta över var företaget vill vara de närmaste åren och hur det ska ta sig dit","En lista över alla företagets kunder","Ett avtal mellan företaget och banken"],a:0,w:"Affärsplanen samlar affärsidé, mål, marknad, affärsmodell, organisation, budget och risker. Den är viktig i kontakten med bank och investerare."},
+{id:"q3k",ch:3,q:"Vad är en hisspitch?",o:["En lång affärsplan som skickas till banken","En kort presentation av affärsidén på 30–60 sekunder som ska väcka intresse","Ett möte där alla anställda röstar om affärsidén"],a:1,w:"Hisspitchen ska vara så kort att den hinns med under en hissresa. Syftet är att få till ett riktigt möte med till exempel en investerare."},
+{id:"q3l",ch:3,q:"Vilken av dessa räknas som en av företagets intressenter i faktaboken?",o:["Konkurrenter","Företagets logotyp","Affärsplanen"],a:0,w:"Faktabokens bild över intressenter visar ägare, anställda, kunder, leverantörer, långivare, stat och kommun samt konkurrenter."},
+{id:"q3m",ch:3,q:"Vilken metod låter dig ställa följdfrågor och se kroppsspråket, men är dyr och tar lång tid?",o:["Webbenkät","Personlig intervju","Skrivbordsundersökning"],a:1,w:"Vid en personlig intervju träffar man personen. Det ger djupa svar men kostar mycket tid och pengar."},
+{id:"q3n",ch:3,q:"Vad är enligt faktaboken en vanlig orsak till att nya företag misslyckas?",o:["De har för många kunder","Det finns inget verkligt kundbehov bakom idén","De registrerar sig hos fel myndighet"],a:1,w:"Därför ska man göra en omvärlds- och marknadsanalys innan man satsar pengar på idén."},
+{id:"q3j",ch:3,q:"Vilket påstående om franchise stämmer?",o:["Franchisetagaren hittar på allt själv men får låna ett namn gratis.","Franchisetagaren får ett färdigt koncept och varumärke mot en avgift.","Franchise betyder att man säljer utan eget lager."],a:1,w:"Franchise ger ett koncept som redan fungerar och ett känt varumärke, men man betalar avgifter och måste följa kedjans regler."},
+/* Kap 4 */
+{id:"q4a",ch:4,q:"Vilken företagsform är inte en juridisk person?",o:["Handelsbolag","Enskild firma","Ekonomisk förening"],a:1,w:"I en enskild firma är ägaren och firman samma person. Därför är den inte en juridisk person."},
+{id:"q4b",ch:4,q:"Hur mycket aktiekapital krävs för att starta ett privat aktiebolag?",o:["25 000 kr","50 000 kr","500 000 kr"],a:0,w:"Ett privat aktiebolag kräver 25 000 kr. Ett publikt aktiebolag, som får erbjuda aktier på den öppna marknaden, kräver 500 000 kr."},
+{id:"q4c",ch:4,q:"Vad betyder det att delägarna i ett handelsbolag har solidariskt ansvar?",o:["Att de bara riskerar pengarna de har satsat","Att varje delägare kan få betala hela bolagets skulder med sina privata pengar","Att staten betalar skulderna om bolaget går i konkurs"],a:1,w:"Ansvaret är både obegränsat och solidariskt. En långivare kan kräva vilken delägare som helst på hela skulden."},
+{id:"q4d",ch:4,q:"Vem i ett kommanditbolag har obegränsat ansvar?",o:["Komplementären","Kommanditdelägaren","Ingen av dem"],a:0,w:"Det måste finnas minst en komplementär med obegränsat ansvar. Kommanditdelägarna ansvarar bara med sin insats."},
+{id:"q4e",ch:4,q:"Hur många medlemmar behövs minst för att starta en ekonomisk förening?",o:["En","Två","Tre"],a:2,w:"En ekonomisk förening behöver minst tre medlemmar. Syftet är att gynna medlemmarna."},
+{id:"q4f",ch:4,q:"Vem betalar skatt på vinsten i ett handelsbolag?",o:["Bolaget betalar bolagsskatt","Delägarna, eftersom vinsten räknas som deras inkomst","Ingen, handelsbolag är skattefria"],a:1,w:"I enskild firma, handelsbolag och kommanditbolag räknas vinsten som ägarnas inkomst. Det är aktiebolag och ekonomiska föreningar som själva betalar skatt på vinsten."},
+{id:"q4g",ch:4,q:"Var registrerar man företaget för att få ett organisationsnummer?",o:["Hos Skatteverket","Hos kommunen","Hos Bolagsverket"],a:2,w:"Bolagsverket ger organisationsnummer. Hos Skatteverket ansöker man om F-skatt. Båda går att göra via verksamt.se."},
+{id:"q4h",ch:4,q:"Tre kompisar vill starta ett företag men vill inte riskera sina privata pengar om det går dåligt. Vilken form passar bäst?",o:["Handelsbolag","Aktiebolag","Enskild firma"],a:1,w:"I ett aktiebolag är ansvaret begränsat till insatsen. I ett handelsbolag ansvarar alla delägare med allt de äger, och en enskild firma kan bara ha en ägare."},
+{id:"q4i",ch:4,q:"Vilket företagsnamn har störst risk att inte godkännas?",o:["Ett påhittat ord som ingen annan använder","Ett namn som liknar ett redan registrerat företags namn","Ett namn med ägarens förnamn, till exempel Emmas designbyrå"],a:1,w:"Namnet får inte gå att förväxla med ett namn som redan är registrerat. Påhittade ord och personnamn brukar godkännas."},
+{id:"q4j",ch:4,q:"Vad är en juridisk person?",o:["Ett företag, en organisation eller förening som kan sluta avtal, äga saker och ha skulder","En person som har läst juridik","Ägaren till en enskild firma"],a:0,w:"En juridisk person har organisationsnummer och företräds av en eller flera fysiska personer, alltså människor."},
+/* Kap 5 */
+{id:"q5a",ch:5,q:"Vilka sätt att skaffa pengar passar bäst i fas 1, när företaget ska starta?",o:["Eget kapital, crowdfunding och affärsänglar","Factoring och checkkredit","Företagets eget kassaflöde"],a:0,w:"I startfasen finns inga intäkter än. Pengarna kommer oftast från ägarna själva, från många små givare via crowdfunding eller från affärsänglar."},
+{id:"q5b",ch:5,q:"Vad är rörelsekapital?",o:["Pengar för att starta företaget","Pengar för den dagliga driften, som oftast kommer från företagets eget kassaflöde","Pengar som bara används till att köpa fordon"],a:1,w:"Rörelsekapital är fas 3. Det behövs för att betala löpande kostnader, och kan också komma från checkkredit, factoring eller leasing."},
+{id:"q5c",ch:5,q:"Vad innebär crowdfunding?",o:["Banken lånar ut pengar till många företag samtidigt","Många personer bidrar med små belopp, ofta via en plattform på nätet","Företaget säljer sina fakturor"],a:1,w:"Crowdfunding är vanligt i startfasen. Givarna får ofta en belöning, produkten i förväg eller en liten ägarandel."},
+{id:"q5d",ch:5,q:"Ett företag får betalt från sina kunder först efter 30 dagar men behöver pengar nu. Vilken lösning passar?",o:["Affärsänglar","Factoring","Såddfinansiering"],a:1,w:"Med factoring får företaget pengar för fakturorna direkt, mot en avgift. Det löser ett tillfälligt problem med kassaflödet."},
+{id:"q5e",ch:5,q:"Vad är leasing?",o:["Att hyra utrustning i stället för att köpa den","Att låna pengar av en affärsängel","Att sälja aktier till anställda"],a:0,w:"Med leasing slipper företaget en stor utgift på en gång, till exempel för bilar eller maskiner."},
+{id:"q5f",ch:5,q:"Vad är skillnaden mellan banklån och riskkapital?",o:["Banklånet ska betalas tillbaka med ränta. Riskkapital ger investeraren en del av ägandet i stället.","Det finns ingen skillnad.","Riskkapital ska betalas tillbaka med högre ränta än ett banklån."],a:0,w:"Med lån behåller ägarna hela företaget men får betala ränta och amortering. Med riskkapital slipper de betala tillbaka men lämnar ifrån sig en del av ägandet."},
+{id:"q5g",ch:5,q:"Vad betyder utspädning?",o:["Att vinsten delas mellan fler kunder","Att varje ägares andel blir mindre när nya aktier ges ut","Att företaget säljer fler varor till lägre pris"],a:1,w:"Om en ny investerare köper nya aktier blir det fler aktier totalt, och de gamla ägarnas andelar krymper."},
+{id:"q5h",ch:5,q:"Vad är en skalbar affärsmodell?",o:["Försäljningen kan öka utan att kostnaderna ökar lika mycket","Företaget kan bara sälja i Sverige","Priset går upp när fler köper"],a:0,w:"Skalbarhet lockar riskkapital, eftersom vinsten kan växa snabbt när försäljningen ökar."},
+{id:"q5i",ch:5,q:"Ett nytt konsultföretag har redan en kund som betalar från första månaden. Vad kallas det?",o:["Bryggfinansiering","Kundfinansierad start","Factoring"],a:1,w:"Vid en kundfinansierad start kan företaget fakturera direkt och behöver mindre lån."},
+{id:"q5j",ch:5,q:"Vad är en affärsängel?",o:["En bank som lånar ut till nya företag","En privatperson som satsar pengar och kunskap i ett tidigt skede mot en ägarandel","En kund som betalar i förskott"],a:1,w:"Affärsänglar är ofta erfarna företagare. De bidrar med både pengar och råd, och vill ha en del av ägandet."},
+/* Kap 6 */
+{id:"q6a",ch:6,q:"Vad visar ett organisationsschema?",o:["Hur företaget är uppbyggt och vem som är chef över vad","Företagets budget för året","Vilka kunder företaget har"],a:0,w:"Organisationsschemat kallas också organogram."},
+{id:"q6b",ch:6,q:"Vilken organisation är vanligast i mindre företag?",o:["Funktionsorganisation","Geografisk organisation","Produktorganisation"],a:0,w:"I en funktionsorganisation delas personalen in efter arbetsuppgift, till exempel inköp, produktion, marknadsföring och ekonomi."},
+{id:"q6c",ch:6,q:"Vad är en stab?",o:["Den avdelning som har flest anställda","En stödfunktion till VD, till exempel personal eller juridik","Företagets styrelse"],a:1,w:"Staben ger råd och hjälp men är inte chef över de andra avdelningarna."},
+{id:"q6k",ch:6,q:"Ett företag har en avdelning för privatkunder, en för mindre företag och en för större företag. Vilken organisationsform är det?",o:["Funktionsorganisation","Kundindelad organisation","Produktorganisation"],a:1,w:"Avdelningarna är indelade efter vilken typ av kund de arbetar med."},
+{id:"q6l",ch:6,q:"Vad avgör vilken organisationsform som passar bäst?",o:["Omständigheterna, till exempel hur stort företaget är och vad det säljer","Lagen säger att alla företag ska ha funktionsorganisation","Det bestämmer Bolagsverket"],a:0,w:"Faktaboken betonar att organisationen beror på omständigheterna. Ett litet företag behöver nästan ingen organisation, ett stort kan välja funktioner, produkter, kundgrupper eller geografi."},
+{id:"q6d",ch:6,q:"Vad står M för i SMARTA mål?",o:["Motiverande","Mätbart","Medvetet"],a:1,w:"SMARTA betyder specifikt, mätbart, accepterat, realistiskt och tidsbestämt."},
+{id:"q6e",ch:6,q:"Vad är skillnaden mellan ledarskap och chefskap?",o:["Chefskap är en formell position. Ledarskap är förmågan att få människor med sig.","Det är samma sak.","Ledarskap är en formell position. Chefskap är en förmåga."],a:0,w:"En chef är utnämnd och har befogenheter. En bra ledare kan motivera, kommunicera och skapa laganda. En chef behöver inte vara en bra ledare."},
+{id:"q6f",ch:6,q:"Vilken ledare fattar beslut tillsammans med gruppen?",o:["Den auktoritära","Den passiva","Den demokratiska"],a:2,w:"Den demokratiska ledaren är en i gruppen. Den auktoritära bestämmer själv, och den passiva håller sig i bakgrunden."},
+{id:"q6g",ch:6,q:"Vad utgår en chef som följer teori X från?",o:["Att människor vill göra sitt bästa och kan ta ansvar","Att människor är lata och behöver kontrolleras","Att alla beslut ska tas av medarbetarna"],a:1,w:"Teori X ger en ledare som styr med order, regler och kontroll. Teori Y utgår från att människor vill och kan ta ansvar."},
+{id:"q6h",ch:6,q:"Vad innebär situationsanpassat ledarskap?",o:["Ledaren byter stil efter situationen och vad medarbetarna behöver","Ledaren är alltid demokratisk","Ledaren byts ut varje år"],a:0,w:"Ibland behövs en tydlig och mer auktoritär ledare, i andra lägen en demokratisk eller mer tillbakadragen."},
+{id:"q6i",ch:6,q:"Vilken av dessa är inte en av diskrimineringslagens sju grunder?",o:["Ålder","Politisk åsikt","Funktionsnedsättning"],a:1,w:"De sju grunderna är kön, könsöverskridande identitet eller uttryck, etnisk tillhörighet, religion eller annan trosuppfattning, funktionsnedsättning, sexuell läggning och ålder."},
+{id:"q6j",ch:6,q:"Vad är företagskultur?",o:["Konst som hänger på kontoret","De värderingar, regler och normer som personalen arbetar efter","Företagets marknadsföring på sociala medier"],a:1,w:"Kulturen byggs med till exempel personalhandböcker, ledare som lever som de lär, introduktion av nyanställda och storytelling."},
+/* Kap 7 */
+{id:"q7a",ch:7,q:"Hur uppstår ett avtal?",o:["När säljaren skickar en faktura","Anbud plus accept","När varan har levererats"],a:1,w:"Den ena parten ger ett anbud, alltså ett erbjudande, och den andra accepterar. Då finns ett bindande avtal enligt avtalslagen."},
+{id:"q7b",ch:7,q:"Vilken sorts avtal är lättast att bevisa?",o:["Skriftligt","Muntligt","De är lika lätta"],a:0,w:"Muntliga avtal gäller också, men de är svåra att bevisa. Företag bör alltid skriva ner viktiga avtal."},
+{id:"q7c",ch:7,q:"Ett företag köper 20 datorer av ett annat företag. Vilken lag gäller?",o:["Konsumentköplagen","Köplagen","Konsumenttjänstlagen"],a:1,w:"Köplagen gäller köp mellan företag. Konsumentköplagen gäller när en privatperson köper av ett företag."},
+{id:"q7d",ch:7,q:"Du köper en mobil i en butik. Vilken lag skyddar dig?",o:["Köplagen","Avtalslagen","Konsumentköplagen"],a:2,w:"När ett företag säljer en vara till en privatperson gäller konsumentköplagen, som är tvingande till konsumentens förmån."},
+{id:"q7e",ch:7,q:"En verkstad lagar din cykel. Vilken lag gäller?",o:["Konsumenttjänstlagen","Köplagen","Konsumentköplagen"],a:0,w:"Konsumenttjänstlagen gäller när ett företag utför en tjänst åt en privatperson."},
+{id:"q7f",ch:7,q:"Vad betyder det att konsumentköplagen är tvingande?",o:["Att alla måste köpa något","Att den inte kan avtalas bort till konsumentens nackdel","Att säljaren kan tvinga kunden att betala direkt"],a:1,w:"Står det något sämre för konsumenten i avtalet gäller lagen ändå. En dispositiv lag, som köplagen, gäller bara om parterna inte har avtalat annat."},
+{id:"q7g",ch:7,q:"Vilken av dessa är inte en anledning till att ett avtal kan bli ogiltigt?",o:["Någon har blivit lurad","Ena parten är minderårig","Köparen ångrar sig dagen efter ett köp i butik"],a:2,w:"Ett avtal kan bli ogiltigt om någon har lurats, tvingats, missförstått villkoren eller är minderårig. Att bara ångra sig räcker inte vid ett vanligt köp i butik."},
+{id:"q7h",ch:7,q:"Vad betyder att reklamera?",o:["Att göra reklam för en vara","Att säga till säljaren att varan är felaktig","Att lämna tillbaka en vara man inte gillar"],a:1,w:"Man ska reklamera inom skälig tid. Två månader från att man upptäckt felet räknas alltid som skälig tid."},
+{id:"q7i",ch:7,q:"Hur lång tid efter köpet kan en konsument som längst reklamera en vara?",o:["Tre månader","Ett år","Tre år"],a:2,w:"Gränsen är tre år efter köpet. Ett fel som visar sig inom två år räknas som att det fanns redan vid köpet."},
+{id:"q7k",ch:7,q:"Hassan köper en soffa i en möbelbutik. Den skadas när den körs hem till honom. Vem har ansvaret?",o:["Hassan, eftersom han har betalat","Möbelbutiken, eftersom ansvaret vid konsumentköp går över först när varan har kommit fram","Transportföretaget, alltid"],a:1,w:"Enligt konsumentköplagen har säljaren ansvaret tills varan når konsumenten. Butiken måste leverera en hel soffa."},
+{id:"q7l",ch:7,q:"Vad betyder bevisbörda?",o:["En avgift man betalar när man reklamerar","Skyldigheten att bevisa det man påstår","Att säljaren alltid måste ta tillbaka varan"],a:1,w:"I grunden måste köparen bevisa att felet fanns vid köpet. Men fel som visar sig inom två år räknas som att de fanns från början."},
+{id:"q7m",ch:7,q:"Elin beställer kattsand på nätet, 20 säckar om 10 kilo. Hon får i stället 10 säckar om 20 kilo. Är varan felaktig?",o:["Nej, mängden är ju rätt","Ja, eftersom förpackningen inte är den som man kom överens om","Bara om pelletsen är av dålig kvalitet"],a:1,w:"En vara kan vara felaktig om förpackningen skiljer sig från det som avtalats, även om mängden stämmer."},
+{id:"q7n",ch:7,q:"Vilken åtgärd kräver att felet på varan är väsentligt för köparen?",o:["Prisavdrag","Att häva köpet","Att få varan reparerad"],a:1,w:"Att häva köpet är den största åtgärden, eftersom hela köpet går tillbaka. Därför krävs att felet är väsentligt."},
+{id:"q7o",ch:7,q:"Du beställer en vara utan att ni har bestämt någon leveranstid. När ska den senast levereras enligt konsumentköplagen?",o:["Inom 7 dagar","Inom 30 dagar","Inom 3 månader"],a:1,w:"Varan ska levereras utan onödig fördröjning och senast 30 dagar efter köpet."},
+{id:"q7j",ch:7,q:"Varför finns konsumentlagarna?",o:["För att skydda konsumenten, som är den svagare parten","För att företag ska kunna ta högre priser","För att staten ska få in mer skatt"],a:0,w:"En privatperson har oftast mindre kunskap och makt än ett företag. Därför ger lagarna konsumenten ett grundskydd."}
+];
+
+const CASES = [
+{id:"c1",ch:3,title:"Bowl & Go",kap:"Kapitel 3 – affärsidé och intressenter",
+ bg:`<p>Sara och Ali är 19 år och vill öppna ett litet café nära en stor gymnasieskola. De ska sälja smoothies och bowls att ta med, för elever som har kort lunch. De har sparat 60 000 kr tillsammans. I närheten finns redan två caféer, och det ena tillhör en stor kedja.</p>`,
+ parts:[
+ {q:"a) Formulera en affärsidé för Bowl & Go.",
+  c:["Svarar på varför: vilket behov eller problem löser de?","Svarar på vem: en tydlig kundgrupp, till exempel gymnasieelever med kort lunch.","Svarar på vad: smoothies och bowls att ta med.","Svarar på hur: snabb service, nära skolan, eventuellt beställning i förväg.","Är kort och slagkraftig, en eller två meningar."],
+  m:"Bowl & Go erbjuder gymnasieelever med kort lunch snabba, nyttiga smoothies och bowls att ta med, nära skolan och med beställning i förväg så att ingen behöver köa."},
+ {q:"b) Välj fyra intressenter. Förklara vad var och en bidrar med och vad de vill ha tillbaka.",
+  c:["Nämner fyra intressenter, till exempel kunder, ägare, leverantörer, bank, anställda eller kommunen.","Skriver för varje intressent vad den bidrar med.","Skriver för varje intressent vad den vill ha tillbaka.","Kopplar till just Bowl & Go, inte bara allmänt."],
+  m:"Kunderna (eleverna) betalar och vill ha god och snabb mat till ett pris de har råd med. Sara och Ali som ägare satsar 60 000 kr och vill tjäna pengar och se idén lyckas. Leverantörerna levererar frukt och förpackningar och vill få betalt i tid. Kommunen ger tillstånd för livsmedel och vill att reglerna följs och att caféet ger skatteintäkter och jobb."},
+ {q:"c) Hur kan de ta reda på om det finns tillräckligt många kunder? Ge ett exempel på en skrivbordsundersökning och ett på en fältundersökning.",
+  c:["Förklarar att en skrivbordsundersökning använder information som redan finns.","Ger ett exempel, till exempel hur många elever skolan har eller vad konkurrenterna tar betalt.","Förklarar att en fältundersökning tar fram ny information.","Ger ett exempel, till exempel en enkät till elever eller provsmakning utanför skolan.","Nämner en fördel eller nackdel med metoden, till exempel att en enkät är billig men att många inte svarar."],
+  m:"Med en skrivbordsundersökning kan de ta reda på hur många elever skolan har och kolla konkurrenternas priser och meny på nätet. Med en fältundersökning kan de göra en enkät bland eleverna om vad de äter till lunch och vad de skulle betala, eller ordna en provsmakning utanför skolan. En enkät är billig och når många, men alla svarar inte. En fokusgrupp med några elever ger djupare svar men kräver att någon leder samtalet bra."},
+ {q:"d) Gör en SWOT-analys med minst en punkt i varje ruta.",
+  c:["Styrka handlar om det egna företaget, till exempel läget nära skolan.","Svaghet handlar om det egna företaget, till exempel ingen erfarenhet eller lite kapital.","Möjlighet finns i omvärlden, till exempel att fler unga vill äta nyttigt.","Hot finns i omvärlden, till exempel kedjecaféet eller stigande råvarupriser.","Interna och externa punkter hamnar i rätt rutor."],
+  m:"Styrka: läget nära skolan och en tydlig kundgrupp. Svaghet: ingen erfarenhet av att driva företag och bara 60 000 kr i kapital. Möjlighet: trenden att unga vill äta nyttigt och snabbt. Hot: kedjecaféet som kan sänka priserna, och dyrare frukt."}
+ ]},
+{id:"c2",ch:4,title:"Nyskick",kap:"Kapitel 4 – juridiska företagsformer",
+ bg:`<p>Lina, Omar och Elsa ska starta Nyskick, som renoverar och säljer begagnade mobiler på nätet. Lina har 30 000 kr, Omar 10 000 kr och Elsa har inga pengar, men hon är bäst på att laga telefoner. De ska köpa in mobiler i lager och lämna garanti till kunderna. Inom två år vill de anställa och öppna en verkstad.</p>`,
+ parts:[
+ {q:"a) Varför kan de inte starta en enskild firma?",
+  c:["En enskild firma kan bara ha en ägare.","De är tre som ska äga företaget."],
+  m:"En enskild firma har bara en ägare, och Nyskick ska ägas av tre personer. De måste därför välja handelsbolag, kommanditbolag, aktiebolag eller ekonomisk förening."},
+ {q:"b) Jämför handelsbolag och aktiebolag för Nyskick när det gäller ansvar, startkapital och skatt.",
+  c:["Ansvar i HB: obegränsat och solidariskt, de kan få betala skulderna med privata pengar.","Ansvar i AB: begränsat till insatsen.","Startkapital: HB inget krav, AB 25 000 kr, som de har råd med (40 000 kr).","Skatt: i HB är vinsten delägarnas inkomst, ett AB betalar bolagsskatt (20,6 %).","Kopplar till Nyskick, till exempel att Elsa saknar pengar men ändå skulle ansvara för allt i ett HB."],
+  m:"I ett handelsbolag ansvarar alla tre obegränsat och solidariskt. Om lagret eller garantierna leder till skulder kan till exempel Elsa få betala hela skulden med sina privata pengar. I ett aktiebolag riskerar de bara insatsen. Ett HB kräver inget startkapital, medan ett AB kräver 25 000 kr, vilket de har eftersom de tillsammans har 40 000 kr. I ett HB räknas vinsten som delägarnas inkomst, medan ett AB betalar bolagsskatt på vinsten."},
+ {q:"c) Vilken företagsform rekommenderar du? Motivera.",
+  c:["Väljer en företagsform, troligen aktiebolag.","Motiverar med begränsat ansvar och risken med lager och garantier.","Motiverar med planerna att växa och anställa.","Nämner att de har råd med aktiekapitalet."],
+  m:"Aktiebolag. Med lager och garantier finns det risk för skulder, och i ett AB riskerar ägarna bara sin insats. De vill också växa och anställa, och ett aktiebolag gör det lättare att ta in nya ägare och visa att företaget är seriöst. De har råd med 25 000 kr i aktiekapital."},
+ {q:"d) Hur registrerar de företaget, och vad gäller för namnet Nyskick?",
+  c:["Registrera hos Bolagsverket och få organisationsnummer.","Ansöka om F-skatt hos Skatteverket.","Nämner verksamt.se.","Namnet får inte gå att förväxla med ett registrerat namn.","Namnet måste innehålla AB, alltså Nyskick AB."],
+  m:"De registrerar aktiebolaget hos Bolagsverket via verksamt.se och får ett organisationsnummer. Hos Skatteverket ansöker de om F-skatt. Namnet får inte gå att förväxla med ett annat registrerat företag, och det måste innehålla AB, alltså Nyskick AB. Sedan bör de registrera ett domännamn och skaffa en enkel hemsida."}
+ ]},
+{id:"c3",ch:5,title:"Nyskick ett år senare",kap:"Kapitel 5 – finansieringsalternativ",
+ bg:`<p>Nyskick AB går bra. Nu vill ägarna öppna en egen verkstad och behöver 400 000 kr till lokal och verktyg. Samtidigt har de fått flera företagskunder som betalar först efter 30 dagar, så det är ofta tomt i kassan. En affärsängel har erbjudit 400 000 kr mot 20 % av aktierna.</p>`,
+ parts:[
+ {q:"a) Vilken fas är företaget i, och vilken sorts kapital behöver det till verkstaden?",
+  c:["Fas 2, tillväxtfasen.","Behöver tillväxtkapital.","Nämner alternativ som passar, till exempel riskkapital, affärsängel eller banklån."],
+  m:"Företaget är i fas 2 och vill växa. Därför behöver det tillväxtkapital, till exempel riskkapital, en affärsängel eller lån från bank eller andra kreditinstitut."},
+ {q:"b) Jämför två sätt att finansiera verkstaden. Ta med för- och nackdelar.",
+  c:["Beskriver banklån: de behåller ägandet, men ska betala ränta och amortering.","Nämner att banken vill se affärsplanen och kanske en säkerhet.","Beskriver affärsängeln: inget att betala tillbaka, och de får kunskap och kontakter.","Nackdelen med affärsängeln: de lämnar ifrån sig 20 % av ägandet.","Eller nämner leasing av verktyg som ett sätt att slippa en stor utgift på en gång."],
+  m:"Med ett banklån behåller Lina, Omar och Elsa hela ägandet, men de måste betala ränta och amortera varje månad, och banken vill se affärsplanen. Med affärsängeln behöver de inte betala tillbaka något och får en erfaren rådgivare, men de lämnar ifrån sig 20 % av företaget och därmed en del av vinsten och makten. Verktygen kan de också leasa i stället för att köpa."},
+ {q:"c) Hur kan de lösa problemet med att kunderna betalar sent?",
+  c:["Förstår att det handlar om kassaflöde och rörelsekapital (fas 3).","Föreslår factoring, alltså att få pengar för fakturorna direkt mot en avgift.","Eller föreslår checkkredit eller förskottsbetalning."],
+  m:"Det är ett problem med kassaflödet, alltså rörelsekapitalet. De kan använda factoring och få pengar för fakturorna direkt mot en avgift, skaffa en checkkredit för tillfälliga hål i kassan eller be nya kunder betala en del i förskott."},
+ {q:"d) Vad händer med ägarnas andelar om affärsängeln får 20 % av aktierna?",
+  c:["Förklarar utspädning: de gamla ägarnas andelar blir mindre.","Konstaterar att Lina, Omar och Elsa tillsammans äger 80 % efteråt.","Nämner att de delar vinst och inflytande med en ny ägare."],
+  m:"Det blir en utspädning. Om nya aktier ges ut till affärsängeln minskar de tidigare ägarnas andelar, så att Lina, Omar och Elsa tillsammans äger 80 % i stället för 100 %. De får dela både vinst och inflytande med affärsängeln."}
+ ]}
+];
+
+const CARDS = [
+[3,"Entreprenör","En person som tar initiativ till och utvecklar en verksamhet."],
+[3,"Affärsidé","Den drivande tanken bakom företaget. Svarar på varför, vem, vad och hur."],
+[3,"Affärsidéns fyra grundstenar","Kundbehov, kundgrupp, produktidé och resurser."],
+[3,"Intressent","En aktör som är intresserad av eller beroende av företaget."],
+[3,"Företagets intressenter","Ägare, anställda, kunder, leverantörer, långivare, stat och kommun samt konkurrenter."],
+[3,"Målgrupp","Den avgränsade grupp människor som är mest intressanta som köpare av företagets produkter."],
+[3,"Hisspitch","En kort presentation av affärsidén, ungefär 30–60 sekunder, för att väcka intresse inför ett möte."],
+[3,"Skrivbordsundersökning","Man samlar information som redan finns, till exempel om marknadens storlek, kundernas köpvanor och konkurrenterna."],
+[3,"Fältundersökning","Man går ut och frågar människor, till exempel med enkäter, intervjuer eller fokusgrupper."],
+[3,"Omvärlds- och marknadsanalys","Undersökning av om det finns en marknad: kunder, konkurrenter, leverantörer samt politiska, sociala och tekniska faktorer."],
+[3,"Fokusgrupp","Gruppintervju där deltagarna diskuterar. Ger djup förståelse men kräver en skicklig samtalsledare."],
+[3,"Observation","Man iakttar hur människor gör utan att påverka dem. Kan ge oväntade insikter men är krävande."],
+[3,"SWOT","Styrkor och svagheter (internt), möjligheter och hot (externt)."],
+[3,"Affärsmodell","Hur företaget fungerar i praktiken och tjänar pengar."],
+[3,"Affärsplan","En karta över var företaget vill vara och hur det ska ta sig dit. Används mot bank och investerare."],
+[3,"Freemium","Gratis grundtjänst, betalt för mer. Exempel Spotify."],
+[3,"Dropshipping","Säljer utan eget lager. Leverantören skickar direkt till kunden."],
+[3,"Franchise","Färdigt koncept och varumärke mot en avgift. Exempel McDonald's."],
+[3,"Delningsekonomi","Dela, låna eller hyra i stället för att äga."],
+[3,"On-demand","Tjänsten levereras direkt när kunden vill, ofta via en app."],
+[4,"Fysisk person","En människa, med personnummer."],
+[4,"Juridisk person","Företag, organisation eller förening som kan sluta avtal, äga saker och ha skulder. Har organisationsnummer."],
+[4,"Enskild firma","En ägare, inte juridisk person, obegränsat ansvar, inget krav på startkapital."],
+[4,"Handelsbolag","Minst två ägare, juridisk person, obegränsat och solidariskt ansvar."],
+[4,"Solidariskt ansvar","Varje delägare kan få betala hela bolagets skulder."],
+[4,"Kommanditbolag","Som ett handelsbolag, men kommanditdelägarna ansvarar bara med sin insats."],
+[4,"Komplementär","Delägaren i ett kommanditbolag som har obegränsat ansvar."],
+[4,"Kommanditdelägare","Delägare i ett kommanditbolag som bara ansvarar med sin insats."],
+[4,"Aktiebolag","En eller flera ägare, begränsat ansvar, 25 000 kr i aktiekapital för privat AB."],
+[4,"Publikt aktiebolag","Får erbjuda aktier på den öppna marknaden. Kräver 500 000 kr i aktiekapital."],
+[4,"Aktie","Bevis på att man äger en del av ett aktiebolag."],
+[4,"Bolagsskatt","Skatt som aktiebolaget betalar på vinsten, 20,6 %."],
+[4,"Ekonomisk förening","Minst tre medlemmar, ska gynna medlemmarna, överskott kan delas ut som återbäring."],
+[4,"Bolagsverket","Registrerar företag och ger organisationsnummer."],
+[4,"Verksamt.se","Webbplats för att starta och registrera företag. Samarbete mellan Bolagsverket, Skatteverket och Tillväxtverket."],
+[5,"Eget kapital","Pengar som ägarna själva satsar."],
+[5,"Banklån","Lån som betalas tillbaka med ränta och amortering."],
+[5,"Riskkapital","Investerare satsar pengar mot en del av ägandet."],
+[5,"Affärsängel","Privatperson som satsar pengar och kunskap i ett tidigt skede mot en ägarandel."],
+[5,"Crowdfunding","Många personer bidrar med små belopp, ofta via en plattform."],
+[5,"Leasing","Att hyra utrustning i stället för att köpa."],
+[5,"Factoring","Företaget får pengar för sina fakturor direkt mot en avgift."],
+[5,"Checkkredit","Kredit på företagskontot som kan användas vid behov."],
+[5,"Startkapital","Pengar för att komma igång. Fas 1."],
+[5,"Tillväxtkapital","Pengar för att växa. Fas 2."],
+[5,"Rörelsekapital","Pengar för den dagliga driften. Fas 3."],
+[5,"Såddfinansiering","Tidiga pengar för att utveckla idén, till exempel en prototyp."],
+[5,"Bryggfinansiering","Tillfälliga pengar för att ta nästa steg."],
+[5,"Skalbar affärsmodell","Försäljningen kan växa utan att kostnaderna växer lika mycket."],
+[5,"Kassaflöde","Pengar in minus pengar ut under en period."],
+[5,"Utspädning","Ägarnas andelar blir mindre när nya aktier ges ut."],
+[5,"Kundfinansierad start","Företaget har en kund från början och kan fakturera direkt."],
+[6,"Organisation","Hur verksamheten planeras och struktureras för att nå målen."],
+[6,"Organisationsschema","En bild av hur företaget är uppbyggt. Kallas också organogram."],
+[6,"Funktionsorganisation","Indelning efter arbetsuppgift. Vanligast i mindre företag."],
+[6,"Stab","Stödfunktion till VD, till exempel personal eller juridik."],
+[6,"Produktorganisation","Varje avdelning ansvarar för sina egna produkter och sköter själv inköp, tillverkning och marknadsföring."],
+[6,"Kundindelad organisation","Avdelningarna arbetar med olika typer av kunder, till exempel privatkunder och företag."],
+[6,"Geografisk indelning","Företagets område delas upp i mindre delar, där varje del blir en avdelning."],
+[6,"Kompetens","En förmåga som är viktig i en viss yrkesroll, till exempel att samarbeta eller kommunicera."],
+[6,"SMARTA mål","Specifikt, mätbart, accepterat, realistiskt, tidsbestämt."],
+[6,"Företagskultur","Värderingar, regler och normer som personalen arbetar efter."],
+[6,"Storytelling","Att använda berättelser för att visa vad företaget står för."],
+[6,"Ledarskap","Förmågan att få människor med sig mot ett mål."],
+[6,"Chefskap","En formell position med befogenheter."],
+[6,"Auktoritär ledare","Fattar alla beslut och delegerar. Maktorienterad."],
+[6,"Demokratisk ledare","Fattar beslut tillsammans med gruppen."],
+[6,"Passiv ledare","Håller sig i bakgrunden och låter saker gå."],
+[6,"Situationsanpassat ledarskap","Ledaren byter stil efter situationen och medarbetarnas behov."],
+[6,"Teori X","Chefen ser människor som lata och leder med kontroll."],
+[6,"Teori Y","Chefen ser människor som ansvarsfulla och leder med mål och förtroende."],
+[6,"Diskrimineringslagen","Ska förebygga diskriminering. Har sju diskrimineringsgrunder."],
+[6,"DO","Diskrimineringsombudsmannen, dit man anmäler diskriminering."],
+[7,"Avtal","En överenskommelse mellan två eller flera parter."],
+[7,"Anbud","Ett erbjudande."],
+[7,"Accept","När den andra parten tackar ja till anbudet."],
+[7,"Avtalslagen","Lagen om hur avtal blir till och blir giltiga."],
+[7,"Ogiltigt avtal","Kan bli det om någon lurats, tvingats, missförstått villkoren eller är minderårig."],
+[7,"Dispositiv lag","Gäller om parterna inte har avtalat något annat. Till exempel köplagen."],
+[7,"Tvingande lag","Kan inte avtalas bort till konsumentens nackdel. Till exempel konsumentköplagen."],
+[7,"Köplagen","Köp mellan företag, och även mellan privatpersoner. Dispositiv."],
+[7,"Besittningsövergång","När ansvaret för varan går över från säljaren till köparen."],
+[7,"Hämtningsköp","Köparen hämtar varan hos säljaren."],
+[7,"Transportköp","Varan transporteras till köparen."],
+[7,"Konsumentköplagen","Företag säljer en vara till en privatperson."],
+[7,"Konsumenttjänstlagen","Företag utför en tjänst åt en privatperson."],
+[7,"Felaktig vara","Varan stämmer inte med avtalet i sort, kvalitet, mängd, egenskaper eller förpackning, eller fungerar inte som man kunde räkna med."],
+[7,"Reklamation","Att säga till säljaren att varan är felaktig."],
+[7,"Prisavdrag","Lägre pris när felet inte är så allvarligt att man vill lämna tillbaka varan."],
+[7,"Häva köpet","Varan lämnas tillbaka och pengarna betalas tillbaka. Kräver att felet är väsentligt."],
+[7,"Skadestånd","Ersättning för kostnader som ett fel eller en försening har orsakat."],
+[7,"Leveranstid utan avtal","Varan ska levereras utan onödig fördröjning, senast 30 dagar efter köpet."],
+[7,"Bevisbörda","Skyldigheten att bevisa det man påstår. Fel som visar sig inom två år räknas som att de fanns vid köpet."],
+[7,"Reklamationstid","Inom skälig tid, två månader räcker alltid. Högst tre år efter köpet."]
+];
+
+const FIXES = [
+{ch:4,was:"Handelsbolaget betalar bolagsskatt på sin vinst.",is:"Vinsten i ett handelsbolag räknas som delägarnas inkomst. Det är aktiebolag och ekonomiska föreningar som själva betalar skatt på vinsten.",note:"Det här var fel i din tabell i 4.7."},
+{ch:4,was:"Överskottet i en ekonomisk förening delas ut till de anställda.",is:"Överskottet kan delas ut som återbäring till medlemmarna. Medlemmarna kan i sin tur vara kunder, leverantörer eller anställda.",note:"Kolla din anteckning om ekonomisk förening."},
+{ch:4,was:"Ett handelsbolag är en juridisk person, så ägarna riskerar bara sin insats.",is:"Handelsbolaget är en juridisk person, men delägarna har ändå obegränsat och solidariskt ansvar.",note:"Juridisk person betyder inte begränsat ansvar."},
+{ch:4,was:"Komplementären i ett kommanditbolag har begränsat ansvar.",is:"Det är tvärtom. Komplementären har obegränsat ansvar, och kommanditdelägarna ansvarar bara med sin insats.",note:""},
+{ch:3,was:"Affärsidé, affärsmodell och affärsplan är samma sak.",is:"Affärsidén är tanken. Affärsmodellen visar hur företaget tjänar pengar. Affärsplanen är hela kartan med mål, marknad, budget och risker.",note:"Idé, modell, plan."},
+{ch:3,was:"Möjligheter och hot handlar om vad företaget är bra eller dåligt på.",is:"Möjligheter och hot finns i omvärlden och kan inte styras av företaget. Det egna företaget beskrivs med styrkor och svagheter.",note:"Internt eller externt?"},
+{ch:5,was:"Rörelsekapital är pengarna man startar företaget med.",is:"Startkapital behövs för att komma igång (fas 1). Rörelsekapital behövs för den dagliga driften (fas 3).",note:""},
+{ch:5,was:"Med riskkapital måste företaget betala tillbaka pengarna med ränta.",is:"Riskkapital ger investeraren en del av ägandet. Det är lån som betalas tillbaka med ränta.",note:"Lån kostar ränta. Riskkapital kostar ägande."},
+{ch:6,was:"Produktionsorganisation är när företaget delas in efter astmamedicin, diabetesmedicin och värktabletter.",is:"Det heter produktorganisation, eftersom indelningen görs efter vad företaget säljer.",note:"Rättat i dina anteckningar."},
+{ch:6,was:"En chef och en ledare är samma sak.",is:"Chefskap är en formell position. Ledarskap är förmågan att få människor med sig. En chef behöver inte vara en bra ledare.",note:""},
+{ch:6,was:"Teori X beskriver en lat chef.",is:"Teori X beskriver chefens syn på medarbetarna: chefen tror att de är lata och leder därför med kontroll.",note:""},
+{ch:7,was:"Köplagen gäller när du köper en mobil i en butik.",is:"När en privatperson köper av ett företag gäller konsumentköplagen. Köplagen gäller köp mellan företag.",note:""},
+{ch:7,was:"Är varan felaktig kan man alltid häva köpet och få pengarna tillbaka.",is:"Företaget ska först få chansen att laga eller byta varan. Att häva köpet kräver att felet är väsentligt för köparen.",note:""},
+{ch:7,was:"Tvingande lag betyder att någon har blivit tvingad att skriva på avtalet.",is:"En tvingande lag går inte att avtala bort till konsumentens nackdel. Ett avtal som någon har tvingats till är däremot ogiltigt, och det är en annan sak.",note:"Tvingande lag eller tvingad person?"}
+];
+
+/* ---------- Lagring ---------- */
+const KEY="fe-block2-meja-v1";
+let S={};
+try{ S=JSON.parse(localStorage.getItem(KEY)||"{}")||{}; }catch(e){ S={}; }
+S.q=S.q||{}; S.k=S.k||[]; S.o=S.o||{}; S.c=S.c||{};
+function save(){ try{ localStorage.setItem(KEY,JSON.stringify(S)); }catch(e){} }
+
+const $=s=>document.querySelector(s);
+const QI=Object.fromEntries(Q.map(q=>[q.id,q]));
+
+/* ---------- Flikar ---------- */
+const TABS=["las","kap","case","quiz","kort","fel","trad"];
+function showTab(id, push){
+  if(!TABS.includes(id)) id="las";
+  document.querySelectorAll("nav.tabs button").forEach(b=>b.setAttribute("aria-selected", b.dataset.tab===id?"true":"false"));
+  document.querySelectorAll("section.panel").forEach(p=>p.classList.toggle("active", p.id===id));
+  if(push){ try{ history.replaceState(null,"","#"+id); }catch(e){ location.hash=id; } }
+  if(id==="kort") renderCard();
+}
+document.querySelector("nav.tabs").addEventListener("click",e=>{
+  const b=e.target.closest("button[data-tab]"); if(!b) return;
+  showTab(b.dataset.tab,true); window.scrollTo({top:0});
+});
+window.addEventListener("hashchange",()=>showTab(location.hash.slice(1),false));
+
+/* ---------- Flerval ---------- */
+function qHTML(q, showWhere){
+  const ans=S.q[q.id];
+  const done=ans!==undefined;
+  const cls=done?(ans===q.a?"right":"wrong"):"";
+  let h=`<div class="q ${cls}" data-q="${q.id}">`;
+  if(showWhere) h+=`<p class="where">Kapitel ${q.ch}</p>`;
+  h+=`<p class="qt">${q.q}</p><div class="opts">`;
+  q.o.forEach((t,i)=>{
+    let c="opt";
+    if(done){ if(i===q.a) c+=" isright"; else if(i===ans) c+=" iswrong"; }
+    h+=`<button class="${c}" data-i="${i}" ${done?"disabled":""}>${t}</button>`;
+  });
+  h+=`</div>`;
+  if(done){
+    h+=`<div class="why"><b>${ans===q.a?"Rätt!":"Inte riktigt."}</b> ${q.w}</div>`;
+    if(ans!==q.a) h+=`<button class="again" data-again="${q.id}">Försök igen</button>`;
+  }
+  return h+`</div>`;
+}
+document.addEventListener("click",e=>{
+  const o=e.target.closest(".opt");
+  if(o && !o.disabled){
+    const box=o.closest(".q"); const id=box.dataset.q;
+    S.q[id]=Number(o.dataset.i); save(); refreshQ(id);
+    return;
+  }
+  const ag=e.target.closest("[data-again]");
+  if(ag){ delete S.q[ag.dataset.again]; save(); refreshQ(ag.dataset.again); }
+});
+function refreshQ(id){
+  document.querySelectorAll(`.q[data-q="${id}"]`).forEach(el=>{
+    const showWhere=!!el.querySelector(".where");
+    el.outerHTML=qHTML(QI[id],showWhere);
+  });
+  renderStatus(); renderQProgress();
+}
+
+/* ---------- Start: status ---------- */
+function chStatus(c){
+  const a=c.snabb.map(id=>S.q[id]);
+  if(a.every(x=>x===undefined)) return ["none","Inte gjord"];
+  if(c.snabb.every(id=>S.q[id]===QI[id].a)) return ["ok","Kan"];
+  if(a.some(x=>x===undefined)) return ["work","Påbörjad"];
+  return ["work","Läs igen"];
+}
+function renderStatus(){
+  let h=`<h3>Din snabbkoll</h3>`;
+  CH.forEach(c=>{
+    const [k,t]=chStatus(c);
+    h+=`<div class="strow"><button data-go="${c.n}">Kap ${c.n}. ${c.title}${c.star?` <span class="star">case</span>`:""}</button><span class="pill ${k}">${t}</span></div>`;
+  });
+  $("#status").innerHTML=h;
+}
+function goChapter(n){
+  showTab("kap",true);
+  const d=document.getElementById("k"+n); d.open=true;
+  setTimeout(()=>d.scrollIntoView({behavior:"smooth",block:"start"}),30);
+}
+document.getElementById("las").addEventListener("click",e=>{
+  const g=e.target.closest("[data-go]"); if(g){ goChapter(g.dataset.go); return; }
+  const c=e.target.closest("[data-gocase]");
+  if(c){ showTab("case",true); const el=document.getElementById(c.dataset.gocase); setTimeout(()=>el.scrollIntoView({behavior:"smooth",block:"start"}),30); return; }
+  const t=e.target.closest("[data-gotab]"); if(t){ showTab(t.dataset.gotab,true); window.scrollTo({top:0}); }
+});
+S.p=S.p||{};
+function renderPasses(){
+  document.querySelectorAll("[data-pass]").forEach(i=>{
+    i.checked=!!S.p[i.dataset.pass];
+    i.closest("li").classList.toggle("isdone", i.checked);
+  });
+}
+$("#passes").addEventListener("change",e=>{
+  const i=e.target.closest("[data-pass]"); if(!i) return;
+  if(i.checked) S.p[i.dataset.pass]=1; else delete S.p[i.dataset.pass];
+  save(); renderPasses();
+});
+
+/* ---------- Läs ---------- */
+function renderTopics(){
+  let h="";
+  CH.forEach(c=>{
+    h+=`<details class="topic" id="k${c.n}"><summary>Kap ${c.n}. ${c.title}<small>${c.pages}</small></summary><div class="tbody">`;
+    h+=`<div class="sk"><h4>Snabbkoll</h4><p class="small">Klarar du alla tre kan du hoppa till nästa kapitel.</p>`;
+    c.snabb.forEach(id=>{ h+=qHTML(QI[id],false); });
+    h+=`</div>`;
+    h+=c.body;
+    h+=`<div class="ovn"><h4>Lärarens övningar till provet</h4><p class="small">Från provlistan. Uppgifterna finns i övningsboken ${c.op}. Märket "gjord på lektion" betyder att klassen gick igenom den. Bocka av det du har gjort.</p><ul>`;
+    c.ovn.forEach(o=>{
+      const key=c.n+"|"+o; const chk=S.o[key]?"checked":"";
+      h+=`<li><label><input type="checkbox" data-ovn="${key}" ${chk}> <span>${o}</span> ${c.cls.includes(o)?`<span class="cls">gjord på lektion</span>`:""}</label></li>`;
+    });
+    h+=`</ul></div>`;
+    h+=`<details class="notes"><summary>Mina anteckningar</summary><div class="nb">${c.notes}</div></details>`;
+    h+=`</div></details>`;
+  });
+  $("#topics").innerHTML=h;
+}
+$("#topics").addEventListener("change",e=>{
+  const i=e.target.closest("[data-ovn]"); if(!i) return;
+  if(i.checked) S.o[i.dataset.ovn]=1; else delete S.o[i.dataset.ovn];
+  save();
+});
+
+/* ---------- Case ---------- */
+function renderCases(){
+  let h="";
+  CASES.forEach(cs=>{
+    h+=`<article class="case" id="${cs.id}"><h3>${cs.title}</h3><p class="kap">${cs.kap}</p><div class="bg">${cs.bg}</div>`;
+    cs.parts.forEach((p,i)=>{
+      const key=cs.id+"_"+i; const st=S.c[key]||{};
+      h+=`<div class="part" data-key="${key}"><p class="pq">${p.q}</p>`;
+      h+=`<textarea data-txt="${key}" aria-label="Ditt svar" placeholder="Skriv ditt svar här">${(st.t||"").replace(/</g,"&lt;")}</textarea>`;
+      if(!st.s){
+        h+=`<div class="row"><button class="btn slim" data-show="${key}">Visa vad ett bra svar tar upp</button></div>`;
+      }else{
+        const k=st.k||[];
+        h+=`<ul class="checks">`;
+        p.c.forEach((t,j)=>{ h+=`<li><label><input type="checkbox" data-chk="${key}" data-j="${j}" ${k.includes(j)?"checked":""}><span>${t}</span></label></li>`; });
+        h+=`</ul><p class="score">${k.length} av ${p.c.length} punkter</p>`;
+        h+=`<div class="model"><b>Exempel på svar:</b> ${p.m}</div>`;
+      }
+      h+=`</div>`;
+    });
+    h+=`</article>`;
+  });
+  $("#cases").innerHTML=h;
+}
+let txtTimer;
+$("#cases").addEventListener("input",e=>{
+  const t=e.target.closest("[data-txt]"); if(!t) return;
+  const key=t.dataset.txt; S.c[key]=S.c[key]||{}; S.c[key].t=t.value;
+  clearTimeout(txtTimer); txtTimer=setTimeout(save,300);
+});
+$("#cases").addEventListener("click",e=>{
+  const b=e.target.closest("[data-show]"); if(!b) return;
+  const key=b.dataset.show; S.c[key]=S.c[key]||{}; S.c[key].s=1; S.c[key].k=S.c[key].k||[]; save();
+  const y=window.scrollY; renderCases(); window.scrollTo({top:y});
+});
+$("#cases").addEventListener("change",e=>{
+  const c=e.target.closest("[data-chk]"); if(!c) return;
+  const key=c.dataset.chk, j=Number(c.dataset.j);
+  const st=S.c[key]=S.c[key]||{}; st.k=st.k||[];
+  if(c.checked){ if(!st.k.includes(j)) st.k.push(j); } else st.k=st.k.filter(x=>x!==j);
+  save();
+  const part=c.closest(".part"); const total=part.querySelectorAll("[data-chk]").length;
+  part.querySelector(".score").textContent=`${st.k.length} av ${total} punkter`;
+});
+
+/* ---------- Quiz ---------- */
+let qf="alla";
+function renderQFilter(){
+  const opts=[["alla","Alla"],["3","Kap 3"],["4","Kap 4"],["5","Kap 5"],["6","Kap 6"],["7","Kap 7"],["fel","Mina fel"]];
+  $("#qfilter").innerHTML=opts.map(([v,t])=>`<button class="chip" data-qf="${v}" aria-pressed="${qf===v}">${t}</button>`).join("");
+}
+function qList(){
+  if(qf==="alla") return Q;
+  if(qf==="fel") return Q.filter(q=>S.q[q.id]!==undefined && S.q[q.id]!==q.a);
+  return Q.filter(q=>String(q.ch)===qf);
+}
+function renderQuiz(){
+  renderQFilter();
+  const L=qList();
+  $("#qlist").innerHTML = L.length ? L.map(q=>qHTML(q,true)).join("") : `<div class="empty">${qf==="fel"?"Inga fel just nu. Snyggt!":"Inga frågor här."}</div>`;
+  renderQProgress();
+}
+function renderQProgress(){
+  const L=qList(); const done=L.filter(q=>S.q[q.id]!==undefined); const right=done.filter(q=>S.q[q.id]===q.a);
+  $("#qprogress").textContent = qf==="fel" ? `${L.length} frågor att öva på` : `${right.length} rätt av ${L.length} frågor (${done.length} besvarade)`;
+}
+$("#qfilter").addEventListener("click",e=>{ const b=e.target.closest("[data-qf]"); if(!b) return; qf=b.dataset.qf; renderQuiz(); });
+$("#qreset").addEventListener("click",()=>{
+  const L=qList(); L.forEach(q=>delete S.q[q.id]); save(); renderQuiz(); renderTopics(); renderStatus();
+});
+
+/* ---------- Kort ---------- */
+let cf="alla", ci=0, flipped=false;
+function cardDeck(){
+  const base=CARDS.map((c,i)=>({i,ch:c[0],f:c[1],b:c[2]})).filter(c=>cf==="alla"||String(c.ch)===cf);
+  const unk=base.filter(c=>!S.k.includes(c.i)), kn=base.filter(c=>S.k.includes(c.i));
+  return unk.concat(kn);
+}
+function renderCFilter(){
+  const opts=[["alla","Alla"],["3","Kap 3"],["4","Kap 4"],["5","Kap 5"],["6","Kap 6"],["7","Kap 7"]];
+  $("#cfilter").innerHTML=opts.map(([v,t])=>`<button class="chip" data-cf="${v}" aria-pressed="${cf===v}">${t}</button>`).join("");
+}
+function renderCard(){
+  renderCFilter();
+  const D=cardDeck(); if(!D.length) return;
+  if(ci>=D.length) ci=0; if(ci<0) ci=D.length-1;
+  const c=D[ci]; const known=S.k.includes(c.i);
+  $("#fside").textContent=`Kap ${c.ch} · ${flipped?"baksida":"framsida"}${known?" · kan":""}`;
+  $("#fcontent").innerHTML = flipped ? `<div class="fa">${c.b}</div>` : `<div class="fq">${c.f}</div>`;
+  const nk=D.filter(x=>S.k.includes(x.i)).length;
+  $("#fcount").textContent=`${ci+1} av ${D.length} · kan ${nk}`;
+  $("#fknow").textContent = known ? "Kan inte än" : "Det här kan jag";
+}
+function flip(){ flipped=!flipped; renderCard(); }
+$("#flash").addEventListener("click",flip);
+$("#flash").addEventListener("keydown",e=>{ if(e.key===" "||e.key==="Enter"){ e.preventDefault(); flip(); } });
+$("#fnext").addEventListener("click",()=>{ ci++; flipped=false; renderCard(); });
+$("#fprev").addEventListener("click",()=>{ ci--; flipped=false; renderCard(); });
+$("#fknow").addEventListener("click",()=>{
+  const D=cardDeck(); const c=D[ci]; if(!c) return;
+  if(S.k.includes(c.i)) S.k=S.k.filter(x=>x!==c.i); else { S.k.push(c.i); }
+  save(); flipped=false; renderCard();
+});
+$("#freset").addEventListener("click",()=>{
+  const ids=CARDS.map((c,i)=>({i,ch:c[0]})).filter(c=>cf==="alla"||String(c.ch)===cf).map(c=>c.i);
+  S.k=S.k.filter(x=>!ids.includes(x)); save(); ci=0; flipped=false; renderCard();
+});
+$("#cfilter").addEventListener("click",e=>{ const b=e.target.closest("[data-cf]"); if(!b) return; cf=b.dataset.cf; ci=0; flipped=false; renderCard(); });
+
+/* ---------- Vanliga fel ---------- */
+function renderFixes(){
+  $("#fixes").innerHTML=FIXES.map(f=>`<div class="fix"><p class="wh">Kapitel ${f.ch}</p><p class="was">${f.was}</p><p class="is">${f.is}</p>${f.note?`<p class="note">${f.note}</p>`:""}</div>`).join("");
+}
+
+/* ---------- Start ---------- */
+renderTopics(); renderStatus(); renderCases(); renderQuiz(); renderFixes(); renderPasses();
+showTab((location.hash||"").slice(1)||"las",false);
+</script>
+</body>
+</html>
