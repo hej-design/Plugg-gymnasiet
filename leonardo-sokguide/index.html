@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Sökguide: intervjun med Leonardo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&display=swap" rel="stylesheet">
+<style>
+/* Ett steg i taget: smal mittkolumn, fast navigering längst ned, val som kort. */
+:root {
+  --bg: #eef0f6;
+  --surface: #ffffff;
+  --ink: #1a2132;
+  --muted: #586176;
+  --line: #d8dce7;
+  --accent: #2b4cb5;
+  --accent-ink: #ffffff;
+  --accent-soft: #e4eafb;
+  --done: #2e7a4d;
+  --display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #10131b;
+    --surface: #1a1f2c;
+    --ink: #e9ecf4;
+    --muted: #a3abbd;
+    --line: #2d3447;
+    --accent: #8da7ff;
+    --accent-ink: #0f1424;
+    --accent-soft: #212d55;
+    --done: #6fcf97;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #10131b;
+  --surface: #1a1f2c;
+  --ink: #e9ecf4;
+  --muted: #a3abbd;
+  --line: #2d3447;
+  --accent: #8da7ff;
+  --accent-ink: #0f1424;
+  --accent-soft: #212d55;
+  --done: #6fcf97;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 18px;
+  line-height: 1.5;
+  -webkit-text-size-adjust: 100%;
+}
+a { color: var(--accent); }
+button, input, textarea, select { font: inherit; color: inherit; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+.wrap { max-width: 560px; margin: 0 auto; padding: 0 16px; }
+
+header.top {
+  position: sticky; top: 0; z-index: 5;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+  padding: 10px 0 10px;
+}
+.top-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.brand { font-family: var(--display); font-weight: 700; font-size: 16px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+.top-tools { display: flex; gap: 6px; }
+.tool {
+  border: 1px solid var(--line); background: var(--surface);
+  border-radius: 999px; padding: 6px 12px; font-size: 15px; cursor: pointer; white-space: nowrap;
+}
+.progress { margin-top: 8px; display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--muted); }
+.bar { flex: 1; height: 6px; background: var(--line); border-radius: 999px; overflow: hidden; }
+.bar span { display: block; height: 100%; background: var(--accent); border-radius: 999px; transition: width .25s; }
+.choices-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.pick {
+  border: 0; background: var(--accent-soft); color: var(--ink);
+  border-radius: 999px; padding: 3px 10px; font-size: 14px; cursor: pointer;
+}
+
+main { padding: 20px 0 120px; }
+h1, h2 { font-family: var(--display); line-height: 1.2; text-wrap: balance; margin: 0 0 10px; }
+h1 { font-size: 30px; }
+h2 { font-size: 25px; }
+.context { font-size: 15px; color: var(--muted); margin: 0 0 6px; }
+.lead { margin: 0 0 18px; }
+
+.options { display: grid; gap: 10px; margin: 6px 0 16px; }
+.option {
+  display: flex; align-items: center; gap: 12px; text-align: left; width: 100%;
+  background: var(--surface); border: 2px solid var(--line); border-radius: 14px;
+  padding: 14px 16px; cursor: pointer; transition: opacity .2s, filter .2s, background .2s;
+}
+.option .t { font-weight: 700; display: block; }
+.option .s { font-size: 15px; color: var(--muted); display: block; }
+.option .mark {
+  flex: none; width: 26px; height: 26px; border-radius: 50%;
+  border: 2px solid var(--line); display: grid; place-items: center;
+}
+.option .mark svg { width: 15px; height: 15px; visibility: hidden; }
+.option.chosen { border-color: var(--accent); background: var(--accent-soft); }
+.option.chosen .mark { background: var(--accent); border-color: var(--accent); }
+.option.chosen .mark svg { visibility: visible; color: var(--accent-ink); }
+.options.has-choice .option:not(.chosen) { opacity: .38; filter: grayscale(1); background: transparent; }
+.options.has-choice .option:not(.chosen):hover { opacity: .65; }
+.option[disabled] { cursor: not-allowed; opacity: .38; filter: grayscale(1); background: transparent; }
+
+.next-hint {
+  border-left: 4px solid var(--accent); background: var(--surface);
+  padding: 12px 14px; border-radius: 0 12px 12px 0; margin: 4px 0 16px;
+}
+.next-hint b { display: block; }
+
+.block { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 16px; margin: 0 0 12px; }
+.block h3 { font-family: var(--display); font-size: 18px; margin: 0 0 8px; display: flex; gap: 8px; align-items: baseline; }
+.num {
+  flex: none; display: inline-grid; place-items: center; width: 24px; height: 24px; border-radius: 50%;
+  background: var(--accent); color: var(--accent-ink); font-size: 14px; font-family: var(--body);
+}
+.block ul { margin: 0; padding-left: 20px; }
+.block li + li { margin-top: 6px; }
+.small { font-size: 15px; color: var(--muted); margin: 8px 0 0; }
+
+.link-card {
+  display: flex; justify-content: space-between; align-items: center; gap: 10px;
+  text-decoration: none; color: var(--ink); border: 1px solid var(--line); border-radius: 10px;
+  padding: 10px 12px; background: var(--bg);
+}
+.link-card + .link-card { margin-top: 8px; }
+.link-card span:last-child { color: var(--accent); font-weight: 700; }
+
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip {
+  text-decoration: none; color: var(--accent); background: var(--accent-soft);
+  border-radius: 999px; padding: 6px 12px; font-size: 16px;
+}
+details { margin-top: 4px; }
+summary { cursor: pointer; color: var(--accent); font-weight: 700; }
+details .link-card { margin-top: 10px; }
+
+label.field { display: block; font-weight: 700; margin: 10px 0 4px; font-size: 16px; }
+input[type="text"], textarea, select {
+  width: 100%; border: 1px solid var(--line); background: var(--bg); border-radius: 10px;
+  padding: 10px 12px; font-size: 17px;
+}
+textarea { min-height: 110px; resize: vertical; }
+
+.checks { display: grid; gap: 8px; }
+.check { display: flex; gap: 10px; align-items: center; cursor: pointer; }
+.check input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.check .box {
+  flex: none; width: 24px; height: 24px; border-radius: 7px; border: 2px solid var(--line);
+  display: grid; place-items: center; background: var(--surface);
+}
+.check .box svg { width: 14px; height: 14px; visibility: hidden; }
+.check input:checked + .box { background: var(--done); border-color: var(--done); }
+.check input:checked + .box svg { visibility: visible; color: #fff; }
+.check input:focus-visible + .box { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+.btn {
+  border: 0; border-radius: 12px; padding: 12px 18px; font-weight: 700; cursor: pointer;
+  background: var(--accent); color: var(--accent-ink);
+}
+.btn.ghost { background: transparent; color: var(--accent); border: 2px solid var(--accent); }
+.btn.quiet { background: transparent; color: var(--muted); border: 1px solid var(--line); font-weight: 400; }
+.btn[disabled] { opacity: .35; cursor: not-allowed; }
+.row { display: flex; gap: 8px; flex-wrap: wrap; }
+
+nav.bottom {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 5;
+  background: var(--bg); border-top: 1px solid var(--line);
+  padding: 10px 0 calc(10px + env(safe-area-inset-bottom));
+}
+nav.bottom .wrap { display: flex; justify-content: space-between; gap: 10px; }
+nav.bottom .btn { flex: 1; }
+
+.overlay {
+  position: fixed; inset: 0; z-index: 10; background: rgba(10, 14, 24, .55);
+  display: none; align-items: flex-end; justify-content: center;
+}
+.overlay.open { display: flex; }
+.sheet {
+  background: var(--surface); width: 100%; max-width: 560px; max-height: 88%;
+  overflow-y: auto; border-radius: 18px 18px 0 0; padding: 18px 16px calc(18px + env(safe-area-inset-bottom));
+}
+.sheet-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.sheet-head h2 { margin: 0; font-size: 22px; }
+.source { border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; margin-bottom: 8px; background: var(--bg); }
+.source b { display: block; }
+.source .meta { font-size: 15px; color: var(--muted); }
+.empty { color: var(--muted); }
+.copybox { margin-top: 10px; display: none; }
+.copybox.show { display: block; }
+
+.note { background: var(--accent-soft); border-radius: 12px; padding: 12px 14px; margin: 0 0 12px; }
+.note b { display: block; }
+.warn { color: var(--ink); background: var(--surface); border: 2px dashed var(--line); border-radius: 10px; padding: 8px 12px; margin-top: 8px; font-size: 16px; }
+input.year { max-width: 140px; font-size: 20px; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <div class="top-row">
+      <div class="brand">Leonardo-intervjun</div>
+      <div class="top-tools">
+        <button class="tool" type="button" id="open-sources">Källor (<span id="src-count">0</span>)</button>
+        <button class="tool" type="button" id="open-stuck">Kört fast?</button>
+      </div>
+    </div>
+    <div class="progress"><span id="step-label">Steg 1 av 15</span><div class="bar"><span id="bar-fill" style="width:6%"></span></div></div>
+    <div class="choices-row" id="choices-row"></div>
+  </div>
+</header>
+
+<main><div class="wrap" id="view"></div></main>
+
+<nav class="bottom">
+  <div class="wrap">
+    <button class="btn quiet" type="button" id="back">Tillbaka</button>
+    <button class="btn" type="button" id="next">Nästa</button>
+  </div>
+</nav>
+
+<div class="overlay" id="sources-overlay" role="dialog" aria-modal="true" aria-labelledby="sources-title">
+  <div class="sheet">
+    <div class="sheet-head"><h2 id="sources-title">Mina källor</h2><button class="tool" type="button" data-close="sources-overlay">Stäng</button></div>
+    <p class="small">Lägg in varje sida direkt när du använder den. Du behöver det till del C.</p>
+    <form id="source-form">
+      <label class="field" for="s-title">Sidans rubrik</label>
+      <input type="text" id="s-title" required>
+      <label class="field" for="s-url">Länk</label>
+      <input type="text" id="s-url" inputmode="url" placeholder="https://www.so-rummet.se/...">
+      <label class="field" for="s-who">Vem har skrivit?</label>
+      <input type="text" id="s-who" placeholder="Står ofta efter ordet Text">
+      <label class="field" for="s-when">Publicerad eller uppdaterad</label>
+      <input type="text" id="s-when" placeholder="T.ex. uppdaterad 2026">
+      <label class="field" for="s-type">Typ av källa</label>
+      <select id="s-type">
+        <option>SO-rummets egen faktatext</option>
+        <option>Länk till en annan sajt</option>
+        <option>Film eller genomgång</option>
+        <option>Podd</option>
+      </select>
+      <label class="field" for="s-for">Skriven för vem?</label>
+      <select id="s-for">
+        <option>Står inte</option>
+        <option>Mellanstadiet</option>
+        <option>Högstadiet</option>
+        <option>Gymnasiet</option>
+        <option>Vuxna</option>
+      </select>
+      <label class="field" for="s-use">Vad använde du den till?</label>
+      <input type="text" id="s-use" placeholder="T.ex. kost och hälsa">
+      <div class="row" style="margin-top:12px"><button class="btn" type="submit">Spara källan</button></div>
+    </form>
+    <h3 style="font-family:var(--display);margin:20px 0 8px">Sparade källor</h3>
+    <div id="source-list"></div>
+  </div>
+</div>
+
+<div class="overlay" id="stuck-overlay" role="dialog" aria-modal="true" aria-labelledby="stuck-title">
+  <div class="sheet">
+    <div class="sheet-head"><h2 id="stuck-title">Kört fast?</h2><button class="tool" type="button" data-close="stuck-overlay">Stäng</button></div>
+    <ul>
+      <li>Byt sökord, inte ämne.</li>
+      <li>Ta nya ord från rutan <b>Ord och begrepp</b> på sidan du läser.</li>
+      <li>Klicka på en <b>relaterad tagg</b> längst ned på sidan.</li>
+      <li>Hittar du inget om ditt land? Läs om hela Europa, och skriv ner att du gjort det.</li>
+      <li>Fråga läraren.</li>
+    </ul>
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var SO = "https://www.so-rummet.se";
+  var P = {
+    leo: [SO + "/kategorier/leonardo-da-vinci", "Leonardo da Vinci (ämnessida)"],
+    leoArt: [SO + "/fakta-artiklar/leonardo-da-vinci-det-rastlosa-geniet", "Leonardo da Vinci – det rastlösa geniet"],
+    ren: [SO + "/kategorier/historia/nya-tiden/renassans-upptacktsresor-och-en-ny-varldsbild", "Renässans, upptäcktsresor och en ny världsbild"],
+    ital: [SO + "/kategorier/historia/varldens-lander-historia/europa-historia/italiens-historia", "Italiens historia"],
+    medici: [SO + "/fakta-artiklar/medici-renassansens-bankir", "Medici – renässansens bankir"],
+    med: [SO + "/kategorier/historia/medeltiden", "Medeltiden"],
+    liv: [SO + "/kategorier/historia/medeltiden/livet-pa-landet-och-i-staden-pa-medeltiden", "Livet på landet och i staden på medeltiden"],
+    kyr: [SO + "/kategorier/historia/medeltiden/kyrkan-och-klostren-pa-medeltiden", "Kyrkan och klostren på medeltiden"],
+    hum: [SO + "/kategorier/religion/icke-religiosa-livsaskadningar/humanism", "Humanism"],
+    lak: [SO + "/kategorier/historia/historiska-teman/historia-om-lakekonst-och-sjukdomar", "Historia om läkekonst och sjukdomar"],
+    sjuk: [SO + "/fakta-artiklar/sjukvard-och-sjukdomar-pa-medeltiden", "Sjukvård och sjukdomar på medeltiden"],
+    rel: [SO + "/kategorier/historia/historiska-teman/historia-om-relationer-karlek-och-sex", "Historia om relationer, kärlek och sex"],
+    datini: [SO + "/fakta-artiklar/margherita-och-francesco-datinis-karleksbrev-karlek-och-sorg-i-1300-talets-italien", "Margherita och Francesco Datinis kärleksbrev"],
+    kvinnor: [SO + "/fakta-artiklar/kvinnors-liv-under-medeltiden", "Kvinnors liv under medeltiden"],
+    hantverk: [SO + "/fakta-artiklar/hantverk-och-skran-pa-medeltiden", "Hantverk och skrån på medeltiden"],
+    mat: [SO + "/fakta-artiklar/mat-och-matvanor-under-antiken-och-medeltiden", "Mat och matvanor under antiken och medeltiden"],
+    perspektiv: [SO + "/content/perspektiv-pa-renassansen-mode-stilar-och-arkitektur", "Perspektiv på renässansen (Populär Historia)"],
+    kk: [SO + "/content/kallkritik-fyra-viktiga-kriterier", "Källkritik – fyra viktiga kriterier (film)"],
+    pod: [SO + "/podcast/historisk-kallkritik", "Historisk källkritik (podd)"]
+  };
+
+  var STEPS = ["start", "hitta", "plats", "land",
+    "klass", "kon2", "forsorjning", "kost", "halsa", "nojen", "religion", "karlek",
+    "b", "c", "klart"];
+  var TOPICS = { hitta: "Hitta Leonardo", land: "Land och tid", klass: "Samhällsklass", kon2: "Att vara man",
+    forsorjning: "Försörjning", kost: "Kost", halsa: "Hälsa", nojen: "Nöjen", religion: "Religion", karlek: "Livet och kärleken" };
+  var A_STEPS = ["klass", "kon2", "forsorjning", "kost", "halsa", "nojen", "religion", "karlek"];
+  var RANGE = { florens: [1467, 1481], milano: [1482, 1499] };
+  var CITY = { florens: "Florens", milano: "Milano" };
+
+  var KEY = "leonardo-sokguide-v1";
+  var fresh = function () {
+    return { step: 0, plats: null, year: "", notes: {}, checks: {}, pro: "", con: "", kallor: [] };
+  };
+  var state = fresh();
+  try {
+    var raw = localStorage.getItem(KEY);
+    if (raw) { var parsed = JSON.parse(raw); for (var k in parsed) { state[k] = parsed[k]; } }
+  } catch (e) { /* utan lagring fungerar sidan ändå */ }
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} }
+
+  function esc(s) {
+    return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+  }
+  var CHECK = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  function searchUrl(w) { return "https://www.google.com/search?q=" + encodeURIComponent("site:so-rummet.se " + w); }
+
+  function city() { return CITY[state.plats] || "Florens eller Milano"; }
+  function yearNum() { var y = parseInt(state.year, 10); return isNaN(y) ? null : y; }
+  function when() {
+    var y = yearNum();
+    if (y && !yearProblem()) { return "år " + y; }
+    return state.plats === "milano" ? "på 1490-talet" : (state.plats === "florens" ? "på 1470-talet" : "före år 1500");
+  }
+  function yearProblem() {
+    var y = yearNum();
+    if (!state.year.trim()) { return ""; }
+    if (y === null) { return "Skriv året med siffror, till exempel 1495."; }
+    if (y >= 1500) { return "Uppgiften slutar år 1500. Välj ett år före det."; }
+    if (y < 1452) { return "Leonardo var inte född då. Kolla när han föddes."; }
+    var r = RANGE[state.plats];
+    if (r && (y < r[0] || y > r[1])) { return "Det året bodde Leonardo troligen inte i " + city() + ". Kolla på SO-rummet var han var då."; }
+    return "";
+  }
+
+  /* ---------- Innehåll per steg ---------- */
+  function content(id) {
+    var mil = state.plats === "milano", flo = state.plats === "florens";
+    var c = { q: "", note: "", start: [], words: [], look: [], hint: null, hintNote: "" };
+    if (id === "hitta") {
+      c.q = "Vem var Leonardo da Vinci?";
+      c.start = [P.leo];
+      c.words = ["Leonardo da Vinci", "renässansen"];
+      c.look = ["När föddes han, och när dog han?", "Var föddes han?", "I vilka städer bodde och arbetade han?"];
+      c.hint = P.leoArt;
+    }
+    if (id === "land") {
+      c.q = "Hur såg Italien ut " + when() + "?";
+      c.note = "Leonardo var italienare. Men fanns Italien som land på hans tid? Ta reda på det.";
+      c.start = flo ? [P.ital, P.medici] : [P.ital, P.ren];
+      c.words = ["stadsstater", "Italiens historia", flo ? "Medici" : "Milano", "renässansen"];
+      c.look = ["Var Italien ett land, eller var det uppdelat?", "Vem styrde " + city() + " " + when() + "?", "Vilka andra makter fanns runt omkring?"];
+      c.hint = P.leoArt;
+    }
+    if (id === "klass") {
+      c.q = "Vilken samhällsklass tillhörde Leonardo?";
+      c.start = [P.leo, P.liv];
+      c.words = ["Leonardo da Vinci", "ståndssamhället", "borgare", "skrå"];
+      c.look = ["Vilka var hans föräldrar? Vad arbetade hans pappa med?", "Var föräldrarna gifta? Vad kunde det betyda på den tiden?", "Var han adelsman, borgare eller hantverkare?"];
+      if (flo) { c.look.push("Vad betydde det att vara lärling, och sedan mästare?"); c.words.push("lärling"); }
+      if (mil) { c.look.push("Vem arbetade han för, och vad betydde det att ha en mäktig beskyddare?"); }
+      c.hint = P.leoArt;
+    }
+    if (id === "kon2") {
+      c.q = "Hur påverkade det hans liv att han var man?";
+      c.start = [P.liv];
+      c.words = ["kvinnors liv", "lärling", "skrå", "förmyndare"];
+      c.look = ["Kunde en flicka ha blivit lärling hos en konstnär?", "Vilken utbildning och vilka yrken kunde kvinnor få?", "Vad hade varit annorlunda om Leonardo hade varit kvinna?"];
+      c.hint = P.kvinnor;
+    }
+    if (id === "forsorjning") {
+      c.q = flo ? "Hur försörjde sig en ung konstnär i Florens?" : "Hur försörjde sig Leonardo i Milano?";
+      c.start = [P.leo, P.leoArt];
+      c.words = flo ? ["verkstad", "lärling", "Verrocchio", "skrå"] : ["Ludovico Sforza", "ingenjör", "uppdrag"];
+      c.look = ["Vem betalade honom, och för vad?", "Vilka olika sorters arbete gjorde han?"];
+      if (flo) { c.look.push("Hur lång tid tog det innan han blev mästare?"); c.hint = P.hantverk; c.hintNote = "Artikeln handlar om svenska hantverkare. Vad gäller också i Florens, och vad gäller kanske inte?"; }
+      if (mil) { c.look.push("Hur säker var hans försörjning? Vad hände senare, år 1499?"); }
+    }
+    if (id === "kost") {
+      c.q = "Vad åt och drack Leonardo?";
+      c.note = "Om just Leonardos mat finns nog lite. Sök då om hur folk i hans samhällsklass åt, och låt honom berätta om det.";
+      c.start = [P.liv];
+      c.words = ["matvanor", "mat under medeltiden", "fasta"];
+      c.look = ["Vad åt vanligt folk, och vad åt de rika?", "Vilken grupp hörde Leonardo till när det gäller mat?", "Vad betydde kyrkans fastor för maten?"];
+      c.hint = P.mat;
+      c.hintNote = "Texten handlar om norra Europa. Gäller den också Italien?";
+    }
+    if (id === "halsa") {
+      c.q = "Hur var det med hälsan på Leonardos tid?";
+      c.start = [P.lak, P.leo];
+      c.words = ["anatomi", "dissektion", "läkekonst", "pest"];
+      c.look = ["Vad visste läkarna om kroppen?", "Hur tog Leonardo reda på hur kroppen fungerar?", "Vad tyckte kyrkan om att man undersökte döda kroppar?", "Vad hände om man blev sjuk?"];
+      if (mil) { c.look.push("Vad gjorde han med kroppen omkring år 1490?"); }
+      c.hint = P.sjuk;
+    }
+    if (id === "nojen") {
+      c.q = "Vad gjorde Leonardo när han inte arbetade?";
+      c.start = [P.leo, P.ren];
+      c.words = ["Leonardo da Vinci", "renässansmänniska", "musik", "fester"];
+      c.look = ["Vilka intressen hade han förutom måleriet?", "Vad studerade han bara för att han var nyfiken?", "Hur roade sig folk i en italiensk stad?"];
+      if (mil) { c.look.push("Hur var livet vid en furstes hov?"); }
+      c.hint = P.perspektiv;
+      c.hintNote = "Det här är en länk till en annan sajt. Skriv vem som står bakom i din källogg.";
+    }
+    if (id === "religion") {
+      c.q = "Hur påverkade religionen Leonardos liv?";
+      c.start = [P.kyr, P.hum];
+      c.words = ["Nattvarden", "altartavla", "humanism", "påven"];
+      c.look = ["Vilka av hans uppdrag kom från kyrkan eller ett kloster?", "Vad var humanismen?", "Hur påverkade kyrkan vanliga människors vardag?"];
+      if (mil) { c.look.push("Var målade han Nattvarden, och för vem?"); }
+      if (flo) { c.look.push("Vilka religiösa motiv målade han som ung?"); }
+      c.hint = P.leoArt;
+    }
+    if (id === "karlek") {
+      c.q = "Hur såg Leonardo på livet och kärleken?";
+      c.start = [P.rel, P.leo];
+      c.words = ["äktenskap", "giftermål", "hemgift", "renässansen"];
+      c.look = ["Vad står det om hans familj och syskon?", "Gifte sig Leonardo? Vad står det, och vad står det inte?", "Hur gick giftermål till på den här tiden?", "Vad verkar ha drivit honom i livet?"];
+      c.hint = P.datini;
+      c.hintNote = "Den handlar om Italien på 1300-talet. Kan du använda den för Leonardos tid? Ta upp det i del C.";
+    }
+    return c;
+  }
+
+  /* ---------- Rendering ---------- */
+  var view = document.getElementById("view");
+
+  function linkCard(p) {
+    return '<a class="link-card" href="' + esc(p[0]) + '" target="_blank" rel="noopener"><span>' + esc(p[1]) + '</span><span>Öppna</span></a>';
+  }
+  function option(group, value, title, sub) {
+    var chosen = state[group] === value;
+    return '<button type="button" class="option' + (chosen ? " chosen" : "") + '" data-choose="' + group + ":" + value + '" aria-pressed="' + (chosen ? "true" : "false") + '">' +
+      '<span class="mark">' + CHECK + '</span><span><span class="t">' + esc(title) + '</span>' +
+      (sub ? '<span class="s">' + esc(sub) + '</span>' : "") + "</span></button>";
+  }
+  function options(group, items) {
+    var h = '<div class="options' + (state[group] ? " has-choice" : "") + '" role="group">';
+    items.forEach(function (it) { h += option(group, it[0], it[1], it[2]); });
+    return h + "</div>";
+  }
+  function hint(title, text) { return '<div class="next-hint"><b>' + esc(title) + "</b>" + esc(text) + "</div>"; }
+  function check(id, text) {
+    var on = !!state.checks[id];
+    return '<label class="check"><input type="checkbox" data-check="' + id + '"' + (on ? " checked" : "") + '>' +
+      '<span class="box">' + CHECK + "</span><span>" + esc(text) + "</span></label>";
+  }
+
+  function searchSteps(id) {
+    var c = content(id), h = "";
+    h += '<p class="context">' + (A_STEPS.indexOf(id) > -1 ? "Del A · " : "") + esc(TOPICS[id]) + "</p>";
+    h += "<h2>" + esc(c.q) + "</h2>";
+    if (c.note) { h += '<div class="note">' + esc(c.note) + "</div>"; }
+    h += '<div class="block"><h3><span class="num">1</span>Börja här</h3>';
+    c.start.forEach(function (p) { h += linkCard(p); });
+    h += '<p class="small">Läs översikten och skrolla sedan ned till listan med artiklar.</p></div>';
+    h += '<div class="block"><h3><span class="num">2</span>Sök på</h3><div class="chips">';
+    c.words.forEach(function (w) { h += '<a class="chip" href="' + esc(searchUrl(w)) + '" target="_blank" rel="noopener">' + esc(w) + "</a>"; });
+    h += '</div><p class="small">Trycker du på ett ord söker du bara på SO-rummet.</p></div>';
+    h += '<div class="block"><h3><span class="num">3</span>Leta efter svar på</h3><ul>';
+    c.look.forEach(function (q) { h += "<li>" + esc(q) + "</li>"; });
+    h += "</ul>";
+    if (c.hint) {
+      h += "<details><summary>Ledtråd: en artikel att börja med</summary>" + linkCard(c.hint) +
+        (c.hintNote ? '<p class="small">' + esc(c.hintNote) + "</p>" : "") + "</details>";
+    }
+    h += "</div>";
+    h += '<div class="block"><h3><span class="num">4</span>Skriv med egna ord</h3>' +
+      '<textarea id="note-' + id + '" data-note="' + id + '" aria-label="Anteckningar om ' + esc(TOPICS[id]) + '" placeholder="Det viktigaste jag hittade...">' + esc(state.notes[id] || "") + "</textarea>" +
+      '<div class="row" style="margin-top:10px"><button class="btn ghost" type="button" data-open-sources>Lägg till källa</button></div></div>';
+    h += '<div class="block"><h3>Klart när du har</h3><div class="checks">' +
+      check(id + "-read", "läst minst en text") + check(id + "-note", "skrivit med egna ord") + check(id + "-src", "lagt in källan") +
+      "</div></div>";
+    return h;
+  }
+
+  function render() {
+    var id = STEPS[state.step];
+    var h = "";
+
+    if (id === "start") {
+      h += "<h1>Sökguide: intervjun med Leonardo da Vinci</h1>";
+      h += '<p class="lead">Du har valt att intervjua Leonardo da Vinci. Guiden visar hur du hittar fakta om honom och hans tid på SO-rummet. Svaren hittar du själv.</p>';
+      h += '<div class="block"><h3>Så här går det till</h3><ul>' +
+        "<li>Ta reda på vem han var.</li><li>Välj var och när du träffar honom.</li>" +
+        "<li>Sök på SO-rummet, ett ämne i taget.</li><li>Skriv ner med egna ord.</li>" +
+        "<li>Lägg in varje källa under <b>Källor</b> uppe till höger.</li></ul>" +
+        '<p class="small">Det du skriver sparas i den här webbläsaren.</p></div>';
+      h += '<div class="row"><button class="btn quiet" type="button" id="reset">Börja om från noll</button></div>';
+    }
+
+    if (id === "hitta") {
+      h += searchSteps("hitta");
+      h += '<div class="next-hint"><b>Viktigt</b>Uppgiften gäller åren 500–1500. Din intervju måste alltså ske före år 1500.</div>';
+    }
+
+    if (id === "plats") {
+      h += "<h2>Var och när träffar du honom?</h2>";
+      h += '<p class="lead">Välj den del av hans liv som du vill skriva om. Båda ligger före år 1500.</p>';
+      h += options("plats", [
+        ["florens", "Florens, 1470-talet", "Ung konstnär som lär sig i en verkstad"],
+        ["milano", "Milano, 1490-talet", "Arbetar för stadens härskare"]
+      ]);
+      if (state.plats) {
+        var r = RANGE[state.plats];
+        h += '<div class="block"><h3><span class="num">1</span>Välj ett exakt år</h3>' +
+          '<p style="margin:0 0 8px">Läs vad Leonardo gjorde i ' + esc(city()) + " och välj ett år mellan " + r[0] + " och " + r[1] + ".</p>" +
+          linkCard(P.leoArt) +
+          '<label class="field" for="year">År</label><input class="year" type="text" inputmode="numeric" id="year" data-field="year" value="' + esc(state.year) + '" placeholder="T.ex. ' + (r[0] + 6) + '">' +
+          '<div id="year-warn">' + (yearProblem() ? '<div class="warn">' + esc(yearProblem()) + "</div>" : "") + "</div>" +
+          '<label class="field" for="note-plats">Vad gjorde han det året?</label>' +
+          '<textarea id="note-plats" data-note="plats" placeholder="Med egna ord...">' + esc(state.notes.plats || "") + "</textarea></div>";
+        h += '<div class="next-hint"><b>Nästa steg</b><span id="when-text">Ta reda på hur Italien såg ut ' + esc(when()) + ".</span></div>";
+      }
+    }
+
+    if (id === "land") { h += searchSteps("land"); }
+    if (A_STEPS.indexOf(id) > -1) { h += searchSteps(id); }
+
+    if (id === "b") {
+      h += '<p class="context">Del B</p>';
+      h += "<h2>Skulle du vilja byta liv med Leonardo?</h2>";
+      h += '<div class="block"><h3><span class="num">1</span>Leta efter båda sidor</h3><ul>' +
+        "<li>Han var berömd. Hade livet varit lika bra för en vanlig person i " + esc(city()) + "?</li>" +
+        "<li>Läs vad som hände med honom när en beskyddare förlorade makten.</li>" +
+        '<li>Medeltiden var inte bara mörk. Läs avsnittet om det på <a href="' + P.med[0] + '" target="_blank" rel="noopener">Medeltiden</a>.</li>' +
+        "<li>Jämför med i dag: vad hade varit bättre, och vad hade varit svårare?</li></ul></div>";
+      h += '<div class="block"><h3><span class="num">2</span>Skriv för och emot</h3>' +
+        '<label class="field" for="pro">För: det här hade varit bra</label><textarea id="pro" data-field="pro">' + esc(state.pro) + "</textarea>" +
+        '<label class="field" for="con">Emot: det här hade varit svårt</label><textarea id="con" data-field="con">' + esc(state.con) + "</textarea>" +
+        '<p class="small">Varje punkt ska bygga på något du läst.</p></div>';
+    }
+
+    if (id === "c") {
+      h += '<p class="context">Del C</p>';
+      h += "<h2>Granska dina källor</h2>";
+      h += '<div class="block"><h3><span class="num">1</span>Dina källor</h3><div id="c-list"></div>' +
+        '<div class="row" style="margin-top:10px"><button class="btn ghost" type="button" data-open-sources>Lägg till källa</button></div></div>';
+      h += '<div class="block"><h3><span class="num">2</span>Fråga varje källa</h3><ul>' +
+        "<li><b>Äkthet:</b> Vem står bakom?</li><li><b>Tid:</b> När skrevs den? Är den uppdaterad?</li>" +
+        "<li><b>Beroende:</b> Bygger den på andra texter? Står samma meningar på flera sidor?</li>" +
+        "<li><b>Tendens:</b> Vill någon påverka dig?</li><li><b>Målgrupp:</b> Är den skriven för yngre elever?</li></ul></div>";
+      h += '<div class="block"><h3><span class="num">3</span>Tänk särskilt på</h3><ul>' +
+        "<li>SO-rummet har två texter om Leonardo. Jämför dem. Säger de samma sak? Vem har skrivit dem, och när?</li>" +
+        "<li>Leonardo dyker upp både under medeltiden och under renässansen på SO-rummet. Varför tror du det?</li>" +
+        "<li>Flera länkar går till andra sajter. Vem står bakom dem?</li>" +
+        "<li>Använde du texter om Sverige eller om en annan tid? Säg det.</li></ul></div>";
+      h += '<div class="block"><h3><span class="num">4</span>Kom ihåg</h3><ul>' +
+        "<li>SO-rummet är en sekundärkälla. Ingen där har träffat Leonardo.</li>" +
+        "<li>Skriv både styrkor och svagheter.</li><li>Kolla minst en sak i läroboken.</li></ul>" +
+        "<details><summary>Lär dig mer om källkritik</summary>" + linkCard(P.kk) + linkCard(P.pod) + "</details></div>";
+    }
+
+    if (id === "klart") {
+      h += "<h2>Innan du lämnar in</h2>";
+      h += '<div class="block"><div class="checks">' +
+        check("f-a", "Del A: land, tid och alla punkter om Leonardo") + check("f-b", "Del B: för och emot, med egna ord") +
+        check("f-c", "Del C: styrkor och svagheter hos källorna") + check("f-src", "Källorna står med") +
+        "</div></div>";
+      h += '<div class="block"><h3>Ta med dig allt du skrivit</h3><p class="small" style="margin-top:0">Kopiera och klistra in i ditt dokument. Där skriver du sedan själva intervjun.</p>' +
+        '<div class="row" style="margin-top:10px"><button class="btn" type="button" id="copy-all">Kopiera allt</button></div>' +
+        '<div class="copybox" id="copybox"><label class="field" for="copytext">Markera och kopiera</label><textarea id="copytext" readonly></textarea></div></div>';
+    }
+
+    view.innerHTML = h;
+    updateChrome();
+    if (id === "c") { renderSourceList(document.getElementById("c-list"), false); }
+  }
+
+  function canGoNext() {
+    if (STEPS[state.step] === "plats") { return !!state.plats; }
+    return state.step < STEPS.length - 1;
+  }
+
+  function updateChrome() {
+    var n = STEPS.length;
+    document.getElementById("step-label").textContent = "Steg " + (state.step + 1) + " av " + n;
+    document.getElementById("bar-fill").style.width = Math.round(((state.step + 1) / n) * 100) + "%";
+    document.getElementById("back").disabled = state.step === 0;
+    var next = document.getElementById("next");
+    next.disabled = !canGoNext();
+    next.textContent = STEPS[state.step] === "start" ? "Börja" : (state.step === n - 1 ? "Klart" : "Nästa");
+    document.getElementById("src-count").textContent = state.kallor.length;
+    var row = document.getElementById("choices-row");
+    var picks = [];
+    if (state.step > 0) { picks.push(["hitta", "Leonardo da Vinci"]); }
+    if (state.plats) { picks.push(["plats", city() + (yearNum() && !yearProblem() ? " " + yearNum() : "")]); }
+    row.innerHTML = picks.map(function (p) {
+      return '<button type="button" class="pick" data-goto="' + p[0] + '">' + esc(p[1]) + "</button>";
+    }).join("");
+  }
+
+  function go(i) {
+    state.step = Math.max(0, Math.min(STEPS.length - 1, i));
+    save(); render();
+    window.scrollTo(0, 0);
+  }
+
+  /* ---------- Händelser ---------- */
+  view.addEventListener("click", function (e) {
+    var t = e.target.closest("[data-choose],[data-open-sources],#reset,#copy-all");
+    if (!t) { return; }
+    if (t.hasAttribute("data-choose")) {
+      var parts = t.getAttribute("data-choose").split(":");
+      if (state[parts[0]] !== parts[1]) { state[parts[0]] = parts[1]; state.year = ""; }
+      save(); render();
+      return;
+    }
+    if (t.hasAttribute("data-open-sources")) { openOverlay("sources-overlay"); return; }
+    if (t.id === "reset") {
+      if (t.getAttribute("data-armed") === "1") { state = fresh(); save(); render(); }
+      else { t.setAttribute("data-armed", "1"); t.textContent = "Tryck igen för att radera allt"; }
+      return;
+    }
+    if (t.id === "copy-all") { copyAll(); }
+  });
+
+  view.addEventListener("input", function (e) {
+    var t = e.target;
+    if (t.hasAttribute("data-field")) {
+      state[t.getAttribute("data-field")] = t.value; save();
+      if (t.getAttribute("data-field") === "year") {
+        var p = yearProblem();
+        document.getElementById("year-warn").innerHTML = p ? '<div class="warn">' + esc(p) + "</div>" : "";
+        var wt = document.getElementById("when-text");
+        if (wt) { wt.textContent = "Ta reda på hur Italien såg ut " + when() + "."; }
+        updateChrome();
+      }
+    }
+    if (t.hasAttribute("data-note")) { state.notes[t.getAttribute("data-note")] = t.value; save(); }
+  });
+  view.addEventListener("change", function (e) {
+    var t = e.target;
+    if (t.hasAttribute("data-check")) { state.checks[t.getAttribute("data-check")] = t.checked; save(); }
+  });
+
+  document.getElementById("next").addEventListener("click", function () { if (canGoNext()) { go(state.step + 1); } });
+  document.getElementById("back").addEventListener("click", function () { go(state.step - 1); });
+  document.getElementById("choices-row").addEventListener("click", function (e) {
+    var t = e.target.closest("[data-goto]");
+    if (t) { go(STEPS.indexOf(t.getAttribute("data-goto"))); }
+  });
+
+  /* ---------- Källor ---------- */
+  function openOverlay(id) {
+    if (id === "sources-overlay") { renderSourceList(document.getElementById("source-list"), true); }
+    document.getElementById(id).classList.add("open");
+  }
+  function closeOverlay(id) {
+    document.getElementById(id).classList.remove("open");
+    if (STEPS[state.step] === "c") { renderSourceList(document.getElementById("c-list"), false); }
+  }
+  document.getElementById("open-sources").addEventListener("click", function () { openOverlay("sources-overlay"); });
+  document.getElementById("open-stuck").addEventListener("click", function () { openOverlay("stuck-overlay"); });
+  document.querySelectorAll("[data-close]").forEach(function (b) {
+    b.addEventListener("click", function () { closeOverlay(b.getAttribute("data-close")); });
+  });
+  document.querySelectorAll(".overlay").forEach(function (o) {
+    o.addEventListener("click", function (e) { if (e.target === o) { closeOverlay(o.id); } });
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") { document.querySelectorAll(".overlay.open").forEach(function (o) { closeOverlay(o.id); }); }
+  });
+
+  function renderSourceList(el, editable) {
+    if (!el) { return; }
+    if (!state.kallor.length) { el.innerHTML = '<p class="empty">Inga källor än.</p>'; return; }
+    el.innerHTML = state.kallor.map(function (s, i) {
+      return '<div class="source"><b>' + esc(s.title) + "</b>" +
+        '<div class="meta">' + esc([s.who || "Okänd skribent", s.when, s.type, "För: " + s.for].filter(Boolean).join(" · ")) + "</div>" +
+        (s.use ? '<div class="meta">Använd till: ' + esc(s.use) + "</div>" : "") +
+        (s.url ? '<div class="meta"><a href="' + esc(s.url) + '" target="_blank" rel="noopener">Öppna sidan</a></div>' : "") +
+        (editable ? '<div class="row" style="margin-top:6px"><button type="button" class="btn quiet" data-del="' + i + '">Ta bort</button></div>' : "") +
+        "</div>";
+    }).join("");
+  }
+  document.getElementById("source-list").addEventListener("click", function (e) {
+    var t = e.target.closest("[data-del]");
+    if (!t) { return; }
+    state.kallor.splice(Number(t.getAttribute("data-del")), 1);
+    save(); renderSourceList(document.getElementById("source-list"), true); updateChrome();
+  });
+  document.getElementById("source-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var v = function (id) { return document.getElementById(id).value.trim(); };
+    if (!v("s-title")) { document.getElementById("s-title").focus(); return; }
+    state.kallor.push({ title: v("s-title"), url: v("s-url"), who: v("s-who"), when: v("s-when"),
+      type: v("s-type"), for: v("s-for"), use: v("s-use") });
+    save();
+    ["s-title", "s-url", "s-who", "s-when", "s-use"].forEach(function (id) { document.getElementById(id).value = ""; });
+    renderSourceList(document.getElementById("source-list"), true);
+    updateChrome();
+  });
+
+  /* ---------- Kopiera allt ---------- */
+  function buildText() {
+    var out = [];
+    out.push("INTERVJUN MED LEONARDO DA VINCI – MINA ANTECKNINGAR", "");
+    out.push("Plats och tid: " + city() + ", " + when());
+    if ((state.notes.plats || "").trim()) { out.push("Vad han gjorde då: " + state.notes.plats.trim()); }
+    ["hitta", "land"].concat(A_STEPS).forEach(function (id) {
+      out.push("", TOPICS[id].toUpperCase(), (state.notes[id] || "").trim() || "(inget skrivet än)");
+    });
+    out.push("", "DEL B", "För:", state.pro.trim() || "(inget skrivet än)", "Emot:", state.con.trim() || "(inget skrivet än)");
+    out.push("", "KÄLLOR");
+    if (!state.kallor.length) { out.push("(inga källor än)"); }
+    state.kallor.forEach(function (s, i) {
+      out.push((i + 1) + ". " + [s.title, s.url, s.who, s.when, s.type, "för " + s.for].filter(Boolean).join(" – ") + (s.use ? " (använd till: " + s.use + ")" : ""));
+    });
+    return out.join("\n");
+  }
+  function copyAll() {
+    var text = buildText();
+    var box = document.getElementById("copybox"), ta = document.getElementById("copytext"), btn = document.getElementById("copy-all");
+    var fallback = function () { ta.value = text; box.classList.add("show"); ta.focus(); ta.select(); };
+    try { navigator.clipboard.writeText(text).then(function () { btn.textContent = "Kopierat!"; }, fallback); }
+    catch (e) { fallback(); }
+  }
+
+  if (typeof state.step !== "number" || state.step < 0 || state.step >= STEPS.length) { state.step = 0; }
+  render();
+})();
+</script>
+
+</body>
+</html>
