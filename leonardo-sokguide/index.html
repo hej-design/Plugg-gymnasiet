@@ -253,7 +253,7 @@ input.year { max-width: 140px; font-size: 20px; }
       <label class="field" for="s-type">Typ av källa</label>
       <select id="s-type">
         <option>SO-rummets egen faktatext</option>
-        <option>Länk till en annan sajt</option>
+        <option>Ämnessida på SO-rummet</option>
         <option>Film eller genomgång</option>
         <option>Podd</option>
       </select>
@@ -281,7 +281,8 @@ input.year { max-width: 140px; font-size: 20px; }
       <li>Byt sökord, inte ämne.</li>
       <li>Ta nya ord från rutan <b>Ord och begrepp</b> på sidan du läser.</li>
       <li>Klicka på en <b>relaterad tagg</b> längst ned på sidan.</li>
-      <li>Hittar du inget om ditt land? Läs om hela Europa, och skriv ner att du gjort det.</li>
+      <li>Hittar du inget om just Leonardo? Sök om hans tid, hans stad eller hans samhällsklass.</li>
+      <li>Stanna på SO-rummet. Leta i listan med artiklar längst ned på ämnessidorna.</li>
       <li>Fråga läraren.</li>
     </ul>
   </div>
@@ -309,7 +310,6 @@ input.year { max-width: 140px; font-size: 20px; }
     kvinnor: [SO + "/fakta-artiklar/kvinnors-liv-under-medeltiden", "Kvinnors liv under medeltiden"],
     hantverk: [SO + "/fakta-artiklar/hantverk-och-skran-pa-medeltiden", "Hantverk och skrån på medeltiden"],
     mat: [SO + "/fakta-artiklar/mat-och-matvanor-under-antiken-och-medeltiden", "Mat och matvanor under antiken och medeltiden"],
-    perspektiv: [SO + "/content/perspektiv-pa-renassansen-mode-stilar-och-arkitektur", "Perspektiv på renässansen (Populär Historia)"],
     kk: [SO + "/content/kallkritik-fyra-viktiga-kriterier", "Källkritik – fyra viktiga kriterier (film)"],
     pod: [SO + "/podcast/historisk-kallkritik", "Historisk källkritik (podd)"]
   };
@@ -426,8 +426,7 @@ input.year { max-width: 140px; font-size: 20px; }
       c.words = ["Leonardo da Vinci", "renässansmänniska", "musik", "fester"];
       c.look = ["Vilka intressen hade han förutom måleriet?", "Vad studerade han bara för att han var nyfiken?", "Hur roade sig folk i en italiensk stad?"];
       if (mil) { c.look.push("Hur var livet vid en furstes hov?"); }
-      c.hint = P.perspektiv;
-      c.hintNote = "Det här är en länk till en annan sajt. Skriv vem som står bakom i din källogg.";
+      c.hint = P.leoArt;
     }
     if (id === "religion") {
       c.q = "Hur påverkade religionen Leonardos liv?";
@@ -510,7 +509,7 @@ input.year { max-width: 140px; font-size: 20px; }
       h += '<p class="lead">Du har valt att intervjua Leonardo da Vinci. Guiden visar hur du hittar fakta om honom och hans tid på SO-rummet. Svaren hittar du själv.</p>';
       h += '<div class="block"><h3>Så här går det till</h3><ul>' +
         "<li>Ta reda på vem han var.</li><li>Välj var och när du träffar honom.</li>" +
-        "<li>Sök på SO-rummet, ett ämne i taget.</li><li>Skriv ner med egna ord.</li>" +
+        "<li>Sök bara på SO-rummet, ett ämne i taget.</li><li>Skriv ner med egna ord.</li>" +
         "<li>Lägg in varje källa under <b>Källor</b> uppe till höger.</li></ul>" +
         '<p class="small">Det du skriver sparas i den här webbläsaren.</p></div>';
       h += '<div class="row"><button class="btn quiet" type="button" id="reset">Börja om från noll</button></div>';
@@ -570,11 +569,11 @@ input.year { max-width: 140px; font-size: 20px; }
       h += '<div class="block"><h3><span class="num">3</span>Tänk särskilt på</h3><ul>' +
         "<li>SO-rummet har två texter om Leonardo. Jämför dem. Säger de samma sak? Vem har skrivit dem, och när?</li>" +
         "<li>Leonardo dyker upp både under medeltiden och under renässansen på SO-rummet. Varför tror du det?</li>" +
-        "<li>Flera länkar går till andra sajter. Vem står bakom dem?</li>" +
+        "<li>En del poster på SO-rummet länkar vidare till andra sajter. Använd bara SO-rummets egna texter.</li>" +
         "<li>Använde du texter om Sverige eller om en annan tid? Säg det.</li></ul></div>";
       h += '<div class="block"><h3><span class="num">4</span>Kom ihåg</h3><ul>' +
         "<li>SO-rummet är en sekundärkälla. Ingen där har träffat Leonardo.</li>" +
-        "<li>Skriv både styrkor och svagheter.</li><li>Kolla minst en sak i läroboken.</li></ul>" +
+        "<li>Skriv både styrkor och svagheter.</li><li>Kolla en viktig uppgift i två olika SO-rummet-texter.</li></ul>" +
         "<details><summary>Lär dig mer om källkritik</summary>" + linkCard(P.kk) + linkCard(P.pod) + "</details></div>";
     }
 
