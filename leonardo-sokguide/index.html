@@ -203,6 +203,8 @@ nav.bottom .btn { flex: 1; }
 .copybox { margin-top: 10px; display: none; }
 .copybox.show { display: block; }
 
+.extra-h { font-family: var(--display); font-size: 17px; margin: 16px 0 8px; }
+.extra-row { margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--line); }
 .note { background: var(--accent-soft); border-radius: 12px; padding: 12px 14px; margin: 0 0 12px; }
 .note b { display: block; }
 .warn { color: var(--ink); background: var(--surface); border: 2px dashed var(--line); border-radius: 10px; padding: 8px 12px; margin-top: 8px; font-size: 16px; }
@@ -254,6 +256,7 @@ input.year { max-width: 140px; font-size: 20px; }
       <select id="s-type">
         <option>SO-rummets egen faktatext</option>
         <option>Ämnessida på SO-rummet</option>
+        <option>Annan sajt</option>
         <option>Film eller genomgång</option>
         <option>Podd</option>
       </select>
@@ -274,6 +277,31 @@ input.year { max-width: 140px; font-size: 20px; }
   </div>
 </div>
 
+<div class="overlay" id="extra-overlay" role="dialog" aria-modal="true" aria-labelledby="extra-title">
+  <div class="sheet">
+    <div class="sheet-head"><h2 id="extra-title">Fler källor</h2><button class="tool" type="button" data-close="extra-overlay">Stäng</button></div>
+    <div class="note">De här ligger utanför SO-rummet. Fråga läraren om du får använda dem i uppgiften.</div>
+    <h3 class="extra-h">Lyssna</h3>
+    <a class="link-card" href="https://www.sverigesradio.se/poddar/da-vinci-avkodad" target="_blank" rel="noopener"><span>Da Vinci – Avkodad (Sveriges Radio)</span><span>Öppna</span></a>
+    <a class="link-card" href="https://www.sverigesradio.se/avsnitt/historierummet-da-vinci-konstnarsgeniet-som-aldrig-blev-klar" target="_blank" rel="noopener"><span>Historierummet: Da Vinci (Sveriges Radio)</span><span>Öppna</span></a>
+    <h3 class="extra-h">Läsa på svenska</h3>
+    <a class="link-card" href="https://popularhistoria.se/civilisationer/stader/en-gata-i-milano/" target="_blank" rel="noopener"><span>En gata i Milano (Populär Historia)</span><span>Öppna</span></a>
+    <a class="link-card" href="https://popularhistoria.se/vardagsliv/turism/historiska-resmal-fantastiska-florens" target="_blank" rel="noopener"><span>Historiska resmål: Florens (Populär Historia)</span><span>Öppna</span></a>
+    <a class="link-card" href="https://popularhistoria.se/samhalle/perspektiv-pa-renassansen/" target="_blank" rel="noopener"><span>Renässansen revolutionerade kulturen (Populär Historia)</span><span>Öppna</span></a>
+    <a class="link-card" href="https://sv.wikipedia.org/wiki/Leonardo_da_Vinci" target="_blank" rel="noopener"><span>Leonardo da Vinci (Wikipedia)</span><span>Öppna</span></a>
+    <a class="link-card" href="https://sv.wikipedia.org/wiki/Nattvarden" target="_blank" rel="noopener"><span>Nattvarden (Wikipedia)</span><span>Öppna</span></a>
+    <h3 class="extra-h">På engelska</h3>
+    <a class="link-card" href="https://www.britannica.com/summary/Leonardo-da-Vinci" target="_blank" rel="noopener"><span>Leonardo da Vinci (Britannica)</span><span>Öppna</span></a>
+    <a class="link-card" href="https://www.worldhistory.org/Leonardo_da_Vinci/" target="_blank" rel="noopener"><span>Leonardo da Vinci (World History Encyclopedia)</span><span>Öppna</span></a>
+    <h3 class="extra-h">Tänk på</h3>
+    <ul>
+      <li>Lägg in varje källa du använder i källoggen.</li>
+      <li>Wikipedia kan alla redigera. Kolla uppgifterna mot SO-rummet.</li>
+      <li>Säger två källor olika saker? Skriv om det i del C.</li>
+    </ul>
+  </div>
+</div>
+
 <div class="overlay" id="stuck-overlay" role="dialog" aria-modal="true" aria-labelledby="stuck-title">
   <div class="sheet">
     <div class="sheet-head"><h2 id="stuck-title">Kört fast?</h2><button class="tool" type="button" data-close="stuck-overlay">Stäng</button></div>
@@ -282,7 +310,7 @@ input.year { max-width: 140px; font-size: 20px; }
       <li>Ta nya ord från rutan <b>Ord och begrepp</b> på sidan du läser.</li>
       <li>Klicka på en <b>relaterad tagg</b> längst ned på sidan.</li>
       <li>Hittar du inget om just Leonardo? Sök om hans tid, hans stad eller hans samhällsklass.</li>
-      <li>Stanna på SO-rummet. Leta i listan med artiklar längst ned på ämnessidorna.</li>
+      <li>Börja alltid på SO-rummet. Leta i listan med artiklar längst ned på ämnessidorna.</li>
       <li>Fråga läraren.</li>
     </ul>
   </div>
@@ -509,7 +537,7 @@ input.year { max-width: 140px; font-size: 20px; }
       h += '<p class="lead">Du har valt att intervjua Leonardo da Vinci. Guiden visar hur du hittar fakta om honom och hans tid på SO-rummet. Svaren hittar du själv.</p>';
       h += '<div class="block"><h3>Så här går det till</h3><ul>' +
         "<li>Ta reda på vem han var.</li><li>Välj var och när du träffar honom.</li>" +
-        "<li>Sök bara på SO-rummet, ett ämne i taget.</li><li>Skriv ner med egna ord.</li>" +
+        "<li>Sök på SO-rummet, ett ämne i taget.</li><li>Skriv ner med egna ord.</li>" +
         "<li>Lägg in varje källa under <b>Källor</b> uppe till höger.</li></ul>" +
         '<p class="small">Det du skriver sparas i den här webbläsaren.</p></div>';
       h += '<div class="row"><button class="btn quiet" type="button" id="reset">Börja om från noll</button></div>';
@@ -569,7 +597,7 @@ input.year { max-width: 140px; font-size: 20px; }
       h += '<div class="block"><h3><span class="num">3</span>Tänk särskilt på</h3><ul>' +
         "<li>SO-rummet har två texter om Leonardo. Jämför dem. Säger de samma sak? Vem har skrivit dem, och när?</li>" +
         "<li>Leonardo dyker upp både under medeltiden och under renässansen på SO-rummet. Varför tror du det?</li>" +
-        "<li>En del poster på SO-rummet länkar vidare till andra sajter. Använd bara SO-rummets egna texter.</li>" +
+        "<li>En del poster på SO-rummet länkar vidare till andra sajter. Skriv i källoggen var texten egentligen kommer ifrån.</li>" +
         "<li>Använde du texter om Sverige eller om en annan tid? Säg det.</li></ul></div>";
       h += '<div class="block"><h3><span class="num">4</span>Kom ihåg</h3><ul>' +
         "<li>SO-rummet är en sekundärkälla. Ingen där har träffat Leonardo.</li>" +
@@ -588,6 +616,7 @@ input.year { max-width: 140px; font-size: 20px; }
         '<div class="copybox" id="copybox"><label class="field" for="copytext">Markera och kopiera</label><textarea id="copytext" readonly></textarea></div></div>';
     }
 
+    h += '<div class="extra-row"><button class="btn quiet" type="button" data-open-extra>Fler källor utanför SO-rummet</button></div>';
     view.innerHTML = h;
     updateChrome();
     if (id === "c") { renderSourceList(document.getElementById("c-list"), false); }
@@ -624,7 +653,7 @@ input.year { max-width: 140px; font-size: 20px; }
 
   /* ---------- Händelser ---------- */
   view.addEventListener("click", function (e) {
-    var t = e.target.closest("[data-choose],[data-open-sources],#reset,#copy-all");
+    var t = e.target.closest("[data-choose],[data-open-sources],[data-open-extra],#reset,#copy-all");
     if (!t) { return; }
     if (t.hasAttribute("data-choose")) {
       var parts = t.getAttribute("data-choose").split(":");
@@ -633,6 +662,7 @@ input.year { max-width: 140px; font-size: 20px; }
       return;
     }
     if (t.hasAttribute("data-open-sources")) { openOverlay("sources-overlay"); return; }
+    if (t.hasAttribute("data-open-extra")) { openOverlay("extra-overlay"); return; }
     if (t.id === "reset") {
       if (t.getAttribute("data-armed") === "1") { state = fresh(); save(); render(); }
       else { t.setAttribute("data-armed", "1"); t.textContent = "Tryck igen för att radera allt"; }
