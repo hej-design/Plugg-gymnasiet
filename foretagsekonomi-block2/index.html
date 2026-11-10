@@ -165,6 +165,7 @@ details.notes .nb p{margin:6px 0}
 .case{background:var(--card); border:2px solid var(--ink); border-radius:6px; padding:14px 16px; margin:0 0 22px; box-shadow:5px 5px 0 var(--tab)}
 .case h3{font-family:var(--head); font-size:1.25rem; margin:0}
 .case .kap{font-size:.85rem; color:var(--soft); margin:0 0 8px}
+.case .xtra{font-family:var(--hand); font-size:1.15rem; color:var(--red); font-weight:700; margin-left:6px}
 .bg{background:var(--paper); border-radius:6px; padding:10px 12px; margin:8px 0 12px}
 .bg p{margin:4px 0}
 .part{border-top:1.5px dashed var(--line); padding:12px 0 4px}
@@ -236,9 +237,9 @@ footer{margin-top:40px; font-size:.85rem; color:var(--soft)}
       <h3>Fyra pass till provet</h3>
       <p class="small" style="margin:0 0 6px">Ungefär 45–60 minuter per pass. Börja varje kapitel med snabbkollen. Klarar du alla tre frågorna kan du skumma texten och gå direkt till caset.</p>
       <ol class="steps" id="passes">
-        <li><b>Pass 1: Affärsidén.</b> Läs <button class="lnk" data-go="3">kapitel 3</button> och gör caset <button class="lnk" data-gocase="c1">Bowl &amp; Go</button>. <span class="t">ca 50 min</span><label class="done"><input type="checkbox" data-pass="1"> Klart</label></li>
-        <li><b>Pass 2: Företagsformerna.</b> Läs <button class="lnk" data-go="4">kapitel 4</button> och gör caset <button class="lnk" data-gocase="c2">Nyskick</button>. <span class="t">ca 50 min</span><label class="done"><input type="checkbox" data-pass="2"> Klart</label></li>
-        <li><b>Pass 3: Pengar och ledarskap.</b> Läs <button class="lnk" data-go="5">kapitel 5</button> och gör caset <button class="lnk" data-gocase="c3">Nyskick ett år senare</button>. Läs sedan <button class="lnk" data-go="6">kapitel 6</button>, med fokus på ledarstilarna, teori X och Y och diskrimineringslagen. <span class="t">ca 60 min</span><label class="done"><input type="checkbox" data-pass="3"> Klart</label></li>
+        <li><b>Pass 1: Affärsidén.</b> Läs <button class="lnk" data-go="3">kapitel 3</button> och gör caset <button class="lnk" data-gocase="c1">Bowl &amp; Go</button>. Hinner du mer: <button class="lnk" data-gocase="c4">Cykelkollen</button> eller <button class="lnk" data-gocase="c5">Ekbackens gårdsbutik</button>. <span class="t">ca 50 min</span><label class="done"><input type="checkbox" data-pass="1"> Klart</label></li>
+        <li><b>Pass 2: Företagsformerna.</b> Läs <button class="lnk" data-go="4">kapitel 4</button> och gör caset <button class="lnk" data-gocase="c2">Nyskick</button>. Hinner du mer: <button class="lnk" data-gocase="c6">Snickare Samir</button> eller <button class="lnk" data-gocase="c7">Byns butik</button>. <span class="t">ca 50 min</span><label class="done"><input type="checkbox" data-pass="2"> Klart</label></li>
+        <li><b>Pass 3: Pengar och ledarskap.</b> Läs <button class="lnk" data-go="5">kapitel 5</button> och gör caset <button class="lnk" data-gocase="c3">Nyskick ett år senare</button>, och <button class="lnk" data-gocase="c8">Glassbilen</button> om du hinner. Läs sedan <button class="lnk" data-go="6">kapitel 6</button>, med fokus på ledarstilarna, teori X och Y och diskrimineringslagen. <span class="t">ca 60 min</span><label class="done"><input type="checkbox" data-pass="3"> Klart</label></li>
         <li><b>Pass 4: Avtal och repetition.</b> Läs <button class="lnk" data-go="7">kapitel 7</button>, gå igenom <button class="lnk" data-gotab="fel">Vanliga fel</button> och kör <button class="lnk" data-gotab="quiz">quizet</button> tills Mina fel är tomt. <span class="t">ca 45 min</span><label class="done"><input type="checkbox" data-pass="4"> Klart</label></li>
       </ol>
       <p class="small">Korten är extra träning, till exempel på bussen eller kvällen före provet.</p>
@@ -263,8 +264,10 @@ footer{margin-top:40px; font-size:.85rem; color:var(--soft)}
   <!-- CASE -->
   <section class="panel" id="case">
     <h2>Case</h2>
-    <p class="lead">Så här ser de långa frågorna ut. Skriv ditt svar först, gärna i stödord. Tryck sedan på knappen och bocka av det du fick med. Svaren sparas på den här enheten.</p>
+    <p class="lead">Så här ser de långa frågorna ut. Det finns åtta case om de tre områden som provet fokuserar på: affärsidé och intressenter, företagsformer och finansiering. Skriv ditt svar först, gärna i stödord. Tryck sedan på knappen och bocka av det du fick med. Svaren sparas på den här enheten.</p>
     <div class="box"><p><b>Så skriver du ett bra casesvar:</b> använd begreppen från kapitlet, koppla alltid till just företaget i caset och motivera varför. "Aktiebolag, eftersom ägarna då bara riskerar sin insats" är bättre än bara "aktiebolag".</p></div>
+    <div class="cardbar" id="casefilter"></div>
+    <p class="progress" id="caseprogress"></p>
     <div id="cases"></div>
   </section>
 
@@ -861,6 +864,38 @@ const CASES = [
   c:["Styrka handlar om det egna företaget, till exempel läget nära skolan.","Svaghet handlar om det egna företaget, till exempel ingen erfarenhet eller lite kapital.","Möjlighet finns i omvärlden, till exempel att fler unga vill äta nyttigt.","Hot finns i omvärlden, till exempel kedjecaféet eller stigande råvarupriser.","Interna och externa punkter hamnar i rätt rutor."],
   m:"Styrka: läget nära skolan och en tydlig kundgrupp. Svaghet: ingen erfarenhet av att driva företag och bara 60 000 kr i kapital. Möjlighet: trenden att unga vill äta nyttigt och snabbt. Hot: kedjecaféet som kan sänka priserna, och dyrare frukt."}
  ]},
+{id:"c4",ch:3,extra:true,title:"Cykelkollen",kap:"Kapitel 3 – affärsidé, målgrupp och marknad",
+ bg:`<p>Jonna är 18 år och har lagat cyklar åt kompisar i flera år. Nu vill hon starta Cykelkollen, en mobil cykelverkstad. Kunden bokar tid i en app, och Jonna kommer hem till kunden eller till jobbet och lagar cykeln på plats. I staden finns två vanliga cykelverkstäder, och där får man ofta vänta flera dagar. Jonna behöver ungefär 40 000 kr till verktyg och en begagnad bil.</p>`,
+ parts:[
+ {q:"a) Formulera en affärsidé för Cykelkollen och beskriv målgruppen.",
+  c:["Svarar på varför: kunderna slipper ta sig till en verkstad och vänta i flera dagar.","Svarar på vem och beskriver en avgränsad målgrupp, till exempel pendlare och barnfamiljer som cyklar varje dag och har ont om tid.","Svarar på vad: cykelreparationer på plats.","Svarar på hur: bokning i app och en mobil verkstad.","Är kort och tydlig."],
+  m:"Cykelkollen lagar cyklar där kunden är, hemma eller på jobbet, så att upptagna pendlare och barnfamiljer slipper ta sig till en verkstad och vänta i flera dagar. Kunden bokar tid i en app. Målgruppen är personer i staden som cyklar till jobbet eller skolan varje dag och har ont om tid."},
+ {q:"b) Jonna ska träffa en möjlig långivare. Vad är en hisspitch, och vad ska hennes innehålla?",
+  c:["Förklarar att en hisspitch är en kort presentation på ungefär 30–60 sekunder.","Säger att syftet är att väcka intresse så att hon får ett riktigt möte.","Tar upp problemet: lång väntetid hos verkstäderna.","Tar upp lösningen och målgruppen.","Säger vad hon behöver: 40 000 kr till verktyg och bil."],
+  m:"En hisspitch är en kort presentation av affärsidén, ungefär 30–60 sekunder, som ska väcka intresse så att långivaren vill boka ett möte. Jonnas kan låta så här: Många i stan väntar flera dagar på att få cykeln lagad. Med Cykelkollen bokar man en tid i en app, och jag kommer hem till kunden och lagar cykeln på plats. Pendlare och barnfamiljer sparar tid. Jag behöver 40 000 kr till verktyg och en bil för att komma igång."},
+ {q:"c) Hur kan Jonna ta reda på om det finns en marknad? Ge ett exempel på en skrivbordsundersökning och ett på en fältundersökning, och en fördel och en nackdel med fältmetoden.",
+  c:["Skrivbordsundersökning med information som redan finns, till exempel statistik om hur många som cyklar i staden eller verkstädernas priser och väntetider på nätet.","Fältundersökning där hon frågar människor, till exempel en webbenkät eller intervjuer vid en cykelparkering.","Ger en rimlig fördel med fältmetoden.","Ger en rimlig nackdel med fältmetoden."],
+  m:"Med en skrivbordsundersökning kan hon söka statistik om hur många som cyklar till jobbet i staden och kolla verkstädernas priser och väntetider på nätet. Med en fältundersökning kan hon lägga ut en webbenkät i en lokal grupp på nätet. Den är snabb och når många, men hon vet inte vilka som svarar, så urvalet kan bli snett. Hon kan också intervjua cyklister vid en cykelparkering. Då får hon djupare svar, men det tar längre tid."},
+ {q:"d) Vilken affärsmodell liknar Cykelkollen, och hur kan Jonna tjäna pengar?",
+  c:["Känner igen on-demand: tjänsten levereras när kunden vill, via en app.","Föreslår hur pengarna kommer in, till exempel pris per reparation och en avgift för att komma ut.","Ger gärna en idé till, till exempel ett abonnemang med vårservice.","Nämner kostnader som intäkterna måste täcka, till exempel bil, verktyg och reservdelar."],
+  m:"Cykelkollen är en on-demand-tjänst, eftersom kunden bokar i en app och får hjälp när den behöver det. Jonna kan ta betalt per reparation och lägga på en avgift för att komma ut. Hon kan också sälja ett abonnemang med vårservice, till exempel till företag vars anställda cyklar till jobbet. Intäkterna måste täcka bilen, verktygen och reservdelarna."}
+ ]},
+{id:"c5",ch:3,extra:true,title:"Ekbackens gårdsbutik",kap:"Kapitel 3 – intressenter, SWOT och omvärld",
+ bg:`<p>Familjen Lind driver Ekbackens gård utanför en småstad. I gårdsbutiken säljer de egna ägg, grönsaker och kött, och butiken har fem anställda. Nu vill de bygga ett café på gården och behöver ett banklån till det. Samtidigt har en stor matbutik i stan börjat sälja mycket ekologiskt och närproducerat, och kommunen planerar en ny cykelväg som ska gå förbi gården.</p>`,
+ parts:[
+ {q:"a) Beskriv Ekbackens intressenter. Ta med minst fem och skriv vad var och en bidrar med och vill ha.",
+  c:["Nämner minst fem intressenter, till exempel familjen som ägare, anställda, kunder, leverantörer, banken, kommunen och konkurrenter.","Skriver vad varje intressent bidrar med.","Skriver vad varje intressent vill ha tillbaka.","Kopplar till Ekbacken, till exempel banken och caféet, kommunen och cykelvägen eller den stora matbutiken som konkurrent."],
+  m:"Familjen Lind är ägare. De satsar pengar och arbete och vill att gården går med vinst. De fem anställda bidrar med arbete och vill ha lön och en trygg anställning. Kunderna betalar och vill ha färska varor från trakten. Leverantörerna, till exempel av foder, vill få betalt i tid. Banken ska låna ut pengar till caféet och vill ha ränta och få lånet tillbaka. Kommunen bygger cykelvägen och vill att företaget ger jobb och skatteintäkter. Den stora matbutiken är en konkurrent som vill ha samma kunder."},
+ {q:"b) Intressenterna vill inte alltid samma sak. Ge två exempel på hur deras intressen kan krocka, och förklara varför företaget måste balansera dem.",
+  c:["Ger ett exempel på en krock, till exempel att ägarna vill ha vinst medan de anställda vill ha högre lön.","Ger ett andra exempel, till exempel att kunderna vill ha låga priser medan ägarna behöver höja priserna för att betala lånet.","Förklarar att företaget behöver alla intressenter och därför måste hitta en balans."],
+  m:"Ägarna vill ha vinst för att kunna betala lånet till caféet, medan de anställda vill ha högre lön. Kunderna vill ha låga priser, men om familjen sänker priserna för att konkurrera med matbutiken blir det svårare att betala banken. Företaget behöver både personal, kunder och bank, så det måste hitta en balans där alla får tillräckligt för att vilja fortsätta."},
+ {q:"c) Gör en SWOT-analys för Ekbacken inför bygget av caféet.",
+  c:["Styrka som gäller företaget självt, till exempel egna närodlade varor eller ett känt namn i trakten.","Svaghet som gäller företaget självt, till exempel litet sortiment eller ingen erfarenhet av café.","Möjlighet i omvärlden, till exempel cykelvägen eller trenden att handla lokalt.","Hot i omvärlden, till exempel matbutikens nya sortiment eller högre räntor.","Interna och externa punkter hamnar i rätt rutor."],
+  m:"Styrkor: egna närodlade varor och ett känt namn i trakten. Svagheter: litet sortiment och ingen erfarenhet av att driva café. Möjligheter: cykelvägen kan ge många fler besökare, och fler vill handla lokalt. Hot: den stora matbutiken säljer nu liknande varor, och högre räntor gör lånet dyrare."},
+ {q:"d) Vilka omvärldsfaktorer bör familjen undersöka innan de tar lånet? Utgå från faktabokens checklista.",
+  c:["Kunderna: vill kunderna fika på gården, och hur ändras deras köpvanor?","Konkurrenterna: matbutiken och andra caféer i närheten.","Politiska och juridiska faktorer: tillstånd och regler för att sälja mat i ett café.","Sociala faktorer: trenden att handla närproducerat och vara ute i naturen.","Tekniska faktorer: till exempel digital betalning eller förbeställning i en app.","Kopplar faktorerna till beslutet om lånet."],
+  m:"Familjen bör ta reda på om kunderna verkligen vill fika på gården, till exempel med en enkät i butiken. De bör undersöka konkurrenterna, både matbutiken och andra caféer i närheten. Politiskt och juridiskt behöver de veta vilka tillstånd och livsmedelsregler som gäller för ett café. Socialt talar trenden att handla närproducerat för dem. Tekniskt kan de fundera på digital betalning och förbeställning. Svaren visar om caféet kan dra in tillräckligt med pengar för att betala lånet."}
+ ]},
 {id:"c2",ch:4,title:"Nyskick",kap:"Kapitel 4 – juridiska företagsformer",
  bg:`<p>Lina, Omar och Elsa ska starta Nyskick, som renoverar och säljer begagnade mobiler på nätet. Lina har 30 000 kr, Omar 10 000 kr och Elsa har inga pengar, men hon är bäst på att laga telefoner. De ska köpa in mobiler i lager och lämna garanti till kunderna. Inom två år vill de anställa och öppna en verkstad.</p>`,
  parts:[
@@ -877,6 +912,38 @@ const CASES = [
   c:["Registrera hos Bolagsverket och få organisationsnummer.","Ansöka om F-skatt hos Skatteverket.","Nämner verksamt.se.","Namnet får inte gå att förväxla med ett registrerat namn.","Namnet måste innehålla AB, alltså Nyskick AB."],
   m:"De registrerar aktiebolaget hos Bolagsverket via verksamt.se och får ett organisationsnummer. Hos Skatteverket ansöker de om F-skatt. Namnet får inte gå att förväxla med ett annat registrerat företag, och det måste innehålla AB, alltså Nyskick AB. Sedan bör de registrera ett domännamn och skaffa en enkel hemsida."}
  ]},
+{id:"c6",ch:4,extra:true,title:"Snickare Samir",kap:"Kapitel 4 – från enskild firma till bolag",
+ bg:`<p>Samir är snickare och har drivit en enskild firma i tre år. Nu vill hans kompis Leo, som också är snickare, bli delägare. Samirs moster Anita vill dessutom satsa 100 000 kr i företaget, men hon vill inte arbeta där och inte riskera mer än de pengar hon satsar. Företaget har en skåpbil på lån och tar ibland stora jobb där kunden betalar först när allt är klart.</p>`,
+ parts:[
+ {q:"a) Varför passar enskild firma inte längre?",
+  c:["En enskild firma kan bara ha en ägare, och nu ska fler äga företaget.","Samir ansvarar personligen för alla skulder, vilket blir riskabelt när jobben blir större."],
+  m:"En enskild firma har bara en ägare, och nu vill både Leo och Anita gå in i företaget. Dessutom ansvarar Samir personligen för alla skulder, till exempel lånet på bilen, och det blir mer riskabelt när företaget tar större jobb."},
+ {q:"b) Vad skulle ett handelsbolag innebära för Samir och Leo?",
+  c:["Ett handelsbolag har minst två ägare och är en juridisk person.","Delägarna har obegränsat och solidariskt ansvar, så Samir kan få betala skulder som Leo har orsakat, och tvärtom.","Det finns inget krav på startkapital.","Vinsten räknas som delägarnas inkomst.","Konstaterar att handelsbolaget inte passar Anita, som vill ha begränsat ansvar."],
+  m:"Ett handelsbolag fungerar med två ägare och är en juridisk person. Det kräver inget startkapital, och vinsten räknas som Samirs och Leos inkomst. Men de får obegränsat och solidariskt ansvar. Om ett stort jobb går fel kan Samir få betala hela skulden med sina privata pengar, även om det var Leo som orsakade den. Anita vill inte riskera mer än 100 000 kr, så handelsbolaget passar inte henne."},
+ {q:"c) Hur kan Anita bli delägare utan att riskera mer än 100 000 kr? Jämför kommanditbolag och aktiebolag.",
+  c:["Kommanditbolag: Anita blir kommanditdelägare och ansvarar bara med sin insats.","I kommanditbolaget måste Samir och/eller Leo vara komplementärer med obegränsat ansvar.","Aktiebolag: alla tre har begränsat ansvar och riskerar bara sin insats.","Aktiebolaget kräver 25 000 kr i aktiekapital och betalar bolagsskatt.","Anita får aktier som visar hur stor del hon äger."],
+  m:"I ett kommanditbolag kan Anita bli kommanditdelägare och bara ansvara med sina 100 000 kr. Samir och Leo blir då komplementärer och har fortfarande obegränsat ansvar. I ett aktiebolag har alla tre begränsat ansvar och riskerar bara det de har satsat. Aktiebolaget kräver 25 000 kr i aktiekapital, vilket Anitas pengar räcker till, och bolaget betalar bolagsskatt på vinsten. Anita får aktier som bevis på sin del av ägandet."},
+ {q:"d) Vilken företagsform rekommenderar du? Motivera och beskriv hur de registrerar företaget.",
+  c:["Väljer en företagsform och motiverar den.","Kopplar till risken: stora jobb, lån på bilen och kunder som betalar i efterhand.","Kopplar till ägarna: Anita vill ha begränsat ansvar.","Registrering hos Bolagsverket och F-skatt hos Skatteverket, till exempel via verksamt.se.","Namnet ska innehålla AB (eller KB) och får inte gå att förväxla med ett annat företags namn."],
+  m:"Jag rekommenderar aktiebolag. De tar stora jobb där kunden betalar i efterhand och har ett lån på bilen, och i ett aktiebolag riskerar ingen av dem sina privata pengar. Det passar också Anita, som bara vill riskera sin insats. De startar ett aktiebolag, registrerar det hos Bolagsverket och ansöker om F-skatt hos Skatteverket via verksamt.se. Namnet måste innehålla AB och får inte gå att förväxla med ett annat registrerat företag."}
+ ]},
+{id:"c7",ch:4,extra:true,title:"Byns butik",kap:"Kapitel 4 – ekonomisk förening",
+ bg:`<p>I byn Lillsjö har den enda matbutiken stängt. 40 hushåll vill tillsammans öppna en ny liten butik med bra priser för dem som bor i byn. Varje hushåll kan satsa 2 000 kr, men ingen vill riskera mer än så. Alla vill kunna vara med och bestämma, och om butiken går med överskott vill de att pengarna ska komma byborna till godo.</p>`,
+ parts:[
+ {q:"a) Vilken företagsform passar bäst? Motivera.",
+  c:["Väljer ekonomisk förening.","Syftet är att gynna medlemmarna, här genom bra priser i byn.","Många kan vara medlemmar, och det krävs minst tre.","Ansvaret är begränsat till insatsen, alltså 2 000 kr per hushåll.","Ett överskott kan delas ut som återbäring till medlemmarna."],
+  m:"En ekonomisk förening passar bäst. Den finns till för att gynna medlemmarna, och här handlar det om bra priser för dem som bor i byn. Den måste ha minst tre medlemmar, och 40 hushåll går bra. Ansvaret är begränsat till insatsen, så ingen riskerar mer än 2 000 kr. Går butiken med överskott kan det delas ut som återbäring till medlemmarna."},
+ {q:"b) Varför passar inte enskild firma eller handelsbolag?",
+  c:["En enskild firma kan bara ha en ägare.","I ett handelsbolag har delägarna obegränsat och solidariskt ansvar, så hushållen skulle kunna förlora mycket mer än 2 000 kr."],
+  m:"En enskild firma kan bara ha en ägare, och här är de 40 hushåll. Ett handelsbolag går att starta med flera ägare, men delägarna har obegränsat och solidariskt ansvar. Om butiken går med förlust skulle ett enskilt hushåll kunna få betala långt mer än sina 2 000 kr."},
+ {q:"c) Jämför med ett aktiebolag. Vad skulle vara likt och vad skulle vara annorlunda?",
+  c:["Likt: aktiebolaget har också begränsat ansvar och är en juridisk person.","Likt: de har råd med aktiekapitalet, eftersom 40 gånger 2 000 kr blir 80 000 kr.","Annorlunda: ett aktiebolag finns oftast till för att ge vinst till ägarna, medan föreningen ska gynna medlemmarna.","Annorlunda: i aktiebolaget bestämmer den mer som äger fler aktier."],
+  m:"Ett aktiebolag skulle också ge begränsat ansvar och vara en juridisk person, och 40 hushåll gånger 2 000 kr blir 80 000 kr, vilket räcker till aktiekapitalet. Men ett aktiebolag finns oftast till för att ge vinst till ägarna, och den som äger flest aktier bestämmer mest. Föreningen passar bättre när målet är bra priser för byborna och när alla ska kunna vara med och bestämma."},
+ {q:"d) Hur registrerar de föreningen, och vad ska de tänka på när de väljer namn?",
+  c:["Registrerar föreningen hos Bolagsverket och får organisationsnummer.","Registrerar sig hos Skatteverket.","Namnet får inte gå att förväxla med ett redan registrerat namn.","Föreslår gärna domännamn och en enkel hemsida."],
+  m:"De registrerar föreningen hos Bolagsverket och får ett organisationsnummer, och de registrerar sig också hos Skatteverket, till exempel via verksamt.se. Namnet får inte gå att förväxla med ett redan registrerat namn. Ett ortnamn som Lillsjö brukar fungera bra. Sedan kan de skaffa ett domännamn och en enkel hemsida med öppettider och kontaktuppgifter."}
+ ]},
 {id:"c3",ch:5,title:"Nyskick ett år senare",kap:"Kapitel 5 – finansieringsalternativ",
  bg:`<p>Nyskick AB går bra. Nu vill ägarna öppna en egen verkstad och behöver 400 000 kr till lokal och verktyg. Samtidigt har de fått flera företagskunder som betalar först efter 30 dagar, så det är ofta tomt i kassan. En affärsängel har erbjudit 400 000 kr mot 20 % av aktierna.</p>`,
  parts:[
@@ -892,6 +959,22 @@ const CASES = [
  {q:"d) Vad händer med ägarnas andelar om affärsängeln får 20 % av aktierna?",
   c:["Förklarar utspädning: de gamla ägarnas andelar blir mindre.","Konstaterar att Lina, Omar och Elsa tillsammans äger 80 % efteråt.","Nämner att de delar vinst och inflytande med en ny ägare."],
   m:"Det blir en utspädning. Om nya aktier ges ut till affärsängeln minskar de tidigare ägarnas andelar, så att Lina, Omar och Elsa tillsammans äger 80 % i stället för 100 %. De får dela både vinst och inflytande med affärsängeln."}
+ ]},
+{id:"c8",ch:5,extra:true,title:"Glassbilen",kap:"Kapitel 5 – startkapital och kassaflöde",
+ bg:`<p>Wilma och Eric är 20 år och vill starta Glassbilen, en matbil som säljer egen glass på festivaler och badstränder från maj till september. Bilen och glassmaskinen kostar 350 000 kr. De har 50 000 kr sparat. På vintern har de nästan inga intäkter, men de måste ändå betala försäkring, hyra för en lagerlokal och sina lån.</p>`,
+ parts:[
+ {q:"a) Vilken fas är företaget i? Föreslå hur de kan få ihop startkapitalet.",
+  c:["Fas 1, startkapital.","Eget kapital: deras egna 50 000 kr.","Lån från bank eller annat kreditinstitut, till exempel Almi, och att banken vill se en affärsplan.","Leasing av bilen eller maskinen i stället för att köpa.","Gärna crowdfunding eller en affärsängel som komplement."],
+  m:"Företaget är i fas 1 och behöver startkapital. De kan satsa sina egna 50 000 kr som eget kapital och söka ett lån från en bank eller från Almi för resten. Banken vill då se en affärsplan. De kan också leasa bilen eller glassmaskinen i stället för att köpa, så att de inte behöver låna lika mycket. Crowdfunding eller en affärsängel kan vara ett komplement."},
+ {q:"b) Jämför leasing och banklån för bilen.",
+  c:["Leasing: ingen stor utgift på en gång, men en månadskostnad, och de äger inte bilen.","Banklån: de äger bilen, men betalar ränta och amortering.","Banken vill se affärsplanen och kanske en säkerhet.","Kopplar till att intäkterna bara kommer på sommaren."],
+  m:"Med leasing slipper de en stor utgift på en gång och betalar en kostnad varje månad, men de äger inte bilen. Med ett banklån äger de bilen, men de måste betala ränta och amortera, och banken vill se en affärsplan och kanske en säkerhet. Eftersom pengarna bara kommer in på sommaren måste de i båda fallen se till att de klarar de fasta kostnaderna hela året."},
+ {q:"c) Hur kan de klara vintern när mer pengar går ut än kommer in?",
+  c:["Förklarar att det handlar om kassaflöde och rörelsekapital (fas 3).","Föreslår att spara en del av sommarens överskott.","Föreslår en checkkredit för tillfälliga hål i kassan.","Föreslår intäkter på vintern, till exempel att sälja glass till butiker eller ta förbokade jobb på företagsfester med betalning i förskott."],
+  m:"På vintern blir kassaflödet negativt, och det är rörelsekapitalet som behöver räcka. De bör spara en del av sommarens överskott. En checkkredit kan täcka tillfälliga hål i kassan. De kan också hitta intäkter på vintern, till exempel genom att sälja glass till butiker och kaféer eller ta förbokade jobb på företagsfester där kunden betalar en del i förskott."},
+ {q:"d) De funderar på crowdfunding. Hur skulle det kunna gå till, och vilka är för- och nackdelarna?",
+  c:["Många personer bidrar med små belopp, ofta via en plattform på nätet.","Föreslår en belöning, till exempel glass i förskott eller att få namnge en smak.","Fördel: de behöver inte låna, och de testar samtidigt om det finns intresse.","Nackdel: det tar tid och det är inte säkert att de når målet, och belöningarna måste levereras."],
+  m:"De lägger ut idén på en plattform för crowdfunding, och många bidrar med små belopp. Som tack kan givarna få glass i förskott eller vara med och namnge en smak. Fördelen är att de inte behöver låna och att de samtidigt ser om det finns intresse, vilket blir ett slags marknadsundersökning. Nackdelen är att kampanjen kräver mycket arbete, att de kanske inte når målet och att belöningarna kostar när de ska levereras."}
  ]}
 ];
 
@@ -1096,7 +1179,7 @@ function goChapter(n){
 document.getElementById("las").addEventListener("click",e=>{
   const g=e.target.closest("[data-go]"); if(g){ goChapter(g.dataset.go); return; }
   const c=e.target.closest("[data-gocase]");
-  if(c){ showTab("case",true); const el=document.getElementById(c.dataset.gocase); setTimeout(()=>el.scrollIntoView({behavior:"smooth",block:"start"}),30); return; }
+  if(c){ if(csf!=="alla"){ csf="alla"; renderCases(); } showTab("case",true); const el=document.getElementById(c.dataset.gocase); setTimeout(()=>el.scrollIntoView({behavior:"smooth",block:"start"}),30); return; }
   const t=e.target.closest("[data-gotab]"); if(t){ showTab(t.dataset.gotab,true); window.scrollTo({top:0}); }
 });
 S.p=S.p||{};
@@ -1139,10 +1222,16 @@ $("#topics").addEventListener("change",e=>{
 });
 
 /* ---------- Case ---------- */
+let csf="alla";
+function caseStarted(cs){ return cs.parts.some((p,i)=>{ const st=S.c[cs.id+"_"+i]; return st && (st.s || (st.t||"").trim()); }); }
 function renderCases(){
+  const opts=[["alla","Alla"],["3","Kap 3"],["4","Kap 4"],["5","Kap 5"]];
+  $("#casefilter").innerHTML=opts.map(([v,t])=>`<button class="chip" data-csf="${v}" aria-pressed="${csf===v}">${t}</button>`).join("");
+  const L=CASES.filter(cs=>csf==="alla"||String(cs.ch)===csf);
+  $("#caseprogress").textContent=`${L.filter(caseStarted).length} av ${L.length} case påbörjade`;
   let h="";
-  CASES.forEach(cs=>{
-    h+=`<article class="case" id="${cs.id}"><h3>${cs.title}</h3><p class="kap">${cs.kap}</p><div class="bg">${cs.bg}</div>`;
+  L.forEach(cs=>{
+    h+=`<article class="case" id="${cs.id}"><h3>${cs.title}${cs.extra?`<span class="xtra">extra</span>`:""}</h3><p class="kap">${cs.kap}</p><div class="bg">${cs.bg}</div>`;
     cs.parts.forEach((p,i)=>{
       const key=cs.id+"_"+i; const st=S.c[key]||{};
       h+=`<div class="part" data-key="${key}"><p class="pq">${p.q}</p>`;
@@ -1166,8 +1255,9 @@ let txtTimer;
 $("#cases").addEventListener("input",e=>{
   const t=e.target.closest("[data-txt]"); if(!t) return;
   const key=t.dataset.txt; S.c[key]=S.c[key]||{}; S.c[key].t=t.value;
-  clearTimeout(txtTimer); txtTimer=setTimeout(save,300);
+  clearTimeout(txtTimer); txtTimer=setTimeout(()=>{ save(); const L=CASES.filter(cs=>csf==="alla"||String(cs.ch)===csf); $("#caseprogress").textContent=`${L.filter(caseStarted).length} av ${L.length} case påbörjade`; },300);
 });
+$("#casefilter").addEventListener("click",e=>{ const b=e.target.closest("[data-csf]"); if(!b) return; csf=b.dataset.csf; renderCases(); });
 $("#cases").addEventListener("click",e=>{
   const b=e.target.closest("[data-show]"); if(!b) return;
   const key=b.dataset.show; S.c[key]=S.c[key]||{}; S.c[key].s=1; S.c[key].k=S.c[key].k||[]; save();
