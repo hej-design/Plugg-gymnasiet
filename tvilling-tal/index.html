@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Mejas tal om att vara tvilling</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pine: #1F4A45; --ink: #1E2B2A; --mint: #EAF4F2; --turq: #7FC8BE; --teal: #3E7F77;
+    --muted: #5B6B69; --paper: #FFFFFF; --line: #D6E7E3;
+    --mark: #FFE97A; --del: #B3261E;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font: 400 17px/1.6 "Source Sans 3", system-ui, sans-serif; }
+  header { background: var(--pine); color: #fff; padding: 28px 20px 22px; }
+  header .wrap { max-width: 760px; margin: 0 auto; }
+  header p { margin: 0 0 4px; color: var(--turq); font-weight: 600; letter-spacing: .02em; }
+  header h1 { margin: 0; font: 700 clamp(26px, 6vw, 36px)/1.2 "Source Serif 4", Georgia, serif; }
+  nav { position: sticky; top: 0; z-index: 5; background: var(--paper); border-bottom: 1px solid var(--line); }
+  nav .wrap { max-width: 760px; margin: 0 auto; display: flex; gap: 4px; padding: 0 12px; overflow-x: auto; }
+  nav a { flex: 1 0 auto; text-align: center; padding: 14px 12px 12px; color: var(--muted); text-decoration: none; font-weight: 600; border-bottom: 3px solid transparent; white-space: nowrap; }
+  nav a[aria-current="page"] { color: var(--pine); border-bottom-color: var(--teal); }
+  main { max-width: 760px; margin: 0 auto; padding: 24px 20px 64px; }
+  section[hidden] { display: none; }
+  .legend { background: var(--mint); border-radius: 12px; padding: 14px 16px; margin: 0 0 24px; font-size: 15px; }
+  .legend p { margin: 0; }
+  .legend p + p { margin-top: 6px; }
+  mark { background: var(--mark); color: inherit; padding: 0 2px; border-radius: 3px; }
+  del { color: var(--del); text-decoration-thickness: 2px; }
+  .moved, .moved-sample { background: #DCEBFA; border-radius: 6px; }
+  #del-manus p.moved { padding: 8px 10px; margin-left: -10px; margin-right: -10px; }
+  .moved-sample { padding: 0 4px; }
+  h2.part { font: 700 24px/1.3 "Source Serif 4", Georgia, serif; color: var(--pine); margin: 32px 0 8px; }
+  h2.part:first-of-type { margin-top: 0; }
+  #del-manus h3 { font-size: 18px; color: var(--teal); margin: 22px 0 6px; }
+  #del-manus p { margin: 0 0 14px; }
+  .slidecard { display: grid; grid-template-columns: 40px 1fr; gap: 14px; padding: 18px 0; border-bottom: 1px solid var(--line); }
+  .slidecard:last-of-type { border-bottom: 0; }
+  .slidecard .num { width: 36px; height: 36px; border-radius: 50%; background: var(--pine); color: #fff; display: grid; place-items: center; font-weight: 700; }
+  .slidecard h3 { margin: 4px 0 6px; font: 700 20px/1.3 "Source Serif 4", Georgia, serif; color: var(--pine); }
+  .slidecard p { margin: 0 0 4px; }
+  .tip { background: var(--mint); border-radius: 12px; padding: 14px 16px; margin-top: 20px; }
+  .intro { color: var(--muted); margin: 0 0 20px; }
+  figure { margin: 0 0 28px; }
+  figure img { display: block; width: 100%; height: auto; border-radius: 10px; box-shadow: 0 1px 2px rgba(0,0,0,.08), 0 4px 16px rgba(31,74,69,.12); }
+  figcaption { display: flex; align-items: center; gap: 10px; margin: 0 0 10px; font-weight: 600; color: var(--pine); }
+  figcaption span { width: 28px; height: 28px; border-radius: 50%; background: var(--mint); display: grid; place-items: center; font-size: 14px; }
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <p>Mejas tal</p>
+  <h1>Hur är det egentligen att vara tvilling?</h1>
+</div></header>
+<nav aria-label="Delar"><div class="wrap">
+  <a href="#manus" data-tab="manus">Manus</a>
+  <a href="#slides" data-tab="slides">Slides</a>
+  <a href="#forhandsvisning" data-tab="forhandsvisning">Förslag</a>
+</div></nav>
+<main>
+  <section id="del-manus">
+    <div class="legend">
+      <p><mark>Gulmarkerad text</mark> är ändrad eller ny.</p>
+      <p><del>Röd överstruken text</del> är borttagen.</p>
+      <p><span class="moved-sample">Ljusblå bakgrund</span> betyder att stycket är flyttat.</p>
+      <p>Rubrikerna Slide 1–9 är nya och visar vilken slide texten hör till.</p>
+    </div>
+<h2 class="part">Inledning</h2>
+<h3>Slide 1: Titelslide</h3>
+<p>Hej och välkomna!</p>
+<p>Idag ska jag prata om hur det egentligen är att vara tvilling och vad skillnaden är mellan att vara enäggstvilling och tvåäggstvilling.</p>
+<h3>Slide 2: Vem är vem?</h3>
+<p>Men innan jag börjar tänkte jag visa några bilder på oss. Kan ni gissa vem som är vem? <mark>(Visa bilderna och låt publiken gissa.)</mark></p>
+<p>Som ni kanske märker kan det ibland vara ganska svårt att se skillnad på oss, speciellt när vi var små. Men hur är det egentligen att växa upp som tvilling? Är det så speciellt som många tror, eller är det egentligen precis som att ha ett vanligt syskon?</p>
+<p>Det tänkte jag berätta mer om idag.</p>
+<h2 class="part">Huvuddel</h2>
+<h3>Slide 3: Två typer av tvillingar</h3>
+<p>Vi börjar med lite fakta. Det finns två huvudtyper av tvillingar: enäggstvillingar och tvåäggstvillingar.</p>
+<p>Enäggstvillingar kan <mark>endast</mark> ha samma kön och är oftast mer lika varandra<mark>, medan</mark> tvåäggstvillingar genetiskt är ungefär lika lika som vanliga syskon och kan därför se ganska olika ut. De kan också ha olika kön, till skillnad från enäggstvillingar.</p>
+<p>Sannolikheten att få tvillingar är ungefär 1 på <del>80 graviditeter</del> <mark>70 förlossningar i Sverige</mark>, även om det varierar beroende på bland annat ärftlighet och andra faktorer.</p>
+<h3>Slide 4: Enägg eller tvåägg?</h3>
+<p>Nu tänkte jag gå över till mer fakta om oss. <mark>Baserat på bilderna, tror ni att vi är enäggs- eller tvåäggstvillingar? (Låt publiken gissa.)</mark></p>
+<h3>Slide 5: Fakta om oss</h3>
+<p>Vi är enäggstvillingar och föddes genom kejsarsnitt. Det skiljer <del>bara ungefär</del> <mark>max</mark> tio sekunder mellan oss<mark>, eftersom två olika barnmorskor tog ut varsin av oss nästan samtidigt. Så</mark> vi har nästan alltid varit jämngamla! Jag är född först<mark>,</mark> alltså <mark>äldst.</mark></p>
+<p class="moved">En sak som kanske är lite ovanlig är att vi alltid har gått i olika klasser. Det har gjort att vi <mark>också</mark> har fått skapa <del>våra</del> egna kompisgäng och vara mer självständiga, istället för att alltid jämföras med varandra.</p>
+<p class="moved">Vi har ändå ganska lika personligheter och många gemensamma intressen. Till exempel gillar vi båda innebandy och har många gemensamma kompisar.</p>
+<h3>Slide 6: Då och nu</h3>
+<p>När vi var riktigt små var vi väldigt lika varandra. Det var ofta svårt för andra att se vem som var vem. <mark>(Visa bilden från när vi var jättesmå.)</mark> Men ju äldre vi har blivit, desto mer olika har vi också blivit<del>, både till utseendet och som personer</del>.</p>
+<h3>Slide 7: Fördelar och nackdelar</h3>
+<p>Att vara tvilling har såklart både fördelar och nackdelar.</p>
+<p>En stor fördel är att man alltid har någon att vara med. Man har alltid en bästa kompis hemma som man har känt hela livet. Det är också ganska praktiskt att kunna låna kläder av varandra. Man kan nästan säga att vi har en dubbelgarderob!</p>
+<p>Men det finns även nackdelar. Eftersom vi spenderar så mycket tid tillsammans och är med varandra större delar av dygnet kan vi också bråka ganska mycket. Även om man är väldigt lik någon betyder det inte att man alltid tycker likadant. Ibland kan det faktiskt vara ganska jobbigt att ha någon så nära hela tiden.</p>
+<h3>Slide 8: Myt</h3>
+<p>En vanlig myt är att tvillingar har ett speciellt band till varandra, nästan som att de kan läsa varandras tankar eller känna vad den andra känner.</p>
+<p>Men stämmer det verkligen?</p>
+<p><mark>Jag</mark> skulle säga både ja och nej. Eftersom vi har levt tillsammans hela livet känner vi varandra väldigt bra och tänker ofta ganska lika. Ibland kan vi förstå vad den andra menar utan att ens behöva förklara så mycket.</p>
+<p>Men <mark>jag</mark> tror inte att vårt band är så annorlunda från det som andra syskon kan ha. Vi känner varandra bra eftersom vi har vuxit upp tillsammans, inte för att vi har några övernaturliga förmågor.</p>
+<p>Därför stämmer den här myten inte helt.</p>
+<h2 class="part">Avslutning</h2>
+<h3>Slide 9: Avslutning</h3>
+<p>Så, hur är det egentligen att vara tvilling?</p>
+<p>Om <mark>jag</mark> ska sammanfatta det skulle <mark>jag</mark> säga att det inte är så märkvärdigt som många kanske tror. Visst finns det vissa speciella saker med att vara tvilling, som att <mark>ha varit</mark> nästan identiska <mark>när vi var små</mark> och att alltid ha någon i samma ålder att dela livet med.</p>
+<p>Men i slutändan känns det faktiskt mest som att ha ett vanligt syskon.</p>
+<p>Tack för att ni har lyssnat!</p>
+  </section>
+
+  <section id="del-slides" hidden>
+    <p class="intro">Förslag på nio slides i den ordning de visas. Under varje står vad sliden kan innehålla och vid vilken mening i manuset Meja byter till den.</p>
+      <article class="slidecard">
+        <div class="num">1</div>
+        <div>
+          <h3>Titelslide</h3>
+          <p><strong>Text:</strong> Hur är det egentligen att vara tvilling? Under rubriken: Meja.</p>
+          <p><strong>Bild:</strong> ingen, bara text.</p>
+          <p><strong>Visas från start.</strong></p>
+        </div>
+      </article>
+      <article class="slidecard">
+        <div class="num">2</div>
+        <div>
+          <h3>Vem är vem?</h3>
+          <p><strong>Text:</strong> Vem är vem?</p>
+          <p><strong>Bild:</strong> jeansjackorna, ett stort foto över hela sliden.</p>
+          <p><strong>Byt vid:</strong> &quot;Kan ni gissa vem som är vem?&quot;</p>
+        </div>
+      </article>
+      <article class="slidecard">
+        <div class="num">3</div>
+        <div>
+          <h3>Två typer av tvillingar</h3>
+          <p><strong>Text:</strong> Enäggstvillingar: ett ägg, alltid samma kön, oftast väldigt lika. Tvåäggstvillingar: två olika ägg, lika som vanliga syskon, kan ha olika kön. Ungefär 1 av 70 förlossningar i Sverige.</p>
+          <p><strong>Liten text längst ner:</strong> Källa: SCB.</p>
+          <p><strong>Bild:</strong> ingen.</p>
+          <p><strong>Byt vid:</strong> &quot;Vi börjar med lite fakta.&quot;</p>
+        </div>
+      </article>
+      <article class="slidecard">
+        <div class="num">4</div>
+        <div>
+          <h3>Enägg eller tvåägg?</h3>
+          <p><strong>Text:</strong> Enägg eller tvåägg?</p>
+          <p><strong>Bild:</strong> kramen i de blå koftorna.</p>
+          <p><strong>Byt vid:</strong> &quot;Nu tänkte jag gå över till mer fakta om oss.&quot;</p>
+        </div>
+      </article>
+      <article class="slidecard">
+        <div class="num">5</div>
+        <div>
+          <h3>Fakta om oss</h3>
+          <p><strong>Text:</strong> Enäggstvillingar. Kejsarsnitt, max 10 sekunder mellan oss. Meja född först. Alltid gått i olika klasser. Gemensamt: innebandy och kompisar.</p>
+          <p><strong>Bild:</strong> ingen.</p>
+          <p><strong>Byt vid:</strong> &quot;Vi är enäggstvillingar...&quot;</p>
+        </div>
+      </article>
+      <article class="slidecard">
+        <div class="num">6</div>
+        <div>
+          <h3>Då och nu</h3>
+          <p><strong>Text:</strong> bara rubriken Då och nu.</p>
+          <p><strong>Bild:</strong> nyföddbilden till vänster och sommarbilden till höger.</p>
+          <p><strong>Byt vid:</strong> &quot;När vi var riktigt små...&quot;</p>
+        </div>
+      </article>
+      <article class="slidecard">
+        <div class="num">7</div>
+        <div>
+          <h3>Fördelar och nackdelar</h3>
+          <p><strong>Text i två spalter.</strong> Fördelar: alltid en bästa kompis hemma, dubbelgarderob. Nackdelar: vi bråkar ganska mycket, ibland jobbigt att ha någon så nära hela tiden.</p>
+          <p><strong>Bild:</strong> ingen.</p>
+          <p><strong>Byt vid:</strong> &quot;Att vara tvilling har såklart både fördelar och nackdelar.&quot;</p>
+        </div>
+      </article>
+      <article class="slidecard">
+        <div class="num">8</div>
+        <div>
+          <h3>Myt</h3>
+          <p><strong>Text:</strong> Har tvillingar ett speciellt band? Kan de läsa varandras tankar? Både ja och nej.</p>
+          <p><strong>Bild:</strong> ingen.</p>
+          <p><strong>Byt vid:</strong> &quot;En vanlig myt är...&quot;</p>
+        </div>
+      </article>
+      <article class="slidecard">
+        <div class="num">9</div>
+        <div>
+          <h3>Avslutning</h3>
+          <p><strong>Text:</strong> Mest som att ha ett vanligt syskon. Under det: Tack för att ni lyssnade!</p>
+          <p><strong>Bild:</strong> skrattet i skogen, svart och grå tröja.</p>
+          <p><strong>Byt vid:</strong> &quot;Så, hur är det egentligen att vara tvilling?&quot;</p>
+        </div>
+      </article>
+    <p class="tip">Håll texten på sliderna kort, så att publiken lyssnar på Meja i stället för att läsa.</p>
+  </section>
+
+  <section id="del-forhandsvisning" hidden>
+    <p class="intro">Ett exempel på hur sliderna kan se ut. Meja gör sin egen presentation i PowerPoint, så det här är bara ett förslag att utgå från.</p>
+      <figure>
+        <figcaption><span>1</span></figcaption>
+        <img src="slides/slide-1.jpg" alt="Slide 1: Titelslide" loading="lazy" width="1400" height="788">
+      </figure>
+      <figure>
+        <figcaption><span>2</span></figcaption>
+        <img src="slides/slide-2.jpg" alt="Slide 2: Vem är vem?" loading="lazy" width="1400" height="788">
+      </figure>
+      <figure>
+        <figcaption><span>3</span></figcaption>
+        <img src="slides/slide-3.jpg" alt="Slide 3: Två typer av tvillingar" loading="lazy" width="1400" height="788">
+      </figure>
+      <figure>
+        <figcaption><span>4</span></figcaption>
+        <img src="slides/slide-4.jpg" alt="Slide 4: Enägg eller tvåägg?" loading="lazy" width="1400" height="788">
+      </figure>
+      <figure>
+        <figcaption><span>5</span></figcaption>
+        <img src="slides/slide-5.jpg" alt="Slide 5: Fakta om oss" loading="lazy" width="1400" height="788">
+      </figure>
+      <figure>
+        <figcaption><span>6</span></figcaption>
+        <img src="slides/slide-6.jpg" alt="Slide 6: Då och nu" loading="lazy" width="1400" height="788">
+      </figure>
+      <figure>
+        <figcaption><span>7</span></figcaption>
+        <img src="slides/slide-7.jpg" alt="Slide 7: Fördelar och nackdelar" loading="lazy" width="1400" height="788">
+      </figure>
+      <figure>
+        <figcaption><span>8</span></figcaption>
+        <img src="slides/slide-8.jpg" alt="Slide 8: Myt" loading="lazy" width="1400" height="788">
+      </figure>
+      <figure>
+        <figcaption><span>9</span></figcaption>
+        <img src="slides/slide-9.jpg" alt="Slide 9: Avslutning" loading="lazy" width="1400" height="788">
+      </figure>
+  </section>
+</main>
+<script>
+  const tabs = ['manus', 'slides', 'forhandsvisning'];
+  function show() {
+    const id = tabs.includes(location.hash.slice(1)) ? location.hash.slice(1) : 'manus';
+    tabs.forEach(t => {
+      document.getElementById('del-' + t).hidden = t !== id;
+      const a = document.querySelector('nav a[data-tab="' + t + '"]');
+      if (t === id) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
+    });
+  }
+  window.addEventListener('hashchange', () => { show(); window.scrollTo(0, 0); });
+  show();
+</script>
+</body>
+</html>
