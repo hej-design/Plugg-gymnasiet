@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Näringslära NIU – plugg</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FBF7F0; --grid:rgba(214,120,40,.10); --ink:#2B2135; --soft:#665d70;
+  --hl:#FFC36B; --hl-ink:#2B2135; --tab:#9ED9B8; --red:#B23A2E; --card:#ffffff;
+  --line:rgba(43,33,53,.16); --ok:#2F7D4F; --warn:#9A5B00; --lek:#3E5FA8;
+  --head:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --body:"Atkinson Hyperlegible","Segoe UI",system-ui,sans-serif;
+  --hand:"Caveat","Comic Sans MS",cursive;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --paper:#18141D; --grid:rgba(255,190,120,.06); --ink:#F1EAF4; --soft:#B5AABD;
+    --hl:#F0A94A; --hl-ink:#18141D; --tab:#4FAF85; --red:#FF8A7A; --card:#221C29;
+    --line:rgba(241,234,244,.15); --ok:#6FD39A; --warn:#F2B654; --lek:#9DB8F2;
+  }
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 64px)}
+body{
+  margin:0; color:var(--ink); font-family:var(--body); font-size:17px; line-height:1.55;
+  background-color:var(--paper);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:22px 22px;
+}
+.wrap{max-width:720px; margin:0 auto; padding:0 18px 60px}
+header.hero{padding:58px 0 12px; position:relative}
+.hero h1{font-family:var(--head); font-weight:800; font-size:clamp(2.2rem,8vw,3.4rem); line-height:1.02; margin:0; letter-spacing:-.02em}
+.hero h1 span{background:linear-gradient(transparent 38%,var(--hl) 38%,var(--hl) 88%,transparent 88%); color:var(--ink); padding:0 .12em; -webkit-box-decoration-break:clone; box-decoration-break:clone}
+.hero p{margin:14px 0 0; color:var(--soft); max-width:34em}
+.tabnote{position:absolute; right:0; top:14px; background:var(--tab); color:#0f2a20; font-family:var(--hand); font-weight:700; font-size:1.35rem; padding:4px 12px 2px; transform:rotate(3deg); border-radius:2px}
+nav.tabs{position:sticky; top:env(safe-area-inset-top,0px); z-index:5; background:var(--paper); border-bottom:2px solid var(--ink); display:flex; gap:4px; overflow-x:auto; margin:12px -18px 0; padding:8px 18px 0; scrollbar-width:none}
+nav.tabs::-webkit-scrollbar{display:none}
+nav.tabs button{font-family:var(--head); font-weight:700; font-size:1rem; color:var(--ink); background:transparent; border:2px solid transparent; border-bottom:none; padding:9px 13px; border-radius:8px 8px 0 0; cursor:pointer; white-space:nowrap}
+nav.tabs button[aria-selected="true"]{background:var(--card); border-color:var(--ink); margin-bottom:-2px}
+button:focus-visible,summary:focus-visible,textarea:focus-visible,input:focus-visible,.flash:focus-visible{outline:3px solid var(--red); outline-offset:2px}
+section.panel{display:none; padding-top:22px}
+section.panel.active{display:block}
+h2{font-family:var(--head); font-size:1.5rem; margin:0 0 6px}
+.lead{color:var(--soft); margin:0 0 18px}
+.small{font-size:.88rem; color:var(--soft)}
+a{color:inherit; text-decoration-color:var(--red); text-underline-offset:3px}
+
+/* Start */
+.fast{background:var(--card); border:2px solid var(--ink); border-radius:6px; padding:14px 16px; margin:0 0 18px; box-shadow:5px 5px 0 var(--tab)}
+.fast h3{font-family:var(--head); font-size:1.15rem; margin:0 0 8px}
+.pass{border-top:1px dashed var(--line); padding:10px 0}
+.pass:first-of-type{border-top:none}
+.pass b{font-family:var(--head)}
+.pass .t{color:var(--soft); font-size:.88rem; white-space:nowrap}
+.pass label{display:inline-flex; gap:6px; align-items:center; margin-left:8px; font-size:.9rem; color:var(--soft); cursor:pointer}
+.pass input{width:18px; height:18px; accent-color:var(--ok)}
+.lnk{font:inherit; color:inherit; background:none; border:none; padding:0; text-decoration:underline; text-decoration-color:var(--red); text-underline-offset:3px; cursor:pointer}
+.box{background:var(--card); border:1.5px solid var(--line); border-radius:6px; padding:14px 16px; margin:0 0 14px}
+.box h3{font-family:var(--head); font-size:1.1rem; margin:0 0 6px}
+.box p{margin:6px 0}
+
+/* Läs */
+details.topic{background:var(--card); border:1.5px solid var(--line); border-radius:6px; margin:0 0 12px}
+details.topic summary{list-style:none; cursor:pointer; padding:14px 16px; font-family:var(--head); font-weight:700; font-size:1.15rem; display:flex; justify-content:space-between; gap:12px; align-items:baseline}
+details.topic summary::-webkit-details-marker{display:none}
+details.topic summary small{font-family:var(--body); font-weight:400; font-size:.82rem; color:var(--soft); text-align:right}
+details.topic[open] summary{border-bottom:1.5px dashed var(--line)}
+.tbody{padding:6px 16px 16px}
+.tbody h4{font-family:var(--head); font-size:1rem; margin:16px 0 4px}
+.tbody p{margin:6px 0}
+.term{background:var(--hl); color:var(--hl-ink); padding:0 4px; border-radius:2px; font-weight:700}
+.formula{font-family:var(--head); font-weight:700; background:var(--paper); border:1.5px solid var(--ink); border-radius:4px; padding:10px 12px; margin:10px 0; overflow-x:auto}
+.tip{font-family:var(--hand); font-size:1.35rem; color:var(--red); line-height:1.2; margin:12px 0 2px}
+.lek{border-left:4px solid var(--warn); padding:6px 10px; background:var(--paper); font-size:.93rem; color:var(--soft)}
+.tag{display:inline-block; font-family:var(--head); font-weight:700; font-size:.75rem; border-radius:99px; padding:1px 8px; border:1.5px solid currentColor; vertical-align:2px}
+.tag.bok{color:var(--ok)} .tag.pres{color:var(--lek)} .tag.lekt{color:var(--warn)}
+p.pres{border-left:4px solid var(--lek); padding:6px 10px; background:var(--paper); margin:10px 0}
+table.vit{width:100%; border-collapse:collapse; font-size:.92rem; margin:8px 0}
+table.vit th,table.vit td{border-bottom:1px solid var(--line); padding:7px 6px; text-align:left; vertical-align:top}
+table.vit th{font-family:var(--head)}
+table.vit td:first-child{font-family:var(--head); font-weight:800; width:2.2em}
+
+/* Knappar och chips */
+.cardbar{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:14px}
+.chip{font:inherit; font-size:.9rem; border:1.5px solid var(--ink); background:transparent; color:var(--ink); border-radius:99px; padding:5px 12px; cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink); color:var(--paper)}
+.btn{font-family:var(--head); font-weight:700; font-size:1rem; padding:9px 15px; border-radius:6px; border:2px solid var(--ink); background:var(--card); color:var(--ink); cursor:pointer}
+.btn.primary{background:var(--ink); color:var(--paper)}
+.btn.good{border-color:var(--ok); color:var(--ok)}
+.row{display:flex; gap:8px; margin-top:10px; flex-wrap:wrap; align-items:center}
+.count{color:var(--soft); font-size:.95rem}
+
+/* Frågor */
+.sq{background:var(--card); border:1.5px solid var(--line); border-radius:6px; padding:14px 16px; margin:0 0 12px}
+.sq.done{border-color:var(--ok); border-width:2px}
+.sq .where{font-size:.85rem; color:var(--soft); display:flex; gap:8px; flex-wrap:wrap; align-items:center}
+.sq .qt{font-family:var(--head); font-weight:700; font-size:1.1rem; margin:4px 0 10px; line-height:1.25}
+.sq textarea{width:100%; min-height:90px; font:inherit; font-size:16px; color:var(--ink); background:var(--paper); border:1.5px solid var(--line); border-radius:6px; padding:9px 11px; resize:vertical}
+.fb{margin-top:10px; padding:12px 14px; border:2px solid var(--ink); border-radius:6px; background:var(--paper)}
+.verdict{font-family:var(--head); font-weight:800; font-size:1.1rem; margin:0 0 4px}
+.verdict.v0{color:var(--ok)} .verdict.v1{color:var(--warn)} .verdict.v2{color:var(--red)}
+.checks{margin:6px 0 0; padding:0; list-style:none}
+.checks li{margin:5px 0}
+.checks label{display:flex; gap:9px; align-items:flex-start; cursor:pointer}
+.checks input{margin-top:4px; width:18px; height:18px; accent-color:var(--ok); flex:none}
+.checks .hit{font-weight:700}
+.trap{color:var(--red); font-weight:700; margin:8px 0 0}
+.ans{margin-top:10px; padding:10px 12px; border-left:4px solid var(--hl); background:var(--paper)}
+.ans p{margin:0 0 6px}
+
+/* Quiz */
+.qbox{background:var(--card); border:2px solid var(--ink); border-radius:6px; padding:18px}
+.qnum{color:var(--soft); font-size:.9rem}
+.qtext{font-family:var(--head); font-weight:700; font-size:1.22rem; margin:4px 0 14px; line-height:1.25}
+.opt{display:block; width:100%; text-align:left; font:inherit; color:var(--ink); background:var(--paper); border:1.5px solid var(--line); border-radius:6px; padding:11px 13px; margin:0 0 8px; cursor:pointer}
+.opt.right{border-color:var(--ok); background:color-mix(in srgb,var(--ok) 14%,var(--card)); font-weight:700}
+.opt.wrong{border-color:var(--red); background:color-mix(in srgb,var(--red) 12%,var(--card))}
+.expl{margin:10px 0 0; padding:10px 12px; border-left:4px solid var(--hl); background:var(--paper)}
+.score{font-family:var(--head); font-size:2.6rem; font-weight:800; margin:0}
+
+/* Kort */
+.flash{min-height:220px; background:var(--card); border:2px solid var(--ink); border-radius:6px; padding:30px 22px 24px; display:flex; flex-direction:column; justify-content:center; cursor:pointer; position:relative; box-shadow:5px 5px 0 var(--tab)}
+.flash .side{font-size:.85rem; color:var(--soft); position:absolute; top:10px; left:14px}
+.flash .fq{font-family:var(--head); font-size:1.4rem; font-weight:700; line-height:1.2}
+.flash .fa{font-size:1.1rem}
+.flashnav{display:flex; justify-content:space-between; align-items:center; gap:8px; margin-top:16px; flex-wrap:wrap}
+
+/* Listan mot boken */
+.fix{background:var(--card); border:1.5px solid var(--line); border-radius:6px; padding:14px 16px; margin:0 0 12px}
+.fix .wh{font-size:.85rem; color:var(--soft); margin:0 0 4px}
+.fix .was{color:var(--soft); text-decoration:line-through; text-decoration-color:var(--red); margin:0}
+.fix .is{margin:6px 0 0}
+.fix .note{font-family:var(--hand); font-size:1.3rem; color:var(--red); margin:6px 0 0; line-height:1.2}
+.fix.okay{border-color:var(--ok)}
+.fix.okay .was{text-decoration:none}
+
+/* Matchdagen */
+.mapwrap{margin:0 0 18px; background:var(--card); border:2px solid var(--ink); border-radius:6px; padding:10px 6px; box-shadow:5px 5px 0 var(--tab)}
+.map{display:block; width:100%; max-width:440px; height:auto; margin:0 auto}
+.map .bx{fill:var(--card); stroke:var(--ink); stroke-width:2}
+.map .bx.kat{fill:color-mix(in srgb,var(--red) 10%,var(--card))}
+.map .bx.ana{fill:color-mix(in srgb,var(--ok) 12%,var(--card))}
+.map .t-time{font-family:var(--hand); font-weight:700; font-size:19px; fill:var(--red)}
+.map .t-h{font-family:var(--head); font-weight:700; font-size:14px; fill:var(--ink)}
+.map .t-s{font-family:var(--body); font-size:11.5px; fill:var(--ink)}
+.map .t-tag{font-family:var(--head); font-weight:700; font-size:10.5px}
+.chain{background:var(--card); border:1.5px solid var(--line); border-radius:6px; padding:12px 14px; margin:0 0 10px}
+.chain .cq{font-family:var(--head); font-weight:700; font-size:1.05rem; margin:0 0 8px}
+.chain ol{margin:8px 0 0; padding-left:22px}
+.chain li{margin:3px 0}
+.sub{font-family:var(--head); font-size:1.2rem; margin:26px 0 6px}
+footer{margin-top:40px; font-size:.85rem; color:var(--soft)}
+footer p{margin:6px 0}
+@media (prefers-reduced-motion:no-preference){ .flash{transition:transform .18s ease} .flash:active{transform:scale(.99)} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+    <div class="tabnote">Prov fre 20/11</div>
+    <h1><span>Näringslära</span><br>NIU åk 1</h1>
+    <p>För Meja och Irma. Lärarens 30 frågor, med svar som följer lärarens presentation och kapitlet om idrottsnutrition i Specialidrott – Tränings- och tävlingslära, s. 90–106.</p>
+  </header>
+
+  <nav class="tabs" role="tablist" aria-label="Delar">
+    <button role="tab" aria-selected="true" data-tab="start">Start</button>
+    <button role="tab" aria-selected="false" data-tab="las">Läs</button>
+    <button role="tab" aria-selected="false" data-tab="fragor">Frågor</button>
+    <button role="tab" aria-selected="false" data-tab="quiz">Quiz</button>
+    <button role="tab" aria-selected="false" data-tab="kort">Kort</button>
+    <button role="tab" aria-selected="false" data-tab="match">Matchdagen</button>
+    <button role="tab" aria-selected="false" data-tab="listan">Kolla listan</button>
+  </nav>
+
+  <!-- START -->
+  <section class="panel active" id="start">
+    <h2>Så pluggar du</h2>
+    <p class="lead">Allt fungerar på telefon och iPad. Det du skriver sparas bara i webbläsaren på din egen telefon.</p>
+
+    <div class="fast">
+      <h3>Fyra pass till provet</h3>
+      <p class="small" style="margin:0 0 4px">Ungefär 40 minuter per pass. Läs först, svara sedan på frågorna utan att titta.</p>
+      <div id="passes"></div>
+    </div>
+
+    <div class="box">
+      <h3>Så funkar rättningen</h3>
+      <p>Under Frågor skriver du ditt svar och trycker på Rätta. Sidan letar efter de viktiga delarna och visar vad som finns med och vad som saknas.</p>
+      <p>Den läser nyckelord, inte hela meningar. Har du skrivit något med egna ord kan du bocka i det själv. Jämför alltid med modellsvaret.</p>
+    </div>
+
+    <div class="box">
+      <h3>Presentationen och boken</h3>
+      <p>Svaren följer lärarens presentation, eftersom det är läraren som rättar provet. Där boken säger mer finns det med också, så att svaren blir fylligare.</p>
+      <p><span class="tag pres">Bild 6</span> visar var det står i presentationen, och <span class="tag bok">Boken s. 95</span> var det står i boken.</p>
+      <p><span class="tag lekt">1177</span> betyder att det varken står i presentationen eller boken. Det gäller bara fråga 30 om ätstörningar.</p>
+    </div>
+  </section>
+
+  <!-- LÄS -->
+  <section class="panel" id="las">
+    <h2>Sammanfattning</h2>
+    <p class="lead">Kapitlet i bokens ordning. Öppna ett avsnitt i taget, läs, blunda och försök säga det högt.</p>
+    <div id="topics"></div>
+  </section>
+
+  <!-- FRÅGOR -->
+  <section class="panel" id="fragor">
+    <h2>Lärarens frågor</h2>
+    <p class="lead">Skriv svaret med egna ord innan du tittar, och tryck sedan på Rätta.</p>
+    <div class="cardbar" id="qfilter"></div>
+    <p class="count" id="qprog"></p>
+    <div id="qlist"></div>
+    <p><button class="chip" id="qreset">Rensa mina svar</button></p>
+  </section>
+
+  <!-- QUIZ -->
+  <section class="panel" id="quiz">
+    <h2>Quiz</h2>
+    <p class="lead">Kryssfrågor i blandad ordning. Du får förklaringen direkt efter varje svar.</p>
+    <div id="quizbox"></div>
+  </section>
+
+  <!-- KORT -->
+  <section class="panel" id="kort">
+    <h2>Kort</h2>
+    <p class="lead">Tryck på kortet för att vända det. Markera de kort du kan, så kommer de sist i högen.</p>
+    <div class="cardbar" id="cardfilter"></div>
+    <div class="flash" id="flash" tabindex="0" role="button" aria-label="Vänd kortet">
+      <span class="side" id="fside">Fråga</span>
+      <div id="fcontent"></div>
+    </div>
+    <div class="flashnav">
+      <button class="btn" id="fprev">Förra</button>
+      <span class="count" id="fcount"></span>
+      <button class="btn good" id="fknow">Jag kan den</button>
+      <button class="btn primary" id="fnext">Nästa</button>
+    </div>
+    <p class="count" style="margin-top:14px"><button class="chip" id="freset">Nollställ markerade kort</button></p>
+  </section>
+
+  <!-- MATCHDAGEN -->
+  <section class="panel" id="match">
+    <h2>Matchdagen</h2>
+    <p class="lead">Hela kapitlet på en dag. Matchen börjar 18.00. Följ dagen uppifrån och ner.</p>
+    <figure class="mapwrap" style="margin-left:0;margin-right:0"><svg class="map" id="daymap" role="img" aria-labelledby="mt md" xmlns="http://www.w3.org/2000/svg"><title id="mt">En matchdag från frukost till sömn</title><desc id="md">Frukost, skollunch, en balanserad måltid två till fyra timmar före start, något litet nära start, matchen, återhämtningsmål direkt efter, kvällsmål och sömn.</desc></svg></figure>
+    <h3 class="sub">Varför-kedjor</h3>
+    <p class="small">Läs frågan, försök bygga kedjan själv och tryck sedan för att se den. Varje steg är en del av resonemanget, och det är stegen som ger poäng på provet.</p>
+    <div id="chains"></div>
+  </section>
+
+  <!-- LISTAN MOT BOKEN -->
+  <section class="panel" id="listan">
+    <h2>Kolla listan</h2>
+    <p class="lead">Svaren i listan stämmer nästan ord för ord med lärarens presentation. Här är det som saknas eller blivit fel, och vad boken lägger till.</p>
+    <div id="fixes"></div>
+  </section>
+
+  <footer>
+    <p><b>Källor.</b> Lärarens presentation Näringslära, Träning- och tävlingslära 1. Specialidrott – Tränings- och tävlingslära (SISU Idrottsböcker), kapitlet om idrottsnutrition, s. 90–106.</p>
+    <p>Fördjupningar och fråga 30: <a href="https://www.livsmedelsverket.se">Livsmedelsverket</a>, bland annat rapporten om järnbrist hos ungdomar (2024), <a href="https://www.1177.se">1177</a> om ätstörningar och var man söker hjälp, och <a href="https://ki.se">Karolinska institutet</a> om vätska.</p>
+  </footer>
+</div>
+
+<script>
+/* ===================== DATA ===================== */
+
+const TOPICS = [
+ {t:"Helheten", s:"mat, träning, sömn, återhämtning", p:"s. 90–92", b:"", h:`
+  <p>Kapitlet handlar om hur kroppen fungerar i träning och tävling utifrån ett <span class="term">näringsfysiologiskt</span> perspektiv. <span class="term">Nutrition</span> är vetenskapen om mat i relation till kroppens energi- och näringsbehov.</p>
+  <p>Mat ger dig ingen guldmedalj, men den kan förbättra träningsresultaten och återhämtningen, förebygga skador och sjukdomar och ge en lång och hälsosam idrottskarriär.</p>
+  <p>Alla är olika, så du behöver hitta det som passar dig. Bra kosthållning handlar om att göra bra val så ofta som möjligt. Med kunskap kan du vara källkritisk mot alla tips om vad man ska och inte ska äta.</p>
+  <p>Boken visar helheten som ett pussel med fem bitar: träning, mat, sömn, återhämtning och prioritera. En tränande ungdom bör se helheten och ta ansvar för alla bitar.</p>`},
+ {t:"Energibalans", s:"katabolism och anabolism", p:"s. 92", b:"bild 3–4", h:`
+  <p class="pres"><span class="tag pres">Presentationen</span> Energibalans: intag = förbrukning. Negativ och positiv energibalans. Katabolism är nedbrytande reaktioner som sker i kroppen och bryter ner maten vi äter för att utvinna energi. Anabolism är uppbyggande reaktioner som använder det nedbrutna materialet för att bygga nytt i cellerna.</p>
+  <p><span class="term">Energibalans</span> är skillnaden mellan energiintag och energiförbrukning. När du är i energibalans har du varken brist eller överskott på kroppens förråd av fett, protein och kolhydrater.</p>
+  <p><span class="term">Positiv energibalans</span> betyder att mer energi kommer in än går ut. <span class="term">Negativ energibalans</span> betyder att mer energi går ut än kommer in.</p>
+  <h4>Metabolism, ämnesomsättning</h4>
+  <p>Ämnesomsättningen består av nedbrytande, <span class="term">katabola</span>, och uppbyggande, <span class="term">anabola</span>, reaktioner. Båda pågår hela tiden.</p>
+  <p>Boken kopplar det till träning: träningen bryter ner, och återhämtningen, alltså mat, vila och sömn, bygger upp kroppen igen så att den blir starkare och klarar träningen bättre nästa gång.</p>
+  <p class="tip">Katabolism bryter ner. Anabolism bygger upp.</p>`},
+ {t:"Energibehov, brist och överskott", s:"energitillgänglighet och kalorier", p:"s. 93–94", b:"bild 5, 7", h:`
+  <p><span class="term">Energibehov</span> är hur mycket energi kroppen behöver för att fungera optimalt. Hos idrottande tonåringar varierar det mycket, bland annat beroende på hur långt man kommit i tillväxten och hur mycket och vilken sorts träning man gör. Energi mäts i <span class="term">kilokalorier</span>, kcal.</p>
+  <h4>Långvarigt energiunderskott</h4>
+  <p class="pres"><span class="tag pres">Presentationen</span> Kroppen kan bryta ner muskelvävnad. Koncentrationen kan försämras. Återhämtningen efter träning kan bli sämre. Immunförsvaret och hormonbalansen kan påverkas.</p>
+  <p>Boken lägger till att långvarig energibrist kan ge sämre prestation eller en platå i träningen, försenad pubertet, avstannad tillväxt, sämre benhälsa, ökad skaderisk, sömnsvårigheter, stört ätbeteende och depression. Tjejer kan få oregelbunden mens, eller att första mensen kommer senare.</p>
+  <h4>Långvarigt energiöverskott</h4>
+  <p class="pres"><span class="tag pres">Presentationen</span> Muskelökning i samband med träning. Hälsorisker i samband med långvarigt överskott.</p>
+  <p>Boken räknar upp hälsoriskerna: övervikt, kroniska sjukdomar, sämre immunförsvar, hormonförändringar, depression och sämre prestation.</p>
+  <h4>Energitillgänglighet</h4>
+  <p><span class="term">Energitillgänglighet</span> är den energi som finns kvar efter träningen och som ska räcka till allt annat kroppen gör.</p>
+  <div class="formula">energiintag − energiförbrukning under träning = energitillgänglighet</div>
+  <p>Den kan ändras från dag till dag, och de negativa effekterna märks ofta först efter en längre tid.</p>
+  <h4>Var extra uppmärksam vid …</h4>
+  <p class="pres"><span class="tag pres">Presentationen</span> … förändrad träningsmängd, skada, sjukdom, tillväxtperioder, viktförändring, träningsläger, förändrad livssituation och stressande livssituation.</p>`},
+ {t:"Energiförbrukning", s:"basalmetabolism, aktivitet, matsmältning", p:"s. 95", b:"bild 6", h:`
+  <p class="pres"><span class="tag pres">Presentationen</span> Det här påverkar vår energiförbrukning: basalmetabolism, fysisk aktivitet, rörelse som inte är träning och matsmältning.</p>
+  <p><span class="term">Basalmetabolism</span>, som boken kallar <span class="term">vilometabolism</span>, är energin som går åt för att kroppens grundläggande funktioner ska fungera i vila: kroppstemperaturen, hjärtat, hjärnan, lungorna och andra organ. För de flesta är det den största delen. Tillväxten räknas också hit.</p>
+  <p><span class="term">Fysisk aktivitet</span> är energin som går åt på träningen och i vardagen. Rörelse som inte är träning, som att gå eller cykla till skolan, räknas också. Det är den del som varierar mest mellan olika personer.</p>
+  <p><span class="term">Matsmältningen</span>, som boken kallar dietär termogenes (DIT), är energin som går åt för att bryta ner och omsätta maten du äter. Den är ungefär 10 procent av den totala förbrukningen.</p>
+  <p>Två jämnåriga med samma kön, längd och vikt kan göra av med väldigt olika mycket energi. Den som tränar och har en aktiv vardag gör av med mer än den som sitter still.</p>
+  <p class="tip">Det heter basalmetabolism. Basal betyder grund.</p>`},
+ {t:"Energi och näring", s:"vad maten ger kroppen", p:"s. 95–96", b:"bild 8–9", h:`
+  <p class="pres"><span class="tag pres">Presentationen</span> Energi och näring får du från maten du äter. Även vätska behövs. Bilden över näringsämnena visar vad de gör:</p>
+  <table class="vit">
+   <tr><th>Näringsämne</th><th>Gör</th></tr>
+   <tr><td>Kolhydrater</td><td>Ger energi</td></tr>
+   <tr><td>Fett</td><td>Ger energi, bygger upp och reparerar</td></tr>
+   <tr><td>Protein</td><td>Ger energi, bygger upp och reparerar</td></tr>
+   <tr><td>Vitaminer</td><td>Ämnesomsättningen, skyddar cellerna</td></tr>
+   <tr><td>Mineralämnen</td><td>Bygger upp och reparerar, ämnesomsättningen, skyddar cellerna</td></tr>
+   <tr><td>Vatten</td><td>Löser och transporterar näringsämnen och avfall, reglerar temperaturen</td></tr>
+  </table>
+  <p>Enligt boken får du energi från kolhydrater, fibrer, fett och protein. Alkohol ger också energi men ingen näring, och den är skadlig för hälsan och sänker prestationen. Vitaminer och mineraler ger ingen energi men behövs för näringsbalansen, och vätska behövs för vätskebalansen.</p>
+  <div class="formula">1 g kolhydrater = 4 kcal<br>1 g protein = 4 kcal<br>1 g fett = 9 kcal<br>1 g kostfiber = 2 kcal</div>
+  <h4>Energibalans eller näringsbalans?</h4>
+  <p><span class="term">Energibalans</span> betyder att du får i dig tillräcklig mängd mat. <span class="term">Näringsbalans</span> betyder att du får i dig rätt sammansättning av maten.</p>
+  <p class="tip">Energibalans = hur mycket. Näringsbalans = vad.</p>`},
+ {t:"Kolhydrater", s:"glykogen, glukos och fiber", p:"s. 96–98", b:"bild 10–11", h:`
+  <p class="pres"><span class="tag pres">Presentationen</span> Kolhydrater är ett samlingsnamn för stärkelse, socker och kostfiber. Källor: pasta, mjöl, bröd, potatis, ris, müsli, frukt och grönsaker. Lagras i kroppen som glykogen.</p>
+  <p>Enligt boken finns kolhydrater i blodet som <span class="term">glukos</span> och lagras som <span class="term">glykogen</span> i musklerna och i levern. Hjärnan behöver glukos för att fungera.</p>
+  <p>Kolhydrater är en viktig energikälla vid träning med hög intensitet. De hjälper också immunförsvaret och muskeluppbyggnaden och har en stor roll i återhämtningen. Du behöver kolhydrater varje dag, och mer när du tränar mer eller hårdare.</p>
+  <h4>Fiber</h4>
+  <p><span class="term">Fibrer</span> är kolhydrater från växtriket som inte bryts ner i matsmältningen. De håller tarmarna igång och gör att du känner dig mätt. Fiber finns i fullkornsprodukter, frukt, grönsaker, rotfrukter, gryn, frön, bönor och linser.</p>
+  <p class="pres"><span class="tag pres">Presentationen</span> För mycket fiberrik mat kan leda till för lite kolhydrater.</p>
+  <p>Boken förklarar varför: fiberrik pasta, råris, grovt bröd och frörik müsli ökar mättnadskänslan, så man blir mätt innan man fått i sig tillräckligt med kolhydrater. Välj hellre vanlig pasta och ris och mellangrovt bröd i perioder med mycket träning.</p>
+  <p class="tip">Glykogen = kolhydratlagret i muskler och lever.</p>`},
+ {t:"Fett", s:"tre sorter och var de finns", p:"s. 98", b:"bild 12–14", h:`
+  <p class="pres"><span class="tag pres">Presentationen</span> Tre sorter: fleromättat, enkelomättat och mättat. Fett lagras i fettväven och behövs för de fettlösliga vitaminerna A, D, E och K.</p>
+  <p><span class="term">Fleromättat fett</span> minskar risken för hjärt- och kärlsjukdomar. Hit hör de livsnödvändiga fettsyrorna omega-3 och omega-6, som finns särskilt i fisk, och därför rekommenderas man att äta fisk. Boken nämner också vissa alger, rapsolja, valnötter, majsolja, solrosolja och sesamfrön.</p>
+  <p><span class="term">Enkelomättat fett</span> finns främst i växtprodukter som rapsolja och olivolja, och i nötter. Boken nämner också oliver, mandlar, avokado och kyckling.</p>
+  <p><span class="term">Mättat fett</span> är sämre för oss. Det finns i djurprodukter, men inte i fisk och fågel. Ett högt intag hänger ihop med ökad risk för hjärt- och kärlsjukdomar. Boken nämner smör, ost, fet mjölk och fil, fett kött och charkuterier, kokosfett och palmolja.</p>
+  <p>Enligt boken är fett den viktigaste energikällan i vila och vid låg träningsintensitet. Fett behövs också för att bilda hormoner och reparera celler, skyddar organen och hjälper till att reglera kroppstemperaturen.</p>
+  <p class="tip">ADEK = de fettlösliga vitaminerna.</p>`},
+ {t:"Protein", s:"aminosyror och fullvärdigt protein", p:"s. 99", b:"bild 15, 27–29", h:`
+  <p class="pres"><span class="tag pres">Presentationen</span> Protein är kroppens byggstenar och består av aminosyror. Det finns 20 aminosyror, och nio av dem är essentiella och måste komma från kosten. Protein lagras inte i kroppen på samma sätt som fett och kolhydrater, och måste därför ätas vid varje måltid.</p>
+  <h4>Fullvärdigt protein</h4>
+  <p>Ett <span class="term">fullvärdigt protein</span> innehåller alla de aminosyror som kroppen inte kan tillverka själv, till exempel kött och fisk. Vegetabiliska proteiner är inte fullvärdiga, utom sojaprotein, som dock inte är lika effektivt som till exempel kött. Veganer och vegetarianer behöver därför variera sina proteinkällor.</p>
+  <h4>Vad protein gör</h4>
+  <p>Protein ger energi, men det är inte dess viktigaste uppgift. Enligt boken behövs det för att reparera celler som skadats under träningen och för att bygga upp muskler och andra vävnader.</p>
+  <h4>Hur mycket?</h4>
+  <p class="pres"><span class="tag pres">Presentationen</span> Ungefär 1,5 gram protein per kilo kroppsvikt för den som tränar och ungefär 0,8 gram för den som inte tränar. Ungefär 20 gram protein finns i 100 gram lax, kycklingfilé, nötkött, skinka eller nötter, i 2 dl kvarg eller i 3 ägg.</p>
+  <h4>Proteinshake och proteinbars?</h4>
+  <p class="pres"><span class="tag pres">Presentationen</span> Fördelar: ganska billigt jämfört med många andra proteinrika livsmedel, snabbt och enkelt, och bra om man har lågt proteinintag i den vanliga kosten. Nackdelar: byter man ut för mycket av maten riskerar man att missa viktiga näringsämnen, för mycket protein ger mycket kalorier, och bars kan innehålla mycket kalorier och socker.</p>
+  <p>Boken säger att proteintillskott inte behövs för att prestera eller bygga muskler, eftersom man får i sig tillräckligt med vanlig mat.</p>`},
+ {t:"Vitaminer och mineraler", s:"inget bränsle, men nödvändiga", p:"s. 100", b:"bild 16–17", h:`
+  <h4>Vitaminer</h4>
+  <p class="pres"><span class="tag pres">Presentationen</span> Vitaminer behövs i små mängder men är essentiella, kroppen kan inte bygga upp dem själv. De har mycket viktiga uppgifter och ger ingen energi i sig, men behövs för att vi ska kunna använda energin. De påskyndar kemiska reaktioner, deltar i utvinningen av energi och i bildandet av vävnad, ingår i hormoner och i upptaget av näringsämnen och behövs för ämnesomsättningen. Vitaminer finns i grönsaker, frukt, ägg och fullkorn. D-vitamin finns i fisk och kantareller. Mer är inte bättre!</p>
+  <p>Vitaminerna A, D, E och K är <span class="term">fettlösliga</span>. Det togs upp under fett i presentationen.</p>
+  <p>Boken säger att du oftast får i dig det du behöver om du äter varierat med frukt och grönt, 500 gram om dagen. Kosttillskott ska du bara ta vid en påvisad brist eller om läkaren säger det.</p>
+  <h4>Mineralämnen</h4>
+  <p class="pres"><span class="tag pres">Presentationen</span> Mineraler finns i och omkring varje cell och i kroppsvätskorna, och de hjälper immunförsvaret. Kalcium och fosfor stärker och bygger upp skelettet. Järn hjälper till med syresättningen. Alla mineraler behövs för att vi ska fungera. Kost som är rik på mineraler är frukt, grönsaker, fisk och skaldjur.</p>
+  <h4>Fördjupning</h4>
+  <p class="lek"><span class="tag lekt">Fördjupning</span> Det här står inte i presentationen eller boken, men det är bra att kunna. Det bygger på Livsmedelsverket.</p>
+  <p>Järn behövs för hemoglobinet i de röda blodkropparna, som transporterar syre till musklerna. Järn finns i rött kött, blodpudding, leverpastej, bönor, linser och fullkorn. C-vitamin i samma måltid hjälper kroppen att ta upp järnet. Tjejer förlorar järn med mensen, och nästan var tredje tjej i årskurs 2 på gymnasiet har järnbrist.</p>
+  <p>Kalcium finns mest i mjölk, fil, yoghurt och ost. D-vitamin behövs för att kroppen ska kunna ta upp kalciumet.</p>
+  <table class="vit">
+   <tr><th></th><th>Behövs till</th><th>Finns i</th></tr>
+   <tr><td>A</td><td>Synen, huden och immunförsvaret</td><td>Lever, morötter, mörkgröna grönsaker, mjölk</td></tr>
+   <tr><td>B</td><td>Frigör energi ur maten, nerverna, röda blodkroppar</td><td>Fullkorn, kött, fisk, ägg, mjölk, baljväxter</td></tr>
+   <tr><td>C</td><td>Immunförsvaret, hjälper kroppen ta upp järn</td><td>Citrusfrukter, kiwi, paprika, broccoli, bär</td></tr>
+   <tr><td>D</td><td>Tar upp kalcium till skelettet</td><td>Fet fisk, kantareller, berikad mjölk, solljus</td></tr>
+   <tr><td>E</td><td>Skyddar cellerna</td><td>Oljor, nötter, frön</td></tr>
+   <tr><td>K</td><td>Får blodet att levra sig</td><td>Gröna bladgrönsaker, kål</td></tr>
+  </table>`},
+ {t:"Vätska", s:"vätskebalans och kiss", p:"s. 101", b:"bild 18", h:`
+  <p class="pres"><span class="tag pres">Presentationen</span> Vätskebehovet påverkas av klimatet, svetten och hur effektivt du gör dig av med värme. Vatten reglerar bland annat kroppstemperaturen. Ungefär 5 dl får vi från maten. Det är viktigt att dricka under träningen, eftersom törst är ett sent tecken. Man kan också dricka för mycket.</p>
+  <p>Enligt boken spelar också typen av träning in. Mat som soppa och frukt innehåller vätska.</p>
+  <p class="lek"><span class="tag lekt">Fördjupning</span> Varken presentationen eller boken anger en total mängd per dag. En vanlig riktlinje är ungefär 2–3 liter vätska om dagen från både mat och dryck, och mer när du tränar eller när det är varmt.</p>
+  <h4>Vätska och träning</h4>
+  <p>Tappar du mer än 2 procent av kroppsvikten i vätska under träningen kan prestationen försämras vid längre pass. Vätskebrist ger huvudvärk, illamående och förvirring. Hjärtat får jobba hårdare och träningen känns orimligt jobbig.</p>
+  <p>För mycket vätska är inte heller bra. Dricker du för mycket späds <span class="term">elektrolyterna</span>, alltså salterna, ut i kroppen, och symtomen liknar vätskebrist.</p>
+  <p class="tip">Kisset ska vara klart till ljusgult. Mörkgult betyder drick mer.</p>`},
+ {t:"Koststrategi", s:"periodisering och måltidsordning", p:"s. 102, 104", b:"bild 20–21, 30", h:`
+  <p class="pres"><span class="tag pres">Presentationen</span> Koststrategier för tränande ungdomar: periodisering, måltidsordning, mat räcker, matdagbok och att det är individuellt.</p>
+  <h4>Periodisering</h4>
+  <p>Maten ska följa träningen. En tuff träningsdag kräver mer energi, framför allt från kolhydrater. Även vilodagen kräver energi, så att du återhämtar dig till nästa pass. Tränar du mer behöver du äta mer, till exempel ett extra mellanmål eller kvällsmål eller större huvudmål.</p>
+  <h4>Måltidsordning</h4>
+  <p class="pres"><span class="tag pres">Presentationen</span> Frukost, mellanmål, lunch, mellanmål, middag och kvällsmål.</p>
+  <p>Boken säger att man ska sprida maten över dagen och äta ungefär var tredje till fjärde timme. Ät alltid efter ett träningspass, även om det slutar sent. Sötsug kan vara ett tecken på att du ätit för lite eller fel sammansatta måltider.</p>
+  <h4>Mat räcker!</h4>
+  <p class="pres"><span class="tag pres">Presentationen</span> Energibalans, näringsbalans och vätskebalans.</p>
+  <p>Boken säger att du kommer långt med att planera och variera maten, äta från alla näringsgrupper och inte hoppa över måltider. Kosttillskott behövs bara om du har brist på något.</p>`},
+ {t:"Före, under och efter", s:"match, träning och återhämtning", p:"s. 102–104", b:"bild 22–26", h:`
+  <h4>Före</h4>
+  <p class="pres"><span class="tag pres">Presentationen</span> Prova inte något nytt! Var noga med vad och hur mycket du äter samma dag och dagarna innan. Ät 2–4 timmar innan start.</p>
+  <p>Boken säger att regel nummer ett är att aldrig prova något nytt på tävlingsdagen eller dagen innan. Hård aktivitet kan göra magen extra känslig. Testa olika upplägg på träning och använd det som fungerar. Äter du 4 timmar innan kan du fylla på med något litet, till exempel en banan, när det närmar sig start.</p>
+  <h4>Under</h4>
+  <p class="pres"><span class="tag pres">Presentationen</span> Glykogenförråden räcker 60–90 minuter. Rekommendationen är 30–60 gram kolhydrater i timmen under fysisk aktivitet.</p>
+  <p>Boken säger att ungdomar troligen inte kan lagra lika mycket kolhydrater som vuxna, så vid pass längre än en timme är det extra viktigt att fylla på. Välj något med lite fiber som snabbt går ut i blodet: banan, torkad frukt, blåbärssoppa, ljust bröd eller starkt blandad saft. Drick ungefär var tjugonde minut.</p>
+  <h4>Efter</h4>
+  <p class="pres"><span class="tag pres">Presentationen</span> Återhämtningsmål behövs om du tränar flera pass om dagen, har svårt att få i dig tillräckligt med energi, har mer än 2 timmar till nästa måltid eller är inne i en tung tränings- eller tävlingsperiod eller växer mycket.</p>
+  <p>Boken säger att du ska äta nära inpå passet. Återhämtningsmålet ska innehålla <span class="term">kolhydrater</span> som fyller på glykogenet, <span class="term">protein</span> som bygger upp musklerna och <span class="term">vätska</span> som återställer vätskebalansen. Fett behövs inte just då. Bokens exempel är en banan och en drickyoghurt.</p>
+  <h4>Mellanmål under och efter träning</h4>
+  <p class="small">Från presentationen, bild 26.</p>
+  <table class="vit">
+   <tr><th>Mellanmål</th><th>Kolhydrater</th><th>Protein</th></tr>
+   <tr><td>1 litet paket russin</td><td>30 g</td><td>1 g</td></tr>
+   <tr><td>2,5 dl fruktyoghurt</td><td>30 g</td><td>8 g</td></tr>
+   <tr><td>1 flaska drickyoghurt</td><td>40 g</td><td>10,5 g</td></tr>
+   <tr><td>3 dl nypon- eller blåbärssoppa</td><td>30 g</td><td>0,5 g</td></tr>
+   <tr><td>5 dl sportdryck</td><td>30 g</td><td>0 g</td></tr>
+   <tr><td>1 Risifrutti</td><td>35 g</td><td>5 g</td></tr>
+   <tr><td>1 banan</td><td>25 g</td><td>1 g</td></tr>
+   <tr><td>1 portion gröt</td><td>25 g</td><td>5 g</td></tr>
+   <tr><td>1 fralla med ost och skinka</td><td>30 g</td><td>12 g</td></tr>
+   <tr><td>1 Pucko eller chokladdryck</td><td>30 g</td><td>10,5 g</td></tr>
+  </table>`},
+ {t:"Ätstörningar och var du får hjälp", s:"inte i boken eller presentationen", p:"lektionen", b:"", h:`
+  <p class="lek"><span class="tag lekt">1177</span> Det här står varken i boken eller i presentationen. Det bygger på 1177. Kolla gärna med läraren vad ni gick igenom.</p>
+  <p>En <span class="term">ätstörning</span> är en psykisk sjukdom där tankar om mat, kropp och vikt tar mycket plats och påverkar både hur man mår och hur kroppen fungerar. Den syns inte alltid utanpå. Det går att bli frisk, och det är lättare ju tidigare man får hjälp.</p>
+  <p><span class="term">Anorexi</span>: man äter för lite och är rädd för att gå upp i vikt.</p>
+  <p><span class="term">Bulimi</span>: man hetsäter återkommande och försöker sedan göra sig av med maten, till exempel genom att kräkas eller träna väldigt mycket.</p>
+  <p><span class="term">Hetsätningsstörning</span>: man hetsäter återkommande utan att försöka göra sig av med maten.</p>
+  <p>Ett annat exempel är <span class="term">ARFID</span>, där man bara äter några få utvalda saker. Inom idrotten pratar man också om relativ energibrist, RED-S, när kroppen under lång tid får för lite energi i förhållande till träningen.</p>
+  <h4>Här kan du söka hjälp</h4>
+  <p>På skolan finns elevhälsan, alltså skolsköterskan och kuratorn. Du kan också vända dig till ungdomsmottagningen (umo.se), vårdcentralen eller BUP, eller ringa 1177. Du som är under 18 kan själv kontakta BUP, ungdomsmottagningen och elevhälsan.</p>
+  <p>Föreningen Frisk &amp; Fri har chatt och telefon, både för den som är drabbad och för anhöriga och kompisar. SHEDO har chatt och mejl.</p>
+  <p>Är du orolig för en lagkompis kan du prata med en vuxen du litar på, till exempel tränaren eller skolsköterskan. Vid akut fara, ring 112.</p>`}
+];
+
+/* Frågor. g = grupper av alternativ (alla grupper måste träffas), min = minst så många alternativ, req = måste finnas för Rätt.
+   ^ord = ordets början, =ord = helt ord. src = sida i boken, bild = bild i presentationen, lek = varken bok eller presentation. */
+const STUDY = [
+ {c:"Energi", q:"Vad är energibalans?", src:"s. 92", bild:"3",
+  a:"Energibalans är jämvikten mellan energiintag och energiförbrukning: intag = förbrukning. I balans har du varken brist eller överskott på kroppens förråd av fett, protein och kolhydrater. Positiv energibalans betyder att mer energi kommer in än går ut. Negativ energibalans betyder att mer energi går ut än kommer in.",
+  p:[{t:"Jämvikt mellan energiintag och energiförbrukning", g:[["intag","äter","får i sig","får i dig","tillför","=in"],["förbruk","gör av med","gör åt","förbrän","=ut"]]},
+     {t:"Intag = förbrukning, varken brist eller överskott", g:[[" = ","varken","lika mycket","jämvikt","jämnvikt","samma mängd","lika stor","ingen brist","inget överskott","balans mellan"]]},
+     {t:"Positiv och negativ energibalans", g:[["positiv","negativ","underskott","överskott"]]}]},
+ {c:"Energi", q:"Vad betyder katabolism och anabolism?", src:"s. 92", bild:"4",
+  a:"Katabolism är de nedbrytande reaktionerna i kroppen, som bryter ner maten vi äter för att utvinna energi. Anabolism är de uppbyggande reaktionerna, som använder det nedbrutna materialet för att bygga nytt i cellerna. Tillsammans kallas de metabolism eller ämnesomsättning. Boken kopplar det till träning: träningen bryter ner och återhämtningen, alltså mat, vila och sömn, bygger upp.",
+  p:[{t:"Katabolism = nedbrytande reaktioner", g:[["katabol"],["bryt","^ned","^ner"]]},
+     {t:"Bryter ner maten för att utvinna energi", g:[["energi","maten"]]},
+     {t:"Anabolism = uppbyggande reaktioner", g:[["anabol"],["bygg"]]},
+     {t:"Bygger nytt i cellerna, bygger upp kroppen", g:[["cell","muskl","muskel","vävnad","bygga nytt","bygger nytt","bygga upp kroppen","bygger upp kroppen","återhämt"]]}], need:3},
+ {c:"Energi", q:"Vad händer i kroppen om du har energiunderskott?", src:"s. 92–93", bild:"7",
+  a:"Vid långvarigt energiunderskott kan kroppen bryta ner muskelvävnad, koncentrationen kan försämras, återhämtningen efter träning kan bli sämre och immunförsvaret och hormonbalansen kan påverkas. Boken lägger till sämre prestation eller platå i träningen, försenad pubertet, avstannad tillväxt, sämre benhälsa, ökad skaderisk, sömnsvårigheter, stört ätbeteende och depression. Tjejer kan få oregelbunden mens.",
+  p:[{t:"Kroppen kan bryta ner muskelvävnad", g:[["muskel","muskl"]]},
+     {t:"Koncentrationen kan försämras", g:[["koncentr","fokus","tänka"]]},
+     {t:"Återhämtningen efter träning blir sämre", g:[["återhämt"]]},
+     {t:"Immunförsvaret och hormonbalansen påverkas", g:[["immun","hormon","sjuk","mens"]]},
+     {t:"Boken: sämre prestation, tillväxt och pubertet", g:[["prest","platå","tillväxt","växa","pubertet"]]},
+     {t:"Boken: sämre benhälsa och ökad skaderisk", g:[["skad","^ben","skelett","fraktur"]]}], need:4},
+ {c:"Energi", q:"Vad händer i kroppen om du har energiöverskott?", src:"s. 94", bild:"7",
+  a:"I samband med träning kan ett energiöverskott ge muskelökning. Ett långvarigt överskott ger hälsorisker. Boken räknar upp dem: övervikt, kroniska sjukdomar, sämre immunförsvar, hormonförändringar, depression och sämre prestation.",
+  p:[{t:"Muskelökning i samband med träning", g:[["muskel","muskl"],["träning","tränar","samband"]]},
+     {t:"Hälsorisker vid långvarigt överskott", g:[["hälsorisk","hälsa","sjukdom","övervikt","kronisk","diabetes","hjärt","risk"]], req:true},
+     {t:"Boken: övervikt och kroniska sjukdomar", g:[["övervikt","kronisk","viktuppgång","fetma","diabetes","går upp i vikt"]]},
+     {t:"Boken: sämre immunförsvar, hormoner, depression eller prestation", g:[["immun","hormon","depression","prest"]]}], need:2},
+ {c:"Energi", q:"Vilka tre delar delas energiförbrukningen in i och vad innebär de?", src:"s. 95", bild:"6",
+  a:"Basalmetabolism, som boken kallar vilometabolism, är energin som går åt för att kroppens grundläggande funktioner ska fungera i vila, som kroppstemperaturen, hjärtat, hjärnan och lungorna. För de flesta är det den största delen. Fysisk aktivitet är energin som går åt på träningen och i vardagen, även rörelse som inte är träning. Den varierar mest mellan personer. Matsmältningen, i boken dietär termogenes, är energin som går åt för att bryta ner och omsätta maten, ungefär 10 procent.",
+  p:[{t:"Basalmetabolism (vilometabolism)", g:[["basal","vilometab","viloomsätt","vilo metab"]], req:true},
+     {t:"Basalmetabolism = grundfunktioner i vila, som hjärta, hjärna och temperatur", g:[["hjärta","hjärna","lung","organ","temperatur","grundläggande","i vila","vilar","livsviktig","andning","andas","överleva","sover"]]},
+     {t:"Fysisk aktivitet: träning och vardagsrörelse", g:[["aktivitet","rörelse","träning","tränar","vardag"]]},
+     {t:"Matsmältning: energin för att bryta ner maten", g:[["termogen","=dit","=tef","matspjälk","matsmält","smälta","bryta ner maten","bryter ner maten","omsätta maten","bryta ned maten"]]},
+     {t:"Basalen är oftast störst, aktiviteten varierar mest", g:[["varierar","störst","största","mest","10 procent","10 %","10%"]]}], need:4,
+  trap:[{g:[["balsam"]], msg:"Stava basalmetabolism, inte balsametabolism. Basal betyder grund."}]},
+ {c:"Energi", q:"Vad får vi energi ifrån?", src:"s. 95–96", bild:"8–9",
+  a:"Från maten, och då från kolhydrater, fett och protein. Enligt boken ger också de fibrer som bryts ner lite energi. Fett ger mest energi per gram: 9 kcal, mot 4 kcal för kolhydrater och protein. Vitaminer, mineraler och vatten ger ingen energi.",
+  p:[{t:"Kolhydrater", g:[["kolhydrat"]]},
+     {t:"Fett", g:[["^fett","fetter"]]},
+     {t:"Protein", g:[["protein"]]},
+     {t:"Fett ger mest per gram, fiber ger lite", g:[["fiber","fibrer","=9","=nio","mest","dubbelt"]]}], need:3},
+ {c:"Energi", q:"Vad får vi näring ifrån?", src:"s. 95", bild:"8–9",
+  a:"Från maten vi äter. Näringsämnena är kolhydrater, fett och protein, som ger energi, och vitaminer och mineraler, som inte ger energi men behövs för ämnesomsättningen, för att bygga upp och reparera och för att skydda cellerna. Även vätska behövs.",
+  p:[{t:"Från maten vi äter", g:[["mat","dryck","äter","kost"]]},
+     {t:"Kolhydrater, fett och protein", g:[["kolhydrat","^fett","protein","energigivande"]]},
+     {t:"Vitaminer och mineraler", g:[["vitamin","mineral"]]},
+     {t:"Även vätska behövs", g:[["vätska","vatten"]]}], need:3},
+ {c:"Näringsämnen", q:"Vilken mat finns det kolhydrater i?", src:"s. 96", bild:"10",
+  a:"Pasta, mjöl, bröd, potatis, ris, müsli, bulgur, gryn, havregryn, flingor, frukt, torkad frukt och grönsaker. Kostfibrer finns också i fullkorn, rotfrukter, bönor och linser.",
+  p:[{t:"Minst tre stärkelserika, som pasta, bröd, potatis och ris", g:[["=ris","riset","pasta","potatis","bröd","gryn","bulgur","flingor","müsli","musli","mjöl","couscous","nudlar","knäcke","quinoa","gröt"]], min:3},
+     {t:"Frukt eller torkad frukt", g:[["frukt","banan","russin","dadl","bär"]]},
+     {t:"Grönsaker eller annat fiberrikt", g:[["grönsak","fullkorn","rotfrukt","bönor","böna","linser","baljväx","frön"]]}], need:2},
+ {c:"Näringsämnen", q:"Vad lagras kolhydrater som i kroppen?", src:"s. 96", bild:"10",
+  a:"Som glykogen, i musklerna och i levern. I blodet finns kolhydrater som glukos, och hjärnan behöver glukos för att fungera.",
+  p:[{t:"Som glykogen", g:[["glykogen"]], req:true},
+     {t:"I musklerna", g:[["muskl","muskel"]]},
+     {t:"I levern", g:[["lever"]]},
+     {t:"I blodet som glukos", g:[["glukos","blodsocker","druvsocker"]]}], need:3},
+ {c:"Näringsämnen", q:"Vad är kolhydrater ett samlingsnamn för?", src:"s. 96", bild:"10",
+  a:"Stärkelse, socker och kostfiber.",
+  p:[{t:"Stärkelse", g:[["stärkelse"]]},{t:"Socker", g:[["socker"]]},{t:"Kostfiber", g:[["fiber","fibrer"]]}], need:3},
+ {c:"Näringsämnen", q:"Varför kan för mycket fiberrik mat leda till för lite kolhydrater?", src:"s. 98", bild:"11",
+  a:"Fiberrik mat som fiberrik pasta, råris, grovt bröd och frörik müsli ökar mättnadskänslan. Man blir mätt innan man fått i sig tillräckligt med kolhydrater när träningen kräver mycket. Därför är det bättre att välja vanlig pasta och ris och mellangrovt bröd i perioder med mycket träning. För mycket fiber kan också ge mag- och tarmproblem.",
+  p:[{t:"Fiber ökar mättnadskänslan", g:[["mätt"]], req:true},
+     {t:"Man blir mätt innan man fått i sig tillräckligt med kolhydrater", g:[["tillräckligt","för lite","inte hinner","svårt att få","innan","orkar inte äta"]]},
+     {t:"Välj vanlig pasta, ris och mellangrovt bröd", g:[["vanlig","mellangrov","ljust","vitt","välj"]]},
+     {t:"För mycket fiber kan ge mag- och tarmproblem", g:[["mag","tarm","knip","gaser"]]}], need:2},
+ {c:"Näringsämnen", q:"Det finns tre olika slags fetter. Vilka, och var finns de?", src:"s. 98", bild:"12–14",
+  a:"Fleromättat fett finns särskilt i fisk, och även i vissa alger, rapsolja, valnötter, majsolja, solrosolja och sesamfrön. Det minskar risken för hjärt- och kärlsjukdomar, och hit hör omega-3 och omega-6. Enkelomättat fett finns främst i växtprodukter som rapsolja och olivolja, och i nötter, oliver, mandlar, avokado och kyckling. Mättat fett finns i djurprodukter utom fisk och fågel, som smör, ost, fet mjölk och fil, fett kött och charkuterier, och även i kokosfett och palmolja. Ett högt intag av mättat fett ökar risken för hjärt- och kärlsjukdomar.",
+  p:[{t:"Fleromättat: fisk, valnötter, solrosolja, majsolja", g:[["fleromätt","fler omätt","fler-omätt"],["fisk","lax","makrill","sill","alg","valnöt","majs","solros","sesam","raps","omega"]]},
+     {t:"Enkelomättat: rapsolja, olivolja, nötter, avokado", g:[["enkelomätt","enkel omätt","enkel-omätt"],["oliv","raps","mandl","nöt","avokado","kyckling","växt"]]},
+     {t:"Mättat: djurprodukter som smör, ost, fett kött", g:[["^mätta"],["djur","smör","=ost","osten","mjölk","=fil","kött","chark","kokos","palm","grädde","mejeri"]]}], need:3},
+ {c:"Vitaminer och mineraler", q:"Vilka vitaminer är fettlösliga?", src:"s. 98", bild:"12",
+  a:"A, D, E och K. B-vitaminerna och C-vitamin är vattenlösliga.",
+  p:[{t:"A", g:[["=a","adek"]]},{t:"D", g:[["=d","adek"]]},{t:"E", g:[["=e","adek"]]},{t:"K", g:[["=k","adek"]]}], need:4,
+  trap:[{g:[["=b","=c","b-vitamin","c-vitamin"]], unless:["vattenlös"], msg:"B- och C-vitamin är vattenlösliga, inte fettlösliga."}]},
+ {c:"Näringsämnen", q:"Vad är protein?", src:"s. 99", bild:"15",
+  a:"Protein är kroppens byggstenar och består av aminosyror. Det finns 20 aminosyror, och nio av dem är essentiella och måste komma från kosten. Protein bygger upp och reparerar, till exempel muskler efter träning. Det lagras inte i kroppen på samma sätt som fett och kolhydrater, så man behöver äta protein vid varje måltid. Ett fullvärdigt protein innehåller alla de aminosyror som kroppen inte kan tillverka själv, till exempel kött och fisk.",
+  p:[{t:"Består av aminosyror", g:[["aminosyr"]], req:true},
+     {t:"20 aminosyror, varav 9 essentiella som måste komma från kosten", g:[["=20","tjugo","=9","=nio","essentiell"]]},
+     {t:"Kroppens byggstenar: bygger upp och reparerar", g:[["byggsten","reparer","bygg","muskl","muskel","vävnad"]]},
+     {t:"Lagras inte, ät vid varje måltid, eller fullvärdigt protein", g:[["lagras inte","varje måltid","fullvärdig"]]}], need:3},
+ {c:"Näringsämnen", q:"Var finns protein?", src:"s. 99", bild:"15, 28",
+  a:"I kött, fisk, fågel, ägg och mejeriprodukter som mjölk, fil, yoghurt, kvarg och ost. Kött och fisk är fullvärdigt protein, alltså med alla essentiella aminosyror. Vegetabiliska källor som bönor, linser, nötter och soja är inte fullvärdiga, utom soja, så den som äter vegetariskt behöver variera. Ungefär 20 gram protein finns i 100 gram lax, kyckling, nötkött, skinka eller nötter, i 2 dl kvarg eller i 3 ägg.",
+  p:[{t:"Animaliskt: kött, fisk, fågel, ägg, mejeriprodukter", g:[["kött","fisk","fågel","kyckling","ägg","mjölk","=ost","yoghurt","kvarg","=fil","mejeri","lax","skinka","torsk"]], min:2, req:true},
+     {t:"Vegetabiliskt: bönor, linser, soja eller nötter", g:[["bönor","böna","linser","tofu","soja","nöt","baljväx","kikärt","spannmål","ärtor","quorn","frön","vegetabil","vegetarisk"]]}], need:1},
+ {c:"Vitaminer och mineraler", q:"Varför behöver vi äta vitaminer?", src:"s. 100", bild:"16",
+  a:"Vitaminer är essentiella, kroppen kan inte bygga upp dem själv, så de måste komma från maten. De behövs i små mängder och ger ingen energi i sig, men behövs för att vi ska kunna använda energin. De påskyndar kemiska reaktioner, deltar i utvinningen av energi och i bildandet av vävnad, ingår i hormoner och i upptaget av näringsämnen och behövs för ämnesomsättningen. Mer är inte bättre.",
+  p:[{t:"Kroppen kan inte bygga upp dem själv, de är essentiella", g:[["själv","essentiell","bygga upp","tillverka","bilda","måste få","från maten"]]},
+     {t:"Ger ingen energi i sig, men behövs för att använda energin", g:[["ingen energi","inte energi","ingen direkt","använda energin","utvinn","frigör","energin ur","energi ur"]]},
+     {t:"Viktiga uppgifter: kemiska reaktioner, vävnad, hormoner, ämnesomsättning", g:[["kemisk","reaktion","vävnad","hormon","upptag","ämnesomsätt","process","tillväxt","immun","viktiga uppgifter","funktion"]]}], need:2},
+ {c:"Vitaminer och mineraler", q:"Vilka vitaminer har vi tagit upp?", bild:"12, 16",
+  a:"I presentationen tas de fettlösliga vitaminerna A, D, E och K upp, och särskilt D-vitamin, som finns i fisk och kantareller. Som fördjupning: B-vitaminerna och C-vitamin är vattenlösliga.",
+  p:[{t:"De fettlösliga: A, D, E och K", g:[["=a","adek"],["=d","adek","d-vitamin"],["=e","adek"],["=k","adek"]], req:true},
+     {t:"Särskilt D-vitamin", g:[["d-vitamin","vitamin d","=d"]]}], need:1},
+ {c:"Vitaminer och mineraler", q:"Var hittar du dessa vitaminer?", src:"s. 100", bild:"16",
+  a:"I grönsaker, frukt, ägg och fullkorn. D-vitamin finns i fisk och kantareller. Boken säger att du oftast får i dig de vitaminer du behöver om du äter varierat med frukt och grönt, 500 gram om dagen.",
+  p:[{t:"Grönsaker och frukt", g:[["grönsak","frukt","grönt"]]},
+     {t:"Ägg och fullkorn", g:[["ägg","fullkorn"]]},
+     {t:"D-vitamin: fisk och kantareller", g:[["fisk","kantarell","svamp","lax"]]}], need:2},
+ {c:"Vitaminer och mineraler", q:"Vad hjälper mineralerna järn och kalcium till med i kroppen, och var får vi i oss dem?", src:"s. 100", bild:"17",
+  a:"Järn hjälper till med syresättningen, alltså att transportera syre i blodet. Kalcium bygger tillsammans med fosfor upp och stärker skelettet. Mineraler finns i och omkring varje cell och i kroppsvätskorna och hjälper immunförsvaret. Kost som är rik på mineraler är frukt, grönsaker, fisk och skaldjur. Som fördjupning: kalcium finns mest i mjölk, yoghurt och ost, och järn i rött kött, blodpudding, bönor och fullkorn.",
+  p:[{t:"Järn hjälper till med syresättningen", g:[["syre","hemoglobin","blodkropp"]]},
+     {t:"Kalcium bygger upp och stärker skelettet", g:[["skelett","^ben","tänder"]]},
+     {t:"Mineralrik kost: frukt, grönsaker, fisk och skaldjur", g:[["frukt","grönsak","fisk","skaldjur"]]},
+     {t:"Fördjupning: kalcium i mjölkprodukter, järn i kött", g:[["mjölk","=ost","yoghurt","mejeri","kött","blodpudding","bönor"]]}], need:3},
+ {c:"Vitaminer och mineraler", q:"Vad händer i kroppen om vi inte har näringsbalans?", src:"s. 95–96", bild:"8, 30",
+  a:"Näringsbalans betyder att du får i dig rätt sammansättning av maten, alltså alla näringsämnen i lagom mängd. Saknas något blir det brist. Du blir trött, presterar och återhämtar dig sämre och blir lättare sjuk. Brist på järn kan ge blodbrist, och för lite kalcium ger ett svagare skelett. Boken säger att man behöver både energi- och näringsbalans för att utvecklas normalt samtidigt som man tränar.",
+  p:[{t:"Näringsbalans = rätt sammansättning av maten", g:[["sammansättning","alla näringsämnen","rätt näring","rätt mat","varierat","allsidig"]]},
+     {t:"Brist på något näringsämne", g:[["brist"]]},
+     {t:"Trötthet, sämre prestation och återhämtning", g:[["trött","prest","orka","återhämt"]]},
+     {t:"Lättare sjuk, sämre immunförsvar", g:[["immun","sjuk","infektion"]]},
+     {t:"Sämre utveckling, blodbrist eller svagare skelett", g:[["blodbrist","anemi","järnbrist","skelett","fraktur","^ben","tillväxt","utveckl"]]}], need:3},
+ {c:"Vätska och träning", q:"Vad avgör hur mycket vatten vi behöver dricka?", src:"s. 101", bild:"18",
+  a:"Klimatet, hur mycket du svettas och hur effektivt du gör dig av med värme. Enligt boken spelar också typen av träning in. Mat som soppa och frukt innehåller vätska, och ungefär 5 dl får vi från maten.",
+  p:[{t:"Klimatet", g:[["klimat","varm","väder","höjd","värme"]]},
+     {t:"Hur mycket du svettas", g:[["svett"]]},
+     {t:"Hur effektivt du gör dig av med värme", g:[["värme","temperatur","kyla"]]},
+     {t:"Boken: typen av träning", g:[["träning","tränar","aktivitet","ansträng"]]}], need:3},
+ {c:"Vätska och träning", q:"Hur mycket vätska behöver en människa normalt få i sig per dag?", src:"s. 101", bild:"18", fordj:true,
+  a:"Presentationen och boken säger att vi får ungefär 5 dl vätska från maten, och resten från dryck. Ingen av dem anger en total mängd. En vanlig riktlinje är ungefär 2–3 liter vätska per dag totalt, och mer när du tränar eller det är varmt. Kisset ska vara klart till ljusgult.",
+  p:[{t:"Ungefär 2–3 liter totalt per dag", g:[["=2","två","=3","tre","2-3"],["liter"]]},
+     {t:"Ungefär 5 dl från maten", g:[["5 dl","fem dl","5dl","mat"]]},
+     {t:"Mer när du tränar eller det är varmt", g:[["mer","extra","träning","tränar","varm","svett"]]}], need:2},
+ {c:"Vätska och träning", q:"Vad händer i kroppen om vi inte har vätskebalans?", src:"s. 101", bild:"18",
+  a:"Vid vätskebrist kan prestationen försämras, redan om du tappar mer än 2 procent av kroppsvikten i vätska. Du kan få huvudvärk, bli illamående och förvirrad, hjärtat får jobba hårdare och träningen känns orimligt jobbig. Törst är ett sent tecken. Dricker du för mycket späds elektrolyterna, alltså salterna, ut i kroppen, och symtomen liknar vätskebrist.",
+  p:[{t:"Prestationen blir sämre, träningen känns jobbig", g:[["prest","2 %","2%","2 procent","jobbig","orka","sämre"]]},
+     {t:"Huvudvärk, illamående och förvirring", g:[["huvudvärk","illamå","förvirr","yr","trött"]]},
+     {t:"Hjärtat får jobba hårdare", g:[["hjärta"]]},
+     {t:"För mycket vätska späder ut salterna", g:[["elektrolyt","salt","späd","för mycket"]]}], need:3},
+ {c:"Vätska och träning", q:"Hur långt innan träning, tävling eller match behöver du äta?", src:"s. 103", bild:"22",
+  a:"2–4 timmar innan start. Äter du så tidigt som 4 timmar innan kan du fylla på med något litet när det närmar sig start, till exempel en banan. Var noga med vad och hur mycket du äter samma dag och dagarna innan.",
+  p:[{t:"2–4 timmar innan start", g:[["=2","=3","=4","två","tre","fyra","2-4"],["timm"]], req:true},
+     {t:"Något litet nära start, som en banan", g:[["banan","mellanmål","något lätt","litet","fylla på","fyll på"]]},
+     {t:"Var noga samma dag och dagarna innan", g:[["dagarna innan","dagen innan","samma dag","noga","fiber","fet"]]}], need:1},
+ {c:"Vätska och träning", q:"Varför bör du inte testa ny mat innan en tävling eller match?", src:"s. 102–103", bild:"22",
+  a:"Du vet inte hur kroppen reagerar på den nya maten, och hård aktivitet kan göra magen extra känslig, så det kan bli problem med magen och tarmarna mitt i matchen. Regel nummer ett är att aldrig prova något nytt på tävlingsdagen eller dagen innan. Testa nya saker på träning och använd det som fungerar.",
+  p:[{t:"Du vet inte hur kroppen reagerar", g:[["vet inte","reager","osäker","ovan","oklart","inte van"]]},
+     {t:"Magen kan bli känslig: mag- och tarmproblem", g:[["mag","tarm","illamå","diarré","knip","kräk","känslig"]]},
+     {t:"Testa på träning och använd det som fungerar", g:[["på träning","på en träning","på träningen","utvärder","fungerar","funkar","brukar","van vid"]]}], need:2},
+ {c:"Vätska och träning", q:"Hur länge räcker glykogenförråden?", src:"s. 103", bild:"23",
+  a:"60–90 minuter. Därför rekommenderas 30–60 gram kolhydrater i timmen under längre fysisk aktivitet. Ungdomar kan troligen inte lagra lika mycket kolhydrater som vuxna, så det är extra viktigt att fylla på under pass som är längre än en timme.",
+  p:[{t:"60–90 minuter", g:[["60","90","sextio","nittio","1,5","en och en halv"]], req:true},
+     {t:"Fyll på med kolhydrater vid längre pass", g:[["30","fylla på","fyll på","längre pass","kolhydrat","ungdom","vuxna"]]}], need:1},
+ {c:"Vätska och träning", q:"Ge två exempel på bra mat under en aktivitet.", src:"s. 103", bild:"23, 26",
+  a:"Till exempel banan, russin eller annan torkad frukt, blåbärs- eller nyponsoppa, sportdryck, starkt blandad saft eller ljust bröd. Välj något med lite fiber, så att kolhydraterna snabbt går ut i blodet och kan användas som bränsle.",
+  p:[{t:"Två exempel, som banan, russin, blåbärssoppa, sportdryck eller saft", g:[["banan","torkad frukt","russin","dadl","blåbärssoppa","nyponsoppa","soppa","ljust bröd","vitt bröd","saft","sportdryck","=gel","energibar","druvsocker","juice","fruktyoghurt","drickyoghurt","risifrutti","mannafrutti"]], min:2, req:true},
+     {t:"Lättsmält med lite fiber och snabba kolhydrater", g:[["lättsmält","fiber","snabb","socker","kolhydrat"]]}], need:1},
+ {c:"Vätska och träning", q:"Efter en träning behöver man fylla på med återhämtningsmål snabbt. När?", src:"s. 103", bild:"24",
+  a:"Det behövs om du tränar flera pass om dagen, har svårt att få i dig tillräckligt med energi, har mer än 2 timmar till nästa måltid eller är inne i en tung tränings- eller tävlingsperiod eller växer mycket. Ät det nära inpå passet. Slutar träningen nära en måltid fungerar måltiden som återhämtningsmål.",
+  p:[{t:"Du tränar flera pass om dagen", g:[["flera pass","fler pass","två pass","flera träningar","tränar mycket"]]},
+     {t:"Du har svårt att få i dig tillräckligt med energi", g:[["svårt","tillräckligt med energi","för lite energi"]]},
+     {t:"Mer än 2 timmar till nästa måltid", g:[["2 timmar","två timmar","2h","nästa måltid"]]},
+     {t:"Tung tränings- eller tävlingsperiod, eller växer mycket", g:[["tung","växer","tävlingsperiod","träningsperiod"]]},
+     {t:"Nära inpå passet", g:[["direkt","nära inpå","så fort","så snart","30","trettio","snabbt","genast","med en gång","efter passet","efter träning"]]}], need:3},
+ {c:"Vätska och träning", q:"Vad ska ett återhämtningsmål innehålla? Ge förslag på ett.", src:"s. 104", bild:"24, 26",
+  a:"Kolhydrater som fyller på glykogenförråden, protein som bygger upp musklerna och vätska som återställer vätskebalansen. Det behöver inte innehålla fett. Förslag: en drickyoghurt och en banan, en Pucko eller chokladdryck, en fralla med ost och skinka, eller fruktyoghurt.",
+  p:[{t:"Kolhydrater som fyller på glykogenet", g:[["kolhydrat"]]},
+     {t:"Protein som bygger upp musklerna", g:[["protein"]]},
+     {t:"Vätska", g:[["vätska","vatten","dryck","dricka"]]},
+     {t:"Ett förslag, som drickyoghurt och banan", g:[["banan","yoghurt","mjölk","smörgås","macka","fralla","=ost","skinka","kvarg","juice","müsli","musli","keso","ägg","tunnbröd","choklad","pucko","risifrutti","mannafrutti","gröt","russin","soppa"]], min:2}], need:3},
+ {c:"Hälsa", q:"Nämn tre ätstörningar och minst två ställen där du kan söka hjälp.", lek:true,
+  a:"Tre ätstörningar är anorexi, bulimi och hetsätningsstörning. Vid anorexi äter man för lite och är rädd för att gå upp i vikt. Vid bulimi hetsäter man återkommande och försöker sedan göra sig av med maten. Vid hetsätningsstörning hetsäter man återkommande utan att göra sig av med maten. Hjälp finns hos elevhälsan, alltså skolsköterskan eller kuratorn, på ungdomsmottagningen, vårdcentralen, BUP och 1177. Föreningarna Frisk & Fri och SHEDO har chatt och telefon eller mejl.",
+  p:[{t:"Anorexi", g:[["anorexi"]]},
+     {t:"Bulimi", g:[["bulimi"]]},
+     {t:"Hetsätningsstörning eller ARFID", g:[["hetsät","arfid","ortorexi","orthorexi"]]},
+     {t:"Två ställen att söka hjälp", g:[["elevhälsa","skolsköterska","kurator","ungdomsmottagning","=umo","vårdcentral","=bup","1177","frisk","shedo","ätstörningszon","tjejzon","=bris","läkare","psykolog"]], min:2}], need:4}
+];
+
+const QUIZ = [
+ ["Vad betyder positiv energibalans?",["Mer energi går ut än kommer in","Mer energi kommer in än går ut","Lika mycket in som ut","Att man äter nyttigt"],1,"Positiv = energi in är större än energi ut. Negativ = energi ut är större än energi in."],
+ ["Vad gör katabolismen enligt presentationen?",["Bygger nytt i cellerna","Bryter ner maten vi äter för att utvinna energi","Lagrar fett","Reglerar temperaturen"],1,"Katabolism är de nedbrytande reaktionerna. Anabolism är de uppbyggande, som använder det nedbrutna materialet för att bygga nytt i cellerna."],
+ ["Vad kallas katabolism och anabolism tillsammans?",["Metabolism eller ämnesomsättning","Termogenes","Energitillgänglighet","Periodisering"],0,"Metabolism och ämnesomsättning betyder samma sak."],
+ ["Vilket av dessa står i presentationen om långvarigt energiunderskott?",["Kroppen kan bryta ner muskelvävnad","Man får bättre koncentration","Musklerna växer","Immunförsvaret blir starkare"],0,"Även koncentrationen och återhämtningen kan bli sämre, och immunförsvaret och hormonbalansen kan påverkas."],
+ ["Vad står i presentationen om långvarigt energiöverskott?",["Bara att man blir trött","Muskelökning i samband med träning, och hälsorisker","Avstannad tillväxt","Försenad pubertet"],1,"Boken räknar upp hälsoriskerna: övervikt, kroniska sjukdomar, sämre immunförsvar, hormonförändringar, depression och sämre prestation."],
+ ["När ska man vara extra uppmärksam på sin energibalans?",["Vid skada, sjukdom, träningsläger och tillväxtperioder","Bara på sommaren","Bara när man vilar","Aldrig, kroppen sköter sig själv"],0,"Även vid förändrad träningsmängd, viktförändring och förändrad eller stressande livssituation."],
+ ["Vad kallas energin kroppen behöver i vila för hjärta, hjärna och andning?",["Matsmältning","Basalmetabolism","Energitillgänglighet","Katabolism"],1,"Basalmetabolism. Boken kallar den vilometabolism. För de flesta är det den största delen."],
+ ["Vad räknas också till energiförbrukningen enligt presentationen, förutom basalmetabolism, fysisk aktivitet och matsmältning?",["Sömn","Rörelse som inte är träning","Tankar","Ingenting"],1,"Att gå eller cykla till skolan räknas också."],
+ ["Ungefär hur stor del av energiförbrukningen går åt till matsmältningen?",["Ungefär 1 procent","Ungefär 10 procent","Ungefär 50 procent","Ungefär 90 procent"],1,"Boken kallar den dietär termogenes, och den är ungefär 10 procent."],
+ ["Vilken del av energiförbrukningen varierar mest mellan olika personer?",["Basalmetabolismen","Matsmältningen","Fysisk aktivitet","Ingen, alla gör av med lika mycket"],2,"Hur mycket man rör sig och tränar skiljer mest."],
+ ["Vilka näringsämnen ger energi?",["Kolhydrater, fett och protein","Vitaminer och mineraler","Vatten och salt","Bara kolhydrater"],0,"Vitaminer, mineraler och vatten ger ingen energi."],
+ ["Vad gör vatten enligt presentationen?",["Ger energi","Löser och transporterar näringsämnen och avfall och reglerar temperaturen","Bygger muskler","Lagrar fett"],1,"Det står på bilden om vad näringsämnena gör."],
+ ["Vilket näringsämne ger mest energi per gram?",["Kolhydrater","Protein","Fett","Fiber"],2,"Fett ger 9 kcal per gram. Kolhydrater och protein ger 4 kcal."],
+ ["Vad är kolhydrater ett samlingsnamn för?",["Stärkelse, socker och kostfiber","Fett, protein och socker","Vitaminer och mineraler","Glukos, glykogen och fett"],0,"Stärkelse, socker och kostfiber."],
+ ["Vad lagras kolhydrater som i kroppen?",["Fett","Glykogen","Protein","Vatten"],1,"Glykogen, i musklerna och levern."],
+ ["Varför kan mycket fiberrik mat ge för lite kolhydrater?",["Fiber förstör glykogenet","Fiber gör en mätt fort","Fiber innehåller inga kolhydrater","Fiber gör en uttorkad"],1,"Man blir mätt innan man fått i sig tillräckligt."],
+ ["Var lagras fett i kroppen?",["I levern","I fettväven","I blodet","I musklerna"],1,"Det står i presentationen."],
+ ["Vilken sorts fett minskar risken för hjärt- och kärlsjukdomar?",["Mättat","Fleromättat","Transfett","Kokosfett"],1,"Fleromättat fett, med omega-3 och omega-6, finns särskilt i fisk."],
+ ["Var finns mättat fett enligt presentationen?",["I djurprodukter, men inte i fisk och fågel","I rapsolja","I fisk","I nötter"],0,"Till exempel smör, ost och fett kött. Ett högt intag ökar risken för hjärt- och kärlsjukdomar."],
+ ["Vilka vitaminer är fettlösliga?",["A, D, E och K","B och C","A, B och C","C, D och K"],0,"ADEK."],
+ ["Hur många aminosyror finns det, och hur många är essentiella?",["9, varav 2 essentiella","20, varav 9 essentiella","50, varav 20 essentiella","100, varav 9 essentiella"],1,"De essentiella måste komma från kosten."],
+ ["Vad är ett fullvärdigt protein?",["Protein som innehåller alla aminosyror kroppen inte kan tillverka själv","Protein i pulverform","Protein som ger mest energi","Allt protein från växter"],0,"Till exempel kött och fisk. Vegetabiliska proteiner är inte fullvärdiga, utom soja."],
+ ["Varför behöver man äta protein vid varje måltid?",["Det smakar bäst då","Det lagras inte i kroppen på samma sätt som fett och kolhydrater","Det ger mest energi","Annars blir man törstig"],1,"Det står i presentationen."],
+ ["Ungefär hur mycket protein behöver den som tränar enligt presentationen?",["0,2 g per kilo kroppsvikt","1,5 g per kilo kroppsvikt","5 g per kilo kroppsvikt","10 g per kilo kroppsvikt"],1,"Ungefär 0,8 g per kilo för den som inte tränar."],
+ ["Vad är en nackdel med proteinshake och proteinbars enligt presentationen?",["De är för billiga","Byter man ut för mycket mat kan man missa viktiga näringsämnen","De innehåller inget protein","De går inte att köpa"],1,"Bars kan också innehålla mycket kalorier och socker."],
+ ["Vad säger presentationen om vitaminer och energi?",["Vitaminer ger mycket energi","Vitaminer ger ingen energi i sig men behövs för att vi ska kunna använda energin","Vitaminer lagrar energi","Vitaminer är samma sak som kolhydrater"],1,"Mer är inte bättre!"],
+ ["Var finns D-vitamin enligt presentationen?",["I fisk och kantareller","I socker","I vitt bröd","I läsk"],0,"D-vitamin bildas också i huden av solljus."],
+ ["Vad hjälper järn till med enligt presentationen?",["Syresättningen","Att bygga tänder","Att lagra fett","Att reglera törsten"],0,"Järn behövs för hemoglobinet som transporterar syre."],
+ ["Vad bygger kalcium och fosfor upp?",["Musklerna","Skelettet","Levern","Fettväven"],1,"Kalcium och fosfor stärker och bygger upp skelettet."],
+ ["Vilken kost är rik på mineraler enligt presentationen?",["Frukt, grönsaker, fisk och skaldjur","Godis och läsk","Vitt bröd och pasta","Smör och grädde"],0,"Alla mineraler behövs för att vi ska fungera."],
+ ["Ungefär hur mycket vätska får vi från maten?",["Ungefär 5 dl","Ungefär 5 liter","Ingenting","Ungefär 1 dl"],0,"Resten får vi från det vi dricker."],
+ ["Varför ska man dricka under träningen?",["Törst är ett sent tecken","Det ger energi","Det bygger muskler","Det behövs inte"],0,"När du känner dig törstig har du redan börjat tappa vätska."],
+ ["Vad händer om man dricker för mycket?",["Ingenting","Elektrolyterna, salterna, späds ut","Man får mer energi","Glykogenet växer"],1,"Symtomen liknar vätskebrist."],
+ ["Hur lång tid innan start bör man äta enligt presentationen?",["10 minuter","2–4 timmar","8 timmar","Dagen innan"],1,"Äter du 4 timmar innan kan du fylla på med en banan när det närmar sig start."],
+ ["Vad är regel nummer ett före match?",["Ät så mycket som möjligt","Prova inte något nytt","Drick sportdryck","Hoppa över lunchen"],1,"Testa nya saker på träning och använd det som fungerar."],
+ ["Hur länge räcker glykogenförråden?",["10–15 minuter","60–90 minuter","5–6 timmar","Ett dygn"],1,"Därför rekommenderas 30–60 gram kolhydrater i timmen vid längre aktivitet."],
+ ["Hur mycket kolhydrater rekommenderas per timme under längre fysisk aktivitet?",["5–10 gram","30–60 gram","200–300 gram","Inga alls"],1,"Till exempel en banan och lite sportdryck."],
+ ["När behövs ett återhämtningsmål?",["När det är mer än 2 timmar till nästa måltid","När middagen är om tio minuter","Bara på vilodagar","Aldrig"],0,"Också om du tränar flera pass om dagen, har svårt att få i dig energi, är i en tung period eller växer mycket."],
+ ["Vad behöver återhämtningsmålet inte innehålla?",["Kolhydrater","Protein","Vätska","Fett"],3,"Fettet kan du få i dig vid andra måltider."],
+ ["Vilken är presentationens måltidsordning?",["Frukost, lunch, middag","Frukost, mellanmål, lunch, mellanmål, middag, kvällsmål","Bara middag","Lunch och kvällsmål"],1,"Sex måltider, spridda över dagen."],
+ ["Vad betyder ”Mat räcker!” i presentationen?",["Energibalans, näringsbalans och vätskebalans","Att man ska äta så mycket som möjligt","Att kosttillskott behövs","Att man kan hoppa över frukosten"],0,"Med vanlig mat kommer man långt."],
+ ["Vilken av dessa är en ätstörning?",["Hetsätningsstörning","Laktosintolerans","Glutenallergi","Järnbrist"],0,"Anorexi, bulimi och hetsätningsstörning är tre ätstörningar."],
+ ["Var kan du som går på gymnasiet söka hjälp om du eller en kompis har problem med ätandet?",["Elevhälsan eller ungdomsmottagningen","Bara hos en personlig tränare","Ingenstans, man ska klara det själv","Bara på akuten"],0,"Även vårdcentralen, BUP, 1177 och föreningar som Frisk & Fri."]
+];
+
+const CARDS = [
+ ["Energi","Energibalans?","Intag = förbrukning. Jämvikt mellan energiintag och energiförbrukning."],
+ ["Energi","Positiv och negativ energibalans?","Positiv: mer energi in än ut. Negativ: mer energi ut än in."],
+ ["Energi","Katabolism?","Nedbrytande reaktioner. Bryter ner maten vi äter för att utvinna energi."],
+ ["Energi","Anabolism?","Uppbyggande reaktioner. Använder det nedbrutna materialet för att bygga nytt i cellerna."],
+ ["Energi","Metabolism?","Ämnesomsättning: katabolism och anabolism tillsammans."],
+ ["Energi","Långvarigt energiunderskott?","Muskelvävnad bryts ner, sämre koncentration, sämre återhämtning, immunförsvar och hormonbalans påverkas."],
+ ["Energi","Långvarigt energiöverskott?","Muskelökning i samband med träning. Hälsorisker, enligt boken övervikt, kroniska sjukdomar med mera."],
+ ["Energi","Var extra uppmärksam på energibalansen vid …","Förändrad träningsmängd, skada, sjukdom, tillväxtperioder, viktförändring, träningsläger, förändrad eller stressande livssituation."],
+ ["Energi","Vad påverkar energiförbrukningen?","Basalmetabolism, fysisk aktivitet, rörelse som inte är träning och matsmältning."],
+ ["Energi","Basalmetabolism?","Energin i vila för hjärta, hjärna, lungor och kroppstemperatur. Oftast störst. Boken: vilometabolism."],
+ ["Energi","Matsmältningen?","Energin det kostar att bryta ner maten, ungefär 10 procent. Boken: dietär termogenes."],
+ ["Energi","Vilken del varierar mest?","Fysisk aktivitet."],
+ ["Näringsämnen","Vad gör kolhydrater, fett och protein?","Ger energi. Fett och protein bygger också upp och reparerar."],
+ ["Näringsämnen","Vad gör vitaminer och mineraler?","Ämnesomsättningen och skyddar cellerna. Mineraler bygger också upp och reparerar."],
+ ["Näringsämnen","Vad gör vatten?","Löser och transporterar näringsämnen och avfall, reglerar temperaturen."],
+ ["Näringsämnen","Kcal per gram?","Kolhydrater 4, protein 4, fett 9, kostfiber 2."],
+ ["Näringsämnen","Energibalans vs näringsbalans?","Energibalans: tillräcklig mängd mat. Näringsbalans: rätt sammansättning."],
+ ["Näringsämnen","Kolhydrater är samlingsnamn för?","Stärkelse, socker och kostfiber."],
+ ["Näringsämnen","Kolhydratkällor?","Pasta, mjöl, bröd, potatis, ris, müsli, frukt, grönsaker."],
+ ["Näringsämnen","Glykogen?","Kolhydratlagret i musklerna och levern."],
+ ["Näringsämnen","Varför kan fiber ge för lite kolhydrater?","Fiber mättar fort, så man blir mätt innan man fått i sig tillräckligt."],
+ ["Näringsämnen","Fettets tre sorter?","Fleromättat, enkelomättat och mättat."],
+ ["Näringsämnen","Var lagras fett?","I fettväven."],
+ ["Näringsämnen","Fleromättat fett?","Särskilt i fisk. Omega-3 och omega-6. Minskar risken för hjärt- och kärlsjukdomar."],
+ ["Näringsämnen","Enkelomättat fett?","Främst i växtprodukter: rapsolja, olivolja, nötter."],
+ ["Näringsämnen","Mättat fett?","I djurprodukter, inte fisk och fågel. Ökar risken för hjärt- och kärlsjukdomar."],
+ ["Näringsämnen","Protein?","Kroppens byggstenar. 20 aminosyror, varav 9 essentiella."],
+ ["Näringsämnen","Fullvärdigt protein?","Innehåller alla aminosyror kroppen inte kan tillverka själv. Till exempel kött och fisk."],
+ ["Näringsämnen","Varför protein vid varje måltid?","Det lagras inte i kroppen på samma sätt som fett och kolhydrater."],
+ ["Näringsämnen","Proteinbehov?","Ungefär 1,5 g per kilo kroppsvikt om man tränar, 0,8 g om man inte tränar."],
+ ["Näringsämnen","Ungefär 20 g protein finns i …","100 g lax, kyckling, nötkött, skinka eller nötter, 2 dl kvarg, 3 ägg."],
+ ["Vitaminer och mineraler","Fettlösliga vitaminer?","A, D, E och K."],
+ ["Vitaminer och mineraler","Vitaminer och energi?","Ger ingen energi i sig, men behövs för att vi ska kunna använda energin."],
+ ["Vitaminer och mineraler","Vad gör vitaminer?","Påskyndar kemiska reaktioner, utvinning av energi, bildar vävnad, ingår i hormoner, upptag av näringsämnen, ämnesomsättning."],
+ ["Vitaminer och mineraler","Var finns vitaminer?","Grönsaker, frukt, ägg och fullkorn. D-vitamin: fisk och kantareller."],
+ ["Vitaminer och mineraler","Järn?","Hjälper till med syresättningen."],
+ ["Vitaminer och mineraler","Kalcium?","Bygger tillsammans med fosfor upp och stärker skelettet."],
+ ["Vitaminer och mineraler","Mineralrik kost?","Frukt, grönsaker, fisk och skaldjur."],
+ ["Vätska och träning","Vad påverkar vätskebehovet?","Klimatet, svett och hur effektivt du gör dig av med värme."],
+ ["Vätska och träning","Vätska från maten?","Ungefär 5 dl."],
+ ["Vätska och träning","Törst?","Ett sent tecken. Drick under träningen."],
+ ["Vätska och träning","För mycket vätska?","Elektrolyterna (salterna) späds ut."],
+ ["Vätska och träning","Måltidsordning?","Frukost, mellanmål, lunch, mellanmål, middag, kvällsmål."],
+ ["Vätska och träning","Före match?","Prova inte något nytt! Ät 2–4 timmar innan start."],
+ ["Vätska och träning","Hur länge räcker glykogenet?","60–90 minuter."],
+ ["Vätska och träning","Kolhydrater under aktivitet?","30–60 gram i timmen."],
+ ["Vätska och träning","När behövs återhämtningsmål?","Flera pass om dagen, svårt att få i sig energi, mer än 2 timmar till nästa måltid, tung period eller växer mycket."],
+ ["Vätska och träning","Återhämtningsmålets innehåll?","Kolhydrater, protein och vätska. Till exempel drickyoghurt och banan."],
+ ["Vätska och träning","Mat räcker!","Energibalans, näringsbalans och vätskebalans."],
+ ["Hälsa","Tre ätstörningar?","Anorexi, bulimi och hetsätningsstörning."],
+ ["Hälsa","Var söker du hjälp?","Elevhälsan, ungdomsmottagningen, vårdcentralen, BUP, 1177, Frisk & Fri, SHEDO."]
+];
+
+const FIXES = [
+ {wh:"Fråga 1–4 och 8–9", was:"", is:"Svaren stämmer med lärarens presentation, bild 3–4, 7 och 10. Fråga 2 om katabolism och anabolism är nästan ordagrant samma som bild 4.", note:"", ok:true},
+ {wh:"Fråga 3 och 4, vad boken lägger till", was:"", is:"Boken räknar upp fler följder. Energiunderskott: sämre prestation, försenad pubertet, avstannad tillväxt, sämre benhälsa, ökad skaderisk, sömnsvårigheter och oregelbunden mens. Energiöverskott, alltså vilka hälsorisker: övervikt, kroniska sjukdomar, sämre immunförsvar, hormonförändringar, depression och sämre prestation (s. 93–94).", note:"Skriv gärna med några av dem på provet.", ok:true},
+ {wh:"Fråga 5, energiförbrukningen", was:"balsametabolism, fysisk aktivitet och matspjälkning", is:"Det stavas basalmetabolism. Frågan vill också veta vad delarna innebär, så förklara varje del: basalmetabolism är energin i vila för hjärta, hjärna och kroppstemperatur, fysisk aktivitet är träning och vardagsrörelse, och matsmältningen är energin det kostar att bryta ner maten (bild 6, s. 95).", note:"Basal betyder grund."},
+ {wh:"Fråga 6 och 7, energi och näring", was:"Vi får energi från … / Näring får vi ifrån …", is:"Energi får vi från kolhydrater, fett och protein. Näring får vi från maten: kolhydrater, fett, protein, vitaminer och mineraler, och även vätska behövs (bild 8–9).", note:"De här svaren saknades."},
+ {wh:"Fråga 10, samlingsnamn", was:"stärkelse, socker, kolhydrater", is:"Stärkelse, socker och kostfiber. Så står det både i presentationen (bild 10) och i boken (s. 96).", note:"Ett litet skrivfel: kostfiber blev kolhydrater."},
+ {wh:"Fråga 11, fiberrik mat", was:"… eftersom", is:"Fiberrik mat ökar mättnadskänslan, så man blir mätt innan man fått i sig tillräckligt med kolhydrater (s. 98).", note:"Svaret tog slut här."},
+ {wh:"Fråga 12, de tre fetterna", was:"enkelomättat och fleromättat fett", is:"Det tredje saknas: mättat fett, som finns i djurprodukter utom fisk och fågel, som smör, ost och fett kött (bild 14, s. 98). Och det heter majsolja, inte majolja.", note:"Kycklingen under enkelomättat fett stämmer, den står i boken."},
+ {wh:"Fråga 13, fettlösliga vitaminer", was:"", is:"Svaret saknades. Rätt svar är A, D, E och K (bild 12, s. 98).", note:"Tänk ADEK."},
+ {wh:"Fråga 14, protein", was:"Protein är aminosyror.", is:"Lägg till: protein är kroppens byggstenar och består av aminosyror. Det finns 20 aminosyror, varav 9 är essentiella och måste komma från kosten. Det lagras inte i kroppen, så man ska äta protein vid varje måltid (bild 15).", note:""},
+ {wh:"Fråga 15, var finns protein", was:"", is:"Rätt. Lägg gärna till att kött och fisk är fullvärdigt protein, och att vegetabiliska källor som bönor och linser inte är det, utom soja (bild 15).", note:"", ok:true},
+ {wh:"Fråga 16 och framåt", was:"Vi behöver äta vitaminer … och resten saknar svar", is:"Alla frågor finns under Frågor, med modellsvar som följer presentationen. Fråga 30 om ätstörningar står varken i presentationen eller boken, så den bygger på 1177.", note:""}
+];
+
+const DAY = [
+ {time:"07.00", h:"Frukost", l:["Fyll på efter natten.","Gröt, bröd, mjölk och frukt."]},
+ {time:"11.30", h:"Skollunch", l:["Ett av dagens tre huvudmål.","Ät ordentligt, det är långt till match."]},
+ {time:"14.00", h:"Balanserad måltid", l:["2–4 timmar före start.","Kolhydratrikt. Lite fibrer och fett","om magen är känslig. Drick."]},
+ {time:"17.15", h:"Något litet", l:["När det närmar sig start:","en banan eller liknande."]},
+ {time:"18.00", h:"Match", tag:"katabolt", cls:"kat", l:["Glykogenet räcker 60–90 minuter.","Drick ungefär var 20:e minut.","Långt pass: banan, saft, torkad frukt."]},
+ {time:"19.45", h:"Återhämtningsmål", tag:"anabolt", cls:"ana", l:["Nära inpå passet.","Kolhydrater + protein + vätska,","till exempel banan och drickyoghurt."]},
+ {time:"21.00", h:"Kvällsmål", tag:"anabolt", cls:"ana", l:["Återhämtningsmålet ersätter","inte maten. Ät ordentligt."]},
+ {time:"natt", h:"Sömn", tag:"anabolt", cls:"ana", l:["Kroppen bygger upp sig","starkare än innan."]}
+];
+
+const CHAINS = [
+ ["Varför tappar du ork i slutet av matchen om du ätit för lite under dagen?",["Kolhydraterna du äter lagras som glykogen i musklerna och levern","Har du ätit för lite är förråden inte fulla när matchen börjar","Vid hög intensitet är kolhydraterna det viktigaste bränslet","Glykogenet räcker bara 60–90 minuter, och ungdomar lagrar mindre än vuxna","Du blir trött, tappar fart och kan inte koncentrera dig"]],
+ ["Varför ska återhämtningsmålet innehålla kolhydrater, protein och vätska?",["Träningen är katabol: glykogen förbrukas och muskelceller skadas","Kolhydraterna fyller på glykogenförråden","Proteinet reparerar cellerna och bygger upp musklerna","Vätskan ersätter det du svettats ut","Då kan kroppen bygga upp sig, anabolt, och klara nästa pass bättre"]],
+ ["Varför kan långvarig energibrist ge fler skador?",["Kroppen får mindre energi än den gör av med under lång tid","Den byggs inte upp efter träningen","Hormonerna påverkas och benhälsan blir sämre","Immunförsvaret och återhämtningen blir sämre","Risken för skador ökar, och prestationen planar ut"]],
+ ["Varför presterar du sämre när du har vätskebrist?",["Du svettas ut vätska när du tränar","Tappar du mer än 2 procent av kroppsvikten blir prestationen sämre","Hjärtat måste jobba hårdare","Du kan få huvudvärk, bli illamående och förvirrad","Träningen känns orimligt jobbig"]],
+ ["Varför ska du välja vanlig pasta i stället för fullkornspasta i en period med mycket träning?",["Du behöver mycket kolhydrater när du tränar mycket","Fiberrik mat ökar mättnadskänslan","Du blir mätt innan du fått i dig tillräckligt","Glykogenförråden fylls inte på","Vanlig pasta och mellangrovt bröd gör det lättare att äta tillräckligt"]],
+ ["Varför ska du aldrig testa ny mat före en match?",["Hård aktivitet kan göra magen extra känslig","Du vet inte hur kroppen reagerar på den nya maten","Det kan ge mag- och tarmproblem mitt i matchen","Därför testar du nya saker på träning och utvärderar","Det som fungerar på träning använder du på matchdagen"]],
+ ["Varför kan sötsug vara en signal?",["Kroppen behöver energi","Har du ätit för lite under dagen, eller fel sammansatta måltider, blir du sugen","Till exempel bara knäckemacka och mjölk till lunch","Sötsuget brukar minska med regelbundna måltider anpassade efter skola och träning"]]
+];
+
+const CATS = ["Energi","Näringsämnen","Vitaminer och mineraler","Vätska och träning","Hälsa"];
+const PASSES = [
+ {b:"Pass 1: Energin.", html:`Läs <button class="lnk" data-topic="0">Helheten</button>, <button class="lnk" data-topic="1">Energibalans</button>, <button class="lnk" data-topic="2">Energibehov</button>, <button class="lnk" data-topic="3">Energiförbrukning</button> och <button class="lnk" data-topic="4">Energi och näring</button>. Svara sedan på <button class="lnk" data-cat="Energi">frågorna om energi</button>.`, t:"ca 40 min"},
+ {b:"Pass 2: Näringsämnena.", html:`Läs <button class="lnk" data-topic="5">Kolhydrater</button>, <button class="lnk" data-topic="6">Fett</button> och <button class="lnk" data-topic="7">Protein</button>. Svara på <button class="lnk" data-cat="Näringsämnen">frågorna om näringsämnen</button>.`, t:"ca 40 min"},
+ {b:"Pass 3: Vitaminer, vätska och mat runt träning.", html:`Läs <button class="lnk" data-topic="8">Vitaminer och mineraler</button>, <button class="lnk" data-topic="9">Vätska</button>, <button class="lnk" data-topic="10">Koststrategi</button>, <button class="lnk" data-topic="11">Före, under och efter</button> och <button class="lnk" data-topic="12">Ätstörningar</button>. Gå igenom <button class="lnk" data-gotab="match">Matchdagen</button> och svara på resten av frågorna.`, t:"ca 45 min"},
+ {b:"Pass 4: Repetition.", html:`Kör <button class="lnk" data-gotab="quiz">Quiz</button> och <button class="lnk" data-gotab="kort">Kort</button> tills det sitter. Gör sedan <button class="lnk" data-cat="Inte klara">frågorna som inte sitter än</button> och läs <button class="lnk" data-gotab="listan">Kolla listan</button>.`, t:"ca 40 min"}
+];
+
+/* ===================== HJÄLP ===================== */
+const LS = "nl-niu-";
+const load = (k,d) => { try{ const v = localStorage.getItem(LS+k); return v ? JSON.parse(v) : d; }catch(e){ return d; } };
+const store = (k,v) => { try{ localStorage.setItem(LS+k, JSON.stringify(v)); }catch(e){} };
+const esc = s => String(s).replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function shuffle(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+
+/* Flikar */
+function showTab(id){
+  document.querySelectorAll('nav.tabs button').forEach(x=>x.setAttribute('aria-selected', x.dataset.tab===id));
+  document.querySelectorAll('section.panel').forEach(p=>p.classList.toggle('active', p.id===id));
+  window.scrollTo({top:0});
+}
+document.querySelectorAll('nav.tabs button').forEach(b=>b.addEventListener('click',()=>showTab(b.dataset.tab)));
+
+/* ===================== START ===================== */
+let passDone = load('pass', {});
+document.getElementById('passes').innerHTML = PASSES.map((p,i)=>`<div class="pass"><b>${p.b}</b> ${p.html} <span class="t">${p.t}</span><label><input type="checkbox" data-pass="${i}" ${passDone[i]?'checked':''}> Klart</label></div>`).join('');
+document.getElementById('passes').addEventListener('change',e=>{
+  if(e.target.dataset.pass===undefined) return;
+  passDone[e.target.dataset.pass]=e.target.checked; store('pass',passDone);
+});
+document.getElementById('passes').addEventListener('click',e=>{
+  const b=e.target.closest('button.lnk'); if(!b) return;
+  if(b.dataset.topic!==undefined){
+    showTab('las');
+    const d=document.querySelectorAll('details.topic')[+b.dataset.topic];
+    if(d){ d.open=true; setTimeout(()=>d.scrollIntoView({block:'start'}),30); }
+  } else if(b.dataset.cat){ qcat=b.dataset.cat; renderQFilter(); renderQ(); showTab('fragor'); }
+  else if(b.dataset.gotab){ showTab(b.dataset.gotab); }
+});
+
+/* ===================== LÄS ===================== */
+document.getElementById('topics').innerHTML = TOPICS.map(t=>
+  `<details class="topic"><summary><span>${t.t}</span><small>${t.s}<br>${t.p==='lektionen'?'<span class="tag lekt">1177</span>':'Boken '+t.p+(t.b?' · '+t.b:'')}</small></summary><div class="tbody">${t.h}</div></details>`).join('');
+
+/* ===================== RÄTTNING ===================== */
+const L = 'a-z0-9åäöéü';
+const fold = s => s.replace(/[åä]/g,'a').replace(/ö/g,'o').replace(/[éè]/g,'e').replace(/ü/g,'u');
+const norm = s => String(s).toLowerCase().replace(/[–—]/g,'-').replace(/\s+/g,' ');
+function reFor(a){
+  let mode='sub';
+  if(a[0]==='^'){ mode='start'; a=a.slice(1); } else if(a[0]==='='){ mode='word'; a=a.slice(1); }
+  const e=a.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+  if(mode==='sub') return new RegExp(e);
+  if(mode==='start') return new RegExp('(^|[^'+L+'])'+e);
+  return new RegExp('(^|[^'+L+'])'+e+'(?=$|[^'+L+'])');
+}
+function prep(text){
+  const raw=norm(text);
+  return {raw, fold: /[åäö]/.test(raw) ? null : fold(raw)};
+}
+function has(T,a){
+  const al=a.toLowerCase();
+  if(reFor(al).test(T.raw)) return true;
+  if(T.fold!==null) return reFor(fold(al)).test(T.fold);
+  return false;
+}
+function pointHit(T,p){
+  if(p.min){ let c=0; for(const a of p.g[0]) if(has(T,a)) c++; return c>=p.min; }
+  return p.g.every(grp=>grp.some(a=>has(T,a)));
+}
+function gradeText(s,text){
+  const T=prep(text);
+  const hits=[]; s.p.forEach((p,i)=>{ if(pointHit(T,p)) hits.push(i); });
+  const traps=(s.trap||[]).filter(tr=>tr.g.every(grp=>grp.some(a=>has(T,a))) && !(tr.unless||[]).some(a=>has(T,a))).map(tr=>tr.msg);
+  return {hits, traps};
+}
+const needOf = s => s.need || Math.ceil(s.p.length*2/3);
+function verdictOf(s,c){
+  const reqOk = s.p.every((p,i)=>!p.req || c.includes(i));
+  if(c.length>=needOf(s) && reqOk) return 0;
+  if(c.length>=1) return 1;
+  return 2;
+}
+const VERD=['Rätt','Delvis rätt','Inte rätt än'];
+
+/* ===================== FRÅGOR ===================== */
+let notes = load('notes', {});
+const saveNotes = ()=>store('notes',notes);
+let qcat = 'Alla';
+const key = i => 'q'+(i+1);
+const isDone = i => { const n=notes[key(i)]; return !!(n && n.g && verdictOf(STUDY[i], n.c||[])===0); };
+function renderQFilter(){
+  const cats=['Alla',...CATS,'Inte klara'];
+  document.getElementById('qfilter').innerHTML = cats.map(c=>`<button class="chip" aria-pressed="${c===qcat}" data-c="${esc(c)}">${c}</button>`).join('');
+}
+document.getElementById('qfilter').addEventListener('click',e=>{
+  const c=e.target.dataset.c; if(!c) return; qcat=c; renderQFilter(); renderQ();
+});
+function renderQ(){
+  const list=document.getElementById('qlist');
+  const shown = STUDY.map((s,i)=>i).filter(i=> qcat==='Alla' || (qcat==='Inte klara' ? !isDone(i) : STUDY[i].c===qcat));
+  list.innerHTML = shown.length ? shown.map(i=>{
+    const s=STUDY[i], n=notes[key(i)]||{};
+    const c=n.c||[];
+    const v = n.g ? verdictOf(s,c) : -1;
+    return `<div class="sq ${v===0?'done':''}" data-i="${i}">
+      <div class="where"><span>Fråga ${i+1} · ${s.c}</span>${s.bild?'<span class="tag pres">Bild '+s.bild+'</span>':''}${s.src?'<span class="tag bok">Boken '+s.src+'</span>':''}${s.lek?'<span class="tag lekt">1177</span>':''}</div>
+      <div class="qt">${s.q}</div>
+      <textarea aria-label="Ditt svar på fråga ${i+1}" placeholder="Skriv ditt svar med egna ord …">${esc(n.t||'')}</textarea>
+      <div class="row"><button class="btn primary" data-act="grade">${n.g?'Rätta igen':'Rätta'}</button><button class="btn" data-act="show">${n.open?'Dölj svaret':'Visa svaret'}</button></div>
+      ${n.err?`<div class="fb"><p style="margin:0">${esc(n.err)}</p></div>`:''}
+      ${n.g?`<div class="fb"><p class="verdict v${v}">${VERD[v]}</p>
+        <p class="small" style="margin:0 0 4px">Det här ska finnas med. Har du skrivit något med egna ord, bocka i det själv.</p>
+        <ul class="checks">${s.p.map((p,j)=>`<li><label><input type="checkbox" data-j="${j}" ${c.includes(j)?'checked':''}><span class="${c.includes(j)?'hit':''}">${p.t}</span></label></li>`).join('')}</ul>
+        ${(n.tr||[]).map(m=>`<p class="trap">${esc(m)}</p>`).join('')}</div>`:''}
+      ${n.open?`<div class="ans"><p>${s.a}</p><p class="small" style="margin:0">${[s.bild?'Presentationen bild '+s.bild:'', s.src?'Boken '+s.src:'', s.lek?'1177, står varken i presentationen eller boken':'', s.fordj?'Den totala mängden är en fördjupning':''].filter(Boolean).join(' · ')}.</p></div>`:''}
+    </div>`;
+  }).join('') : `<div class="box"><p style="margin:0">Alla frågor här sitter. Snyggt!</p></div>`;
+  const done = STUDY.filter((s,i)=>isDone(i)).length;
+  document.getElementById('qprog').textContent = `${done} av ${STUDY.length} frågor är rätt.`;
+}
+const ql=document.getElementById('qlist');
+ql.addEventListener('input',e=>{
+  if(e.target.tagName!=='TEXTAREA') return;
+  const k=key(+e.target.closest('.sq').dataset.i); notes[k]=notes[k]||{}; notes[k].t=e.target.value; saveNotes();
+});
+ql.addEventListener('click',e=>{
+  const card=e.target.closest('.sq'); if(!card) return;
+  const i=+card.dataset.i, k=key(i), act=e.target.dataset.act; if(!act) return;
+  notes[k]=notes[k]||{};
+  if(act==='show'){ notes[k].open=!notes[k].open; }
+  if(act==='grade'){
+    const t=card.querySelector('textarea').value.trim();
+    notes[k].t=t;
+    if(!t){ notes[k].err='Skriv ett svar först, sedan kan det rättas.'; }
+    else { delete notes[k].err; const r=gradeText(STUDY[i],t); notes[k].c=r.hits; notes[k].tr=r.traps; notes[k].g=true; }
+  }
+  saveNotes(); renderQ();
+  const again=document.querySelector(`.sq[data-i="${i}"]`); if(again && act==='grade'){ const fb=again.querySelector('.fb'); if(fb) fb.scrollIntoView({block:'nearest'}); }
+});
+ql.addEventListener('change',e=>{
+  if(e.target.type!=='checkbox') return;
+  const i=+e.target.closest('.sq').dataset.i, k=key(i), j=+e.target.dataset.j;
+  const c=new Set(notes[k].c||[]); e.target.checked?c.add(j):c.delete(j); notes[k].c=[...c].sort((a,b)=>a-b); saveNotes(); renderQ();
+});
+document.getElementById('qreset').onclick=()=>{ notes={}; saveNotes(); renderQ(); };
+renderQFilter(); renderQ();
+
+/* ===================== QUIZ ===================== */
+let qorder=[], qi=0, qscore=0, wrong=[];
+function startQuiz(){ qorder=shuffle(QUIZ.map((q,i)=>i)); qi=0; qscore=0; wrong=[]; renderQuiz(); }
+function renderQuiz(){
+  const box=document.getElementById('quizbox');
+  if(qi>=qorder.length){
+    const pct=qscore/qorder.length;
+    const msg = pct>=0.9 ? "Riktigt starkt. Du är redo." : pct>=0.7 ? "Bra grund. Titta på det du missade." : "Läs sammanfattningen en gång till och kör igen.";
+    box.innerHTML = `<div class="qbox"><p class="qnum">Resultat</p><p class="score">${qscore} / ${qorder.length}</p><p>${msg}</p>
+      ${wrong.length?'<p><strong>Repetera:</strong></p>'+wrong.map(i=>`<p class="expl">${QUIZ[i][0]}<br><strong>${QUIZ[i][1][QUIZ[i][2]]}</strong></p>`).join(''):''}
+      <p style="margin-top:14px"><button class="btn primary" id="qagain">Kör igen</button></p></div>`;
+    document.getElementById('qagain').onclick=startQuiz; return;
+  }
+  const q=QUIZ[qorder[qi]];
+  const opts=shuffle(q[1].map((o,i)=>i));
+  box.innerHTML = `<div class="qbox"><div class="qnum">Fråga ${qi+1} av ${qorder.length}, ${qscore} rätt hittills</div>
+    <div class="qtext">${q[0]}</div>
+    ${opts.map(i=>`<button class="opt" data-i="${i}">${q[1][i]}</button>`).join('')}
+    <div id="qafter"></div></div>`;
+  box.querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(+b.dataset.i));
+}
+function answer(i){
+  const q=QUIZ[qorder[qi]], box=document.getElementById('quizbox');
+  box.querySelectorAll('.opt').forEach(b=>{ b.disabled=true; const n=+b.dataset.i; if(n===q[2]) b.classList.add('right'); else if(n===i) b.classList.add('wrong'); });
+  if(i===q[2]) qscore++; else wrong.push(qorder[qi]);
+  document.getElementById('qafter').innerHTML = `<p class="expl">${q[3]}</p><p style="margin-top:12px"><button class="btn primary" id="qnext">${qi+1<qorder.length?'Nästa fråga':'Se resultat'}</button></p>`;
+  const n=document.getElementById('qnext'); n.onclick=()=>{ qi++; renderQuiz(); }; n.focus();
+}
+startQuiz();
+
+/* ===================== KORT ===================== */
+let known = new Set(load('known', []));
+const saveKnown = ()=>store('known',[...known]);
+const ccats = ["Alla", ...new Set(CARDS.map(c=>c[0]))];
+let ccat="Alla", deck=[], idx=0, flipped=false;
+const cf=document.getElementById('cardfilter');
+cf.innerHTML = ccats.map(c=>`<button class="chip" aria-pressed="${c==='Alla'}" data-c="${esc(c)}">${c}</button>`).join('');
+cf.addEventListener('click',e=>{
+  const c=e.target.dataset.c; if(!c) return; ccat=c;
+  cf.querySelectorAll('.chip').forEach(x=>x.setAttribute('aria-pressed', x.dataset.c===c));
+  buildDeck();
+});
+function buildDeck(){
+  const all=CARDS.map((c,i)=>i).filter(i=>ccat==="Alla"||CARDS[i][0]===ccat);
+  deck = shuffle(all.filter(i=>!known.has(i))).concat(shuffle(all.filter(i=>known.has(i))));
+  idx=0; flipped=false; renderCard();
+}
+function renderCard(){
+  const c=CARDS[deck[idx]];
+  document.getElementById('fside').textContent = flipped ? "Svar" : `Fråga · ${c[0].toLowerCase()}`;
+  document.getElementById('fcontent').innerHTML = flipped ? `<div class="fa">${c[2]}</div>` : `<div class="fq">${c[1]}</div>`;
+  const nk=deck.filter(i=>known.has(i)).length;
+  document.getElementById('fcount').textContent = `${idx+1} av ${deck.length}, ${nk} kan du`;
+  document.getElementById('fknow').textContent = known.has(deck[idx]) ? "Kan den ✓" : "Jag kan den";
+}
+const flip=()=>{ flipped=!flipped; renderCard(); };
+document.getElementById('flash').addEventListener('click',flip);
+document.getElementById('flash').addEventListener('keydown',e=>{ if(e.key===' '||e.key==='Enter'){ e.preventDefault(); flip(); } });
+document.getElementById('fnext').onclick=()=>{ idx=(idx+1)%deck.length; flipped=false; renderCard(); };
+document.getElementById('fprev').onclick=()=>{ idx=(idx-1+deck.length)%deck.length; flipped=false; renderCard(); };
+document.getElementById('fknow').onclick=()=>{ const k=deck[idx]; known.has(k)?known.delete(k):known.add(k); saveKnown(); renderCard(); };
+document.getElementById('freset').onclick=()=>{ known.clear(); saveKnown(); buildDeck(); };
+buildDeck();
+
+/* ===================== MATCHDAGEN ===================== */
+(function(){
+  const svg=document.getElementById('daymap');
+  const X0=88, W=262, LH=15.5;
+  let y=18, parts=[];
+  const ys=[];
+  DAY.forEach(d=>{
+    const h=34+d.l.length*LH;
+    ys.push([y,h]);
+    y+=h+16;
+  });
+  const total=y+4;
+  svg.setAttribute('viewBox',`0 0 360 ${total}`);
+  parts.push(`<line x1="62" y1="${ys[0][0]+16}" x2="62" y2="${ys[ys.length-1][0]+16}" style="stroke:var(--ink);stroke-width:2"/>`);
+  DAY.forEach((d,k)=>{
+    const [yy,h]=ys[k];
+    parts.push(`<circle cx="62" cy="${yy+16}" r="6" style="fill:var(--hl);stroke:var(--ink);stroke-width:2"/>`);
+    parts.push(`<text x="51" y="${yy+21}" class="t-time" text-anchor="end">${d.time}</text>`);
+    parts.push(`<line x1="68" y1="${yy+16}" x2="${X0}" y2="${yy+16}" style="stroke:var(--ink);stroke-width:2"/>`);
+    parts.push(`<rect x="${X0}" y="${yy}" width="${W}" height="${h}" rx="6" class="bx ${d.cls||''}"/>`);
+    parts.push(`<text x="${X0+12}" y="${yy+22}" class="t-h">${d.h}</text>`);
+    if(d.tag) parts.push(`<text x="${X0+W-10}" y="${yy+21}" class="t-tag" text-anchor="end" style="fill:${d.cls==='kat'?'var(--red)':'var(--ok)'}">${d.tag}</text>`);
+    d.l.forEach((line,m)=>parts.push(`<text x="${X0+12}" y="${yy+40+m*LH}" class="t-s">${line}</text>`));
+  });
+  svg.insertAdjacentHTML('beforeend', parts.join(''));
+})();
+const ch=document.getElementById('chains');
+ch.innerHTML = CHAINS.map((c,i)=>`<div class="chain"><p class="cq">${c[0]}</p><button class="btn" data-ch="${i}">Visa kedjan</button><div id="chain${i}" hidden><ol>${c[1].map(x=>`<li>${x}</li>`).join('')}</ol></div></div>`).join('');
+ch.addEventListener('click',e=>{
+  const i=e.target.dataset.ch; if(i===undefined) return;
+  const d=document.getElementById('chain'+i); d.hidden=!d.hidden;
+  e.target.textContent = d.hidden ? 'Visa kedjan' : 'Dölj kedjan';
+});
+
+/* ===================== LISTAN MOT BOKEN ===================== */
+document.getElementById('fixes').innerHTML = FIXES.map(f=>`<div class="fix ${f.ok?'okay':''}"><p class="wh">${f.wh}</p>${f.was?`<p class="was">${esc(f.was)}</p>`:''}<p class="is">${f.is}</p>${f.note?`<p class="note">${f.note}</p>`:''}</div>`).join('');
+</script>
+</body>
+</html>
