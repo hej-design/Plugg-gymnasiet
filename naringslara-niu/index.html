@@ -12,7 +12,7 @@
 :root{
   --paper:#FBF7F0; --grid:rgba(214,120,40,.10); --ink:#2B2135; --soft:#665d70;
   --hl:#FFC36B; --hl-ink:#2B2135; --tab:#9ED9B8; --red:#B23A2E; --card:#ffffff;
-  --line:rgba(43,33,53,.16); --ok:#2F7D4F; --warn:#9A5B00; --lek:#3E5FA8;
+  --line:rgba(43,33,53,.16); --ok:#2F7D4F; --warn:#9A5B00; --lek:#3E5FA8; --lk:#7B3F8F;
   --head:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
   --body:"Atkinson Hyperlegible","Segoe UI",system-ui,sans-serif;
   --hand:"Caveat","Comic Sans MS",cursive;
@@ -24,7 +24,7 @@
   :root{
     --paper:#18141D; --grid:rgba(255,190,120,.06); --ink:#F1EAF4; --soft:#B5AABD;
     --hl:#F0A94A; --hl-ink:#18141D; --tab:#4FAF85; --red:#FF8A7A; --card:#221C29;
-    --line:rgba(241,234,244,.15); --ok:#6FD39A; --warn:#F2B654; --lek:#9DB8F2;
+    --line:rgba(241,234,244,.15); --ok:#6FD39A; --warn:#F2B654; --lek:#9DB8F2; --lk:#D6A8E8;
   }
 }
 *,*::before,*::after{box-sizing:border-box}
@@ -81,7 +81,8 @@ details.topic[open] summary{border-bottom:1.5px dashed var(--line)}
 .tip{font-family:var(--hand); font-size:1.35rem; color:var(--red); line-height:1.2; margin:12px 0 2px}
 .lek{border-left:4px solid var(--warn); padding:6px 10px; background:var(--paper); font-size:.93rem; color:var(--soft)}
 .tag{display:inline-block; font-family:var(--head); font-weight:700; font-size:.75rem; border-radius:99px; padding:1px 8px; border:1.5px solid currentColor; vertical-align:2px}
-.tag.bok{color:var(--ok)} .tag.pres{color:var(--lek)} .tag.lekt{color:var(--warn)}
+.tag.bok{color:var(--ok)} .tag.pres{color:var(--lek)} .tag.lekt{color:var(--warn)} .tag.lk{color:var(--lk)}
+p.lk{border-left:4px solid var(--lk); padding:6px 10px; background:var(--paper); margin:10px 0}
 p.pres{border-left:4px solid var(--lek); padding:6px 10px; background:var(--paper); margin:10px 0}
 table.vit{width:100%; border-collapse:collapse; font-size:.92rem; margin:8px 0}
 table.vit th,table.vit td{border-bottom:1px solid var(--line); padding:7px 6px; text-align:left; vertical-align:top}
@@ -174,6 +175,7 @@ footer p{margin:6px 0}
     <button role="tab" aria-selected="true" data-tab="start">Start</button>
     <button role="tab" aria-selected="false" data-tab="las">Läs</button>
     <button role="tab" aria-selected="false" data-tab="fragor">Frågor</button>
+    <button role="tab" aria-selected="false" data-tab="resonera">Resonera</button>
     <button role="tab" aria-selected="false" data-tab="quiz">Quiz</button>
     <button role="tab" aria-selected="false" data-tab="kort">Kort</button>
     <button role="tab" aria-selected="false" data-tab="match">Matchdagen</button>
@@ -201,6 +203,7 @@ footer p{margin:6px 0}
       <h3>Presentationen och boken</h3>
       <p>Svaren följer lärarens presentation, eftersom det är läraren som rättar provet. Där boken säger mer finns det med också, så att svaren blir fylligare.</p>
       <p><span class="tag pres">Bild 6</span> visar var det står i presentationen, och <span class="tag bok">Boken s. 95</span> var det står i boken.</p>
+      <p><span class="tag lk">Lektionen</span> betyder att det kommer från anteckningarna från lektionerna. Där sa läraren att procentsatserna för energiförbrukningen kommer på provet.</p>
       <p><span class="tag lekt">1177</span> betyder att det varken står i presentationen eller boken. Det gäller bara fråga 30 om ätstörningar.</p>
     </div>
   </section>
@@ -222,10 +225,21 @@ footer p{margin:6px 0}
     <p><button class="chip" id="qreset">Rensa mina svar</button></p>
   </section>
 
+  <!-- RESONERA -->
+  <section class="panel" id="resonera">
+    <h2>Resonera</h2>
+    <p class="lead">Här räcker det inte att kunna fakta. Du ska förklara varför och hur saker hänger ihop.</p>
+    <p class="small">Ett bra resonemang har flera steg: vad som händer, varför det händer och vad det leder till. Skriv med egna ord och tryck på Rätta. Bocka i de steg du har med, även om du skrev dem på ett annat sätt.</p>
+    <p class="count" id="rprog"></p>
+    <div id="rlist"></div>
+    <p><button class="chip" id="rreset">Rensa mina svar</button></p>
+  </section>
+
   <!-- QUIZ -->
   <section class="panel" id="quiz">
     <h2>Quiz</h2>
-    <p class="lead">Kryssfrågor i blandad ordning. Du får förklaringen direkt efter varje svar.</p>
+    <p class="lead">Kryssfrågor i blandad ordning. Välj om du vill köra frågorna från presentationen och boken eller från lektionsanteckningarna.</p>
+    <div class="cardbar" id="quizset"></div>
     <div id="quizbox"></div>
   </section>
 
@@ -265,7 +279,7 @@ footer p{margin:6px 0}
   </section>
 
   <footer>
-    <p><b>Källor.</b> Lärarens presentation Näringslära, Träning- och tävlingslära 1. Specialidrott – Tränings- och tävlingslära (SISU Idrottsböcker), kapitlet om idrottsnutrition, s. 90–106.</p>
+    <p><b>Källor.</b> Lärarens presentation Näringslära, Träning- och tävlingslära 1, och anteckningar från lektion 1 och 2. Specialidrott – Tränings- och tävlingslära (SISU Idrottsböcker), kapitlet om idrottsnutrition, s. 90–106.</p>
     <p>Fördjupningar och fråga 30: <a href="https://www.livsmedelsverket.se">Livsmedelsverket</a>, bland annat rapporten om järnbrist hos ungdomar (2024), <a href="https://www.1177.se">1177</a> om ätstörningar och var man söker hjälp, och <a href="https://ki.se">Karolinska institutet</a> om vätska.</p>
   </footer>
 </div>
@@ -283,6 +297,7 @@ const TOPICS = [
   <p class="pres"><span class="tag pres">Presentationen</span> Energibalans: intag = förbrukning. Negativ och positiv energibalans. Katabolism är nedbrytande reaktioner som sker i kroppen och bryter ner maten vi äter för att utvinna energi. Anabolism är uppbyggande reaktioner som använder det nedbrutna materialet för att bygga nytt i cellerna.</p>
   <p><span class="term">Energibalans</span> är skillnaden mellan energiintag och energiförbrukning. När du är i energibalans har du varken brist eller överskott på kroppens förråd av fett, protein och kolhydrater.</p>
   <p><span class="term">Positiv energibalans</span> betyder att mer energi kommer in än går ut. <span class="term">Negativ energibalans</span> betyder att mer energi går ut än kommer in.</p>
+  <p class="lk"><span class="tag lk">Lektionen</span> Negativ energibalans är för lite mat, alltså energi, i förhållande till träningen. Allt du äter förbränns, så tränar du mer behöver du äta mer för att ha balans. Efter träningen dippar energin, eftersom den är slut.</p>
   <h4>Metabolism, ämnesomsättning</h4>
   <p>Ämnesomsättningen består av nedbrytande, <span class="term">katabola</span>, och uppbyggande, <span class="term">anabola</span>, reaktioner. Båda pågår hela tiden.</p>
   <p>Boken kopplar det till träning: träningen bryter ner, och återhämtningen, alltså mat, vila och sömn, bygger upp kroppen igen så att den blir starkare och klarar träningen bättre nästa gång.</p>
@@ -303,11 +318,13 @@ const TOPICS = [
   <p class="pres"><span class="tag pres">Presentationen</span> … förändrad träningsmängd, skada, sjukdom, tillväxtperioder, viktförändring, träningsläger, förändrad livssituation och stressande livssituation.</p>`},
  {t:"Energiförbrukning", s:"basalmetabolism, aktivitet, matsmältning", p:"s. 95", b:"bild 6", h:`
   <p class="pres"><span class="tag pres">Presentationen</span> Det här påverkar vår energiförbrukning: basalmetabolism, fysisk aktivitet, rörelse som inte är träning och matsmältning.</p>
+  <p class="lk"><span class="tag lk">Lektionen</span> Procentsatserna kommer på provet. Basalmetabolism är ungefär 70 procent, och det är energin som organen behöver för att orka hålla igång. Rörelse som inte är träning är 15 procent, matsmältning 10 procent och fysisk aktivitet 5 procent.</p>
   <p><span class="term">Basalmetabolism</span>, som boken kallar <span class="term">vilometabolism</span>, är energin som går åt för att kroppens grundläggande funktioner ska fungera i vila: kroppstemperaturen, hjärtat, hjärnan, lungorna och andra organ. För de flesta är det den största delen. Tillväxten räknas också hit.</p>
   <p><span class="term">Fysisk aktivitet</span> är energin som går åt på träningen och i vardagen. Rörelse som inte är träning, som att gå eller cykla till skolan, räknas också. Det är den del som varierar mest mellan olika personer.</p>
   <p><span class="term">Matsmältningen</span>, som boken kallar dietär termogenes (DIT), är energin som går åt för att bryta ner och omsätta maten du äter. Den är ungefär 10 procent av den totala förbrukningen.</p>
   <p>Två jämnåriga med samma kön, längd och vikt kan göra av med väldigt olika mycket energi. Den som tränar och har en aktiv vardag gör av med mer än den som sitter still.</p>
-  <p class="tip">Det heter basalmetabolism. Basal betyder grund.</p>`},
+  <p class="tip">Det heter basalmetabolism. Basal betyder grund.</p>
+  <p>Att fysisk aktivitet bara är 5 procent betyder inte att den är oviktig. Siffrorna gäller en genomsnittlig person. Den som tränar mycket gör av med mer, och därför är det den del som skiljer mest mellan olika personer.</p>`},
  {t:"Energi och näring", s:"vad maten ger kroppen", p:"s. 95–96", b:"bild 8–9", h:`
   <p class="pres"><span class="tag pres">Presentationen</span> Energi och näring får du från maten du äter. Även vätska behövs. Bilden över näringsämnena visar vad de gör:</p>
   <table class="vit">
@@ -373,6 +390,7 @@ const TOPICS = [
   </table>`},
  {t:"Vätska", s:"vätskebalans och kiss", p:"s. 101", b:"bild 18", h:`
   <p class="pres"><span class="tag pres">Presentationen</span> Vätskebehovet påverkas av klimatet, svetten och hur effektivt du gör dig av med värme. Vatten reglerar bland annat kroppstemperaturen. Ungefär 5 dl om dagen får vi från maten, och resten från dryck. Det är viktigt att dricka under träningen, eftersom törst är ett sent tecken. Man kan också dricka för mycket.</p>
+  <p class="lk"><span class="tag lk">Lektionen</span> Drick extra mycket för att reglera kroppstemperaturen. Drick i förebyggande syfte, alltså redan innan match och träning.</p>
   <p>Enligt boken spelar också typen av träning in. Mat som soppa och frukt innehåller vätska.</p>
   <p class="lek"><span class="tag lekt">Fördjupning</span> Varken presentationen eller boken anger en total mängd per dag. Enligt Karolinska institutet behöver en frisk vuxen ungefär 2 liter vätska per dygn, från både mat och dryck. Den som tränar, svettas mycket eller är i värme behöver mer.</p>
   <h4>Vätska och träning</h4>
@@ -456,12 +474,13 @@ const STUDY = [
      {t:"Boken: övervikt och kroniska sjukdomar", g:[["övervikt","kronisk","viktuppgång","fetma","diabetes","går upp i vikt"]]},
      {t:"Boken: sämre immunförsvar, hormoner, depression eller prestation", g:[["immun","hormon","depression","prest"]]}], need:2},
  {c:"Energi", q:"Vilka tre delar delas energiförbrukningen in i och vad innebär de?", src:"s. 95", bild:"6",
-  a:"Basalmetabolism, som boken kallar vilometabolism, är energin som går åt för att kroppens grundläggande funktioner ska fungera i vila, som kroppstemperaturen, hjärtat, hjärnan och lungorna. För de flesta är det den största delen. Fysisk aktivitet är energin som går åt på träningen och i vardagen, även rörelse som inte är träning. Den varierar mest mellan personer. Matsmältningen, i boken dietär termogenes, är energin som går åt för att bryta ner och omsätta maten, ungefär 10 procent av den totala energiförbrukningen.",
+  a:"Basalmetabolism, som boken kallar vilometabolism, är energin som går åt för att kroppens grundläggande funktioner ska fungera i vila, som kroppstemperaturen, hjärtat, hjärnan och lungorna. För de flesta är det den största delen. Fysisk aktivitet är energin som går åt på träningen och i vardagen, även rörelse som inte är träning. Den varierar mest mellan personer. Matsmältningen, i boken dietär termogenes, är energin som går åt för att bryta ner och omsätta maten, ungefär 10 procent av den totala energiförbrukningen. Läraren sa på lektionen att procentsatserna kommer på provet: basalmetabolism ungefär 70 procent, rörelse som inte är träning 15 procent, matsmältning 10 procent och fysisk aktivitet 5 procent.",
   p:[{t:"Basalmetabolism (vilometabolism)", g:[["basal","vilometab","viloomsätt","vilo metab"]], req:true},
      {t:"Basalmetabolism = grundfunktioner i vila, som hjärta, hjärna och temperatur", g:[["hjärta","hjärna","lung","organ","temperatur","grundläggande","i vila","vilar","livsviktig","andning","andas","överleva","sover"]]},
      {t:"Fysisk aktivitet: träning och vardagsrörelse", g:[["aktivitet","rörelse","träning","tränar","vardag"]]},
      {t:"Matsmältning: energin för att bryta ner maten", g:[["termogen","=dit","=tef","matspjälk","matsmält","smälta","bryta ner maten","bryter ner maten","omsätta maten","bryta ned maten"]]},
-     {t:"Basalen är oftast störst, aktiviteten varierar mest", g:[["varierar","störst","största","mest","10 procent","10 %","10%"]]}], need:4,
+     {t:"Basalen är oftast störst, aktiviteten varierar mest", g:[["varierar","störst","största","mest","10 procent","10 %","10%"]]},
+     {t:"Lektionen: 70, 15, 10 och 5 procent", g:[["70"]]}], need:4,
   trap:[{g:[["balsam"]], msg:"Stava basalmetabolism, inte balsametabolism. Basal betyder grund."}]},
  {c:"Energi", q:"Vad får vi energi ifrån?", src:"s. 95–96", bild:"8–9",
   a:"Från maten, och då från kolhydrater, fett och protein. Enligt boken ger också de fibrer som bryts ner lite energi. Fett ger mest energi per gram: 9 kcal, mot 4 kcal för kolhydrater och protein. Vitaminer, mineraler och vatten ger ingen energi.",
@@ -656,6 +675,8 @@ const CARDS = [
  ["Energi","Basalmetabolism?","Energin i vila för hjärta, hjärna, lungor och kroppstemperatur. Oftast störst. Boken: vilometabolism."],
  ["Energi","Matsmältningen?","Energin det kostar att bryta ner maten, ungefär 10 procent av den totala energiförbrukningen. Boken: dietär termogenes."],
  ["Energi","Vilken del varierar mest?","Fysisk aktivitet."],
+ ["Energi","Hur stor är varje del av energiförbrukningen, enligt lektionen?","Basalmetabolism 70 %, rörelse som inte är träning 15 %, matsmältning 10 % och fysisk aktivitet 5 %. Kommer på provet!"],
+ ["Energi","Negativ energibalans, med lärarens ord?","För lite mat, alltså energi, i förhållande till träningen."],
  ["Näringsämnen","Vad gör kolhydrater, fett och protein?","Ger energi. Fett och protein bygger också upp och reparerar."],
  ["Näringsämnen","Vad gör vitaminer och mineraler?","Behövs för ämnesomsättningen och skyddar cellerna. Mineraler bygger också upp och reparerar."],
  ["Näringsämnen","Vad gör vatten?","Löser och transporterar näringsämnen och avfall, reglerar temperaturen."],
@@ -685,6 +706,7 @@ const CARDS = [
  ["Vätska och träning","Vad påverkar vätskebehovet?","Klimatet, svett och hur effektivt du gör dig av med värme."],
  ["Vätska och träning","Hur mycket vätska får vi från maten per dag?","Ungefär 5 dl. Resten får vi från dryck."],
  ["Vätska och träning","Törst?","Ett sent tecken. Drick under träningen."],
+ ["Vätska och träning","När ska du dricka inför match och träning?","Innan, i förebyggande syfte. Vänta inte tills du blir törstig."],
  ["Vätska och träning","För mycket vätska?","Elektrolyterna (salterna) späds ut."],
  ["Vätska och träning","Måltidsordning?","Frukost, mellanmål, lunch, mellanmål, middag, kvällsmål."],
  ["Vätska och träning","Före match?","Prova inte något nytt! Ät 2–4 timmar innan start."],
@@ -695,6 +717,50 @@ const CARDS = [
  ["Vätska och träning","Mat räcker!","Energibalans, näringsbalans och vätskebalans."],
  ["Hälsa","Tre ätstörningar?","Anorexi, bulimi och hetsätningsstörning."],
  ["Hälsa","Var söker du hjälp?","Elevhälsan, ungdomsmottagningen, vårdcentralen, BUP, 1177, Frisk & Fri, SHEDO."]
+];
+
+const QUIZ_LEK = [
+ ["Ungefär hur stor del av energiförbrukningen är basalmetabolismen, enligt lektionen?", ["Ungefär 70 procent", "Ungefär 10 procent", "Ungefär 30 procent", "Ungefär 95 procent"], 0, "Läraren sa att procentsatserna kommer på provet: basalmetabolism 70, rörelse som inte är träning 15, matsmältning 10 och fysisk aktivitet 5 procent."],
+ ["Ungefär hur stor del av energiförbrukningen är rörelse som inte är träning, enligt lektionen?", ["Ungefär 15 procent", "Ungefär 5 procent", "Ungefär 50 procent", "Ungefär 70 procent"], 0, "Till exempel att gå eller cykla till skolan. Det är mer än själva träningen, som är ungefär 5 procent."],
+ ["Ungefär hur stor del av energiförbrukningen är fysisk aktivitet, alltså träning, enligt lektionen?", ["Ungefär 5 procent", "Ungefär 15 procent", "Ungefär 40 procent", "Ungefär 70 procent"], 0, "Siffran gäller en genomsnittlig person. Den som tränar mycket gör av med mer, och därför är det den del som skiljer mest mellan personer."],
+ ["Ungefär hur stor del av energiförbrukningen går åt till matsmältningen, enligt lektionen?", ["Ungefär 10 procent", "Ungefär 1 procent", "Ungefär 25 procent", "Ungefär 70 procent"], 0, "Samma siffra står i boken, som kallar det dietär termogenes."],
+ ["Vilken del av energiförbrukningen är störst?", ["Basalmetabolismen", "Fysisk aktivitet", "Rörelse som inte är träning", "Matsmältningen"], 0, "Ungefär 70 procent. Det är energin som organen behöver för att orka hålla igång, även när du vilar."],
+ ["Vad betyder energibalans?", ["Intag = förbrukning", "Att man tränar varje dag", "Att man äter mer än man gör av med", "Att man bara äter nyttigt"], 0, "Du får i dig lika mycket energi som du gör av med."],
+ ["Vad är negativ energibalans, med lärarens ord?", ["För lite mat, alltså energi, i förhållande till träningen", "För mycket mat i förhållande till träningen", "Lika mycket mat som träning", "För lite vätska under träningen"], 0, "Du gör av med mer energi än du får i dig. Positiv energibalans är tvärtom."],
+ ["Vad behöver du göra om du tränar mer, för att behålla energibalansen?", ["Äta mer", "Äta mindre", "Dricka mindre", "Ingenting, det jämnar ut sig"], 0, "Allt du äter förbränns. Tränar du mer gör du av med mer, och då behöver intaget öka för att det ska bli balans."],
+ ["Varför dippar energin efter träningen, enligt lektionen?", ["Energin är slut", "Man har ätit för mycket", "Musklerna har vuxit", "Man har druckit för mycket"], 0, "Glykogenförråden har gått åt under passet. Därför behövs ett återhämtningsmål."],
+ ["Vad gör katabolismen?", ["Bryter ner maten för att utvinna energi", "Bygger upp nytt i cellerna", "Lagrar fett", "Bygger upp skelettet"], 0, "Katabolism är den nedbrytande fasen och anabolism den uppbyggande. Presentationen skriver att maten bryts ner för att utvinna energi."],
+ ["Vad är metabolism ett annat ord för?", ["Ämnesomsättning", "Matsmältning", "Energibalans", "Fettförbränning"], 0, "Metabolism är katabolism och anabolism tillsammans."],
+ ["Vilka näringsämnen gick ni igenom på lektionen?", ["Kolhydrater, protein, fett, vitaminer och mineraler", "Bara kolhydrater och fett", "Vatten och salt", "Socker och fibrer"], 0, "Energi och näring får vi från maten."],
+ ["Varför ska du dricka extra mycket, enligt lektionen?", ["För att reglera kroppstemperaturen", "För att få mer energi", "För att bygga muskler", "För att bli mätt"], 0, "Vatten löser och transporterar också näringsämnen."],
+ ["När ska du dricka inför en match eller träning?", ["Innan, i förebyggande syfte", "Först när du blir törstig", "Bara efteråt", "Bara i pausen"], 0, "Törst är ett sent tecken. När du känner dig törstig har du redan börjat tappa vätska."],
+ ["Vad gör vatten i kroppen?", ["Löser och transporterar näringsämnen", "Ger mycket energi", "Bygger upp muskler", "Lagrar kolhydrater"], 0, "Vatten reglerar också kroppstemperaturen."],
+ ["Vilken mat är kolhydratkällor?", ["Pasta, mjöl, bröd, potatis och ris", "Smör, olja och ost", "Kyckling, fisk och ägg", "Vatten och mjölk"], 0, "Kolhydrater ger energi och lagras som glykogen."],
+ ["Vad lagras kolhydrater som i kroppen?", ["Glykogen", "Aminosyror", "Fettväv", "Vatten"], 0, "Glykogenförråden räcker 60–90 minuter under fysisk aktivitet."],
+ ["Vad gör protein?", ["Ger energi, bygger upp och reparerar", "Reglerar bara kroppstemperaturen", "Transporterar avfall", "Ingenting, det bara lagras"], 0, "Protein är kroppens byggstenar och består av aminosyror."],
+ ["Hur många aminosyror finns det?", ["20", "9", "100", "3"], 0, "Nio av dem är essentiella och måste komma från maten."],
+ ["Varför ska du äta protein till varje måltid?", ["Det lagras inte i kroppen på samma sätt som fett och kolhydrater", "Det ger mest energi per gram", "Det gör att man dricker mer", "Det behövs bara på morgonen"], 0, "Kroppen behöver därför få nytt protein flera gånger om dagen."],
+ ["Var finns fleromättat fett?", ["I fisk", "I smör", "I mjölk", "I godis"], 0, "Enkelomättat fett finns i växtprodukter som nötter, rapsolja och olivolja. Mättat fett finns i djurprodukter som smör och mjölk."],
+ ["Var finns mättat fett?", ["I djurprodukter, till exempel smör och mjölk", "I fisk", "I rapsolja och olivolja", "I nötter"], 0, "Fleromättat fett finns i fisk och enkelomättat i växtprodukter."],
+ ["Vad gör både vitaminer och mineraler?", ["Behövs för ämnesomsättningen och skyddar cellerna", "Ger energi och lagras som glykogen", "Bygger muskler och ger värme", "Transporterar vatten"], 0, "Kalcium och järn är exempel på mineraler."],
+ ["Vad händer om du äter för mycket fibrer?", ["Du blir jättemätt och får i dig mindre kolhydrater", "Du får mer energi", "Glykogenet räcker längre", "Du blir törstig"], 0, "Fibrer är ändå bra för matsmältningen. Det handlar om att inte äta för mycket av dem när du tränar mycket."],
+ ["Hur lång tid före start av match eller träning ska du äta en måltid?", ["2–4 timmar", "10 minuter", "8 timmar", "Dagen innan"], 0, "Äter du 4 timmar innan kan du fylla på med något litet, som en banan, när det närmar sig start."],
+ ["Ungefär hur mycket protein per dag behöver en person som tränar?", ["1,5 g per kilo kroppsvikt", "0,8 g per kilo kroppsvikt", "5 g per kilo kroppsvikt", "15 g per kilo kroppsvikt"], 0, "Den som inte tränar behöver ungefär 0,8 g per kilo kroppsvikt och dag."],
+ ["Ungefär hur mycket protein per dag behöver en person som inte tränar?", ["0,8 g per kilo kroppsvikt", "1,5 g per kilo kroppsvikt", "3 g per kilo kroppsvikt", "Inget protein alls"], 0, "Den som tränar behöver ungefär 1,5 g per kilo kroppsvikt och dag."],
+ ["Hur länge räcker glykogenförråden under fysisk aktivitet?", ["60–90 minuter", "10–20 minuter", "4–5 timmar", "Ett dygn"], 0, "Vid längre pass behöver du fylla på med kolhydrater."],
+ ["Vilka tre balanser avslutade lektion 2?", ["Energibalans, näringsbalans och vätskebalans", "Syrebalans, saltbalans och sockerbalans", "Träning, vila och sömn", "Frukost, lunch och middag"], 0, "Det är samma tre som i presentationens ”Mat räcker!”."]
+];
+
+const REASON = [
+ {"q": "Läraren säger att fysisk aktivitet bara är ungefär 5 procent av energiförbrukningen. Ändå skriver boken att det är den del som varierar mest mellan olika personer. Hur kan båda stämma?", "bild": "6", "src": "s. 95", "lk": true, "a": "Procentsatserna gäller en genomsnittlig person. Basalmetabolismen är störst, ungefär 70 procent, eftersom organen behöver energi hela dygnet. Hur mycket man tränar och rör sig skiljer däremot mycket mellan personer. Boken jämför två jämnåriga med samma kön, längd och vikt: den som tränar och har en aktiv vardag gör av med mer energi än den som sitter still. Därför kan aktiviteten vara en liten del hos en person, men ändå vara det som skiljer mest mellan två personer.", "p": [{"t": "Procentsatserna gäller en genomsnittlig person", "g": [["genomsnitt", "snitt", "vanlig person", "vanliga person", "de flesta", "normal"]]}, {"t": "Basalmetabolismen är störst, ungefär 70 procent", "g": [["basal", "vila", "70"]]}, {"t": "Hur mycket man tränar och rör sig skiljer mellan personer", "g": [["olika mycket", "skiljer", "varierar", "beroende på", "beror på"]]}, {"t": "Den som tränar mycket gör av med mer energi", "g": [["tränar mer", "tränar mycket", "mer energi", "av med mer", "förbränner mer", "förbrukar mer", "aktiv"]]}], "need": 3},
+ {"q": "Två jämnåriga tjejer är lika långa, väger lika mycket och äter exakt samma mat. Den ena tränar fem pass i veckan och cyklar till skolan, den andra sitter mest still. Vad händer med energibalansen hos var och en, och varför?", "bild": "3, 6–7", "src": "s. 92–95", "lk": true, "a": "Den som tränar och cyklar gör av med mer energi, eftersom både fysisk aktivitet och rörelse som inte är träning ökar förbrukningen. Hon äter lika mycket som den andra, så hon får för lite energi i förhållande till träningen och hamnar i negativ energibalans. Den som sitter still gör av med mindre, så samma mat kan ge henne positiv energibalans. För att ha balans behöver den som tränar mer äta mer. Pågår underskottet länge kan kroppen bryta ner muskelvävnad, och koncentrationen, återhämtningen och immunförsvaret blir sämre.", "p": [{"t": "Den aktiva gör av med mer energi", "g": [["mer energi", "av med mer", "förbrukar mer", "förbränner mer", "högre förbrukning", "större förbrukning"]]}, {"t": "Den aktiva hamnar i negativ energibalans", "g": [["negativ", "underskott"]]}, {"t": "Den som sitter still kan hamna i positiv energibalans", "g": [["positiv", "överskott"]]}, {"t": "Den som tränar mer behöver äta mer", "g": [["äta mer", "äter mer", "mer mat", "öka intaget", "större intag", "mer intag"]]}, {"t": "Följder av långvarigt underskott", "g": [["muskel", "koncentration", "återhämt", "immun", "hormon", "trött"]]}], "need": 4},
+ {"q": "Varför dippar energin efter ett långt träningspass, och vad behöver du göra då?", "bild": "4, 23–24", "src": "s. 92, 103–104", "lk": true, "a": "Under passet bryter kroppen ner kolhydrater för att utvinna energi, och det är katabolism. Kolhydraterna är lagrade som glykogen i musklerna och levern, och förråden räcker bara 60–90 minuter. Efter ett långt pass är energin slut, och då dippar den. Därför behöver du ett återhämtningsmål med kolhydrater som fyller på glykogenet, protein som bygger upp och reparerar musklerna och vätska som återställer vätskebalansen. Då kan kroppen bygga upp sig igen, och det är anabolism.", "p": [{"t": "Kroppen bryter ner kolhydrater för energi, katabolism", "g": [["katabol", "bryter ner", "bryts ner", "förbrukas", "går åt", "förbränn"]]}, {"t": "Glykogenet räcker 60–90 minuter", "g": [["60", "90", "glykogen"]]}, {"t": "Ät ett återhämtningsmål", "g": [["återhämtning", "mellanmål", "äta", "äter"]]}, {"t": "Kolhydrater fyller på glykogenet", "g": [["kolhydrat"]]}, {"t": "Protein bygger upp och reparerar musklerna", "g": [["protein"]]}, {"t": "Kroppen bygger upp sig igen, anabolism", "g": [["anabol", "bygg", "repar"]]}], "need": 4},
+ {"q": "Varför ska du dricka redan innan match och träning, och inte vänta tills du blir törstig?", "bild": "18", "src": "s. 101", "lk": true, "a": "Vatten reglerar kroppstemperaturen och löser och transporterar näringsämnen. När du tränar svettas du och tappar vätska. Törst är ett sent tecken, så när du känner dig törstig har du redan börjat tappa. Tappar du mer än 2 procent av kroppsvikten i vätska kan prestationen bli sämre, och du kan få huvudvärk och bli illamående. Därför dricker du i förebyggande syfte, både innan och under passet.", "p": [{"t": "Vatten reglerar kroppstemperaturen", "g": [["temperatur", "värme", "kyl"]]}, {"t": "Du svettas och tappar vätska", "g": [["svett", "tappar", "förlorar", "förlust"]]}, {"t": "Törst är ett sent tecken", "g": [["sent", "redan", "för sent"]]}, {"t": "Vätskebrist ger sämre prestation", "g": [["prest", "2 %", "2%", "2 procent", "orka", "huvudvärk", "illamå", "jobbig", "sämre"]]}, {"t": "Drick i förebyggande syfte", "g": [["förebygg", "innan", "i förväg", "före"]]}], "need": 4},
+ {"q": "En spelare äter fullkornspasta, råris och grovt bröd till varje måltid under en vecka med mycket träning. Vad kan hända, och vad borde hon välja i stället?", "bild": "11", "src": "s. 98", "lk": true, "a": "Fiberrik mat gör att man blir väldigt mätt. Hon kan bli mätt innan hon fått i sig tillräckligt med kolhydrater, fast hon behöver mycket när hon tränar mycket. Då fylls glykogenförråden inte på ordentligt, och hon orkar mindre på träningen och återhämtar sig sämre. I en period med mycket träning är det bättre att välja vanlig pasta, vanligt ris och mellangrovt bröd. Fibrer är ändå bra för matsmältningen, så det handlar om att inte äta för mycket av dem just då.", "p": [{"t": "Fibrer gör en väldigt mätt", "g": [["mätt"]]}, {"t": "Hon får i sig för lite kolhydrater", "g": [["kolhydrat"]]}, {"t": "Glykogenet fylls inte på, hon orkar mindre", "g": [["glykogen", "orka", "energi", "trött", "prest", "återhämt"]]}, {"t": "Välj vanlig pasta, vanligt ris och mellangrovt bröd", "g": [["vanlig", "vitt", "ljus", "mellangrov", "mindre fiber", "inte fullkorn"]]}], "need": 3},
+ {"q": "Varför behöver den som tränar mer protein än den som inte tränar, och varför ska proteinet delas upp på dagens måltider?", "bild": "15, 27", "src": "s. 99", "lk": true, "a": "Protein är kroppens byggstenar och består av aminosyror. Det bygger upp och reparerar, till exempel musklerna efter träning. Träningen bryter ner kroppen, så den som tränar har mer att reparera och behöver ungefär 1,5 gram protein per kilo kroppsvikt och dag, mot ungefär 0,8 gram för den som inte tränar. Protein lagras inte i kroppen på samma sätt som fett och kolhydrater. Därför behöver du få i dig protein vid varje måltid.", "p": [{"t": "Protein bygger upp och reparerar", "g": [["bygg", "repar"]]}, {"t": "Träningen bryter ner, så det finns mer att reparera", "g": [["bryter ner", "bryts ner", "sliter", "skad", "katabol"]]}, {"t": "Ungefär 1,5 g mot 0,8 g per kilo kroppsvikt och dag", "g": [["1,5", "1.5", "0,8", "0.8"]]}, {"t": "Protein lagras inte på samma sätt som fett och kolhydrater", "g": [["lagra", "sparas", "förråd"]]}, {"t": "Därför protein vid varje måltid", "g": [["varje måltid", "alla måltider", "varje mål", "flera gånger", "hela dagen", "fördela", "utspritt"]]}], "need": 4},
+ {"q": "Varför ska du äta en måltid 2–4 timmar före match, och inte precis innan eller mycket tidigare?", "bild": "22", "src": "s. 103", "lk": true, "a": "Hård aktivitet kan göra magen extra känslig. Äter du en stor måltid precis innan hinner kroppen inte ta hand om maten, och du kan få problem med magen mitt i matchen. Äter du mycket tidigare hinner energin ta slut innan start. 2–4 timmar före start ger kroppen tid att smälta maten och fylla på energin. Äter du 4 timmar innan kan du fylla på med något litet, som en banan, när det närmar sig start. Och prova inte något nytt den dagen.", "p": [{"t": "Magen behöver tid, och hård aktivitet gör den känslig", "g": [["mage", "magen", "smält", "känslig", "tarm"]]}, {"t": "För tidigt: energin hinner ta slut", "g": [["ta slut", "tar slut", "hungrig", "tom", "för tidigt"]]}, {"t": "2–4 timmar ger tid att smälta och fylla på energin", "g": [["2-4", "två till fyra", "fyll", "energi"]]}, {"t": "Något litet nära start, till exempel en banan", "g": [["banan", "något litet", "mellanmål", "fylla på"]]}], "need": 3},
+ {"q": "Varför räcker det inte med energibalans? Förklara varför du också behöver näringsbalans och vätskebalans.", "bild": "8–9, 30", "src": "s. 95–96, 104", "lk": true, "a": "Energibalans betyder att du får i dig lika mycket energi som du gör av med, men energin kan komma från mat som saknar viktiga näringsämnen. Näringsbalans betyder att maten har rätt sammansättning, med kolhydrater, protein, fett, vitaminer och mineraler. Vitaminer och mineraler ger ingen energi, men behövs för ämnesomsättningen och skyddar cellerna. Järn behövs för syresättningen och kalcium för skelettet. Vätskebalans behövs eftersom vatten reglerar kroppstemperaturen och transporterar näringsämnen. Saknas någon av de tre blir du trött, presterar sämre och återhämtar dig sämre, även om energin räcker.", "p": [{"t": "Energin kan komma från mat som saknar näringsämnen", "g": [["fel mat", "näringsämnen", "skräpmat", "godis", "tomma", "näring"]]}, {"t": "Näringsbalans: rätt sammansättning", "g": [["sammansättning", "alla näringsämnen", "varierat", "rätt mat", "vitamin", "mineral"]]}, {"t": "Vitaminer och mineraler behövs fast de inte ger energi", "g": [["ämnesomsättning", "skyddar", "celler", "järn", "kalcium", "syre", "skelett"]]}, {"t": "Vätskebalans: vatten reglerar temperaturen och transporterar", "g": [["vatten", "vätska", "temperatur", "transport"]]}, {"t": "Annars blir du trött och presterar sämre", "g": [["trött", "prest", "återhämt", "sjuk", "brist", "orka"]]}], "need": 4},
+ {"q": "Basalmetabolismen är ungefär 70 procent av energiförbrukningen. Varför går så mycket energi åt när du vilar?", "bild": "6", "src": "s. 95", "lk": true, "a": "Basalmetabolismen är energin som organen behöver för att orka hålla igång. Hjärtat pumpar, hjärnan arbetar, lungorna andas och kroppstemperaturen hålls uppe hela dygnet, även när du sover. Träningen pågår bara en liten del av dygnet. Därför blir vilan den största delen av energiförbrukningen, trots att varje minut i vila kostar mindre energi än en minut på träningen.", "p": [{"t": "Organen behöver energi för att hålla igång", "g": [["organ", "hjärta", "hjärna", "lung", "andning", "andas"]]}, {"t": "Kroppstemperaturen ska hållas uppe", "g": [["temperatur", "värme", "varm"]]}, {"t": "Det pågår hela dygnet, även när du sover", "g": [["dygn", "hela tiden", "alltid", "sover", "sömn", "24"]]}, {"t": "Träningen är bara en liten del av dygnet", "g": [["träning", "tränar", "aktivitet"]]}], "need": 3}
 ];
 
 const FIXES = [
@@ -737,7 +803,7 @@ const PASSES = [
  {b:"Pass 1: Energin.", html:`Läs <button class="lnk" data-topic="0">Helheten</button>, <button class="lnk" data-topic="1">Energibalans</button>, <button class="lnk" data-topic="2">Energibehov</button>, <button class="lnk" data-topic="3">Energiförbrukning</button> och <button class="lnk" data-topic="4">Energi och näring</button>. Svara sedan på <button class="lnk" data-cat="Energi">frågorna om energi</button>.`, t:"ca 40 min"},
  {b:"Pass 2: Näringsämnena.", html:`Läs <button class="lnk" data-topic="5">Kolhydrater</button>, <button class="lnk" data-topic="6">Fett</button> och <button class="lnk" data-topic="7">Protein</button>. Svara på <button class="lnk" data-cat="Näringsämnen">frågorna om näringsämnen</button>.`, t:"ca 40 min"},
  {b:"Pass 3: Vitaminer, vätska och mat runt träning.", html:`Läs <button class="lnk" data-topic="8">Vitaminer och mineraler</button>, <button class="lnk" data-topic="9">Vätska</button>, <button class="lnk" data-topic="10">Koststrategi</button>, <button class="lnk" data-topic="11">Före, under och efter</button> och <button class="lnk" data-topic="12">Ätstörningar</button>. Gå igenom <button class="lnk" data-gotab="match">Matchdagen</button> och svara på resten av frågorna.`, t:"ca 45 min"},
- {b:"Pass 4: Repetition.", html:`Kör <button class="lnk" data-gotab="quiz">Quiz</button> och <button class="lnk" data-gotab="kort">Kort</button> tills det sitter. Gör sedan <button class="lnk" data-cat="Inte klara">frågorna som inte sitter än</button> och läs <button class="lnk" data-gotab="listan">Kolla listan</button>.`, t:"ca 40 min"}
+ {b:"Pass 4: Repetition.", html:`Kör <button class="lnk" data-gotab="quiz">Quiz</button>, både presentationens och lektionens, och <button class="lnk" data-gotab="kort">Kort</button> tills det sitter. Träna på att förklara under <button class="lnk" data-gotab="resonera">Resonera</button>. Gör sedan <button class="lnk" data-cat="Inte klara">frågorna som inte sitter än</button> och läs <button class="lnk" data-gotab="listan">Kolla listan</button>.`, t:"ca 50 min"}
 ];
 
 /* ===================== HJÄLP ===================== */
@@ -870,7 +936,7 @@ ql.addEventListener('click',e=>{
     else { delete notes[k].err; const r=gradeText(STUDY[i],t); notes[k].c=r.hits; notes[k].tr=r.traps; notes[k].g=true; }
   }
   saveNotes(); renderQ();
-  const again=document.querySelector(`.sq[data-i="${i}"]`); if(again && act==='grade'){ const fb=again.querySelector('.fb'); if(fb) fb.scrollIntoView({block:'nearest'}); }
+  const again=ql.querySelector(`.sq[data-i="${i}"]`); if(again && act==='grade'){ const fb=again.querySelector('.fb'); if(fb) fb.scrollIntoView({block:'nearest'}); }
 });
 ql.addEventListener('change',e=>{
   if(e.target.type!=='checkbox') return;
@@ -880,20 +946,80 @@ ql.addEventListener('change',e=>{
 document.getElementById('qreset').onclick=()=>{ notes={}; saveNotes(); renderQ(); };
 renderQFilter(); renderQ();
 
+/* ===================== RESONERA ===================== */
+let rnotes = load('rnotes', {});
+const saveR = ()=>store('rnotes',rnotes);
+const rkey = i => 'r'+(i+1);
+const rDone = i => { const n=rnotes[rkey(i)]; return !!(n && n.g && verdictOf(REASON[i], n.c||[])===0); };
+const rl=document.getElementById('rlist');
+function renderR(){
+  rl.innerHTML = REASON.map((s,i)=>{
+    const n=rnotes[rkey(i)]||{}, c=n.c||[];
+    const v = n.g ? verdictOf(s,c) : -1;
+    return `<div class="sq ${v===0?'done':''}" data-i="${i}">
+      <div class="where"><span>Resonemang ${i+1}</span>${s.bild?'<span class="tag pres">Bild '+s.bild+'</span>':''}${s.src?'<span class="tag bok">Boken '+s.src+'</span>':''}${s.lk?'<span class="tag lk">Lektionen</span>':''}</div>
+      <div class="qt">${s.q}</div>
+      <textarea aria-label="Ditt resonemang ${i+1}" placeholder="Förklara steg för steg med egna ord …">${esc(n.t||'')}</textarea>
+      <div class="row"><button class="btn primary" data-act="grade">${n.g?'Rätta igen':'Rätta'}</button><button class="btn" data-act="show">${n.open?'Dölj svaret':'Visa ett bra svar'}</button></div>
+      ${n.err?`<div class="fb"><p style="margin:0">${esc(n.err)}</p></div>`:''}
+      ${n.g?`<div class="fb"><p class="verdict v${v}">${VERD[v]}</p>
+        <p class="small" style="margin:0 0 4px">De här stegen ska finnas med. Har du skrivit något med egna ord, bocka i det själv.</p>
+        <ul class="checks">${s.p.map((p,j)=>`<li><label><input type="checkbox" data-j="${j}" ${c.includes(j)?'checked':''}><span class="${c.includes(j)?'hit':''}">${p.t}</span></label></li>`).join('')}</ul></div>`:''}
+      ${n.open?`<div class="ans"><p>${s.a}</p></div>`:''}
+    </div>`;
+  }).join('');
+  document.getElementById('rprog').textContent = `${REASON.filter((s,i)=>rDone(i)).length} av ${REASON.length} resonemang är klara.`;
+}
+rl.addEventListener('input',e=>{
+  if(e.target.tagName!=='TEXTAREA') return;
+  const k=rkey(+e.target.closest('.sq').dataset.i); rnotes[k]=rnotes[k]||{}; rnotes[k].t=e.target.value; saveR();
+});
+rl.addEventListener('click',e=>{
+  const card=e.target.closest('.sq'); if(!card) return;
+  const i=+card.dataset.i, k=rkey(i), act=e.target.dataset.act; if(!act) return;
+  rnotes[k]=rnotes[k]||{};
+  if(act==='show'){ rnotes[k].open=!rnotes[k].open; }
+  if(act==='grade'){
+    const t=card.querySelector('textarea').value.trim();
+    rnotes[k].t=t;
+    if(!t){ rnotes[k].err='Skriv ett svar först, sedan kan det rättas.'; }
+    else { delete rnotes[k].err; const r=gradeText(REASON[i],t); rnotes[k].c=r.hits; rnotes[k].g=true; }
+  }
+  saveR(); renderR();
+  const again=rl.querySelector(`.sq[data-i="${i}"]`); if(again && act==='grade'){ const fb=again.querySelector('.fb'); if(fb) fb.scrollIntoView({block:'nearest'}); }
+});
+rl.addEventListener('change',e=>{
+  if(e.target.type!=='checkbox') return;
+  const i=+e.target.closest('.sq').dataset.i, k=rkey(i), j=+e.target.dataset.j;
+  const c=new Set(rnotes[k].c||[]); e.target.checked?c.add(j):c.delete(j); rnotes[k].c=[...c].sort((a,b)=>a-b); saveR(); renderR();
+});
+document.getElementById('rreset').onclick=()=>{ rnotes={}; saveR(); renderR(); };
+renderR();
+
 /* ===================== QUIZ ===================== */
+const QSETS = {pres:{name:"Presentationen och boken", q:QUIZ}, lek:{name:"Lektionsanteckningarna", q:QUIZ_LEK}};
+let qset = load('qset','pres'); if(!QSETS[qset]) qset='pres';
+let QZ = QSETS[qset].q;
+function renderQSet(){
+  document.getElementById('quizset').innerHTML = Object.entries(QSETS).map(([k,v])=>`<button class="chip" aria-pressed="${k===qset}" data-s="${k}">${v.name}</button>`).join('');
+}
+document.getElementById('quizset').addEventListener('click',e=>{
+  const k=e.target.dataset.s; if(!k || k===qset) return;
+  qset=k; store('qset',k); QZ=QSETS[k].q; renderQSet(); startQuiz();
+});
 let qorder=[], qi=0, qscore=0, wrong=[];
-function startQuiz(){ qorder=shuffle(QUIZ.map((q,i)=>i)); qi=0; qscore=0; wrong=[]; renderQuiz(); }
+function startQuiz(){ qorder=shuffle(QZ.map((q,i)=>i)); qi=0; qscore=0; wrong=[]; renderQuiz(); }
 function renderQuiz(){
   const box=document.getElementById('quizbox');
   if(qi>=qorder.length){
     const pct=qscore/qorder.length;
     const msg = pct>=0.9 ? "Riktigt starkt. Du är redo." : pct>=0.7 ? "Bra grund. Titta på det du missade." : "Läs sammanfattningen en gång till och kör igen.";
     box.innerHTML = `<div class="qbox"><p class="qnum">Resultat</p><p class="score">${qscore} / ${qorder.length}</p><p>${msg}</p>
-      ${wrong.length?'<p><strong>Repetera:</strong></p>'+wrong.map(i=>`<p class="expl">${QUIZ[i][0]}<br><strong>${QUIZ[i][1][QUIZ[i][2]]}</strong></p>`).join(''):''}
+      ${wrong.length?'<p><strong>Repetera:</strong></p>'+wrong.map(i=>`<p class="expl">${QZ[i][0]}<br><strong>${QZ[i][1][QZ[i][2]]}</strong></p>`).join(''):''}
       <p style="margin-top:14px"><button class="btn primary" id="qagain">Kör igen</button></p></div>`;
     document.getElementById('qagain').onclick=startQuiz; return;
   }
-  const q=QUIZ[qorder[qi]];
+  const q=QZ[qorder[qi]];
   const opts=shuffle(q[1].map((o,i)=>i));
   box.innerHTML = `<div class="qbox"><div class="qnum">Fråga ${qi+1} av ${qorder.length}, ${qscore} rätt hittills</div>
     <div class="qtext">${q[0]}</div>
@@ -902,13 +1028,13 @@ function renderQuiz(){
   box.querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(+b.dataset.i));
 }
 function answer(i){
-  const q=QUIZ[qorder[qi]], box=document.getElementById('quizbox');
+  const q=QZ[qorder[qi]], box=document.getElementById('quizbox');
   box.querySelectorAll('.opt').forEach(b=>{ b.disabled=true; const n=+b.dataset.i; if(n===q[2]) b.classList.add('right'); else if(n===i) b.classList.add('wrong'); });
   if(i===q[2]) qscore++; else wrong.push(qorder[qi]);
   document.getElementById('qafter').innerHTML = `<p class="expl">${q[3]}</p><p style="margin-top:12px"><button class="btn primary" id="qnext">${qi+1<qorder.length?'Nästa fråga':'Se resultat'}</button></p>`;
   const n=document.getElementById('qnext'); n.onclick=()=>{ qi++; renderQuiz(); }; n.focus();
 }
-startQuiz();
+renderQSet(); startQuiz();
 
 /* ===================== KORT ===================== */
 let known = new Set(load('known', []));
