@@ -102,7 +102,7 @@ table.vit td:first-child{font-family:var(--head); font-weight:800; width:2.2em}
 /* Frågor */
 .sq{background:var(--card); border:1.5px solid var(--line); border-radius:6px; padding:14px 16px; margin:0 0 12px}
 .sq.done{border-color:var(--ok); border-width:2px}
-.sq .where{font-size:.85rem; color:var(--soft); display:flex; gap:8px; flex-wrap:wrap; align-items:center}
+.sq .where,.qbox .where,.flash .where{font-size:.85rem; color:var(--soft); display:flex; gap:8px; flex-wrap:wrap; align-items:center}
 .sq .qt{font-family:var(--head); font-weight:700; font-size:1.1rem; margin:4px 0 10px; line-height:1.25}
 .sq textarea{width:100%; min-height:90px; font:inherit; font-size:16px; color:var(--ink); background:var(--paper); border:1.5px solid var(--line); border-radius:6px; padding:9px 11px; resize:vertical}
 .fb{margin-top:10px; padding:12px 14px; border:2px solid var(--ink); border-radius:6px; background:var(--paper)}
@@ -120,6 +120,9 @@ table.vit td:first-child{font-family:var(--head); font-weight:800; width:2.2em}
 /* Quiz */
 .qbox{background:var(--card); border:2px solid var(--ink); border-radius:6px; padding:18px}
 .qnum{color:var(--soft); font-size:.9rem}
+.qbox .where{margin:6px 0 2px}
+.flash .where{margin-top:14px}
+.expl .where{margin-top:6px; display:flex; gap:6px; flex-wrap:wrap}
 .qtext{font-family:var(--head); font-weight:700; font-size:1.22rem; margin:4px 0 14px; line-height:1.25}
 .opt{display:block; width:100%; text-align:left; font:inherit; color:var(--ink); background:var(--paper); border:1.5px solid var(--line); border-radius:6px; padding:11px 13px; margin:0 0 8px; cursor:pointer}
 .opt.right{border-color:var(--ok); background:color-mix(in srgb,var(--ok) 14%,var(--card)); font-weight:700}
@@ -617,138 +620,138 @@ const STUDY = [
 ];
 
 const QUIZ = [
- ["Vad betyder positiv energibalans?",["Mer energi går ut än kommer in","Mer energi kommer in än går ut","Lika mycket in som ut","Att man äter nyttigt"],1,"Positiv = energi in är större än energi ut. Negativ = energi ut är större än energi in."],
- ["Vad gör katabolismen enligt presentationen?",["Bygger nytt i cellerna","Bryter ner maten vi äter för att utvinna energi","Lagrar fett","Reglerar temperaturen"],1,"Katabolism är de nedbrytande reaktionerna. Anabolism är de uppbyggande, som använder det nedbrutna materialet för att bygga nytt i cellerna."],
- ["Vad kallas katabolism och anabolism tillsammans?",["Metabolism eller ämnesomsättning","Termogenes","Energitillgänglighet","Periodisering"],0,"Metabolism och ämnesomsättning betyder samma sak."],
- ["Vilket av dessa står i presentationen om långvarigt energiunderskott?",["Kroppen kan bryta ner muskelvävnad","Man får bättre koncentration","Musklerna växer","Immunförsvaret blir starkare"],0,"Även koncentrationen och återhämtningen kan bli sämre, och immunförsvaret och hormonbalansen kan påverkas."],
- ["Vad står i presentationen om långvarigt energiöverskott?",["Bara att man blir trött","Muskelökning i samband med träning, och hälsorisker","Avstannad tillväxt","Försenad pubertet"],1,"Boken räknar upp hälsoriskerna: övervikt, kroniska sjukdomar, sämre immunförsvar, hormonförändringar, depression och sämre prestation."],
- ["När ska man vara extra uppmärksam på sin energibalans?",["Vid skada, sjukdom, träningsläger och tillväxtperioder","Bara på sommaren","Bara när man vilar","Aldrig, kroppen sköter sig själv"],0,"Även vid förändrad träningsmängd, viktförändring och förändrad eller stressande livssituation."],
- ["Vad kallas energin kroppen behöver i vila för hjärta, hjärna och andning?",["Matsmältning","Basalmetabolism","Energitillgänglighet","Katabolism"],1,"Basalmetabolism. Boken kallar den vilometabolism. För de flesta är det den största delen."],
- ["Vad räknas också till energiförbrukningen enligt presentationen, förutom basalmetabolism, fysisk aktivitet och matsmältning?",["Sömn","Rörelse som inte är träning","Tankar","Ingenting"],1,"Att gå eller cykla till skolan räknas också."],
- ["Ungefär hur stor del av den totala energiförbrukningen går åt till matsmältningen?",["Ungefär 1 procent","Ungefär 10 procent","Ungefär 50 procent","Ungefär 90 procent"],1,"Boken kallar den dietär termogenes, och den är ungefär 10 procent."],
- ["Vilken del av energiförbrukningen varierar mest mellan olika personer?",["Basalmetabolismen","Matsmältningen","Fysisk aktivitet","Ingen, alla gör av med lika mycket"],2,"Hur mycket man rör sig och tränar skiljer mest."],
- ["Vilka näringsämnen ger energi?",["Kolhydrater, fett och protein","Vitaminer och mineraler","Vatten och salt","Bara kolhydrater"],0,"Vitaminer, mineraler och vatten ger ingen energi."],
- ["Vad gör vatten enligt presentationen?",["Ger energi","Löser och transporterar näringsämnen och avfall och reglerar temperaturen","Bygger muskler","Lagrar fett"],1,"Vatten ger ingen energi, men utan det kan kroppen inte transportera näringsämnen och avfall eller hålla temperaturen."],
- ["Vilket näringsämne ger mest energi per gram?",["Kolhydrater","Protein","Fett","Fiber"],2,"Fett ger 9 kcal per gram. Kolhydrater och protein ger 4 kcal."],
- ["Vad är kolhydrater ett samlingsnamn för?",["Stärkelse, socker och kostfiber","Fett, protein och socker","Vitaminer och mineraler","Glukos, glykogen och fett"],0,"Stärkelse, socker och kostfiber."],
- ["Vad lagras kolhydrater som i kroppen?",["Fett","Glykogen","Protein","Vatten"],1,"Glykogen, i musklerna och levern."],
- ["Varför kan mycket fiberrik mat ge för lite kolhydrater?",["Fiber förstör glykogenet","Fiber gör en mätt fort","Fiber innehåller inga kolhydrater","Fiber gör en uttorkad"],1,"Man blir mätt innan man fått i sig tillräckligt."],
- ["Var lagras fett i kroppen?",["I levern","I fettväven","I blodet","I musklerna"],1,"Fettväven är kroppens fettlager. Kolhydrater lagras i stället som glykogen i musklerna och levern."],
- ["Vilken sorts fett minskar risken för hjärt- och kärlsjukdomar?",["Mättat","Fleromättat","Transfett","Kokosfett"],1,"Fleromättat fett, med omega-3 och omega-6, finns särskilt i fisk."],
- ["Var finns mättat fett enligt presentationen?",["I djurprodukter, men inte i fisk och fågel","I rapsolja","I fisk","I nötter"],0,"Till exempel smör, ost och fett kött. Ett högt intag ökar risken för hjärt- och kärlsjukdomar."],
- ["Vilka vitaminer är fettlösliga?",["A, D, E och K","B och C","A, B och C","C, D och K"],0,"ADEK."],
- ["Hur många aminosyror finns det, och hur många är essentiella?",["9, varav 2 essentiella","20, varav 9 essentiella","50, varav 20 essentiella","100, varav 9 essentiella"],1,"De essentiella måste komma från kosten."],
- ["Vad är ett fullvärdigt protein?",["Protein som innehåller alla aminosyror kroppen inte kan tillverka själv","Protein i pulverform","Protein som ger mest energi","Allt protein från växter"],0,"Till exempel kött och fisk. Vegetabiliska proteiner är inte fullvärdiga, utom soja."],
- ["Varför behöver man äta protein vid varje måltid?",["Det smakar bäst då","Det lagras inte i kroppen på samma sätt som fett och kolhydrater","Det ger mest energi","Annars blir man törstig"],1,"Därför behöver kroppen få nytt protein flera gånger om dagen, till varje måltid."],
- ["Ungefär hur mycket protein per dag behöver den som tränar, enligt presentationen?",["0,2 g per kilo kroppsvikt","1,5 g per kilo kroppsvikt","5 g per kilo kroppsvikt","10 g per kilo kroppsvikt"],1,"Den som inte tränar behöver ungefär 0,8 g per kilo kroppsvikt och dag."],
- ["Vad är en nackdel med proteinshake och proteinbars enligt presentationen?",["De är för billiga","Byter man ut för mycket mat kan man missa viktiga näringsämnen","De innehåller inget protein","De går inte att köpa"],1,"Bars kan också innehålla mycket kalorier och socker."],
- ["Vad säger presentationen om vitaminer och energi?",["Vitaminer ger mycket energi","Vitaminer ger ingen energi i sig men behövs för att vi ska kunna använda energin","Vitaminer lagrar energi","Vitaminer är samma sak som kolhydrater"],1,"Mer är inte bättre!"],
- ["Var finns D-vitamin enligt presentationen?",["I fisk och kantareller","I socker","I vitt bröd","I läsk"],0,"D-vitamin bildas också i huden av solljus."],
- ["Vad hjälper järn till med enligt presentationen?",["Syresättningen","Att bygga tänder","Att lagra fett","Att reglera törsten"],0,"Järn behövs för hemoglobinet som transporterar syre."],
- ["Vad bygger kalcium och fosfor upp?",["Musklerna","Skelettet","Levern","Fettväven"],1,"Kalcium och fosfor stärker och bygger upp skelettet."],
- ["Vilken kost är rik på mineraler enligt presentationen?",["Frukt, grönsaker, fisk och skaldjur","Godis och läsk","Vitt bröd och pasta","Smör och grädde"],0,"Alla mineraler behövs för att vi ska fungera."],
- ["Ungefär hur mycket vätska får vi från maten per dag?",["Ungefär 5 dl","Ungefär 5 liter","Ingenting","Ungefär 1 dl"],0,"Resten får vi från det vi dricker. Boken och presentationen skriver bara ”ca 5 dl från maten”, men det gäller hur mycket vi får i oss under en dag."],
- ["Varför ska man dricka under träningen?",["Törst är ett sent tecken","Det ger energi","Det bygger muskler","Det behövs inte"],0,"När du känner dig törstig har du redan börjat tappa vätska."],
- ["Vad händer om man dricker för mycket?",["Ingenting","Elektrolyterna, salterna, späds ut","Man får mer energi","Glykogenet växer"],1,"Symtomen liknar vätskebrist."],
- ["Hur lång tid före start bör man äta en måltid, enligt presentationen?",["10 minuter","2–4 timmar","8 timmar","Dagen innan"],1,"Äter du 4 timmar innan kan du fylla på med en banan när det närmar sig start."],
- ["Vad är regel nummer ett före match?",["Ät så mycket som möjligt","Prova inte något nytt","Drick sportdryck","Hoppa över lunchen"],1,"Testa nya saker på träning och använd det som fungerar."],
- ["Ungefär hur länge räcker glykogenförråden under fysisk aktivitet?",["10–15 minuter","60–90 minuter","5–6 timmar","Ett dygn"],1,"Därför rekommenderas 30–60 gram kolhydrater i timmen vid längre aktivitet."],
- ["Hur mycket kolhydrater rekommenderas per timme under fysisk aktivitet som är längre än en timme?",["5–10 gram","30–60 gram","200–300 gram","Inga alls"],1,"Till exempel en banan och lite sportdryck."],
- ["När behövs ett återhämtningsmål?",["När det är mer än 2 timmar till nästa måltid","När middagen är om tio minuter","Bara på vilodagar","Aldrig"],0,"Också om du tränar flera pass om dagen, har svårt att få i dig energi, är i en tung period eller växer mycket."],
- ["Vad behöver återhämtningsmålet inte innehålla?",["Kolhydrater","Protein","Vätska","Fett"],3,"Fettet kan du få i dig vid andra måltider."],
- ["Vilken är presentationens måltidsordning?",["Frukost, lunch, middag","Frukost, mellanmål, lunch, mellanmål, middag, kvällsmål","Bara middag","Lunch och kvällsmål"],1,"Sex måltider, spridda över dagen."],
- ["Vad betyder ”Mat räcker!” i presentationen?",["Energibalans, näringsbalans och vätskebalans","Att man ska äta så mycket som möjligt","Att kosttillskott behövs","Att man kan hoppa över frukosten"],0,"Med vanlig mat kommer man långt."],
- ["Vilken av dessa är en ätstörning?",["Hetsätningsstörning","Laktosintolerans","Glutenallergi","Järnbrist"],0,"Anorexi, bulimi och hetsätningsstörning är tre ätstörningar."],
- ["Var kan du som går på gymnasiet söka hjälp om du eller en kompis har problem med ätandet?",["Elevhälsan eller ungdomsmottagningen","Bara hos en personlig tränare","Ingenstans, man ska klara det själv","Bara på akuten"],0,"Även vårdcentralen, BUP, 1177 och föreningar som Frisk & Fri."]
+ ["Vad betyder positiv energibalans?", ["Mer energi går ut än kommer in", "Mer energi kommer in än går ut", "Lika mycket in som ut", "Att man äter nyttigt"], 1, "Positiv = energi in är större än energi ut. Negativ = energi ut är större än energi in.", {"b": "3", "s": "92"}],
+ ["Vad gör katabolismen enligt presentationen?", ["Bygger nytt i cellerna", "Bryter ner maten vi äter för att utvinna energi", "Lagrar fett", "Reglerar temperaturen"], 1, "Katabolism är de nedbrytande reaktionerna. Anabolism är de uppbyggande, som använder det nedbrutna materialet för att bygga nytt i cellerna.", {"b": "4", "s": "92"}],
+ ["Vad kallas katabolism och anabolism tillsammans?", ["Metabolism eller ämnesomsättning", "Termogenes", "Energitillgänglighet", "Periodisering"], 0, "Metabolism och ämnesomsättning betyder samma sak.", {"b": "4", "s": "92"}],
+ ["Vilket av dessa står i presentationen om långvarigt energiunderskott?", ["Kroppen kan bryta ner muskelvävnad", "Man får bättre koncentration", "Musklerna växer", "Immunförsvaret blir starkare"], 0, "Även koncentrationen och återhämtningen kan bli sämre, och immunförsvaret och hormonbalansen kan påverkas.", {"b": "7", "s": "93"}],
+ ["Vad står i presentationen om långvarigt energiöverskott?", ["Bara att man blir trött", "Muskelökning i samband med träning, och hälsorisker", "Avstannad tillväxt", "Försenad pubertet"], 1, "Boken räknar upp hälsoriskerna: övervikt, kroniska sjukdomar, sämre immunförsvar, hormonförändringar, depression och sämre prestation.", {"b": "7", "s": "94"}],
+ ["När ska man vara extra uppmärksam på sin energibalans?", ["Vid skada, sjukdom, träningsläger och tillväxtperioder", "Bara på sommaren", "Bara när man vilar", "Aldrig, kroppen sköter sig själv"], 0, "Även vid förändrad träningsmängd, viktförändring och förändrad eller stressande livssituation.", {"b": "5", "s": "94"}],
+ ["Vad kallas energin kroppen behöver i vila för hjärta, hjärna och andning?", ["Matsmältning", "Basalmetabolism", "Energitillgänglighet", "Katabolism"], 1, "Basalmetabolism. Boken kallar den vilometabolism. För de flesta är det den största delen.", {"b": "6", "s": "95"}],
+ ["Vad räknas också till energiförbrukningen enligt presentationen, förutom basalmetabolism, fysisk aktivitet och matsmältning?", ["Sömn", "Rörelse som inte är träning", "Tankar", "Ingenting"], 1, "Att gå eller cykla till skolan räknas också.", {"b": "6", "s": "95"}],
+ ["Ungefär hur stor del av den totala energiförbrukningen går åt till matsmältningen?", ["Ungefär 1 procent", "Ungefär 10 procent", "Ungefär 50 procent", "Ungefär 90 procent"], 1, "Boken kallar den dietär termogenes, och den är ungefär 10 procent.", {"b": "6", "s": "95"}],
+ ["Vilken del av energiförbrukningen varierar mest mellan olika personer?", ["Basalmetabolismen", "Matsmältningen", "Fysisk aktivitet", "Ingen, alla gör av med lika mycket"], 2, "Hur mycket man rör sig och tränar skiljer mest.", {"b": "6", "s": "95"}],
+ ["Vilka näringsämnen ger energi?", ["Kolhydrater, fett och protein", "Vitaminer och mineraler", "Vatten och salt", "Bara kolhydrater"], 0, "Vitaminer, mineraler och vatten ger ingen energi.", {"b": "8–9", "s": "95–96"}],
+ ["Vad gör vatten enligt presentationen?", ["Ger energi", "Löser och transporterar näringsämnen och avfall och reglerar temperaturen", "Bygger muskler", "Lagrar fett"], 1, "Vatten ger ingen energi, men utan det kan kroppen inte transportera näringsämnen och avfall eller hålla temperaturen.", {"b": "9, 18"}],
+ ["Vilket näringsämne ger mest energi per gram?", ["Kolhydrater", "Protein", "Fett", "Fiber"], 2, "Fett ger 9 kcal per gram. Kolhydrater och protein ger 4 kcal.", {"s": "96"}],
+ ["Vad är kolhydrater ett samlingsnamn för?", ["Stärkelse, socker och kostfiber", "Fett, protein och socker", "Vitaminer och mineraler", "Glukos, glykogen och fett"], 0, "Stärkelse, socker och kostfiber.", {"b": "10", "s": "96"}],
+ ["Vad lagras kolhydrater som i kroppen?", ["Fett", "Glykogen", "Protein", "Vatten"], 1, "Glykogen, i musklerna och levern.", {"b": "10", "s": "96"}],
+ ["Varför kan mycket fiberrik mat ge för lite kolhydrater?", ["Fiber förstör glykogenet", "Fiber gör en mätt fort", "Fiber innehåller inga kolhydrater", "Fiber gör en uttorkad"], 1, "Man blir mätt innan man fått i sig tillräckligt.", {"b": "11", "s": "98"}],
+ ["Var lagras fett i kroppen?", ["I levern", "I fettväven", "I blodet", "I musklerna"], 1, "Fettväven är kroppens fettlager. Kolhydrater lagras i stället som glykogen i musklerna och levern.", {"b": "12"}],
+ ["Vilken sorts fett minskar risken för hjärt- och kärlsjukdomar?", ["Mättat", "Fleromättat", "Transfett", "Kokosfett"], 1, "Fleromättat fett, med omega-3 och omega-6, finns särskilt i fisk.", {"b": "13", "s": "98"}],
+ ["Var finns mättat fett enligt presentationen?", ["I djurprodukter, men inte i fisk och fågel", "I rapsolja", "I fisk", "I nötter"], 0, "Till exempel smör, ost och fett kött. Ett högt intag ökar risken för hjärt- och kärlsjukdomar.", {"b": "14", "s": "98"}],
+ ["Vilka vitaminer är fettlösliga?", ["A, D, E och K", "B och C", "A, B och C", "C, D och K"], 0, "ADEK.", {"b": "12", "s": "98"}],
+ ["Hur många aminosyror finns det, och hur många är essentiella?", ["9, varav 2 essentiella", "20, varav 9 essentiella", "50, varav 20 essentiella", "100, varav 9 essentiella"], 1, "De essentiella måste komma från kosten.", {"b": "15", "s": "99"}],
+ ["Vad är ett fullvärdigt protein?", ["Protein som innehåller alla aminosyror kroppen inte kan tillverka själv", "Protein i pulverform", "Protein som ger mest energi", "Allt protein från växter"], 0, "Till exempel kött och fisk. Vegetabiliska proteiner är inte fullvärdiga, utom soja.", {"b": "15", "s": "99"}],
+ ["Varför behöver man äta protein vid varje måltid?", ["Det smakar bäst då", "Det lagras inte i kroppen på samma sätt som fett och kolhydrater", "Det ger mest energi", "Annars blir man törstig"], 1, "Därför behöver kroppen få nytt protein flera gånger om dagen, till varje måltid.", {"b": "15"}],
+ ["Ungefär hur mycket protein per dag behöver den som tränar, enligt presentationen?", ["0,2 g per kilo kroppsvikt", "1,5 g per kilo kroppsvikt", "5 g per kilo kroppsvikt", "10 g per kilo kroppsvikt"], 1, "Den som inte tränar behöver ungefär 0,8 g per kilo kroppsvikt och dag.", {"b": "27"}],
+ ["Vad är en nackdel med proteinshake och proteinbars enligt presentationen?", ["De är för billiga", "Byter man ut för mycket mat kan man missa viktiga näringsämnen", "De innehåller inget protein", "De går inte att köpa"], 1, "Bars kan också innehålla mycket kalorier och socker.", {"b": "29"}],
+ ["Vad säger presentationen om vitaminer och energi?", ["Vitaminer ger mycket energi", "Vitaminer ger ingen energi i sig men behövs för att vi ska kunna använda energin", "Vitaminer lagrar energi", "Vitaminer är samma sak som kolhydrater"], 1, "Mer är inte bättre!", {"b": "16", "s": "100"}],
+ ["Var finns D-vitamin enligt presentationen?", ["I fisk och kantareller", "I socker", "I vitt bröd", "I läsk"], 0, "D-vitamin bildas också i huden av solljus.", {"b": "16"}],
+ ["Vad hjälper järn till med enligt presentationen?", ["Syresättningen", "Att bygga tänder", "Att lagra fett", "Att reglera törsten"], 0, "Järn behövs för hemoglobinet som transporterar syre.", {"b": "17"}],
+ ["Vad bygger kalcium och fosfor upp?", ["Musklerna", "Skelettet", "Levern", "Fettväven"], 1, "Kalcium och fosfor stärker och bygger upp skelettet.", {"b": "17"}],
+ ["Vilken kost är rik på mineraler enligt presentationen?", ["Frukt, grönsaker, fisk och skaldjur", "Godis och läsk", "Vitt bröd och pasta", "Smör och grädde"], 0, "Alla mineraler behövs för att vi ska fungera.", {"b": "17"}],
+ ["Ungefär hur mycket vätska får vi från maten per dag?", ["Ungefär 5 dl", "Ungefär 5 liter", "Ingenting", "Ungefär 1 dl"], 0, "Resten får vi från det vi dricker. Boken och presentationen skriver bara ”ca 5 dl från maten”, men det gäller hur mycket vi får i oss under en dag.", {"b": "18", "s": "101"}],
+ ["Varför ska man dricka under träningen?", ["Törst är ett sent tecken", "Det ger energi", "Det bygger muskler", "Det behövs inte"], 0, "När du känner dig törstig har du redan börjat tappa vätska.", {"b": "18", "s": "101"}],
+ ["Vad händer om man dricker för mycket?", ["Ingenting", "Elektrolyterna, salterna, späds ut", "Man får mer energi", "Glykogenet växer"], 1, "Symtomen liknar vätskebrist.", {"b": "18", "s": "101"}],
+ ["Hur lång tid före start bör man äta en måltid, enligt presentationen?", ["10 minuter", "2–4 timmar", "8 timmar", "Dagen innan"], 1, "Äter du 4 timmar innan kan du fylla på med en banan när det närmar sig start.", {"b": "22", "s": "103"}],
+ ["Vad är regel nummer ett före match?", ["Ät så mycket som möjligt", "Prova inte något nytt", "Drick sportdryck", "Hoppa över lunchen"], 1, "Testa nya saker på träning och använd det som fungerar.", {"b": "22", "s": "102–103"}],
+ ["Ungefär hur länge räcker glykogenförråden under fysisk aktivitet?", ["10–15 minuter", "60–90 minuter", "5–6 timmar", "Ett dygn"], 1, "Därför rekommenderas 30–60 gram kolhydrater i timmen vid längre aktivitet.", {"b": "23", "s": "103"}],
+ ["Hur mycket kolhydrater rekommenderas per timme under fysisk aktivitet som är längre än en timme?", ["5–10 gram", "30–60 gram", "200–300 gram", "Inga alls"], 1, "Till exempel en banan och lite sportdryck.", {"b": "23", "s": "103"}],
+ ["När behövs ett återhämtningsmål?", ["När det är mer än 2 timmar till nästa måltid", "När middagen är om tio minuter", "Bara på vilodagar", "Aldrig"], 0, "Också om du tränar flera pass om dagen, har svårt att få i dig energi, är i en tung period eller växer mycket.", {"b": "24", "s": "103"}],
+ ["Vad behöver återhämtningsmålet inte innehålla?", ["Kolhydrater", "Protein", "Vätska", "Fett"], 3, "Fettet kan du få i dig vid andra måltider.", {"b": "24", "s": "104"}],
+ ["Vilken är presentationens måltidsordning?", ["Frukost, lunch, middag", "Frukost, mellanmål, lunch, mellanmål, middag, kvällsmål", "Bara middag", "Lunch och kvällsmål"], 1, "Sex måltider, spridda över dagen.", {"b": "21", "s": "102"}],
+ ["Vad betyder ”Mat räcker!” i presentationen?", ["Energibalans, näringsbalans och vätskebalans", "Att man ska äta så mycket som möjligt", "Att kosttillskott behövs", "Att man kan hoppa över frukosten"], 0, "Med vanlig mat kommer man långt.", {"b": "30", "s": "104"}],
+ ["Vilken av dessa är en ätstörning?", ["Hetsätningsstörning", "Laktosintolerans", "Glutenallergi", "Järnbrist"], 0, "Anorexi, bulimi och hetsätningsstörning är tre ätstörningar.", {"h": 1}],
+ ["Var kan du som går på gymnasiet söka hjälp om du eller en kompis har problem med ätandet?", ["Elevhälsan eller ungdomsmottagningen", "Bara hos en personlig tränare", "Ingenstans, man ska klara det själv", "Bara på akuten"], 0, "Även vårdcentralen, BUP, 1177 och föreningar som Frisk & Fri.", {"h": 1}]
 ];
 
 const CARDS = [
- ["Energi","Energibalans?","Intag = förbrukning. Jämvikt mellan energiintag och energiförbrukning."],
- ["Energi","Positiv och negativ energibalans?","Positiv: mer energi in än ut. Negativ: mer energi ut än in."],
- ["Energi","Katabolism?","Nedbrytande reaktioner. Bryter ner maten vi äter för att utvinna energi."],
- ["Energi","Anabolism?","Uppbyggande reaktioner. Använder det nedbrutna materialet för att bygga nytt i cellerna."],
- ["Energi","Metabolism?","Ämnesomsättning: katabolism och anabolism tillsammans."],
- ["Energi","Långvarigt energiunderskott?","Muskelvävnad bryts ner, sämre koncentration, sämre återhämtning, immunförsvar och hormonbalans påverkas."],
- ["Energi","Långvarigt energiöverskott?","Muskelökning i samband med träning. Hälsorisker, enligt boken övervikt, kroniska sjukdomar med mera."],
- ["Energi","Var extra uppmärksam på energibalansen vid …","Förändrad träningsmängd, skada, sjukdom, tillväxtperioder, viktförändring, träningsläger, förändrad eller stressande livssituation."],
- ["Energi","Vad påverkar energiförbrukningen?","Basalmetabolism, fysisk aktivitet, rörelse som inte är träning och matsmältning."],
- ["Energi","Basalmetabolism?","Energin i vila för hjärta, hjärna, lungor och kroppstemperatur. Oftast störst. Boken: vilometabolism."],
- ["Energi","Matsmältningen?","Energin det kostar att bryta ner maten, ungefär 10 procent av den totala energiförbrukningen. Boken: dietär termogenes."],
- ["Energi","Vilken del varierar mest?","Fysisk aktivitet."],
- ["Energi","Hur stor är varje del av energiförbrukningen, enligt lektionen?","Basalmetabolism 70 %, rörelse som inte är träning 15 %, matsmältning 10 % och fysisk aktivitet 5 %. Kommer på provet!"],
- ["Energi","Negativ energibalans, med lärarens ord?","För lite mat, alltså energi, i förhållande till träningen."],
- ["Näringsämnen","Vad gör kolhydrater, fett och protein?","Ger energi. Fett och protein bygger också upp och reparerar."],
- ["Näringsämnen","Vad gör vitaminer och mineraler?","Behövs för ämnesomsättningen och skyddar cellerna. Mineraler bygger också upp och reparerar."],
- ["Näringsämnen","Vad gör vatten?","Löser och transporterar näringsämnen och avfall, reglerar temperaturen."],
- ["Näringsämnen","Hur många kcal ger ett gram av varje näringsämne?","Kolhydrater 4, protein 4, fett 9, kostfiber 2."],
- ["Näringsämnen","Energibalans vs näringsbalans?","Energibalans: tillräcklig mängd mat. Näringsbalans: rätt sammansättning."],
- ["Näringsämnen","Kolhydrater är samlingsnamn för?","Stärkelse, socker och kostfiber."],
- ["Näringsämnen","Kolhydratkällor?","Pasta, mjöl, bröd, potatis, ris, müsli, frukt, grönsaker."],
- ["Näringsämnen","Glykogen?","Kolhydratlagret i musklerna och levern."],
- ["Näringsämnen","Varför kan fiber ge för lite kolhydrater?","Fiber mättar fort, så man blir mätt innan man fått i sig tillräckligt."],
- ["Näringsämnen","Fettets tre sorter?","Fleromättat, enkelomättat och mättat."],
- ["Näringsämnen","Var lagras fett?","I fettväven."],
- ["Näringsämnen","Fleromättat fett?","Särskilt i fisk. Omega-3 och omega-6. Minskar risken för hjärt- och kärlsjukdomar."],
- ["Näringsämnen","Enkelomättat fett?","Främst i växtprodukter: rapsolja, olivolja, nötter."],
- ["Näringsämnen","Mättat fett?","I djurprodukter, inte fisk och fågel. Ökar risken för hjärt- och kärlsjukdomar."],
- ["Näringsämnen","Protein?","Kroppens byggstenar. 20 aminosyror, varav 9 essentiella."],
- ["Näringsämnen","Fullvärdigt protein?","Innehåller alla aminosyror kroppen inte kan tillverka själv. Till exempel kött och fisk."],
- ["Näringsämnen","Varför protein vid varje måltid?","Det lagras inte i kroppen på samma sätt som fett och kolhydrater."],
- ["Näringsämnen","Proteinbehov per dag?","Ungefär 1,5 g per kilo kroppsvikt och dag om man tränar, 0,8 g om man inte tränar."],
- ["Näringsämnen","Ungefär 20 g protein finns i …","100 g lax, kyckling, nötkött, skinka eller nötter, 2 dl kvarg, 3 ägg."],
- ["Vitaminer och mineraler","Fettlösliga vitaminer?","A, D, E och K."],
- ["Vitaminer och mineraler","Vitaminer och energi?","Ger ingen energi i sig, men behövs för att vi ska kunna använda energin."],
- ["Vitaminer och mineraler","Vad gör vitaminer?","Påskyndar kemiska reaktioner, utvinning av energi, bildar vävnad, ingår i hormoner, upptag av näringsämnen, ämnesomsättning."],
- ["Vitaminer och mineraler","Var finns vitaminer?","Grönsaker, frukt, ägg och fullkorn. D-vitamin: fisk och kantareller."],
- ["Vitaminer och mineraler","Järn?","Hjälper till med syresättningen."],
- ["Vitaminer och mineraler","Kalcium?","Bygger tillsammans med fosfor upp och stärker skelettet."],
- ["Vitaminer och mineraler","Mineralrik kost?","Frukt, grönsaker, fisk och skaldjur."],
- ["Vätska och träning","Vad påverkar vätskebehovet?","Klimatet, svett och hur effektivt du gör dig av med värme."],
- ["Vätska och träning","Hur mycket vätska får vi från maten per dag?","Ungefär 5 dl. Resten får vi från dryck."],
- ["Vätska och träning","Törst?","Ett sent tecken. Drick under träningen."],
- ["Vätska och träning","När ska du dricka inför match och träning?","Innan, i förebyggande syfte. Vänta inte tills du blir törstig."],
- ["Vätska och träning","För mycket vätska?","Elektrolyterna (salterna) späds ut."],
- ["Vätska och träning","Måltidsordning?","Frukost, mellanmål, lunch, mellanmål, middag, kvällsmål."],
- ["Vätska och träning","Före match?","Prova inte något nytt! Ät 2–4 timmar innan start."],
- ["Vätska och träning","Hur länge räcker glykogenet under fysisk aktivitet?","60–90 minuter."],
- ["Vätska och träning","Kolhydrater under långa pass?","30–60 gram i timmen, när aktiviteten är längre än en timme."],
- ["Vätska och träning","När behövs återhämtningsmål?","Flera pass om dagen, svårt att få i sig energi, mer än 2 timmar till nästa måltid, tung period eller växer mycket."],
- ["Vätska och träning","Återhämtningsmålets innehåll?","Kolhydrater, protein och vätska. Till exempel drickyoghurt och banan."],
- ["Vätska och träning","Mat räcker!","Energibalans, näringsbalans och vätskebalans."],
- ["Hälsa","Tre ätstörningar?","Anorexi, bulimi och hetsätningsstörning."],
- ["Hälsa","Var söker du hjälp?","Elevhälsan, ungdomsmottagningen, vårdcentralen, BUP, 1177, Frisk & Fri, SHEDO."]
+ ["Energi", "Energibalans?", "Intag = förbrukning. Jämvikt mellan energiintag och energiförbrukning.", {"b": "3", "s": "92"}],
+ ["Energi", "Positiv och negativ energibalans?", "Positiv: mer energi in än ut. Negativ: mer energi ut än in.", {"b": "3", "s": "92"}],
+ ["Energi", "Katabolism?", "Nedbrytande reaktioner. Bryter ner maten vi äter för att utvinna energi.", {"b": "4", "s": "92"}],
+ ["Energi", "Anabolism?", "Uppbyggande reaktioner. Använder det nedbrutna materialet för att bygga nytt i cellerna.", {"b": "4", "s": "92"}],
+ ["Energi", "Metabolism?", "Ämnesomsättning: katabolism och anabolism tillsammans.", {"b": "4", "s": "92"}],
+ ["Energi", "Långvarigt energiunderskott?", "Muskelvävnad bryts ner, sämre koncentration, sämre återhämtning, immunförsvar och hormonbalans påverkas.", {"b": "7", "s": "93"}],
+ ["Energi", "Långvarigt energiöverskott?", "Muskelökning i samband med träning. Hälsorisker, enligt boken övervikt, kroniska sjukdomar med mera.", {"b": "7", "s": "94"}],
+ ["Energi", "Var extra uppmärksam på energibalansen vid …", "Förändrad träningsmängd, skada, sjukdom, tillväxtperioder, viktförändring, träningsläger, förändrad eller stressande livssituation.", {"b": "5", "s": "94"}],
+ ["Energi", "Vad påverkar energiförbrukningen?", "Basalmetabolism, fysisk aktivitet, rörelse som inte är träning och matsmältning.", {"b": "6", "s": "95"}],
+ ["Energi", "Basalmetabolism?", "Energin i vila för hjärta, hjärna, lungor och kroppstemperatur. Oftast störst. Boken: vilometabolism.", {"b": "6", "s": "95"}],
+ ["Energi", "Matsmältningen?", "Energin det kostar att bryta ner maten, ungefär 10 procent av den totala energiförbrukningen. Boken: dietär termogenes.", {"b": "6", "s": "95"}],
+ ["Energi", "Vilken del varierar mest?", "Fysisk aktivitet.", {"s": "95"}],
+ ["Energi", "Hur stor är varje del av energiförbrukningen, enligt lektionen?", "Basalmetabolism 70 %, rörelse som inte är träning 15 %, matsmältning 10 % och fysisk aktivitet 5 %. Kommer på provet!", {"b": "6", "lk": 1}],
+ ["Energi", "Negativ energibalans, med lärarens ord?", "För lite mat, alltså energi, i förhållande till träningen.", {"b": "3", "lk": 1}],
+ ["Näringsämnen", "Vad gör kolhydrater, fett och protein?", "Ger energi. Fett och protein bygger också upp och reparerar.", {"b": "9"}],
+ ["Näringsämnen", "Vad gör vitaminer och mineraler?", "Behövs för ämnesomsättningen och skyddar cellerna. Mineraler bygger också upp och reparerar.", {"b": "9"}],
+ ["Näringsämnen", "Vad gör vatten?", "Löser och transporterar näringsämnen och avfall, reglerar temperaturen.", {"b": "9"}],
+ ["Näringsämnen", "Hur många kcal ger ett gram av varje näringsämne?", "Kolhydrater 4, protein 4, fett 9, kostfiber 2.", {"s": "96"}],
+ ["Näringsämnen", "Energibalans vs näringsbalans?", "Energibalans: tillräcklig mängd mat. Näringsbalans: rätt sammansättning.", {"b": "8", "s": "95"}],
+ ["Näringsämnen", "Kolhydrater är samlingsnamn för?", "Stärkelse, socker och kostfiber.", {"b": "10", "s": "96"}],
+ ["Näringsämnen", "Kolhydratkällor?", "Pasta, mjöl, bröd, potatis, ris, müsli, frukt, grönsaker.", {"b": "10", "s": "96"}],
+ ["Näringsämnen", "Glykogen?", "Kolhydratlagret i musklerna och levern.", {"b": "10", "s": "96"}],
+ ["Näringsämnen", "Varför kan fiber ge för lite kolhydrater?", "Fiber mättar fort, så man blir mätt innan man fått i sig tillräckligt.", {"b": "11", "s": "98"}],
+ ["Näringsämnen", "Fettets tre sorter?", "Fleromättat, enkelomättat och mättat.", {"b": "12", "s": "98"}],
+ ["Näringsämnen", "Var lagras fett?", "I fettväven.", {"b": "12"}],
+ ["Näringsämnen", "Fleromättat fett?", "Särskilt i fisk. Omega-3 och omega-6. Minskar risken för hjärt- och kärlsjukdomar.", {"b": "13", "s": "98"}],
+ ["Näringsämnen", "Enkelomättat fett?", "Främst i växtprodukter: rapsolja, olivolja, nötter.", {"b": "13", "s": "98"}],
+ ["Näringsämnen", "Mättat fett?", "I djurprodukter, inte fisk och fågel. Ökar risken för hjärt- och kärlsjukdomar.", {"b": "14", "s": "98"}],
+ ["Näringsämnen", "Protein?", "Kroppens byggstenar. 20 aminosyror, varav 9 essentiella.", {"b": "15", "s": "99"}],
+ ["Näringsämnen", "Fullvärdigt protein?", "Innehåller alla aminosyror kroppen inte kan tillverka själv. Till exempel kött och fisk.", {"b": "15", "s": "99"}],
+ ["Näringsämnen", "Varför protein vid varje måltid?", "Det lagras inte i kroppen på samma sätt som fett och kolhydrater.", {"b": "15"}],
+ ["Näringsämnen", "Proteinbehov per dag?", "Ungefär 1,5 g per kilo kroppsvikt och dag om man tränar, 0,8 g om man inte tränar.", {"b": "27"}],
+ ["Näringsämnen", "Ungefär 20 g protein finns i …", "100 g lax, kyckling, nötkött, skinka eller nötter, 2 dl kvarg, 3 ägg.", {"b": "28", "s": "99"}],
+ ["Vitaminer och mineraler", "Fettlösliga vitaminer?", "A, D, E och K.", {"b": "12", "s": "98"}],
+ ["Vitaminer och mineraler", "Vitaminer och energi?", "Ger ingen energi i sig, men behövs för att vi ska kunna använda energin.", {"b": "16"}],
+ ["Vitaminer och mineraler", "Vad gör vitaminer?", "Påskyndar kemiska reaktioner, utvinning av energi, bildar vävnad, ingår i hormoner, upptag av näringsämnen, ämnesomsättning.", {"b": "16"}],
+ ["Vitaminer och mineraler", "Var finns vitaminer?", "Grönsaker, frukt, ägg och fullkorn. D-vitamin: fisk och kantareller.", {"b": "16", "s": "100"}],
+ ["Vitaminer och mineraler", "Järn?", "Hjälper till med syresättningen.", {"b": "17"}],
+ ["Vitaminer och mineraler", "Kalcium?", "Bygger tillsammans med fosfor upp och stärker skelettet.", {"b": "17"}],
+ ["Vitaminer och mineraler", "Mineralrik kost?", "Frukt, grönsaker, fisk och skaldjur.", {"b": "17"}],
+ ["Vätska och träning", "Vad påverkar vätskebehovet?", "Klimatet, svett och hur effektivt du gör dig av med värme.", {"b": "18", "s": "101"}],
+ ["Vätska och träning", "Hur mycket vätska får vi från maten per dag?", "Ungefär 5 dl. Resten får vi från dryck.", {"b": "18", "s": "101"}],
+ ["Vätska och träning", "Törst?", "Ett sent tecken. Drick under träningen.", {"b": "18", "s": "101"}],
+ ["Vätska och träning", "När ska du dricka inför match och träning?", "Innan, i förebyggande syfte. Vänta inte tills du blir törstig.", {"b": "18", "lk": 1}],
+ ["Vätska och träning", "För mycket vätska?", "Elektrolyterna (salterna) späds ut.", {"b": "18", "s": "101"}],
+ ["Vätska och träning", "Måltidsordning?", "Frukost, mellanmål, lunch, mellanmål, middag, kvällsmål.", {"b": "21", "s": "102"}],
+ ["Vätska och träning", "Före match?", "Prova inte något nytt! Ät 2–4 timmar innan start.", {"b": "22", "s": "102–103"}],
+ ["Vätska och träning", "Hur länge räcker glykogenet under fysisk aktivitet?", "60–90 minuter.", {"b": "23", "s": "103"}],
+ ["Vätska och träning", "Kolhydrater under långa pass?", "30–60 gram i timmen, när aktiviteten är längre än en timme.", {"b": "23", "s": "103"}],
+ ["Vätska och träning", "När behövs återhämtningsmål?", "Flera pass om dagen, svårt att få i sig energi, mer än 2 timmar till nästa måltid, tung period eller växer mycket.", {"b": "24", "s": "103"}],
+ ["Vätska och träning", "Återhämtningsmålets innehåll?", "Kolhydrater, protein och vätska. Till exempel drickyoghurt och banan.", {"b": "24", "s": "104"}],
+ ["Vätska och träning", "Mat räcker!", "Energibalans, näringsbalans och vätskebalans.", {"b": "30", "s": "104"}],
+ ["Hälsa", "Tre ätstörningar?", "Anorexi, bulimi och hetsätningsstörning.", {"h": 1}],
+ ["Hälsa", "Var söker du hjälp?", "Elevhälsan, ungdomsmottagningen, vårdcentralen, BUP, 1177, Frisk & Fri, SHEDO.", {"h": 1}]
 ];
 
 const QUIZ_LEK = [
- ["Ungefär hur stor del av energiförbrukningen är basalmetabolismen, enligt lektionen?", ["Ungefär 70 procent", "Ungefär 10 procent", "Ungefär 30 procent", "Ungefär 95 procent"], 0, "Läraren sa att procentsatserna kommer på provet: basalmetabolism 70, rörelse som inte är träning 15, matsmältning 10 och fysisk aktivitet 5 procent."],
- ["Ungefär hur stor del av energiförbrukningen är rörelse som inte är träning, enligt lektionen?", ["Ungefär 15 procent", "Ungefär 5 procent", "Ungefär 50 procent", "Ungefär 70 procent"], 0, "Till exempel att gå eller cykla till skolan. Det är mer än själva träningen, som är ungefär 5 procent."],
- ["Ungefär hur stor del av energiförbrukningen är fysisk aktivitet, alltså träning, enligt lektionen?", ["Ungefär 5 procent", "Ungefär 15 procent", "Ungefär 40 procent", "Ungefär 70 procent"], 0, "Siffran gäller en genomsnittlig person. Den som tränar mycket gör av med mer, och därför är det den del som skiljer mest mellan personer."],
- ["Ungefär hur stor del av energiförbrukningen går åt till matsmältningen, enligt lektionen?", ["Ungefär 10 procent", "Ungefär 1 procent", "Ungefär 25 procent", "Ungefär 70 procent"], 0, "Samma siffra står i boken, som kallar det dietär termogenes."],
- ["Vilken del av energiförbrukningen är störst?", ["Basalmetabolismen", "Fysisk aktivitet", "Rörelse som inte är träning", "Matsmältningen"], 0, "Ungefär 70 procent. Det är energin som organen behöver för att orka hålla igång, även när du vilar."],
- ["Vad betyder energibalans?", ["Intag = förbrukning", "Att man tränar varje dag", "Att man äter mer än man gör av med", "Att man bara äter nyttigt"], 0, "Du får i dig lika mycket energi som du gör av med."],
- ["Vad är negativ energibalans, med lärarens ord?", ["För lite mat, alltså energi, i förhållande till träningen", "För mycket mat i förhållande till träningen", "Lika mycket mat som träning", "För lite vätska under träningen"], 0, "Du gör av med mer energi än du får i dig. Positiv energibalans är tvärtom."],
- ["Vad behöver du göra om du tränar mer, för att behålla energibalansen?", ["Äta mer", "Äta mindre", "Dricka mindre", "Ingenting, det jämnar ut sig"], 0, "Allt du äter förbränns. Tränar du mer gör du av med mer, och då behöver intaget öka för att det ska bli balans."],
- ["Varför dippar energin efter träningen, enligt lektionen?", ["Energin är slut", "Man har ätit för mycket", "Musklerna har vuxit", "Man har druckit för mycket"], 0, "Glykogenförråden har gått åt under passet. Därför behövs ett återhämtningsmål."],
- ["Vad gör katabolismen?", ["Bryter ner maten för att utvinna energi", "Bygger upp nytt i cellerna", "Lagrar fett", "Bygger upp skelettet"], 0, "Katabolism är den nedbrytande fasen och anabolism den uppbyggande. Presentationen skriver att maten bryts ner för att utvinna energi."],
- ["Vad är metabolism ett annat ord för?", ["Ämnesomsättning", "Matsmältning", "Energibalans", "Fettförbränning"], 0, "Metabolism är katabolism och anabolism tillsammans."],
- ["Vilka näringsämnen gick ni igenom på lektionen?", ["Kolhydrater, protein, fett, vitaminer och mineraler", "Bara kolhydrater och fett", "Vatten och salt", "Socker och fibrer"], 0, "Energi och näring får vi från maten."],
- ["Varför ska du dricka extra mycket, enligt lektionen?", ["För att reglera kroppstemperaturen", "För att få mer energi", "För att bygga muskler", "För att bli mätt"], 0, "Vatten löser och transporterar också näringsämnen."],
- ["När ska du dricka inför en match eller träning?", ["Innan, i förebyggande syfte", "Först när du blir törstig", "Bara efteråt", "Bara i pausen"], 0, "Törst är ett sent tecken. När du känner dig törstig har du redan börjat tappa vätska."],
- ["Vad gör vatten i kroppen?", ["Löser och transporterar näringsämnen", "Ger mycket energi", "Bygger upp muskler", "Lagrar kolhydrater"], 0, "Vatten reglerar också kroppstemperaturen."],
- ["Vilken mat är kolhydratkällor?", ["Pasta, mjöl, bröd, potatis och ris", "Smör, olja och ost", "Kyckling, fisk och ägg", "Vatten och mjölk"], 0, "Kolhydrater ger energi och lagras som glykogen."],
- ["Vad lagras kolhydrater som i kroppen?", ["Glykogen", "Aminosyror", "Fettväv", "Vatten"], 0, "Glykogenförråden räcker 60–90 minuter under fysisk aktivitet."],
- ["Vad gör protein?", ["Ger energi, bygger upp och reparerar", "Reglerar bara kroppstemperaturen", "Transporterar avfall", "Ingenting, det bara lagras"], 0, "Protein är kroppens byggstenar och består av aminosyror."],
- ["Hur många aminosyror finns det?", ["20", "9", "100", "3"], 0, "Nio av dem är essentiella och måste komma från maten."],
- ["Varför ska du äta protein till varje måltid?", ["Det lagras inte i kroppen på samma sätt som fett och kolhydrater", "Det ger mest energi per gram", "Det gör att man dricker mer", "Det behövs bara på morgonen"], 0, "Kroppen behöver därför få nytt protein flera gånger om dagen."],
- ["Var finns fleromättat fett?", ["I fisk", "I smör", "I mjölk", "I godis"], 0, "Enkelomättat fett finns i växtprodukter som nötter, rapsolja och olivolja. Mättat fett finns i djurprodukter som smör och mjölk."],
- ["Var finns mättat fett?", ["I djurprodukter, till exempel smör och mjölk", "I fisk", "I rapsolja och olivolja", "I nötter"], 0, "Fleromättat fett finns i fisk och enkelomättat i växtprodukter."],
- ["Vad gör både vitaminer och mineraler?", ["Behövs för ämnesomsättningen och skyddar cellerna", "Ger energi och lagras som glykogen", "Bygger muskler och ger värme", "Transporterar vatten"], 0, "Kalcium och järn är exempel på mineraler."],
- ["Vad händer om du äter för mycket fibrer?", ["Du blir jättemätt och får i dig mindre kolhydrater", "Du får mer energi", "Glykogenet räcker längre", "Du blir törstig"], 0, "Fibrer är ändå bra för matsmältningen. Det handlar om att inte äta för mycket av dem när du tränar mycket."],
- ["Hur lång tid före start av match eller träning ska du äta en måltid?", ["2–4 timmar", "10 minuter", "8 timmar", "Dagen innan"], 0, "Äter du 4 timmar innan kan du fylla på med något litet, som en banan, när det närmar sig start."],
- ["Ungefär hur mycket protein per dag behöver en person som tränar?", ["1,5 g per kilo kroppsvikt", "0,8 g per kilo kroppsvikt", "5 g per kilo kroppsvikt", "15 g per kilo kroppsvikt"], 0, "Den som inte tränar behöver ungefär 0,8 g per kilo kroppsvikt och dag."],
- ["Ungefär hur mycket protein per dag behöver en person som inte tränar?", ["0,8 g per kilo kroppsvikt", "1,5 g per kilo kroppsvikt", "3 g per kilo kroppsvikt", "Inget protein alls"], 0, "Den som tränar behöver ungefär 1,5 g per kilo kroppsvikt och dag."],
- ["Hur länge räcker glykogenförråden under fysisk aktivitet?", ["60–90 minuter", "10–20 minuter", "4–5 timmar", "Ett dygn"], 0, "Vid längre pass behöver du fylla på med kolhydrater."],
- ["Vilka tre balanser avslutade lektion 2?", ["Energibalans, näringsbalans och vätskebalans", "Syrebalans, saltbalans och sockerbalans", "Träning, vila och sömn", "Frukost, lunch och middag"], 0, "Det är samma tre som i presentationens ”Mat räcker!”."]
+ ["Ungefär hur stor del av energiförbrukningen är basalmetabolismen, enligt lektionen?", ["Ungefär 70 procent", "Ungefär 10 procent", "Ungefär 30 procent", "Ungefär 95 procent"], 0, "Läraren sa att procentsatserna kommer på provet: basalmetabolism 70, rörelse som inte är träning 15, matsmältning 10 och fysisk aktivitet 5 procent.", {"b": "6", "s": "95", "lk": 1}],
+ ["Ungefär hur stor del av energiförbrukningen är rörelse som inte är träning, enligt lektionen?", ["Ungefär 15 procent", "Ungefär 5 procent", "Ungefär 50 procent", "Ungefär 70 procent"], 0, "Till exempel att gå eller cykla till skolan. Det är mer än själva träningen, som är ungefär 5 procent.", {"b": "6", "lk": 1}],
+ ["Ungefär hur stor del av energiförbrukningen är fysisk aktivitet, alltså träning, enligt lektionen?", ["Ungefär 5 procent", "Ungefär 15 procent", "Ungefär 40 procent", "Ungefär 70 procent"], 0, "Siffran gäller en genomsnittlig person. Den som tränar mycket gör av med mer, och därför är det den del som skiljer mest mellan personer.", {"b": "6", "s": "95", "lk": 1}],
+ ["Ungefär hur stor del av energiförbrukningen går åt till matsmältningen, enligt lektionen?", ["Ungefär 10 procent", "Ungefär 1 procent", "Ungefär 25 procent", "Ungefär 70 procent"], 0, "Samma siffra står i boken, som kallar det dietär termogenes.", {"b": "6", "s": "95", "lk": 1}],
+ ["Vilken del av energiförbrukningen är störst?", ["Basalmetabolismen", "Fysisk aktivitet", "Rörelse som inte är träning", "Matsmältningen"], 0, "Ungefär 70 procent. Det är energin som organen behöver för att orka hålla igång, även när du vilar.", {"b": "6", "s": "95", "lk": 1}],
+ ["Vad betyder energibalans?", ["Intag = förbrukning", "Att man tränar varje dag", "Att man äter mer än man gör av med", "Att man bara äter nyttigt"], 0, "Du får i dig lika mycket energi som du gör av med.", {"b": "3", "s": "92", "lk": 1}],
+ ["Vad är negativ energibalans, med lärarens ord?", ["För lite mat, alltså energi, i förhållande till träningen", "För mycket mat i förhållande till träningen", "Lika mycket mat som träning", "För lite vätska under träningen"], 0, "Du gör av med mer energi än du får i dig. Positiv energibalans är tvärtom.", {"b": "3", "s": "92", "lk": 1}],
+ ["Vad behöver du göra om du tränar mer, för att behålla energibalansen?", ["Äta mer", "Äta mindre", "Dricka mindre", "Ingenting, det jämnar ut sig"], 0, "Allt du äter förbränns. Tränar du mer gör du av med mer, och då behöver intaget öka för att det ska bli balans.", {"b": "3", "s": "92–93", "lk": 1}],
+ ["Varför dippar energin efter träningen, enligt lektionen?", ["Energin är slut", "Man har ätit för mycket", "Musklerna har vuxit", "Man har druckit för mycket"], 0, "Glykogenförråden har gått åt under passet. Därför behövs ett återhämtningsmål.", {"b": "23–24", "s": "103", "lk": 1}],
+ ["Vad gör katabolismen?", ["Bryter ner maten för att utvinna energi", "Bygger upp nytt i cellerna", "Lagrar fett", "Bygger upp skelettet"], 0, "Katabolism är den nedbrytande fasen och anabolism den uppbyggande. Presentationen skriver att maten bryts ner för att utvinna energi.", {"b": "4", "s": "92", "lk": 1}],
+ ["Vad är metabolism ett annat ord för?", ["Ämnesomsättning", "Matsmältning", "Energibalans", "Fettförbränning"], 0, "Metabolism är katabolism och anabolism tillsammans.", {"b": "4", "s": "92", "lk": 1}],
+ ["Vilka näringsämnen gick ni igenom på lektionen?", ["Kolhydrater, protein, fett, vitaminer och mineraler", "Bara kolhydrater och fett", "Vatten och salt", "Socker och fibrer"], 0, "Energi och näring får vi från maten.", {"b": "8", "s": "95", "lk": 1}],
+ ["Varför ska du dricka extra mycket, enligt lektionen?", ["För att reglera kroppstemperaturen", "För att få mer energi", "För att bygga muskler", "För att bli mätt"], 0, "Vatten löser och transporterar också näringsämnen.", {"b": "18", "s": "101", "lk": 1}],
+ ["När ska du dricka inför en match eller träning?", ["Innan, i förebyggande syfte", "Först när du blir törstig", "Bara efteråt", "Bara i pausen"], 0, "Törst är ett sent tecken. När du känner dig törstig har du redan börjat tappa vätska.", {"b": "18", "s": "101", "lk": 1}],
+ ["Vad gör vatten i kroppen?", ["Löser och transporterar näringsämnen", "Ger mycket energi", "Bygger upp muskler", "Lagrar kolhydrater"], 0, "Vatten reglerar också kroppstemperaturen.", {"b": "9, 18", "lk": 1}],
+ ["Vilken mat är kolhydratkällor?", ["Pasta, mjöl, bröd, potatis och ris", "Smör, olja och ost", "Kyckling, fisk och ägg", "Vatten och mjölk"], 0, "Kolhydrater ger energi och lagras som glykogen.", {"b": "10", "s": "96", "lk": 1}],
+ ["Vad lagras kolhydrater som i kroppen?", ["Glykogen", "Aminosyror", "Fettväv", "Vatten"], 0, "Glykogenförråden räcker 60–90 minuter under fysisk aktivitet.", {"b": "10", "s": "96", "lk": 1}],
+ ["Vad gör protein?", ["Ger energi, bygger upp och reparerar", "Reglerar bara kroppstemperaturen", "Transporterar avfall", "Ingenting, det bara lagras"], 0, "Protein är kroppens byggstenar och består av aminosyror.", {"b": "15", "s": "99", "lk": 1}],
+ ["Hur många aminosyror finns det?", ["20", "9", "100", "3"], 0, "Nio av dem är essentiella och måste komma från maten.", {"b": "15", "s": "99", "lk": 1}],
+ ["Varför ska du äta protein till varje måltid?", ["Det lagras inte i kroppen på samma sätt som fett och kolhydrater", "Det ger mest energi per gram", "Det gör att man dricker mer", "Det behövs bara på morgonen"], 0, "Kroppen behöver därför få nytt protein flera gånger om dagen.", {"b": "15", "lk": 1}],
+ ["Var finns fleromättat fett?", ["I fisk", "I smör", "I mjölk", "I godis"], 0, "Enkelomättat fett finns i växtprodukter som nötter, rapsolja och olivolja. Mättat fett finns i djurprodukter som smör och mjölk.", {"b": "13", "s": "98", "lk": 1}],
+ ["Var finns mättat fett?", ["I djurprodukter, till exempel smör och mjölk", "I fisk", "I rapsolja och olivolja", "I nötter"], 0, "Fleromättat fett finns i fisk och enkelomättat i växtprodukter.", {"b": "14", "s": "98", "lk": 1}],
+ ["Vad gör både vitaminer och mineraler?", ["Behövs för ämnesomsättningen och skyddar cellerna", "Ger energi och lagras som glykogen", "Bygger muskler och ger värme", "Transporterar vatten"], 0, "Kalcium och järn är exempel på mineraler.", {"b": "9, 16–17", "lk": 1}],
+ ["Vad händer om du äter för mycket fibrer?", ["Du blir jättemätt och får i dig mindre kolhydrater", "Du får mer energi", "Glykogenet räcker längre", "Du blir törstig"], 0, "Fibrer är ändå bra för matsmältningen. Det handlar om att inte äta för mycket av dem när du tränar mycket.", {"b": "11", "s": "98", "lk": 1}],
+ ["Hur lång tid före start av match eller träning ska du äta en måltid?", ["2–4 timmar", "10 minuter", "8 timmar", "Dagen innan"], 0, "Äter du 4 timmar innan kan du fylla på med något litet, som en banan, när det närmar sig start.", {"b": "22", "s": "103", "lk": 1}],
+ ["Ungefär hur mycket protein per dag behöver en person som tränar?", ["1,5 g per kilo kroppsvikt", "0,8 g per kilo kroppsvikt", "5 g per kilo kroppsvikt", "15 g per kilo kroppsvikt"], 0, "Den som inte tränar behöver ungefär 0,8 g per kilo kroppsvikt och dag.", {"b": "27", "lk": 1}],
+ ["Ungefär hur mycket protein per dag behöver en person som inte tränar?", ["0,8 g per kilo kroppsvikt", "1,5 g per kilo kroppsvikt", "3 g per kilo kroppsvikt", "Inget protein alls"], 0, "Den som tränar behöver ungefär 1,5 g per kilo kroppsvikt och dag.", {"b": "27", "lk": 1}],
+ ["Hur länge räcker glykogenförråden under fysisk aktivitet?", ["60–90 minuter", "10–20 minuter", "4–5 timmar", "Ett dygn"], 0, "Vid längre pass behöver du fylla på med kolhydrater.", {"b": "23", "s": "103", "lk": 1}],
+ ["Vilka tre balanser avslutade lektion 2?", ["Energibalans, näringsbalans och vätskebalans", "Syrebalans, saltbalans och sockerbalans", "Träning, vila och sömn", "Frukost, lunch och middag"], 0, "Det är samma tre som i presentationens ”Mat räcker!”.", {"b": "30", "s": "104", "lk": 1}]
 ];
 
 const REASON = [
@@ -811,6 +814,7 @@ const LS = "nl-niu-";
 const load = (k,d) => { try{ const v = localStorage.getItem(LS+k); return v ? JSON.parse(v) : d; }catch(e){ return d; } };
 const store = (k,v) => { try{ localStorage.setItem(LS+k, JSON.stringify(v)); }catch(e){} };
 const esc = s => String(s).replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const refTags = r => r ? (r.b?'<span class="tag pres">Bild '+r.b+'</span>':'')+(r.s?'<span class="tag bok">Boken s. '+r.s+'</span>':'')+(r.lk?'<span class="tag lk">Lektionen</span>':'')+(r.h?'<span class="tag lekt">1177</span>':'') : '';
 function shuffle(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
 
 /* Flikar */
@@ -1015,13 +1019,14 @@ function renderQuiz(){
     const pct=qscore/qorder.length;
     const msg = pct>=0.9 ? "Riktigt starkt. Du är redo." : pct>=0.7 ? "Bra grund. Titta på det du missade." : "Läs sammanfattningen en gång till och kör igen.";
     box.innerHTML = `<div class="qbox"><p class="qnum">Resultat</p><p class="score">${qscore} / ${qorder.length}</p><p>${msg}</p>
-      ${wrong.length?'<p><strong>Repetera:</strong></p>'+wrong.map(i=>`<p class="expl">${QZ[i][0]}<br><strong>${QZ[i][1][QZ[i][2]]}</strong></p>`).join(''):''}
+      ${wrong.length?'<p><strong>Repetera:</strong></p>'+wrong.map(i=>`<div class="expl">${QZ[i][0]}<br><strong>${QZ[i][1][QZ[i][2]]}</strong><div class="where">${refTags(QZ[i][4])}</div></div>`).join(''):''}
       <p style="margin-top:14px"><button class="btn primary" id="qagain">Kör igen</button></p></div>`;
     document.getElementById('qagain').onclick=startQuiz; return;
   }
   const q=QZ[qorder[qi]];
   const opts=shuffle(q[1].map((o,i)=>i));
   box.innerHTML = `<div class="qbox"><div class="qnum">Fråga ${qi+1} av ${qorder.length}, ${qscore} rätt hittills</div>
+    <div class="where">${refTags(q[4])}</div>
     <div class="qtext">${q[0]}</div>
     ${opts.map(i=>`<button class="opt" data-i="${i}">${q[1][i]}</button>`).join('')}
     <div id="qafter"></div></div>`;
@@ -1056,7 +1061,7 @@ function buildDeck(){
 function renderCard(){
   const c=CARDS[deck[idx]];
   document.getElementById('fside').textContent = flipped ? "Svar" : `Fråga · ${c[0].toLowerCase()}`;
-  document.getElementById('fcontent').innerHTML = flipped ? `<div class="fa">${c[2]}</div>` : `<div class="fq">${c[1]}</div>`;
+  document.getElementById('fcontent').innerHTML = flipped ? `<div class="fa">${c[2]}</div><div class="where">${refTags(c[3])}</div>` : `<div class="fq">${c[1]}</div>`;
   const nk=deck.filter(i=>known.has(i)).length;
   document.getElementById('fcount').textContent = `${idx+1} av ${deck.length}, ${nk} kan du`;
   document.getElementById('fknow').textContent = known.has(deck[idx]) ? "Kan den ✓" : "Jag kan den";
