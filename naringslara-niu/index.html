@@ -192,11 +192,6 @@ footer p{margin:6px 0}
     <p class="lead">Allt fungerar på telefon och iPad. Det du skriver sparas bara i webbläsaren på din egen telefon.</p>
     <p><a class="btn primary" href="https://hej-design.github.io/Plugg-gymnasiet/naringslara-podd/" target="_blank" rel="noopener">🎧 Lyssna på pluggpodden</a> <span class="small">Tretton korta avsnitt, ungefär 13 minuter. Bra på bussen eller före träningen.</span></p>
 
-    <div class="fast">
-      <h3>Fyra pass till provet</h3>
-      <p class="small" style="margin:0 0 4px">Ungefär 40 minuter per pass. Läs först, svara sedan på frågorna utan att titta.</p>
-      <div id="passes"></div>
-    </div>
 
     <div class="box">
       <h3>Så funkar rättningen</h3>
@@ -804,12 +799,6 @@ const CHAINS = [
 ];
 
 const CATS = ["Energi","Näringsämnen","Vitaminer och mineraler","Vätska och träning","Hälsa"];
-const PASSES = [
- {b:"Pass 1: Energin.", html:`Läs <button class="lnk" data-topic="0">Helheten</button>, <button class="lnk" data-topic="1">Energibalans</button>, <button class="lnk" data-topic="2">Energibehov</button>, <button class="lnk" data-topic="3">Energiförbrukning</button> och <button class="lnk" data-topic="4">Energi och näring</button>. Svara sedan på <button class="lnk" data-cat="Energi">frågorna om energi</button>.`, t:"ca 40 min"},
- {b:"Pass 2: Näringsämnena.", html:`Läs <button class="lnk" data-topic="5">Kolhydrater</button>, <button class="lnk" data-topic="6">Fett</button> och <button class="lnk" data-topic="7">Protein</button>. Svara på <button class="lnk" data-cat="Näringsämnen">frågorna om näringsämnen</button>.`, t:"ca 40 min"},
- {b:"Pass 3: Vitaminer, vätska och mat runt träning.", html:`Läs <button class="lnk" data-topic="8">Vitaminer och mineraler</button>, <button class="lnk" data-topic="9">Vätska</button>, <button class="lnk" data-topic="10">Koststrategi</button>, <button class="lnk" data-topic="11">Före, under och efter</button> och <button class="lnk" data-topic="12">Ätstörningar</button>. Gå igenom <button class="lnk" data-gotab="match">Matchdagen</button> och svara på resten av frågorna.`, t:"ca 45 min"},
- {b:"Pass 4: Repetition.", html:`Kör <button class="lnk" data-gotab="quiz">Quiz</button>, både presentationens och lektionens, och <button class="lnk" data-gotab="kort">Kort</button> tills det sitter. Träna på att förklara under <button class="lnk" data-gotab="resonera">Resonera</button>. Gör sedan <button class="lnk" data-cat="Inte klara">frågorna som inte sitter än</button> och läs <button class="lnk" data-gotab="listan">Kolla listan</button>.`, t:"ca 50 min"}
-];
 
 /* ===================== HJÄLP ===================== */
 const LS = "nl-niu-";
@@ -828,21 +817,6 @@ function showTab(id){
 document.querySelectorAll('nav.tabs button').forEach(b=>b.addEventListener('click',()=>showTab(b.dataset.tab)));
 
 /* ===================== START ===================== */
-let passDone = load('pass', {});
-document.getElementById('passes').innerHTML = PASSES.map((p,i)=>`<div class="pass"><b>${p.b}</b> ${p.html} <span class="t">${p.t}</span><label><input type="checkbox" data-pass="${i}" ${passDone[i]?'checked':''}> Klart</label></div>`).join('');
-document.getElementById('passes').addEventListener('change',e=>{
-  if(e.target.dataset.pass===undefined) return;
-  passDone[e.target.dataset.pass]=e.target.checked; store('pass',passDone);
-});
-document.getElementById('passes').addEventListener('click',e=>{
-  const b=e.target.closest('button.lnk'); if(!b) return;
-  if(b.dataset.topic!==undefined){
-    showTab('las');
-    const d=document.querySelectorAll('details.topic')[+b.dataset.topic];
-    if(d){ d.open=true; setTimeout(()=>d.scrollIntoView({block:'start'}),30); }
-  } else if(b.dataset.cat){ qcat=b.dataset.cat; renderQFilter(); renderQ(); showTab('fragor'); }
-  else if(b.dataset.gotab){ showTab(b.dataset.gotab); }
-});
 
 /* ===================== LÄS ===================== */
 document.getElementById('topics').innerHTML = TOPICS.map(t=>
