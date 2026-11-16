@@ -138,15 +138,6 @@ a.btn{display:inline-block; text-decoration:none; margin:2px 0 6px}
 .flash .fa{font-size:1.1rem}
 .flashnav{display:flex; justify-content:space-between; align-items:center; gap:8px; margin-top:16px; flex-wrap:wrap}
 
-/* Listan mot boken */
-.fix{background:var(--card); border:1.5px solid var(--line); border-radius:6px; padding:14px 16px; margin:0 0 12px}
-.fix .wh{font-size:.85rem; color:var(--soft); margin:0 0 4px}
-.fix .was{color:var(--soft); text-decoration:line-through; text-decoration-color:var(--red); margin:0}
-.fix .is{margin:6px 0 0}
-.fix .note{font-family:var(--hand); font-size:1.3rem; color:var(--red); margin:6px 0 0; line-height:1.2}
-.fix.okay{border-color:var(--ok)}
-.fix.okay .was{text-decoration:none}
-
 /* Matchdagen */
 .mapwrap{margin:0 0 18px; background:var(--card); border:2px solid var(--ink); border-radius:6px; padding:10px 6px; box-shadow:5px 5px 0 var(--tab)}
 .map{display:block; width:100%; max-width:440px; height:auto; margin:0 auto}
@@ -183,7 +174,6 @@ footer p{margin:6px 0}
     <button role="tab" aria-selected="false" data-tab="quiz">Quiz</button>
     <button role="tab" aria-selected="false" data-tab="kort">Kort</button>
     <button role="tab" aria-selected="false" data-tab="match">Matchdagen</button>
-    <button role="tab" aria-selected="false" data-tab="listan">Kolla listan</button>
   </nav>
 
   <!-- START -->
@@ -269,13 +259,6 @@ footer p{margin:6px 0}
     <h3 class="sub">Varför-kedjor</h3>
     <p class="small">Läs frågan, försök bygga kedjan själv och tryck sedan för att se den. Varje steg är en del av resonemanget, och det är stegen som ger poäng på provet.</p>
     <div id="chains"></div>
-  </section>
-
-  <!-- LISTAN MOT BOKEN -->
-  <section class="panel" id="listan">
-    <h2>Kolla listan</h2>
-    <p class="lead">Svaren i listan stämmer nästan ord för ord med lärarens presentation. Här är det som saknas eller blivit fel, och vad boken lägger till.</p>
-    <div id="fixes"></div>
   </section>
 
   <footer>
@@ -763,19 +746,6 @@ const REASON = [
  {"q": "Basalmetabolismen är ungefär 70 procent av energiförbrukningen. Varför går så mycket energi åt när du vilar?", "bild": "6", "src": "s. 95", "lk": true, "a": "Basalmetabolismen är energin som organen behöver för att orka hålla igång. Hjärtat pumpar, hjärnan arbetar, lungorna andas och kroppstemperaturen hålls uppe hela dygnet, även när du sover. Träningen pågår bara en liten del av dygnet. Därför blir vilan den största delen av energiförbrukningen, trots att varje minut i vila kostar mindre energi än en minut på träningen.", "p": [{"t": "Organen behöver energi för att hålla igång", "g": [["organ", "hjärta", "hjärna", "lung", "andning", "andas"]]}, {"t": "Kroppstemperaturen ska hållas uppe", "g": [["temperatur", "värme", "varm"]]}, {"t": "Det pågår hela dygnet, även när du sover", "g": [["dygn", "hela tiden", "alltid", "sover", "sömn", "24"]]}, {"t": "Träningen är bara en liten del av dygnet", "g": [["träning", "tränar", "aktivitet"]]}], "need": 3}
 ];
 
-const FIXES = [
- {wh:"Fråga 1–4 och 8–9", was:"", is:"Svaren stämmer med lärarens presentation, bild 3–4, 7 och 10. Fråga 2 om katabolism och anabolism är nästan ordagrant samma som bild 4.", note:"", ok:true},
- {wh:"Fråga 3 och 4, vad boken lägger till", was:"", is:"Boken räknar upp fler följder. Energiunderskott: sämre prestation, försenad pubertet, avstannad tillväxt, sämre benhälsa, ökad skaderisk, sömnsvårigheter och oregelbunden mens. Energiöverskott, alltså vilka hälsorisker: övervikt, kroniska sjukdomar, sämre immunförsvar, hormonförändringar, depression och sämre prestation (s. 93–94).", note:"Skriv gärna med några av dem på provet.", ok:true},
- {wh:"Fråga 5, energiförbrukningen", was:"balsametabolism, fysisk aktivitet och matspjälkning", is:"Det stavas basalmetabolism. Frågan vill också veta vad delarna innebär, så förklara varje del: basalmetabolism är energin i vila för hjärta, hjärna och kroppstemperatur, fysisk aktivitet är träning och vardagsrörelse, och matsmältningen är energin det kostar att bryta ner maten (bild 6, s. 95).", note:"Basal betyder grund."},
- {wh:"Fråga 6 och 7, energi och näring", was:"Vi får energi från … / Näring får vi ifrån …", is:"Energi får vi från kolhydrater, fett och protein. Näring får vi från maten: kolhydrater, fett, protein, vitaminer och mineraler, och även vätska behövs (bild 8–9).", note:"De här svaren saknades."},
- {wh:"Fråga 10, samlingsnamn", was:"stärkelse, socker, kolhydrater", is:"Stärkelse, socker och kostfiber. Så står det både i presentationen (bild 10) och i boken (s. 96).", note:"Ett litet skrivfel: kostfiber blev kolhydrater."},
- {wh:"Fråga 11, fiberrik mat", was:"… eftersom", is:"Fiberrik mat ökar mättnadskänslan, så man blir mätt innan man fått i sig tillräckligt med kolhydrater (s. 98).", note:"Svaret tog slut här."},
- {wh:"Fråga 12, de tre fetterna", was:"enkelomättat och fleromättat fett", is:"Det tredje saknas: mättat fett, som finns i djurprodukter utom fisk och fågel, som smör, ost och fett kött (bild 14, s. 98). Och det heter majsolja, inte majolja.", note:"Kycklingen under enkelomättat fett stämmer, den står i boken."},
- {wh:"Fråga 13, fettlösliga vitaminer", was:"", is:"Svaret saknades. Rätt svar är A, D, E och K (bild 12, s. 98).", note:"Tänk ADEK."},
- {wh:"Fråga 14, protein", was:"Protein är aminosyror.", is:"Lägg till: protein är kroppens byggstenar och består av aminosyror. Det finns 20 aminosyror, varav 9 är essentiella och måste komma från kosten. Det lagras inte i kroppen, så man ska äta protein vid varje måltid (bild 15).", note:""},
- {wh:"Fråga 15, var finns protein", was:"", is:"Rätt. Lägg gärna till att kött och fisk är fullvärdigt protein, och att vegetabiliska källor som bönor och linser inte är det, utom soja (bild 15).", note:"", ok:true},
- {wh:"Fråga 16 och framåt", was:"Vi behöver äta vitaminer … och resten saknar svar", is:"Alla frågor finns under Frågor, med modellsvar som följer presentationen. Fråga 30 om ätstörningar står varken i presentationen eller boken, så den bygger på 1177.", note:""}
-];
 
 const DAY = [
  {time:"07.00", h:"Frukost", l:["Fyll på efter natten.","Gröt, bröd, mjölk och frukt."]},
@@ -1085,8 +1055,6 @@ ch.addEventListener('click',e=>{
   e.target.textContent = d.hidden ? 'Visa kedjan' : 'Dölj kedjan';
 });
 
-/* ===================== LISTAN MOT BOKEN ===================== */
-document.getElementById('fixes').innerHTML = FIXES.map(f=>`<div class="fix ${f.ok?'okay':''}"><p class="wh">${f.wh}</p>${f.was?`<p class="was">${esc(f.was)}</p>`:''}<p class="is">${f.is}</p>${f.note?`<p class="note">${f.note}</p>`:''}</div>`).join('');
 </script>
 </body>
 </html>
