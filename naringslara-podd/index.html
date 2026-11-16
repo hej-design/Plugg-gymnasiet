@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<style>[hidden]{display:none!important}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
+<title>Pluggpodd näringslära</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<style>
+/* Samma upplägg som Week 5-podden: fast spelare överst, avsnitten som kort under. Marias färger, ett ljust tema med avsikt. */
+:root{
+  --navy:#182851; --gold:#b4975a; --brown:#362b25; --taupe:#7c675c; --warm:#e3dedd;
+  --paper:#f7f4f2; --white:#fffdfb; --line:#d6cfcc; --hl:#efe4cf; --onnavy:#ece6df;
+  --serif:"EB Garamond", Garamond, "Garamond Premier Pro", Georgia, serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+body{margin:0; background:var(--paper); color:var(--brown); font-family:var(--serif); font-size:19px; line-height:1.55}
+.wrap{max-width:720px; margin:0 auto; padding-block:2.5rem 5rem; padding-inline:16px}
+.eyebrow{font-size:.8rem; letter-spacing:.14em; text-transform:uppercase; color:var(--taupe)}
+h1{font-weight:500; font-size:2.4rem; line-height:1.1; color:var(--navy); margin:.3rem 0 .6rem; text-wrap:balance}
+.lede{color:var(--taupe); margin:0 0 1.6rem; max-width:60ch}
+.player{position:sticky; top:env(safe-area-inset-top,0px); z-index:5; background:var(--navy); color:#fff; border-radius:10px; padding:.9rem 1rem; display:flex; flex-wrap:wrap; gap:.6rem .8rem; align-items:center; margin-bottom:1.6rem; box-shadow:0 6px 20px rgba(24,40,81,.18)}
+.player .now{flex:1 1 100%; font-size:.95rem; color:var(--onnavy); min-height:1.4em}
+.player .now strong{color:var(--gold); font-weight:600}
+.ctrls{display:flex; flex-wrap:wrap; gap:.5rem .6rem; align-items:center; flex:1 1 100%}
+.player button{font-family:inherit; font-size:1rem; border-radius:999px; border:1px solid var(--gold); background:transparent; color:#fff; padding:.35rem 1rem; cursor:pointer; min-height:2.2rem}
+.player button.primary{background:var(--gold); color:var(--navy); font-weight:600; min-width:6.2rem}
+.player label{font-size:.9rem; color:var(--onnavy); display:flex; align-items:center; gap:.4rem}
+.player select{font-family:inherit; font-size:.95rem; border-radius:6px; border:1px solid var(--gold); background:var(--navy); color:#fff; padding:.2rem .4rem}
+button:focus-visible, select:focus-visible, .bar:focus-visible, .line:focus-visible{outline:2px solid var(--gold); outline-offset:2px}
+.bar-wrap{flex:1 1 100%; display:flex; align-items:center; gap:.6rem; margin-top:.2rem}
+.t{font-size:.9rem; color:var(--onnavy); min-width:2.9rem; text-align:center; font-variant-numeric:tabular-nums}
+.bar{position:relative; flex:1; height:10px; border-radius:99px; background:rgba(255,255,255,.18); cursor:pointer; touch-action:none}
+.bar::before{content:""; position:absolute; left:0; right:0; top:-12px; bottom:-12px}
+.fill{position:absolute; left:0; top:0; bottom:0; width:0; border-radius:99px; background:var(--gold)}
+.ticks span{position:absolute; top:-3px; width:2px; height:16px; background:rgba(255,255,255,.6); margin-left:-1px}
+.knob{position:absolute; top:50%; left:0; width:20px; height:20px; margin:-10px 0 0 -10px; border-radius:50%; background:#fff; border:3px solid var(--gold); box-shadow:0 1px 4px rgba(0,0,0,.3)}
+.resume{flex:1 1 100%; font-size:.95rem; color:var(--onnavy); display:flex; flex-wrap:wrap; align-items:center; gap:.4rem .6rem}
+.tip{font-size:.95rem; color:var(--taupe); margin:-.6rem 0 1.4rem}
+.ep{background:var(--white); border:1px solid var(--line); border-radius:10px; margin-bottom:.9rem; overflow:hidden}
+.ep.playing{border-color:var(--gold); box-shadow:0 0 0 2px rgba(180,151,90,.25)}
+.ep-head{display:flex; align-items:center; gap:.9rem; padding:.9rem 1rem}
+.ep-play{flex-shrink:0; width:2.8rem; height:2.8rem; border-radius:50%; border:none; background:var(--navy); color:var(--gold); font-size:1rem; cursor:pointer}
+.ep.playing .ep-play{background:var(--gold); color:var(--navy)}
+.ep-titles{flex:1; min-width:0}
+.ep-num{font-size:.78rem; letter-spacing:.1em; text-transform:uppercase; color:var(--taupe)}
+.ep h2{margin:.05rem 0 0; font-weight:600; font-size:1.3rem; color:var(--navy); line-height:1.2; text-wrap:balance}
+.ep-sub{font-size:.95rem; color:var(--taupe); font-style:italic}
+.ep-ref{font-size:.85rem; color:var(--navy); margin-top:.15rem}
+footer a{color:var(--navy)}
+.ep-toggle{flex-shrink:0; font-family:inherit; font-size:.95rem; border-radius:999px; border:1px solid var(--navy); background:var(--white); color:var(--navy); padding:.25rem .8rem; cursor:pointer}
+.ep-text{padding:0 1.2rem 1rem 4.7rem}
+.line{margin:0 0 .7rem; border-radius:4px; padding:.1rem .3rem; cursor:pointer; transition:background .2s}
+.line:hover{background:var(--warm)}
+.line.speaking{background:var(--hl); color:var(--navy)}
+footer{margin-top:2rem; font-size:.95rem; color:var(--taupe)}
+@media (max-width:520px){
+  h1{font-size:2rem}
+  .ep-text{padding-left:1.2rem}
+  .ep-head{flex-wrap:wrap}
+  .ep-titles{flex:1 1 calc(100% - 4rem)}
+  .ep-toggle{margin-left:3.7rem}
+  .player button{padding:.35rem .8rem}
+}
+@media (prefers-reduced-motion:reduce){ .line{transition:none} }
+</style>
+</head>
+<body>
+
+
+<div class="wrap">
+<div class="eyebrow">NIU åk 1 · Träning- och tävlingslära 1 · Prov fredag vecka 47</div>
+<h1>Pluggpodd näringslära</h1>
+<p class="lede">Tretton korta avsnitt, ungefär 13 minuter totalt, som följer lärarens presentation, boken och lektionsanteckningarna. Tryck på Spela för att lyssna. Ljudet fortsätter när skärmen släcks, och tidslinjen visar var du slutade.</p>
+
+<div class="player" role="region" aria-label="Spelare">
+  <audio id="audio" preload="metadata" src="podd.mp3"></audio>
+  <div class="now" id="now">Redo. Tryck på Spela, eller starta från ett avsnitt nedan.</div>
+  <div class="ctrls">
+    <button type="button" class="primary" id="play" aria-label="Spela">▶ Spela</button>
+    <button type="button" id="back" aria-label="Bakåt 15 sekunder">↺ 15 s</button>
+    <button type="button" id="fwd" aria-label="Framåt 15 sekunder">15 s ↻</button>
+    <button type="button" id="next" aria-label="Nästa avsnitt">Nästa ⏭</button>
+    <label for="rate">Hastighet <select id="rate"><option value="0.85">0,85×</option><option value="1" selected>1×</option><option value="1.15">1,15×</option><option value="1.3">1,3×</option></select></label>
+  </div>
+  <div class="bar-wrap">
+    <span class="t" id="cur">0:00</span>
+    <div class="bar" id="bar" role="slider" tabindex="0" aria-label="Position i podden" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-valuetext="0:00">
+      <div class="fill" id="fill"></div><div class="ticks" id="ticks"></div><div class="knob" id="knob"></div>
+    </div>
+    <span class="t" id="dur">0:00</span>
+  </div>
+  <div class="resume" id="resume" hidden></div>
+</div>
+<p class="tip">Du kan också styra podden från låsskärmen. Den vita pricken visar var du är, och du kan dra i den. De tunna strecken visar var varje avsnitt börjar. Tryck på en mening i texten för att hoppa dit.</p>
+
+<article class="ep" id="ep0">
+<header class="ep-head">
+<button type="button" class="ep-play" data-ep="0" aria-label="Spela från avsnitt 1"><span aria-hidden="true">▶</span></button>
+<div class="ep-titles"><div class="ep-num">Avsnitt 1 · cirka 1 min</div><h2>Helheten och energibalans</h2><div class="ep-sub">Pusslet, intag och förbrukning</div><div class="ep-ref">Bild 3 · Boken s. 90–92 · Lektionen</div></div>
+<button type="button" class="ep-toggle" data-ep="0" aria-expanded="false">Visa text</button>
+</header>
+<div class="ep-text" hidden><p class="line" data-ep="0" data-ln="0">Hej och välkommen till pluggpodden om näringslära, i Träning- och tävlingslära ett.</p><p class="line" data-ep="0" data-ln="1">Podden följer lärarens presentation, kapitlet om idrottsnutrition i boken och anteckningarna från lektionerna.</p><p class="line" data-ep="0" data-ln="2">Vi börjar med helheten.</p><p class="line" data-ep="0" data-ln="3">Mat ger dig ingen guldmedalj.</p><p class="line" data-ep="0" data-ln="4">Men den kan förbättra träningsresultaten och återhämtningen, förebygga skador och sjukdomar och ge en lång och hälsosam idrottskarriär.</p><p class="line" data-ep="0" data-ln="5">Boken beskriver helheten som ett pussel med fem bitar: träning, mat, sömn, återhämtning och att prioritera.</p><p class="line" data-ep="0" data-ln="6">Det första begreppet är energibalans.</p><p class="line" data-ep="0" data-ln="7">Energibalans betyder att intaget är lika stort som förbrukningen.</p><p class="line" data-ep="0" data-ln="8">Får du i dig mer energi än du gör av med, har du positiv energibalans.</p><p class="line" data-ep="0" data-ln="9">Gör du av med mer än du får i dig, har du negativ energibalans.</p><p class="line" data-ep="0" data-ln="10">Med lärarens ord: för lite mat i förhållande till träningen.</p><p class="line" data-ep="0" data-ln="11">Allt du äter förbränns.</p><p class="line" data-ep="0" data-ln="12">Därför gäller en enkel regel.</p><p class="line" data-ep="0" data-ln="13">Tränar du mer, behöver du äta mer för att ha balans.</p></div>
+</article>
+
+<article class="ep" id="ep1">
+<header class="ep-head">
+<button type="button" class="ep-play" data-ep="1" aria-label="Spela från avsnitt 2"><span aria-hidden="true">▶</span></button>
+<div class="ep-titles"><div class="ep-num">Avsnitt 2 · cirka 1 min</div><h2>Ämnesomsättningen</h2><div class="ep-sub">Katabolism och anabolism</div><div class="ep-ref">Bild 4 · Boken s. 92 · Lektionen</div></div>
+<button type="button" class="ep-toggle" data-ep="1" aria-expanded="false">Visa text</button>
+</header>
+<div class="ep-text" hidden><p class="line" data-ep="1" data-ln="0">Metabolism är ett annat ord för ämnesomsättning.</p><p class="line" data-ep="1" data-ln="1">Den består av två delar som pågår hela tiden.</p><p class="line" data-ep="1" data-ln="2">Katabolism är den nedbrytande delen.</p><p class="line" data-ep="1" data-ln="3">Kroppen bryter ner maten vi äter för att utvinna energi.</p><p class="line" data-ep="1" data-ln="4">Anabolism är den uppbyggande delen.</p><p class="line" data-ep="1" data-ln="5">Kroppen använder det nedbrutna materialet för att bygga nytt i cellerna.</p><p class="line" data-ep="1" data-ln="6">Ett sätt att minnas det är att katabolism bryter ner och anabolism bygger upp.</p><p class="line" data-ep="1" data-ln="7">Boken kopplar det till träningen.</p><p class="line" data-ep="1" data-ln="8">Träningen bryter ner kroppen.</p><p class="line" data-ep="1" data-ln="9">Återhämtningen, alltså mat, vila och sömn, bygger upp den igen, så att den blir starkare och klarar träningen bättre nästa gång.</p><p class="line" data-ep="1" data-ln="10">Efter ett hårt pass dippar energin, eftersom den är slut.</p><p class="line" data-ep="1" data-ln="11">Då behöver kroppen påfyllning för att kunna bygga upp sig igen.</p></div>
+</article>
+
+<article class="ep" id="ep2">
+<header class="ep-head">
+<button type="button" class="ep-play" data-ep="2" aria-label="Spela från avsnitt 3"><span aria-hidden="true">▶</span></button>
+<div class="ep-titles"><div class="ep-num">Avsnitt 3 · cirka 1 min</div><h2>Brist och överskott</h2><div class="ep-sub">Långvarigt underskott och överskott</div><div class="ep-ref">Bild 5, 7 · Boken s. 93–94</div></div>
+<button type="button" class="ep-toggle" data-ep="2" aria-expanded="false">Visa text</button>
+</header>
+<div class="ep-text" hidden><p class="line" data-ep="2" data-ln="0">Energibehov är hur mycket energi kroppen behöver för att fungera optimalt.</p><p class="line" data-ep="2" data-ln="1">Hos idrottande tonåringar varierar det mycket, bland annat beroende på tillväxten och på hur mycket och vilken sorts träning man gör.</p><p class="line" data-ep="2" data-ln="2">Energi mäts i kilokalorier.</p><p class="line" data-ep="2" data-ln="3">Vad händer vid långvarigt energiunderskott?</p><p class="line" data-ep="2" data-ln="4">Kroppen kan bryta ner muskelvävnad.</p><p class="line" data-ep="2" data-ln="5">Koncentrationen kan försämras, och återhämtningen efter träningen kan bli sämre.</p><p class="line" data-ep="2" data-ln="6">Immunförsvaret och hormonbalansen kan påverkas.</p><p class="line" data-ep="2" data-ln="7">Boken lägger till sämre prestation, ökad skaderisk, sämre benhälsa och sömnsvårigheter.</p><p class="line" data-ep="2" data-ln="8">Tjejer kan få oregelbunden mens.</p><p class="line" data-ep="2" data-ln="9">Vid långvarigt energiöverskott kan det bli muskelökning, om man tränar samtidigt.</p><p class="line" data-ep="2" data-ln="10">Men ett överskott under lång tid ger också hälsorisker.</p><p class="line" data-ep="2" data-ln="11">Presentationen säger att du ska vara extra uppmärksam på energibalansen vid förändrad träningsmängd, skada, sjukdom, tillväxtperioder, viktförändring, träningsläger och när livssituationen förändras eller är stressande.</p></div>
+</article>
+
+<article class="ep" id="ep3">
+<header class="ep-head">
+<button type="button" class="ep-play" data-ep="3" aria-label="Spela från avsnitt 4"><span aria-hidden="true">▶</span></button>
+<div class="ep-titles"><div class="ep-num">Avsnitt 4 · cirka 1 min</div><h2>Energiförbrukningen</h2><div class="ep-sub">Sjuttio, femton, tio och fem procent</div><div class="ep-ref">Bild 6 · Boken s. 95 · Lektionen</div></div>
+<button type="button" class="ep-toggle" data-ep="3" aria-expanded="false">Visa text</button>
+</header>
+<div class="ep-text" hidden><p class="line" data-ep="3" data-ln="0">Vad går energin åt till?</p><p class="line" data-ep="3" data-ln="1">Läraren sa att det här kommer på provet, så lyssna noga.</p><p class="line" data-ep="3" data-ln="2">Basalmetabolismen är ungefär sjuttio procent av energiförbrukningen.</p><p class="line" data-ep="3" data-ln="3">Det är energin som organen behöver för att orka hålla igång: hjärtat, hjärnan, lungorna och kroppstemperaturen.</p><p class="line" data-ep="3" data-ln="4">Det pågår hela dygnet, även när du vilar och sover.</p><p class="line" data-ep="3" data-ln="5">Boken kallar det vilometabolism.</p><p class="line" data-ep="3" data-ln="6">Basal betyder grund.</p><p class="line" data-ep="3" data-ln="7">Rörelse som inte är träning är ungefär femton procent.</p><p class="line" data-ep="3" data-ln="8">Det är till exempel att gå eller cykla till skolan.</p><p class="line" data-ep="3" data-ln="9">Matsmältningen är ungefär tio procent.</p><p class="line" data-ep="3" data-ln="10">Det är energin som går åt för att bryta ner maten.</p><p class="line" data-ep="3" data-ln="11">Boken kallar den dietär termogenes.</p><p class="line" data-ep="3" data-ln="12">Fysisk aktivitet, alltså träningen, är ungefär fem procent.</p><p class="line" data-ep="3" data-ln="13">Kom ihåg en sak.</p><p class="line" data-ep="3" data-ln="14">Siffrorna gäller en genomsnittlig person.</p><p class="line" data-ep="3" data-ln="15">Även om träningen bara är fem procent, är det den del som varierar mest mellan olika personer.</p><p class="line" data-ep="3" data-ln="16">Två jämnåriga med samma kön, längd och vikt kan göra av med väldigt olika mycket energi.</p><p class="line" data-ep="3" data-ln="17">Den som tränar och har en aktiv vardag gör av med mer än den som sitter still.</p></div>
+</article>
+
+<article class="ep" id="ep4">
+<header class="ep-head">
+<button type="button" class="ep-play" data-ep="4" aria-label="Spela från avsnitt 5"><span aria-hidden="true">▶</span></button>
+<div class="ep-titles"><div class="ep-num">Avsnitt 5 · cirka 1 min</div><h2>Näringsämnena</h2><div class="ep-sub">Vad näringsämnena gör, kilokalorier per gram</div><div class="ep-ref">Bild 8–9 · Boken s. 95–96</div></div>
+<button type="button" class="ep-toggle" data-ep="4" aria-expanded="false">Visa text</button>
+</header>
+<div class="ep-text" hidden><p class="line" data-ep="4" data-ln="0">Energi och näring får du från maten du äter.</p><p class="line" data-ep="4" data-ln="1">Näringsämnena är kolhydrater, fett, protein, vitaminer och mineraler.</p><p class="line" data-ep="4" data-ln="2">Även vatten behövs.</p><p class="line" data-ep="4" data-ln="3">Kolhydrater ger energi.</p><p class="line" data-ep="4" data-ln="4">Fett och protein ger också energi, och de bygger upp och reparerar.</p><p class="line" data-ep="4" data-ln="5">Vitaminer behövs för ämnesomsättningen och skyddar cellerna.</p><p class="line" data-ep="4" data-ln="6">Mineralerna gör samma sak, och de bygger också upp och reparerar.</p><p class="line" data-ep="4" data-ln="7">Vatten löser och transporterar näringsämnen och avfall, och det reglerar kroppstemperaturen.</p><p class="line" data-ep="4" data-ln="8">Ett gram kolhydrater ger fyra kilokalorier.</p><p class="line" data-ep="4" data-ln="9">Ett gram protein ger också fyra.</p><p class="line" data-ep="4" data-ln="10">Ett gram fett ger nio, alltså mest energi per gram.</p><p class="line" data-ep="4" data-ln="11">Kostfiber ger två.</p><p class="line" data-ep="4" data-ln="12">Två begrepp är lätta att blanda ihop.</p><p class="line" data-ep="4" data-ln="13">Energibalans handlar om hur mycket du äter.</p><p class="line" data-ep="4" data-ln="14">Näringsbalans handlar om vad du äter, alltså att maten har rätt sammansättning.</p></div>
+</article>
+
+<article class="ep" id="ep5">
+<header class="ep-head">
+<button type="button" class="ep-play" data-ep="5" aria-label="Spela från avsnitt 6"><span aria-hidden="true">▶</span></button>
+<div class="ep-titles"><div class="ep-num">Avsnitt 6 · cirka 1 min</div><h2>Kolhydrater och fibrer</h2><div class="ep-sub">Glykogen och fiberfällan</div><div class="ep-ref">Bild 10–11 · Boken s. 96, 98</div></div>
+<button type="button" class="ep-toggle" data-ep="5" aria-expanded="false">Visa text</button>
+</header>
+<div class="ep-text" hidden><p class="line" data-ep="5" data-ln="0">Kolhydrater är ett samlingsnamn för stärkelse, socker och kostfiber.</p><p class="line" data-ep="5" data-ln="1">Bra källor är pasta, mjöl, bröd, potatis, ris, müsli, frukt och grönsaker.</p><p class="line" data-ep="5" data-ln="2">Kolhydraterna lagras i kroppen som glykogen, i musklerna och i levern.</p><p class="line" data-ep="5" data-ln="3">De är en viktig energikälla när du tränar med hög intensitet, och de har en stor roll i återhämtningen.</p><p class="line" data-ep="5" data-ln="4">Du behöver kolhydrater varje dag, och mer när du tränar mer eller hårdare.</p><p class="line" data-ep="5" data-ln="5">Fibrer är kolhydrater från växtriket som inte bryts ner i matsmältningen.</p><p class="line" data-ep="5" data-ln="6">De är bra för matsmältningen och gör att du blir mätt.</p><p class="line" data-ep="5" data-ln="7">Men här finns en fälla.</p><p class="line" data-ep="5" data-ln="8">Äter du mycket fiberrik mat, som fullkornspasta, råris och grovt bröd, kan du bli jättemätt innan du har fått i dig tillräckligt med kolhydrater.</p><p class="line" data-ep="5" data-ln="9">I perioder med mycket träning är det därför bättre att välja vanlig pasta, vanligt ris och mellangrovt bröd.</p></div>
+</article>
+
+<article class="ep" id="ep6">
+<header class="ep-head">
+<button type="button" class="ep-play" data-ep="6" aria-label="Spela från avsnitt 7"><span aria-hidden="true">▶</span></button>
+<div class="ep-titles"><div class="ep-num">Avsnitt 7 · cirka 1 min</div><h2>Fett</h2><div class="ep-sub">Fleromättat, enkelomättat och mättat</div><div class="ep-ref">Bild 12–14 · Boken s. 98</div></div>
+<button type="button" class="ep-toggle" data-ep="6" aria-expanded="false">Visa text</button>
+</header>
+<div class="ep-text" hidden><p class="line" data-ep="6" data-ln="0">Det finns tre sorters fett: fleromättat, enkelomättat och mättat.</p><p class="line" data-ep="6" data-ln="1">Fleromättat fett är det bra fettet.</p><p class="line" data-ep="6" data-ln="2">Det minskar risken för hjärt- och kärlsjukdomar.</p><p class="line" data-ep="6" data-ln="3">Hit hör de livsnödvändiga fettsyrorna omega-tre och omega-sex, som finns särskilt i fisk.</p><p class="line" data-ep="6" data-ln="4">Därför rekommenderas man att äta fisk.</p><p class="line" data-ep="6" data-ln="5">Enkelomättat fett finns främst i växtprodukter, som rapsolja, olivolja och nötter.</p><p class="line" data-ep="6" data-ln="6">Mättat fett är sämre för oss.</p><p class="line" data-ep="6" data-ln="7">Det finns i djurprodukter, men inte i fisk och fågel.</p><p class="line" data-ep="6" data-ln="8">Exempel är smör och mjölk.</p><p class="line" data-ep="6" data-ln="9">Ett högt intag hänger ihop med ökad risk för hjärt- och kärlsjukdomar.</p><p class="line" data-ep="6" data-ln="10">Fett lagras i fettväven.</p><p class="line" data-ep="6" data-ln="11">Det behövs också för de fettlösliga vitaminerna A, D, E och K.</p><p class="line" data-ep="6" data-ln="12">Enligt boken är fett den viktigaste energikällan när du vilar och när du tränar med låg intensitet.</p></div>
+</article>
+
+<article class="ep" id="ep7">
+<header class="ep-head">
+<button type="button" class="ep-play" data-ep="7" aria-label="Spela från avsnitt 8"><span aria-hidden="true">▶</span></button>
+<div class="ep-titles"><div class="ep-num">Avsnitt 8 · cirka 1 min</div><h2>Protein</h2><div class="ep-sub">Aminosyror, gram per kilo och proteinshake</div><div class="ep-ref">Bild 15, 27–29 · Boken s. 99</div></div>
+<button type="button" class="ep-toggle" data-ep="7" aria-expanded="false">Visa text</button>
+</header>
+<div class="ep-text" hidden><p class="line" data-ep="7" data-ln="0">Protein är kroppens byggstenar och består av aminosyror.</p><p class="line" data-ep="7" data-ln="1">Det finns tjugo aminosyror, och nio av dem är essentiella.</p><p class="line" data-ep="7" data-ln="2">Det betyder att de måste komma från maten.</p><p class="line" data-ep="7" data-ln="3">Protein ger energi, men det är inte dess viktigaste uppgift.</p><p class="line" data-ep="7" data-ln="4">Protein bygger upp och reparerar, till exempel musklerna efter träningen.</p><p class="line" data-ep="7" data-ln="5">Ett fullvärdigt protein innehåller alla aminosyror som kroppen inte kan tillverka själv.</p><p class="line" data-ep="7" data-ln="6">Kött och fisk är exempel.</p><p class="line" data-ep="7" data-ln="7">Vegetabiliska proteiner är inte fullvärdiga, utom sojaprotein.</p><p class="line" data-ep="7" data-ln="8">Därför behöver veganer och vegetarianer variera sina proteinkällor.</p><p class="line" data-ep="7" data-ln="9">Hur mycket behöver du?</p><p class="line" data-ep="7" data-ln="10">Den som tränar behöver ungefär en komma fem gram protein per kilo kroppsvikt och dag.</p><p class="line" data-ep="7" data-ln="11">Den som inte tränar behöver ungefär noll komma åtta gram.</p><p class="line" data-ep="7" data-ln="12">Ungefär tjugo gram protein finns till exempel i hundra gram lax eller kycklingfilé, i två deciliter kvarg eller i tre ägg.</p><p class="line" data-ep="7" data-ln="13">Protein lagras inte i kroppen på samma sätt som fett och kolhydrater.</p><p class="line" data-ep="7" data-ln="14">Därför ska du äta protein vid varje måltid.</p><p class="line" data-ep="7" data-ln="15">Och proteinshake?</p><p class="line" data-ep="7" data-ln="16">Det är snabbt och enkelt.</p><p class="line" data-ep="7" data-ln="17">Men byter du ut för mycket av maten kan du missa viktiga näringsämnen, och bars kan innehålla mycket socker.</p><p class="line" data-ep="7" data-ln="18">Boken säger att vanlig mat räcker.</p></div>
+</article>
+
+<article class="ep" id="ep8">
+<header class="ep-head">
+<button type="button" class="ep-play" data-ep="8" aria-label="Spela från avsnitt 9"><span aria-hidden="true">▶</span></button>
+<div class="ep-titles"><div class="ep-num">Avsnitt 9 · cirka 1 min</div><h2>Vitaminer och mineraler</h2><div class="ep-sub">D-vitamin, kalcium och järn</div><div class="ep-ref">Bild 16–17 · Boken s. 100</div></div>
+<button type="button" class="ep-toggle" data-ep="8" aria-expanded="false">Visa text</button>
+</header>
+<div class="ep-text" hidden><p class="line" data-ep="8" data-ln="0">Vitaminer behövs i små mängder, men de är essentiella.</p><p class="line" data-ep="8" data-ln="1">Kroppen kan inte bygga upp dem själv.</p><p class="line" data-ep="8" data-ln="2">Vitaminer ger ingen energi, men de behövs för att vi ska kunna använda energin.</p><p class="line" data-ep="8" data-ln="3">De behövs för ämnesomsättningen och skyddar cellerna.</p><p class="line" data-ep="8" data-ln="4">Vitaminer finns i grönsaker, frukt, ägg och fullkorn.</p><p class="line" data-ep="8" data-ln="5">D-vitamin finns i fisk och kantareller.</p><p class="line" data-ep="8" data-ln="6">Och mer är inte bättre.</p><p class="line" data-ep="8" data-ln="7">Boken säger att du oftast får i dig det du behöver om du äter varierat, med femhundra gram frukt och grönt om dagen.</p><p class="line" data-ep="8" data-ln="8">Kosttillskott ska du bara ta om du har en påvisad brist.</p><p class="line" data-ep="8" data-ln="9">Mineraler finns i och omkring varje cell och i kroppsvätskorna, och de hjälper immunförsvaret.</p><p class="line" data-ep="8" data-ln="10">Kalcium och fosfor stärker och bygger upp skelettet.</p><p class="line" data-ep="8" data-ln="11">Järn hjälper till med syresättningen.</p><p class="line" data-ep="8" data-ln="12">Kost som är rik på mineraler är frukt, grönsaker, fisk och skaldjur.</p></div>
+</article>
+
+<article class="ep" id="ep9">
+<header class="ep-head">
+<button type="button" class="ep-play" data-ep="9" aria-label="Spela från avsnitt 10"><span aria-hidden="true">▶</span></button>
+<div class="ep-titles"><div class="ep-num">Avsnitt 10 · cirka 1 min</div><h2>Vätska</h2><div class="ep-sub">Fem deciliter, törst och två procent</div><div class="ep-ref">Bild 18 · Boken s. 101 · Lektionen</div></div>
+<button type="button" class="ep-toggle" data-ep="9" aria-expanded="false">Visa text</button>
+</header>
+<div class="ep-text" hidden><p class="line" data-ep="9" data-ln="0">Vätskebehovet påverkas av klimatet, av hur mycket du svettas och av hur effektivt du gör dig av med värme.</p><p class="line" data-ep="9" data-ln="1">Vatten reglerar kroppstemperaturen och löser och transporterar näringsämnen.</p><p class="line" data-ep="9" data-ln="2">Ungefär fem deciliter vätska om dagen får vi från maten.</p><p class="line" data-ep="9" data-ln="3">Resten får vi från det vi dricker.</p><p class="line" data-ep="9" data-ln="4">Läraren sa två saker på lektionen.</p><p class="line" data-ep="9" data-ln="5">Drick extra mycket för att reglera kroppstemperaturen.</p><p class="line" data-ep="9" data-ln="6">Och drick i förebyggande syfte, alltså redan innan match och träning.</p><p class="line" data-ep="9" data-ln="7">Törst är ett sent tecken, så drick även under träningen.</p><p class="line" data-ep="9" data-ln="8">Tappar du mer än två procent av kroppsvikten i vätska kan prestationen bli sämre vid längre pass.</p><p class="line" data-ep="9" data-ln="9">Du kan få huvudvärk och bli illamående, och träningen känns orimligt jobbig.</p><p class="line" data-ep="9" data-ln="10">Men man kan också dricka för mycket.</p><p class="line" data-ep="9" data-ln="11">Då späds salterna i kroppen ut.</p><p class="line" data-ep="9" data-ln="12">Ett enkelt test är färgen på kisset.</p><p class="line" data-ep="9" data-ln="13">Det ska vara klart till ljusgult.</p></div>
+</article>
+
+<article class="ep" id="ep10">
+<header class="ep-head">
+<button type="button" class="ep-play" data-ep="10" aria-label="Spela från avsnitt 11"><span aria-hidden="true">▶</span></button>
+<div class="ep-titles"><div class="ep-num">Avsnitt 11 · cirka 1 min</div><h2>Koststrategi</h2><div class="ep-sub">Periodisering, måltidsordning och Mat räcker</div><div class="ep-ref">Bild 20–21, 30 · Boken s. 102, 104</div></div>
+<button type="button" class="ep-toggle" data-ep="10" aria-expanded="false">Visa text</button>
+</header>
+<div class="ep-text" hidden><p class="line" data-ep="10" data-ln="0">Presentationen tar upp koststrategier för tränande ungdomar.</p><p class="line" data-ep="10" data-ln="1">Den första är periodisering.</p><p class="line" data-ep="10" data-ln="2">Maten ska följa träningen.</p><p class="line" data-ep="10" data-ln="3">En tuff träningsdag kräver mer energi, framför allt från kolhydrater.</p><p class="line" data-ep="10" data-ln="4">Även vilodagen kräver energi, så att du återhämtar dig till nästa pass.</p><p class="line" data-ep="10" data-ln="5">Den andra är måltidsordning: frukost, mellanmål, lunch, mellanmål, middag och kvällsmål.</p><p class="line" data-ep="10" data-ln="6">Boken säger att du ska sprida maten över dagen och äta ungefär var tredje till fjärde timme.</p><p class="line" data-ep="10" data-ln="7">Ät alltid efter ett träningspass, även om det slutar sent.</p><p class="line" data-ep="10" data-ln="8">Den tredje heter Mat räcker.</p><p class="line" data-ep="10" data-ln="9">Det betyder att du ska sträva efter tre balanser: energibalans, näringsbalans och vätskebalans.</p><p class="line" data-ep="10" data-ln="10">Du kommer långt med att planera och variera maten, äta från alla näringsgrupper och inte hoppa över måltider.</p></div>
+</article>
+
+<article class="ep" id="ep11">
+<header class="ep-head">
+<button type="button" class="ep-play" data-ep="11" aria-label="Spela från avsnitt 12"><span aria-hidden="true">▶</span></button>
+<div class="ep-titles"><div class="ep-num">Avsnitt 12 · cirka 1 min</div><h2>Före, under och efter</h2><div class="ep-sub">Två till fyra timmar, sextio till nittio minuter, återhämtningsmål</div><div class="ep-ref">Bild 22–24 · Boken s. 103–104</div></div>
+<button type="button" class="ep-toggle" data-ep="11" aria-expanded="false">Visa text</button>
+</header>
+<div class="ep-text" hidden><p class="line" data-ep="11" data-ln="0">Före träning och match gäller regel nummer ett: prova inte något nytt.</p><p class="line" data-ep="11" data-ln="1">Var noga med vad och hur mycket du äter samma dag och dagarna innan.</p><p class="line" data-ep="11" data-ln="2">Ät en måltid två till fyra timmar innan start.</p><p class="line" data-ep="11" data-ln="3">Hård aktivitet kan göra magen extra känslig.</p><p class="line" data-ep="11" data-ln="4">Äter du fyra timmar innan kan du fylla på med något litet, till exempel en banan, när det närmar sig start.</p><p class="line" data-ep="11" data-ln="5">Under fysisk aktivitet räcker glykogenförråden sextio till nittio minuter.</p><p class="line" data-ep="11" data-ln="6">Rekommendationen är trettio till sextio gram kolhydrater i timmen.</p><p class="line" data-ep="11" data-ln="7">Välj något med lite fiber som snabbt går ut i blodet, som banan, torkad frukt, blåbärssoppa eller ljust bröd.</p><p class="line" data-ep="11" data-ln="8">Efter träningen behövs ett återhämtningsmål om du tränar flera pass om dagen, har svårt att få i dig tillräckligt med energi, har mer än två timmar till nästa måltid, är inne i en tung period eller växer mycket.</p><p class="line" data-ep="11" data-ln="9">Ät nära inpå passet.</p><p class="line" data-ep="11" data-ln="10">Återhämtningsmålet ska innehålla kolhydrater som fyller på glykogenet, protein som bygger upp musklerna och vätska som återställer vätskebalansen.</p><p class="line" data-ep="11" data-ln="11">Fett behövs inte just då.</p><p class="line" data-ep="11" data-ln="12">Bokens exempel är en banan och en drickyoghurt.</p></div>
+</article>
+
+<article class="ep" id="ep12">
+<header class="ep-head">
+<button type="button" class="ep-play" data-ep="12" aria-label="Spela från avsnitt 13"><span aria-hidden="true">▶</span></button>
+<div class="ep-titles"><div class="ep-num">Avsnitt 13 · cirka 1 min</div><h2>Ätstörningar</h2><div class="ep-sub">Vad det är och var du får hjälp</div><div class="ep-ref">1177</div></div>
+<button type="button" class="ep-toggle" data-ep="12" aria-expanded="false">Visa text</button>
+</header>
+<div class="ep-text" hidden><p class="line" data-ep="12" data-ln="0">Det sista avsnittet handlar om något som inte står i boken eller presentationen, men som finns med bland lärarens frågor.</p><p class="line" data-ep="12" data-ln="1">Det bygger på elva sjuttiosju.</p><p class="line" data-ep="12" data-ln="2">En ätstörning är en psykisk sjukdom där tankar om mat, kropp och vikt tar mycket plats.</p><p class="line" data-ep="12" data-ln="3">Vid anorexi äter man för lite och är rädd för att gå upp i vikt.</p><p class="line" data-ep="12" data-ln="4">Vid bulimi hetsäter man återkommande och försöker sedan göra sig av med maten.</p><p class="line" data-ep="12" data-ln="5">Vid hetsätningsstörning hetsäter man utan att försöka göra sig av med maten.</p><p class="line" data-ep="12" data-ln="6">Det går att bli frisk, och det är lättare ju tidigare man får hjälp.</p><p class="line" data-ep="12" data-ln="7">På skolan kan du vända dig till elevhälsan, alltså skolsköterskan och kuratorn.</p><p class="line" data-ep="12" data-ln="8">Du kan också gå till ungdomsmottagningen eller vårdcentralen, eller ringa elva sjuttiosju.</p><p class="line" data-ep="12" data-ln="9">Är du orolig för en lagkompis kan du prata med en vuxen du litar på, till exempel tränaren.</p><p class="line" data-ep="12" data-ln="10">Det var allt för den här gången.</p><p class="line" data-ep="12" data-ln="11">Lycka till på provet på fredag.</p></div>
+</article>
+
+<footer>Uppläst med en AI-röst från HeyGen. Byggd från lärarens presentation, kapitlet om idrottsnutrition i Specialidrott – Tränings- och tävlingslära (s. 90–106) och anteckningarna från lektion 1 och 2. Avsnitt 13 bygger på 1177. Under varje avsnitt står vilka bilder och boksidor det handlar om. Frågor, quiz och kort finns på <a href="../naringslara-niu/">pluggsidan för näringslära</a>.</footer>
+</div>
+
+<script>
+(function(){
+var CH = {"chapters": [{"start": 0.4, "lines": [0.4, 5.66, 18.0, 18.3, 20.42, 28.72, 37.05, 39.89, 43.99, 48.44, 52.46, 55.98, 59.94, 60.24]}, {"start": 64.35, "lines": [67.24, 73.11, 75.77, 76.15, 79.27, 82.22, 85.87, 91.07, 93.36, 95.8, 103.77, 107.58]}, {"start": 111.97, "lines": [115.37, 120.02, 127.4, 132.5, 133.48, 136.1, 139.81, 144.52, 151.28, 152.49, 156.28, 159.76]}, {"start": 175.08, "lines": [177.82, 180.31, 186.52, 188.18, 193.66, 197.38, 199.77, 201.47, 207.67, 208.96, 211.62, 215.74, 219.73, 221.35, 222.68, 225.5, 229.98, 236.22]}, {"start": 242.32, "lines": [244.68, 248.37, 252.78, 256.23, 256.53, 260.77, 264.62, 268.66, 274.55, 277.53, 279.49, 283.45, 284.84, 287.97, 290.5]}, {"start": 296.49, "lines": [300.07, 304.94, 311.72, 314.81, 322.95, 328.57, 333.58, 336.69, 338.21, 347.91]}, {"start": 354.61, "lines": [357.22, 361.22, 366.37, 367.49, 375.38, 375.92, 381.61, 383.46, 387.08, 389.21, 393.52, 395.79, 400.34]}, {"start": 407.18, "lines": [409.62, 413.56, 419.3, 420.21, 423.11, 427.72, 434.01, 437.78, 439.97, 443.73, 446.04, 450.33, 454.5, 462.84, 466.49, 470.17, 471.29, 473.26, 479.51]}, {"start": 482.93, "lines": [486.58, 489.9, 492.14, 497.08, 500.2, 504.28, 508.75, 509.3, 515.92, 519.9, 525.72, 531.22, 531.74]}, {"start": 536.87, "lines": [539.23, 546.19, 550.29, 556.12, 558.79, 559.09, 562.34, 566.73, 570.07, 576.48, 581.9, 583.0, 585.27, 587.8]}, {"start": 590.97, "lines": [593.59, 597.49, 599.49, 601.4, 606.85, 610.71, 617.01, 625.0, 626.85, 628.88, 634.83]}, {"start": 642.59, "lines": [646.39, 650.6, 654.7, 657.8, 660.98, 667.34, 672.26, 676.96, 683.59, 696.09, 698.05, 706.88, 708.74]}, {"start": 712.79, "lines": [715.55, 723.77, 724.46, 729.4, 733.67, 737.7, 742.63, 746.51, 751.44, 756.85, 762.11, 763.08]}], "total": 765.81};
+var a=document.getElementById('audio'), play=document.getElementById('play'), now=document.getElementById('now');
+var bar=document.getElementById('bar'), fill=document.getElementById('fill'), knob=document.getElementById('knob');
+var cur=document.getElementById('cur'), dur=document.getElementById('dur'), rate=document.getElementById('rate'), resume=document.getElementById('resume');
+var TOTAL=CH.total, KEY='nlpodd-pos', pending=null, lastKey='', dragging=false;
+function fmt(s){s=Math.max(0,Math.floor(s));return Math.floor(s/60)+':'+String(s%60).padStart(2,'0');}
+function total(){return (isFinite(a.duration)&&a.duration>0)?a.duration:TOTAL;}
+function pos(){return pending!==null?pending:(a.currentTime||0);}
+dur.textContent=fmt(TOTAL);
+var ticks=document.getElementById('ticks');
+CH.chapters.forEach(function(c,i){if(i===0)return;var s=document.createElement('span');s.style.left=(c.start/TOTAL*100)+'%';ticks.appendChild(s);});
+function where(t){var e=0;for(var i=0;i<CH.chapters.length;i++){if(t>=CH.chapters[i].start-0.05)e=i;}var L=CH.chapters[e].lines,l=0;for(var j=0;j<L.length;j++){if(t>=L[j]-0.05)l=j;}return [e,l];}
+function title(i){return document.querySelector('#ep'+i+' h2').textContent;}
+function meta(e){
+  if(!('mediaSession' in navigator))return;
+  try{navigator.mediaSession.metadata=new MediaMetadata({title:'Avsnitt '+(e+1)+': '+title(e),artist:'Pluggpodd näringslära',album:'Träning- och tävlingslära 1'});}catch(err){}
+}
+function render(){
+  var t=pos(), p=Math.min(1,t/total());
+  fill.style.width=(p*100)+'%'; knob.style.left=(p*100)+'%';
+  bar.setAttribute('aria-valuenow',Math.round(p*100)); bar.setAttribute('aria-valuetext',fmt(t)); cur.textContent=fmt(t);
+  var w=where(t), k=w[0]+'-'+w[1]+(a.paused?'p':'');
+  if(k===lastKey)return; lastKey=k;
+  document.querySelectorAll('.line.speaking').forEach(function(x){x.classList.remove('speaking');});
+  document.querySelectorAll('.ep.playing').forEach(function(x){x.classList.remove('playing');});
+  var ep=document.getElementById('ep'+w[0]);
+  if(t>0.2||!a.paused){ep.classList.add('playing');var ln=ep.querySelector('.line[data-ln="'+w[1]+'"]');if(ln)ln.classList.add('speaking');}
+  if(a.paused&&t<0.2){now.textContent='Redo. Tryck på Spela, eller starta från ett avsnitt nedan.';}
+  else{now.innerHTML=(a.paused?'Pausad · ':'')+'Avsnitt '+(w[0]+1)+': <strong>'+title(w[0])+'</strong>';}
+  meta(w[0]);
+}
+function save(){try{localStorage.setItem(KEY,String(pos()));}catch(e){}}
+function setPlayLabel(){play.textContent=a.paused?'▶ Spela':'❚❚ Paus';play.setAttribute('aria-label',a.paused?'Spela':'Pausa');}
+function hideResume(){resume.hidden=true;}
+function go(t,start){
+  t=Math.max(0,Math.min(total()-0.1,t));
+  if(a.readyState>=1){a.currentTime=t;pending=null;}else{pending=t;}
+  lastKey='';render();save();
+  if(start)startPlay();
+}
+function startPlay(){
+  var p=a.play();
+  if(p&&p.catch)p.catch(function(){now.textContent='Tryck på Spela igen för att starta.';});
+}
+play.addEventListener('click',function(){hideResume();if(a.paused){startPlay();}else{a.pause();}});
+document.getElementById('back').addEventListener('click',function(){go(pos()-15,false);});
+document.getElementById('fwd').addEventListener('click',function(){go(pos()+15,false);});
+function nextEp(){var e=where(pos())[0];if(e<CH.chapters.length-1){hideResume();go(CH.chapters[e+1].start,true);}}
+document.getElementById('next').addEventListener('click',nextEp);
+rate.addEventListener('change',function(){a.playbackRate=parseFloat(rate.value)||1;try{localStorage.setItem(KEY+'-rate',rate.value);}catch(e){}});
+try{var r=localStorage.getItem(KEY+'-rate');if(r&&rate.querySelector('option[value="'+r+'"]'))rate.value=r;}catch(e){}
+a.addEventListener('loadedmetadata',function(){if(pending!==null){a.currentTime=pending;pending=null;}dur.textContent=fmt(total());lastKey='';render();});
+a.addEventListener('play',function(){a.playbackRate=parseFloat(rate.value)||1;setPlayLabel();lastKey='';render();});
+a.addEventListener('pause',function(){setPlayLabel();lastKey='';render();save();});
+var lastSave=0;
+a.addEventListener('timeupdate',function(){if(!dragging)render();var n=Date.now();if(n-lastSave>4000){lastSave=n;save();}
+  if('mediaSession' in navigator&&navigator.mediaSession.setPositionState&&isFinite(a.duration)){try{navigator.mediaSession.setPositionState({duration:a.duration,playbackRate:a.playbackRate,position:Math.min(a.currentTime,a.duration)});}catch(e){}}});
+a.addEventListener('ended',function(){setPlayLabel();now.textContent='Slut på podden. Bra jobbat.';try{localStorage.removeItem(KEY);}catch(e){}});
+document.addEventListener('visibilitychange',function(){if(document.hidden)save();});
+function seekFromEvent(ev){var r=bar.getBoundingClientRect();var x=ev.clientX-r.left;var t=Math.max(0,Math.min(1,x/r.width))*total();
+  if(a.readyState>=1){a.currentTime=t;pending=null;}else{pending=t;} lastKey='';render();}
+bar.addEventListener('pointerdown',function(e){dragging=true;hideResume();try{bar.setPointerCapture(e.pointerId);}catch(_){}seekFromEvent(e);});
+bar.addEventListener('pointermove',function(e){if(dragging)seekFromEvent(e);});
+function endDrag(){if(dragging){dragging=false;save();}}
+bar.addEventListener('pointerup',endDrag); bar.addEventListener('pointercancel',endDrag);
+bar.addEventListener('keydown',function(e){if(e.key==='ArrowRight'){go(pos()+5,false);e.preventDefault();}if(e.key==='ArrowLeft'){go(pos()-5,false);e.preventDefault();}});
+document.querySelectorAll('.ep-play').forEach(function(b){b.addEventListener('click',function(){var i=+b.dataset.ep, w=where(pos());
+  hideResume(); if(!a.paused&&w[0]===i){a.pause();return;} go(CH.chapters[i].start,true);});});
+document.querySelectorAll('.line').forEach(function(l){l.setAttribute('tabindex','0');l.setAttribute('role','button');
+  var jump=function(){hideResume();go(CH.chapters[+l.dataset.ep].lines[+l.dataset.ln],true);};
+  l.addEventListener('click',jump); l.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();jump();}});});
+document.querySelectorAll('.ep-toggle').forEach(function(b){b.addEventListener('click',function(){var t=document.querySelector('#ep'+b.dataset.ep+' .ep-text');t.hidden=!t.hidden;b.textContent=t.hidden?'Visa text':'Dölj text';b.setAttribute('aria-expanded',String(!t.hidden));});});
+if('mediaSession' in navigator){try{
+  navigator.mediaSession.setActionHandler('play',function(){startPlay();});
+  navigator.mediaSession.setActionHandler('pause',function(){a.pause();});
+  navigator.mediaSession.setActionHandler('seekbackward',function(){go(pos()-15,false);});
+  navigator.mediaSession.setActionHandler('seekforward',function(){go(pos()+15,false);});
+  navigator.mediaSession.setActionHandler('nexttrack',nextEp);
+  navigator.mediaSession.setActionHandler('previoustrack',function(){var t=pos(),e=where(t)[0];go(CH.chapters[(t-CH.chapters[e].start>3)?e:Math.max(0,e-1)].start,true);});
+  try{navigator.mediaSession.setActionHandler('seekto',function(d){if(d&&typeof d.seekTime==='number')go(d.seekTime,false);});}catch(e){}
+}catch(e){}}
+var saved=0;try{saved=parseFloat(localStorage.getItem(KEY))||0;}catch(e){}
+if(saved>5&&saved<TOTAL-3){
+  var w=where(saved);
+  go(saved,false);
+  resume.innerHTML='<span>Du slutade vid '+fmt(saved)+' i avsnitt '+(w[0]+1)+'. Tryck på Spela för att fortsätta.</span><button type="button" id="restart">Börja om</button>';
+  resume.hidden=false;
+  document.getElementById('restart').addEventListener('click',function(){hideResume();go(0,false);});
+}
+render();
+})();
+</script>
+
+</body>
+</html>
