@@ -156,6 +156,25 @@ a.btn{display:inline-block; text-decoration:none; margin:2px 0 6px}
 footer{margin-top:40px; font-size:.85rem; color:var(--soft)}
 footer p{margin:6px 0}
 @media (prefers-reduced-motion:no-preference){ .flash{transition:transform .18s ease} .flash:active{transform:scale(.99)} }
+/* Tema: linjerat block, blått och korall */
+:root{
+  --paper:#F5F8FD; --rule:rgba(47,91,183,.15); --margin:rgba(214,64,84,.45); --ink:#1C2540; --soft:#566079;
+  --hl:#FFBACB; --hl-ink:#1C2540; --tab:#FFD966; --red:#C2364B; --card:#ffffff;
+  --line:rgba(28,37,64,.16); --ok:#21785A; --warn:#A35800; --lek:#2F5BB7; --lk:#7A3E9D;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --paper:#131926; --rule:rgba(140,170,230,.09); --margin:rgba(255,120,140,.30); --ink:#EEF1F8; --soft:#A9B1C4;
+    --hl:#8E3550; --hl-ink:#FFF4F6; --tab:#D9B84A; --red:#FF8C9A; --card:#1B2232;
+    --line:rgba(238,241,248,.15); --ok:#6FD3A6; --warn:#F2B654; --lek:#9DB8F2; --lk:#D2A8EC;
+  }
+}
+body{
+  background-image:linear-gradient(90deg,transparent 7px,var(--margin) 7px,var(--margin) 9px,transparent 9px),linear-gradient(var(--rule) 1px,transparent 1px);
+  background-size:100% 100%,100% 30px;
+}
+.tabnote{transform:rotate(-2.5deg)}
+.hero h1 span{color:var(--hl-ink)}
 /* Samhällskunskap */
 .tag.ur{color:var(--red)}
 a.tag{text-decoration:none}
