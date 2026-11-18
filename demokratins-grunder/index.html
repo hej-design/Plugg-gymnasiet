@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Demokratins grunder – plugg</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FBF7F0; --grid:rgba(214,120,40,.10); --ink:#2B2135; --soft:#665d70;
+  --hl:#FFC36B; --hl-ink:#2B2135; --tab:#9ED9B8; --red:#B23A2E; --card:#ffffff;
+  --line:rgba(43,33,53,.16); --ok:#2F7D4F; --warn:#9A5B00; --lek:#3E5FA8; --lk:#7B3F8F;
+  --head:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --body:"Atkinson Hyperlegible","Segoe UI",system-ui,sans-serif;
+  --hand:"Caveat","Comic Sans MS",cursive;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --paper:#18141D; --grid:rgba(255,190,120,.06); --ink:#F1EAF4; --soft:#B5AABD;
+    --hl:#F0A94A; --hl-ink:#18141D; --tab:#4FAF85; --red:#FF8A7A; --card:#221C29;
+    --line:rgba(241,234,244,.15); --ok:#6FD39A; --warn:#F2B654; --lek:#9DB8F2; --lk:#D6A8E8;
+  }
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 64px)}
+body{
+  margin:0; color:var(--ink); font-family:var(--body); font-size:17px; line-height:1.55;
+  background-color:var(--paper);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:22px 22px;
+}
+.wrap{max-width:720px; margin:0 auto; padding:0 18px 60px}
+header.hero{padding:58px 0 12px; position:relative}
+.hero h1{font-family:var(--head); font-weight:800; font-size:clamp(2.2rem,8vw,3.4rem); line-height:1.02; margin:0; letter-spacing:-.02em}
+.hero h1 span{background:linear-gradient(transparent 38%,var(--hl) 38%,var(--hl) 88%,transparent 88%); color:var(--ink); padding:0 .12em; -webkit-box-decoration-break:clone; box-decoration-break:clone}
+.hero p{margin:14px 0 0; color:var(--soft); max-width:34em}
+.tabnote{position:absolute; right:0; top:14px; background:var(--tab); color:#0f2a20; font-family:var(--hand); font-weight:700; font-size:1.35rem; padding:4px 12px 2px; transform:rotate(3deg); border-radius:2px}
+nav.tabs{position:sticky; top:env(safe-area-inset-top,0px); z-index:5; background:var(--paper); border-bottom:2px solid var(--ink); display:flex; gap:4px; overflow-x:auto; margin:12px -18px 0; padding:8px 18px 0; scrollbar-width:none}
+nav.tabs::-webkit-scrollbar{display:none}
+nav.tabs button{font-family:var(--head); font-weight:700; font-size:1rem; color:var(--ink); background:transparent; border:2px solid transparent; border-bottom:none; padding:9px 13px; border-radius:8px 8px 0 0; cursor:pointer; white-space:nowrap}
+nav.tabs button[aria-selected="true"]{background:var(--card); border-color:var(--ink); margin-bottom:-2px}
+button:focus-visible,summary:focus-visible,textarea:focus-visible,input:focus-visible,.flash:focus-visible{outline:3px solid var(--red); outline-offset:2px}
+section.panel{display:none; padding-top:22px}
+section.panel.active{display:block}
+h2{font-family:var(--head); font-size:1.5rem; margin:0 0 6px}
+.lead{color:var(--soft); margin:0 0 18px}
+.small{font-size:.88rem; color:var(--soft)}
+a{color:inherit; text-decoration-color:var(--red); text-underline-offset:3px}
+
+/* Start */
+.fast{background:var(--card); border:2px solid var(--ink); border-radius:6px; padding:14px 16px; margin:0 0 18px; box-shadow:5px 5px 0 var(--tab)}
+.fast h3{font-family:var(--head); font-size:1.15rem; margin:0 0 8px}
+.pass{border-top:1px dashed var(--line); padding:10px 0}
+.pass:first-of-type{border-top:none}
+.pass b{font-family:var(--head)}
+.pass .t{color:var(--soft); font-size:.88rem; white-space:nowrap}
+.pass label{display:inline-flex; gap:6px; align-items:center; margin-left:8px; font-size:.9rem; color:var(--soft); cursor:pointer}
+.pass input{width:18px; height:18px; accent-color:var(--ok)}
+.lnk{font:inherit; color:inherit; background:none; border:none; padding:0; text-decoration:underline; text-decoration-color:var(--red); text-underline-offset:3px; cursor:pointer}
+.box{background:var(--card); border:1.5px solid var(--line); border-radius:6px; padding:14px 16px; margin:0 0 14px}
+.box h3{font-family:var(--head); font-size:1.1rem; margin:0 0 6px}
+.box p{margin:6px 0}
+
+/* Läs */
+details.topic{background:var(--card); border:1.5px solid var(--line); border-radius:6px; margin:0 0 12px}
+details.topic summary{list-style:none; cursor:pointer; padding:14px 16px; font-family:var(--head); font-weight:700; font-size:1.15rem; display:flex; justify-content:space-between; gap:12px; align-items:baseline}
+details.topic summary::-webkit-details-marker{display:none}
+details.topic summary small{font-family:var(--body); font-weight:400; font-size:.82rem; color:var(--soft); text-align:right}
+details.topic[open] summary{border-bottom:1.5px dashed var(--line)}
+.tbody{padding:6px 16px 16px}
+.tbody h4{font-family:var(--head); font-size:1rem; margin:16px 0 4px}
+.tbody p{margin:6px 0}
+.term{background:var(--hl); color:var(--hl-ink); padding:0 4px; border-radius:2px; font-weight:700}
+.formula{font-family:var(--head); font-weight:700; background:var(--paper); border:1.5px solid var(--ink); border-radius:4px; padding:10px 12px; margin:10px 0; overflow-x:auto}
+.tip{font-family:var(--hand); font-size:1.35rem; color:var(--red); line-height:1.2; margin:12px 0 2px}
+.lek{border-left:4px solid var(--warn); padding:6px 10px; background:var(--paper); font-size:.93rem; color:var(--soft)}
+.tag{display:inline-block; font-family:var(--head); font-weight:700; font-size:.75rem; border-radius:99px; padding:1px 8px; border:1.5px solid currentColor; vertical-align:2px}
+.tag.bok{color:var(--ok)} .tag.pres{color:var(--lek)} .tag.lekt{color:var(--warn)} .tag.lk{color:var(--lk)}
+p.lk{border-left:4px solid var(--lk); padding:6px 10px; background:var(--paper); margin:10px 0}
+p.pres{border-left:4px solid var(--lek); padding:6px 10px; background:var(--paper); margin:10px 0}
+table.vit{width:100%; border-collapse:collapse; font-size:.92rem; margin:8px 0}
+table.vit th,table.vit td{border-bottom:1px solid var(--line); padding:7px 6px; text-align:left; vertical-align:top}
+table.vit th{font-family:var(--head)}
+table.vit td:first-child{font-family:var(--head); font-weight:800; width:2.2em}
+
+/* Knappar och chips */
+.cardbar{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:14px}
+.chip{font:inherit; font-size:.9rem; border:1.5px solid var(--ink); background:transparent; color:var(--ink); border-radius:99px; padding:5px 12px; cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink); color:var(--paper)}
+a.btn{display:inline-block; text-decoration:none; margin:2px 0 6px}
+.btn{font-family:var(--head); font-weight:700; font-size:1rem; padding:9px 15px; border-radius:6px; border:2px solid var(--ink); background:var(--card); color:var(--ink); cursor:pointer}
+.btn.primary{background:var(--ink); color:var(--paper)}
+.btn.good{border-color:var(--ok); color:var(--ok)}
+.row{display:flex; gap:8px; margin-top:10px; flex-wrap:wrap; align-items:center}
+.count{color:var(--soft); font-size:.95rem}
+
+/* Frågor */
+.sq{background:var(--card); border:1.5px solid var(--line); border-radius:6px; padding:14px 16px; margin:0 0 12px}
+.sq.done{border-color:var(--ok); border-width:2px}
+.sq .where,.qbox .where,.flash .where{font-size:.85rem; color:var(--soft); display:flex; gap:8px; flex-wrap:wrap; align-items:center}
+.sq .qt{font-family:var(--head); font-weight:700; font-size:1.1rem; margin:4px 0 10px; line-height:1.25}
+.sq textarea{width:100%; min-height:90px; font:inherit; font-size:16px; color:var(--ink); background:var(--paper); border:1.5px solid var(--line); border-radius:6px; padding:9px 11px; resize:vertical}
+.fb{margin-top:10px; padding:12px 14px; border:2px solid var(--ink); border-radius:6px; background:var(--paper)}
+.verdict{font-family:var(--head); font-weight:800; font-size:1.1rem; margin:0 0 4px}
+.verdict.v0{color:var(--ok)} .verdict.v1{color:var(--warn)} .verdict.v2{color:var(--red)}
+.checks{margin:6px 0 0; padding:0; list-style:none}
+.checks li{margin:5px 0}
+.checks label{display:flex; gap:9px; align-items:flex-start; cursor:pointer}
+.checks input{margin-top:4px; width:18px; height:18px; accent-color:var(--ok); flex:none}
+.checks .hit{font-weight:700}
+.trap{color:var(--red); font-weight:700; margin:8px 0 0}
+.ans{margin-top:10px; padding:10px 12px; border-left:4px solid var(--hl); background:var(--paper)}
+.ans p{margin:0 0 6px}
+
+/* Quiz */
+.qbox{background:var(--card); border:2px solid var(--ink); border-radius:6px; padding:18px}
+.qnum{color:var(--soft); font-size:.9rem}
+.qbox .where{margin:6px 0 2px}
+.flash .where{margin-top:14px}
+.expl .where{margin-top:6px; display:flex; gap:6px; flex-wrap:wrap}
+.qtext{font-family:var(--head); font-weight:700; font-size:1.22rem; margin:4px 0 14px; line-height:1.25}
+.opt{display:block; width:100%; text-align:left; font:inherit; color:var(--ink); background:var(--paper); border:1.5px solid var(--line); border-radius:6px; padding:11px 13px; margin:0 0 8px; cursor:pointer}
+.opt.right{border-color:var(--ok); background:color-mix(in srgb,var(--ok) 14%,var(--card)); font-weight:700}
+.opt.wrong{border-color:var(--red); background:color-mix(in srgb,var(--red) 12%,var(--card))}
+.expl{margin:10px 0 0; padding:10px 12px; border-left:4px solid var(--hl); background:var(--paper)}
+.score{font-family:var(--head); font-size:2.6rem; font-weight:800; margin:0}
+
+/* Kort */
+.flash{min-height:220px; background:var(--card); border:2px solid var(--ink); border-radius:6px; padding:30px 22px 24px; display:flex; flex-direction:column; justify-content:center; cursor:pointer; position:relative; box-shadow:5px 5px 0 var(--tab)}
+.flash .side{font-size:.85rem; color:var(--soft); position:absolute; top:10px; left:14px}
+.flash .fq{font-family:var(--head); font-size:1.4rem; font-weight:700; line-height:1.2}
+.flash .fa{font-size:1.1rem}
+.flashnav{display:flex; justify-content:space-between; align-items:center; gap:8px; margin-top:16px; flex-wrap:wrap}
+
+/* Matchdagen */
+.mapwrap{margin:0 0 18px; background:var(--card); border:2px solid var(--ink); border-radius:6px; padding:10px 6px; box-shadow:5px 5px 0 var(--tab)}
+.map{display:block; width:100%; max-width:440px; height:auto; margin:0 auto}
+.map .bx{fill:var(--card); stroke:var(--ink); stroke-width:2}
+.map .bx.kat{fill:color-mix(in srgb,var(--red) 10%,var(--card))}
+.map .bx.ana{fill:color-mix(in srgb,var(--ok) 12%,var(--card))}
+.map .t-time{font-family:var(--hand); font-weight:700; font-size:19px; fill:var(--red)}
+.map .t-h{font-family:var(--head); font-weight:700; font-size:14px; fill:var(--ink)}
+.map .t-s{font-family:var(--body); font-size:11.5px; fill:var(--ink)}
+.map .t-tag{font-family:var(--head); font-weight:700; font-size:10.5px}
+.chain{background:var(--card); border:1.5px solid var(--line); border-radius:6px; padding:12px 14px; margin:0 0 10px}
+.chain .cq{font-family:var(--head); font-weight:700; font-size:1.05rem; margin:0 0 8px}
+.chain ol{margin:8px 0 0; padding-left:22px}
+.chain li{margin:3px 0}
+.sub{font-family:var(--head); font-size:1.2rem; margin:26px 0 6px}
+footer{margin-top:40px; font-size:.85rem; color:var(--soft)}
+footer p{margin:6px 0}
+@media (prefers-reduced-motion:no-preference){ .flash{transition:transform .18s ease} .flash:active{transform:scale(.99)} }
+/* Samhällskunskap */
+.tag.ur{color:var(--red)}
+a.tag{text-decoration:none}
+table.vit.mod td:first-child{width:auto; min-width:6.8em; max-width:9em; font-weight:700; -webkit-hyphens:manual; hyphens:manual}
+.map .bx.folk{fill:color-mix(in srgb,var(--hl) 32%,var(--card))}
+.map .bx.lag{fill:color-mix(in srgb,var(--lek) 14%,var(--card))}
+.map .bx.verk{fill:color-mix(in srgb,var(--ok) 12%,var(--card))}
+.map .bx.dom{fill:color-mix(in srgb,var(--warn) 14%,var(--card))}
+.map .bx.gr{fill:color-mix(in srgb,var(--lk) 13%,var(--card))}
+.map .t-lab{font-family:var(--hand); font-weight:700; font-size:17px; fill:var(--red)}
+ul.links{margin:4px 0 10px; padding-left:20px}
+ul.links li{margin:5px 0}
+.urrow{display:flex; gap:6px; flex-wrap:wrap; margin:2px 0 10px}
+a.urbtn{display:inline-block; font-family:var(--head); font-weight:700; font-size:.88rem; color:var(--red); border:2px solid var(--red); border-radius:99px; padding:4px 12px; text-decoration:none; background:var(--card)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+    <div class="tabnote">Prov fre 27/11</div>
+    <h1><span>Demokratins</span><br>grunder</h1>
+    <p>För Meja. Lärarens 24 instuderingsfrågor och hela begreppslistan, förklarade med webbsidorna i studieguiden: riksdagen, regeringen, Forum för levande historia och den statliga värdegrunden.</p>
+  </header>
+
+  <nav class="tabs" role="tablist" aria-label="Delar">
+    <button role="tab" aria-selected="true" data-tab="start">Start</button>
+    <button role="tab" aria-selected="false" data-tab="las">Läs</button>
+    <button role="tab" aria-selected="false" data-tab="fragor">Frågor</button>
+    <button role="tab" aria-selected="false" data-tab="resonera">Resonera</button>
+    <button role="tab" aria-selected="false" data-tab="quiz">Quiz</button>
+    <button role="tab" aria-selected="false" data-tab="kort">Kort</button>
+    <button role="tab" aria-selected="false" data-tab="karta">Maktkartan</button>
+  </nav>
+
+  <!-- START -->
+  <section class="panel active" id="start">
+    <h2>Så pluggar du</h2>
+    <p class="lead">Allt fungerar på telefon och iPad. Det du skriver sparas bara i webbläsaren på din egen telefon.</p>
+
+    <div class="box">
+      <h3>Så funkar rättningen</h3>
+      <p>Under Frågor skriver du ditt svar och trycker på Rätta. Sidan letar efter de viktiga delarna och visar vad som finns med och vad som saknas.</p>
+      <p>Den läser nyckelord, inte hela meningar. Har du skrivit något med egna ord kan du bocka i det själv. Jämför alltid med modellsvaret.</p>
+    </div>
+
+    <div class="box">
+      <h3>Var svaren kommer ifrån</h3>
+      <p>Enligt studieguiden utgår provet från det ni har gått igenom på lektionerna. Det finns ingen lärobok, så svaren bygger på webbsidorna i studieguiden. Taggarna vid varje fråga visar var det står.</p>
+      <p><span class="tag bok">Riksdagen</span> riksdagens sidor om demokrati och grundlagarna. <span class="tag pres">Regeringen</span> regeringens sidor om mänskliga rättigheter. <span class="tag bok">Levande historia</span> Forum för levande historia. <span class="tag lekt">Värdegrunden</span> den statliga värdegrunden, som Statskontoret beskriver. <span class="tag lekt">Förvaltningslagen</span> lagen där rättsprinciperna står.</p>
+      <p><span class="tag lk">Begreppslistan</span> betyder att begreppet finns i lärarens lista men inte förklaras på webbsidorna. Där bygger förklaringen på vanlig gymnasiekunskap i samhällskunskap.</p>
+      <p><span class="tag ur">▶ UR</span> visar vilket UR-program som tar upp samma sak. Programmen har inte använts som källa till svaren, men de ger bra exempel och diskussioner.</p>
+      <p>När lektionsanteckningarna kommer läggs de till med taggen <span class="tag lk">Lektionen</span>.</p>
+    </div>
+
+    <div class="box">
+      <h3>Studieguidens material</h3>
+      <p><b>UR Play</b></p>
+      <ul class="links">
+        <li><a href="https://urplay.se/program/240787-samhallskunskap-forklarad-demokrati" target="_blank" rel="noopener">Samhällskunskap förklarad: Demokrati</a></li>
+        <li><a href="https://urplay.se/program/243720-perspektiv-pa-varlden-demokrati-till-varje-pris" target="_blank" rel="noopener">Demokrati till varje pris</a> <span class="small">Är demokrati alltid bäst, och får man tvinga på andra den?</span></li>
+        <li><a href="https://urplay.se/program/243718-perspektiv-pa-varlden-pengar-makt-och-demokrati" target="_blank" rel="noopener">Pengar, makt och demokrati</a> <span class="small">Ekonomisk makt och lobbyism.</span></li>
+        <li><a href="https://urplay.se/program/243727-perspektiv-pa-varlden-hotet-fran-extremism" target="_blank" rel="noopener">Hotet från extremism</a> <span class="small">Extremism och yttrandefrihetens dilemma.</span></li>
+        <li><a href="https://urplay.se/program/243716-perspektiv-pa-varlden-manskliga-rattigheter" target="_blank" rel="noopener">Mänskliga rättigheter</a> <span class="small">Demokratiskt underskott, politiska rättigheter och rättssäkerhet.</span></li>
+      </ul>
+      <p><b>Webbsidor</b></p>
+      <ul class="links">
+        <li><a href="https://www.riksdagen.se/sv/sa-fungerar-riksdagen/demokrati/" target="_blank" rel="noopener">Riksdagen om demokrati</a></li>
+        <li><a href="https://www.regeringen.se/regeringens-politik/demokrati-och-manskliga-rattigheter/fakta-om-manskliga-rattigheter/" target="_blank" rel="noopener">Regeringen om mänskliga rättigheter</a></li>
+        <li><a href="https://www.levandehistoria.se/fakta/demokrati" target="_blank" rel="noopener">Forum för levande historia om demokrati</a></li>
+        <li><a href="https://vardemokrati.se/om-demokratin/" target="_blank" rel="noopener">Vår demokrati</a></li>
+        <li><a href="https://www.statskontoret.se/kunskapsstod-och-regler/forvaltningskultur/den-statliga-vardegrunden/" target="_blank" rel="noopener">Statskontoret om den statliga värdegrunden</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- LÄS -->
+  <section class="panel" id="las">
+    <h2>Sammanfattning</h2>
+    <p class="lead">Avsnitten följer studieguidens ordning. Öppna ett i taget, läs, blunda och försök förklara det högt.</p>
+    <div class="box">
+      <h3>Titta på UR</h3>
+      <p class="small" style="margin:0 0 6px">Programmen från studieguiden. Under varje avsnitt och fråga finns en knapp till det program som tar upp samma sak.</p>
+      <ul class="links">
+        <li><a href="https://urplay.se/program/240787-samhallskunskap-forklarad-demokrati" target="_blank" rel="noopener">▶ Samhällskunskap förklarad: Demokrati</a> <span class="small">Grunderna, bra att börja med.</span></li>
+        <li><a href="https://urplay.se/program/243720-perspektiv-pa-varlden-demokrati-till-varje-pris" target="_blank" rel="noopener">▶ Demokrati till varje pris</a> <span class="small">Är demokrati alltid bäst, och får man tvinga på andra den?</span></li>
+        <li><a href="https://urplay.se/program/243718-perspektiv-pa-varlden-pengar-makt-och-demokrati" target="_blank" rel="noopener">▶ Pengar, makt och demokrati</a> <span class="small">Ekonomisk makt och lobbyism.</span></li>
+        <li><a href="https://urplay.se/program/243727-perspektiv-pa-varlden-hotet-fran-extremism" target="_blank" rel="noopener">▶ Hotet från extremism</a> <span class="small">Extremism och yttrandefrihetens dilemma.</span></li>
+        <li><a href="https://urplay.se/program/243716-perspektiv-pa-varlden-manskliga-rattigheter" target="_blank" rel="noopener">▶ Mänskliga rättigheter</a> <span class="small">Demokratiskt underskott, politiska rättigheter och rättssäkerhet.</span></li>
+      </ul>
+    </div>
+    <div id="topics"></div>
+  </section>
+
+  <!-- FRÅGOR -->
+  <section class="panel" id="fragor">
+    <h2>Lärarens frågor</h2>
+    <p class="lead">Skriv svaret med egna ord innan du tittar, och tryck sedan på Rätta.</p>
+    <div class="cardbar" id="qfilter"></div>
+    <p class="count" id="qprog"></p>
+    <div id="qlist"></div>
+    <p><button class="chip" id="qreset">Rensa mina svar</button></p>
+  </section>
+
+  <!-- RESONERA -->
+  <section class="panel" id="resonera">
+    <h2>Resonera</h2>
+    <p class="lead">Här räcker det inte att kunna fakta. Du ska förklara varför, väga argument mot varandra och komma fram till en slutsats.</p>
+    <p class="small">Ett bra resonemang har flera steg: vad det handlar om, argument för och emot, och vad du själv kommer fram till och varför. Skriv med egna ord och tryck på Rätta. Bocka i de steg du har med, även om du skrev dem på ett annat sätt.</p>
+    <p class="count" id="rprog"></p>
+    <div id="rlist"></div>
+    <p><button class="chip" id="rreset">Rensa mina svar</button></p>
+  </section>
+
+  <!-- QUIZ -->
+  <section class="panel" id="quiz">
+    <h2>Quiz</h2>
+    <p class="lead">Kryssfrågor i blandad ordning. Välj kunskapsfrågor eller begreppen ur lärarens begreppslista.</p>
+    <div class="cardbar" id="quizset"></div>
+    <div id="quizbox"></div>
+  </section>
+
+  <!-- KORT -->
+  <section class="panel" id="kort">
+    <h2>Kort</h2>
+    <p class="lead">Hela begreppslistan. Tryck på kortet för att vända det. Markera de kort du kan, så kommer de sist i högen.</p>
+    <div class="cardbar" id="cardfilter"></div>
+    <div class="flash" id="flash" tabindex="0" role="button" aria-label="Vänd kortet">
+      <span class="side" id="fside">Fråga</span>
+      <div id="fcontent"></div>
+    </div>
+    <div class="flashnav">
+      <button class="btn" id="fprev">Förra</button>
+      <span class="count" id="fcount"></span>
+      <button class="btn good" id="fknow">Jag kan den</button>
+      <button class="btn primary" id="fnext">Nästa</button>
+    </div>
+    <p class="count" style="margin-top:14px"><button class="chip" id="freset">Nollställ markerade kort</button></p>
+  </section>
+
+  <!-- MAKTKARTAN -->
+  <section class="panel" id="karta">
+    <h2>Maktkartan</h2>
+    <p class="lead">Så hänger makten ihop i Sverige. Följ kartan uppifrån och ner, och försök sedan rita den själv på ett papper.</p>
+    <figure class="mapwrap" style="margin-left:0;margin-right:0"><svg class="map" id="mapsvg" role="img" aria-labelledby="mt md" xmlns="http://www.w3.org/2000/svg"><title id="mt">Maktkartan över Sveriges demokrati</title><desc id="md">Folket väljer riksdagen, som stiftar lagar och kan avsätta regeringen. Regeringen styr med hjälp av myndigheterna. Vid sidan av finns självständiga domstolar och granskare som medierna, JO, Riksrevisionen och KU.</desc></svg></figure>
+    <h3 class="sub">Varför-kedjor</h3>
+    <p class="small">Läs frågan, försök bygga kedjan själv och tryck sedan för att se den. Varje steg är en del av resonemanget, och det är stegen som ger poäng på provet.</p>
+    <div id="chains"></div>
+  </section>
+
+  <footer>
+    <p><b>Källor.</b> Studieguiden Demokratins grunder och dess webbsidor: <a href="https://www.riksdagen.se/sv/sa-fungerar-riksdagen/demokrati/vad-ar-demokrati/">Riksdagen, Vad är demokrati?</a> och <a href="https://www.riksdagen.se/sv/sa-fungerar-riksdagen/demokrati/sveriges-grundlagar-och-riksdagsordningen/">Sveriges grundlagar</a>. <a href="https://www.regeringen.se/regeringens-politik/demokrati-och-manskliga-rattigheter/fakta-om-manskliga-rattigheter/">Regeringen, Fakta om mänskliga rättigheter</a>, med undersidorna om rättsstatens principer och om medborgerliga och politiska rättigheter. Forum för levande historia, Demokratiska grundregler och Från demokrati till diktatur steg för steg. Den statliga värdegrunden enligt Statskontoret och Värdegrundsdelegationens skrift Den gemensamma värdegrunden för de statsanställda.</p>
+    <p>Rättsprinciperna: <a href="https://www.riksdagen.se/sv/dokument-och-lagar/dokument/svensk-forfattningssamling/forvaltningslag-2017900_sfs-2017-900/">förvaltningslagen (2017:900)</a> 5 och 23 §§. Utmaningarna för demokratin: regeringens Strategi för en stark demokrati.</p>
+    <p>Begrepp märkta Begreppslistan förklaras med vanlig gymnasiekunskap, eftersom de inte står på webbsidorna. UR-programmen är tips och har inte använts som källa.</p>
+  </footer>
+</div>
+
+<script>
+/* ===================== KÄLLOR ===================== */
+const SRC = {
+ rd:["Riksdagen","bok"],
+ rg:["Regeringen","pres"],
+ lh:["Levande historia","bok"],
+ vg:["Värdegrunden","lekt"],
+ fl:["Förvaltningslagen","lekt"],
+ bg:["Begreppslistan","lk"],
+ lk:["Lektionen","lk"]
+};
+const UR = [
+ ["Demokrati","https://urplay.se/program/240787-samhallskunskap-forklarad-demokrati"],
+ ["Demokrati till varje pris","https://urplay.se/program/243720-perspektiv-pa-varlden-demokrati-till-varje-pris"],
+ ["Pengar, makt och demokrati","https://urplay.se/program/243718-perspektiv-pa-varlden-pengar-makt-och-demokrati"],
+ ["Hotet från extremism","https://urplay.se/program/243727-perspektiv-pa-varlden-hotet-fran-extremism"],
+ ["Mänskliga rättigheter","https://urplay.se/program/243716-perspektiv-pa-varlden-manskliga-rattigheter"]
+];
+
+/* ===================== LÄS ===================== */
+const TOPICS = [
+ {t:"Makt", s:"makt, maktmedel, maktmissbruk", r:{k:["bg"]}, h:`
+  <p><span class="term">Makt</span> är förmågan att få andra att göra något som de annars inte skulle ha gjort. Det kan också vara möjligheten att påverka beslut och hur samhället ska se ut. Makt finns överallt, i familjen, i skolan, på jobbet och i politiken.</p>
+  <p>Den som har makt använder olika <span class="term">maktmedel</span>. Det kan vara våld och tvång, som militär, polis och fängelse. Det kan vara pengar, som kan användas för att belöna eller muta. Det kan vara kunskap och information, till exempel att bestämma vad medierna får säga. Det kan också vara lagar och en formell position, en stor organisation eller karisma, när människor följer en ledare för att de tror på hen.</p>
+  <p>När den som har makt använder den på ett otillåtet sätt eller för att gynna sig själv kallas det <span class="term">maktmissbruk</span>. Risken blir störst vid <span class="term">maktkoncentration</span>, alltså när all makt samlas hos en person eller en liten grupp.</p>
+  <p>Motsatsen är <span class="term">pluralism</span>. Då finns det många partier, åsikter, medier och organisationer som konkurrerar, så att ingen ensam bestämmer. När alla inblandade är överens kallas det <span class="term">konsensus</span>, eller samförstånd.</p>
+  <h4>Den offentliga makten</h4>
+  <p><span class="term">Den offentliga makten</span> är den makt som staten, regionerna och kommunerna har över oss, genom riksdagen, regeringen, myndigheterna och domstolarna. Det handlar till exempel om att ta ut skatt, betala ut bidrag, ge tillstånd och döma den som begått brott. Enligt regeringsformen ska den offentliga makten utövas under lagarna.</p>
+  <p class="tip">Makt = få någon att göra det hen annars inte skulle ha gjort.</p>`},
+ {t:"Vad är demokrati?", s:"folkstyre, kännetecken, grundregler", r:{k:["rd","lh"],u:0}, h:`
+  <p>Ordet <span class="term">demokrati</span> kommer från grekiskan och betyder ungefär folkstyre. Det innebär att den som är medborgare eller bor i ett land kan vara med och tycka till om hur landet ska styras, till exempel genom regelbundna val.</p>
+  <p>En annan grundtanke är att alla människor är lika mycket värda och har samma rättigheter. Man får tänka och tycka vad man vill och uttrycka sina åsikter öppet i tal och skrift. Motsatsen till demokrati är diktatur, där ett enda parti eller en enda person styr.</p>
+  <h4>Demokratins kännetecken</h4>
+  <p class="pres"><span class="tag bok">Riksdagen</span> Fria val. Flera partier att välja mellan. Politiska rättigheter som rösträtt, yttrandefrihet och mötesfrihet. Rättssäkerhet och likhet inför lagen. Respekt för de mänskliga rättigheterna. En statsförvaltning som fungerar, utan korruption och maktmissbruk.</p>
+  <h4>Demokratiska grundregler</h4>
+  <p class="pres"><span class="tag bok">Levande historia</span> Alla har lika värde. Alla får och kan vara med. Alla har en röst var. Majoriteten bestämmer, men minoriteten ska respekteras. Alla får säga vad de tycker. Alla möts med respekt.</p>
+  <h4>Så blev Sverige en demokrati</h4>
+  <p><span class="term">Demokratisering</span> är när ett land går från ett auktoritärt styre till demokrati. I Sverige beslutade riksdagen 1919 om <span class="term">allmän rösträtt</span> för både kvinnor och män, och det första riksdagsvalet med allmän och lika rösträtt hölls 1921. Sverige har alltså varit en demokrati i drygt 100 år.</p>
+  <p class="tip">Demokrati = demos (folk) + kratos (makt).</p>`},
+ {t:"Direkt och representativ demokrati", s:"folkomröstning, parlament, valsystem", r:{k:["rd"]}, h:`
+  <p>De flesta demokratiska länder har <span class="term">representativ demokrati</span>. Folket väljer representanter i regelbundna val, och de fattar sedan besluten i folkets ställe. Sverige är ett exempel. Val till riksdagen, regionerna och kommunerna hålls vart fjärde år, och val till Europaparlamentet vart femte år.</p>
+  <p>I en <span class="term">direktdemokrati</span> bestämmer invånarna själva i en särskild fråga, till exempel i en folkomröstning. Sverige har haft nationella folkomröstningar om bland annat kärnkraft och EU-medlemskap. De är rådgivande, så politikerna måste inte följa resultatet.</p>
+  <p>Den folkvalda församling som stiftar lagar kallas <span class="term">parlament</span>. I Sverige är det riksdagen, med 349 ledamöter. För att få rösta i riksdagsvalet ska man vara svensk medborgare, ha fyllt 18 år och vara eller ha varit folkbokförd i Sverige. I kommun- och regionval behöver man inte vara svensk medborgare.</p>
+  <h4>Valsystem</h4>
+  <p>Ett <span class="term">valsystem</span> är reglerna för hur rösterna blir platser, så kallade mandat. Vid <span class="term">majoritetsval</span> delas landet in i valkretsar, och den som får flest röster i en valkrets vinner hela platsen. Det gynnar stora partier och ger ofta två stora partier, som i Storbritannien och USA. Många röster leder då inte till någon plats alls.</p>
+  <p>Vid <span class="term">proportionella val</span> får partierna platser i förhållande till hur stor andel av rösterna de fått. Det ger fler partier och speglar väljarna bättre, men regeringen behöver ofta bygga på samarbete mellan flera partier. Sverige har proportionella val, och ett parti behöver minst 4 procent av rösterna för att komma in i riksdagen.</p>
+  <p class="tip">Representativ = vi väljer någon som bestämmer åt oss.</p>`},
+ {t:"Demokratimodeller", s:"val, deltagande, samtal, liberal, egalitär", r:{k:["bg"]}, h:`
+  <p>Alla demokratier har val, men man kan ha olika syn på vad som är viktigast i en demokrati. Därför talar man om olika demokratimodeller. Tänk på dem som olika glasögon att se på demokratin med.</p>
+  <table class="vit mod">
+   <tr><th>Modell</th><th>Det viktigaste</th></tr>
+   <tr><td>Valdemokrati</td><td>Fria och rättvisa val. Medborgarna väljer vilka som ska styra och kan rösta bort dem nästa gång. Mellan valen sköter de folkvalda politiken.</td></tr>
+   <tr><td>Deltagar&shy;demokrati</td><td>Medborgarna ska delta aktivt även mellan valen, i partier, föreningar, folkomröstningar och demonstrationer. Deltagandet gör människor mer engagerade och kunniga.</td></tr>
+   <tr><td>Samtals&shy;demokrati</td><td>Besluten ska föregås av öppna och jämlika samtal där argumenten vägs mot varandra och man kan ändra åsikt. Målet är så bra beslut som möjligt, gärna i samförstånd.</td></tr>
+   <tr><td>Liberal demokrati</td><td>Utöver fria val ska individens fri- och rättigheter skyddas mot staten och mot majoriteten, genom grundlagar, rättsstat, maktdelning och oberoende domstolar.</td></tr>
+   <tr><td>Egalitär demokrati</td><td>Alla grupper ska ha lika möjligheter att delta och påverka. Stora skillnader i pengar, utbildning eller hälsa får inte ge ojämlik politisk makt.</td></tr>
+  </table>
+  <p>Modellerna utesluter inte varandra. Sverige och de flesta västländer räknas som liberala demokratier, men Sverige har också inslag av deltagardemokrati genom föreningsliv och folkrörelser.</p>
+  <p class="tip">Val, delta, samtal, liberal, egalitär: vem väljer, vem deltar, hur pratar vi, vem skyddas, vem har resurser?</p>`},
+ {t:"Folksuveränitet och maktdelning", s:"tre statsmakter, Sverige och USA", r:{k:["rd","vg","bg"]}, h:`
+  <p>Makten i ett land kan delas upp i tre delar. <span class="term">Lagstiftande makt</span> stiftar lagarna och beslutar om budget och skatter. <span class="term">Verkställande makt</span> genomför besluten och styr landet. <span class="term">Dömande makt</span> dömer enligt lagarna och avgör tvister och brottmål.</p>
+  <h4>Maktdelningsprincipen</h4>
+  <p>Under upplysningstiden på 1700-talet menade den franske filosofen Montesquieu att makt lätt missbrukas om den samlas hos en person eller en grupp. Därför skulle de tre delarna skiljas åt, vara oberoende och kontrollera och balansera varandra. Det kallas <span class="term">maktdelningsprincipen</span>.</p>
+  <p>USA är det tydligaste exemplet. Kongressen stiftar lagar, presidenten väljs i ett eget val och styr, och Högsta domstolen kan underkänna lagar som strider mot konstitutionen. Ingen av dem kan ensam bestämma allt.</p>
+  <h4>Folksuveränitetsprincipen</h4>
+  <p class="pres"><span class="tag bok">Riksdagen</span> Regeringsformen slår fast att all offentlig makt i Sverige utgår från folket och att riksdagen är folkets främsta företrädare.</p>
+  <p>Det kallas <span class="term">folksuveränitetsprincipen</span>. Makten går som en kedja: folket väljer riksdagen, riksdagen stiftar lagar och väljer statsminister, och regeringen styr med hjälp av myndigheterna. Regeringen måste ha riksdagens stöd, annars kan riksdagen avsätta den. Det kallas parlamentarism.</p>
+  <p>Sverige bygger alltså främst på folksuveränitet, där riksdagen står högst. Men även i Sverige är domstolarna självständiga. Ingen myndighet, inte ens riksdagen, får bestämma hur en domstol ska döma i ett enskilt fall.</p>
+  <p class="tip">Sverige: en kedja med riksdagen överst. USA: en triangel där alla vaktar alla.</p>`},
+ {t:"Grundlagar och rättigheter", s:"konstitution, fri- och rättigheter, MR", r:{k:["rd","rg"],u:4}, h:`
+  <p>En <span class="term">konstitution</span>, eller författning, är ett lands grundläggande regler för hur det ska styras och vilka rättigheter medborgarna har. I Sverige består den av fyra <span class="term">grundlagar</span>.</p>
+  <table class="vit mod">
+   <tr><th>Grundlag</th><th>Handlar om</th></tr>
+   <tr><td>Regerings&shy;formen</td><td>Hur landet ska styras, folkets fri- och rättigheter och ansvaret mellan riksdag och regering. Den nuvarande kom 1974.</td></tr>
+   <tr><td>Successions&shy;ordningen</td><td>Vem som blir kung eller drottning.</td></tr>
+   <tr><td>Tryckfrihets&shy;förordningen</td><td>Rätten att ge ut tidningar och böcker utan censur och att ta del av allmänna handlingar. Sverige fick tryckfrihet 1766, som första land i världen.</td></tr>
+   <tr><td>Yttrandefrihets&shy;grundlagen</td><td>Yttrandefrihet i radio, tv, film och liknande medier. Den yngsta, från 1991.</td></tr>
+  </table>
+  <p>Grundlagarna står över alla andra lagar och är svårare att ändra. Riksdagen måste fatta två likadana beslut med ett riksdagsval emellan. Det skyddar demokratin mot att en tillfällig majoritet ändrar spelreglerna i en handvändning.</p>
+  <h4>Fri- och rättigheter</h4>
+  <p><span class="term">Politiska rättigheter</span> ger dig rätt att delta i politiken: rösträtt, rätt att ställa upp i val, yttrandefrihet, mötesfrihet och föreningsfrihet. Ingen får hindra någon från att engagera sig politiskt.</p>
+  <p><span class="term">Medborgerliga rättigheter</span> skyddar dig mot staten och mot maktmissbruk och godtycke. Regeringen räknar bland annat upp rätten till liv, skydd mot tortyr och slaveri, rätten till frihet och en rättvis rättegång, skydd för privatlivet, tanke-, samvets- och religionsfrihet, egendomsskydd och skydd mot diskriminering.</p>
+  <p><span class="term">Opinionsfriheterna</span> står i regeringsformens andra kapitel: yttrandefrihet, informationsfrihet, mötesfrihet, demonstrationsfrihet, föreningsfrihet och religionsfrihet. <span class="term">Pressfrihet</span> är rätten att fritt ge ut tidningar och andra tryckta skrifter utan censur.</p>
+  <h4>Mänskliga rättigheter</h4>
+  <p class="pres"><span class="tag pres">Regeringen</span> De mänskliga rättigheterna är universella och gäller lika för alla. De reglerar främst förhållandet mellan staten och individen och begränsar statens makt. Rättigheterna hänger ihop, och ingen är viktigare än någon annan.</p>
+  <p>FN:s allmänna förklaring om de mänskliga rättigheterna kom 1948, efter andra världskriget och Förintelsen. Europakonventionen kom 1950, och den som anser att staten brutit mot den kan vända sig till Europadomstolen. I Sverige är det staten, och ytterst regeringen, som ansvarar för att rättigheterna följs.</p>
+  <p class="tip">Politiska = vara med och bestämma. Medborgerliga = skyddas från staten.</p>`},
+ {t:"Institutioner och medier", s:"riksdag, regering, domstolar, JO, medier", r:{k:["rd"]}, h:`
+  <p><span class="term">Demokratiska institutioner</span> är de organisationer och regler som gör att folkstyret fungerar i praktiken. Utan dem blir demokratin bara ord.</p>
+  <table class="vit mod">
+   <tr><th>Institution</th><th>Uppgift</th></tr>
+   <tr><td>Riksdagen</td><td>Stiftar lagar, beslutar om statens budget, väljer statsminister och granskar regeringen.</td></tr>
+   <tr><td>Regeringen</td><td>Styr landet, lägger förslag till nya lagar och ser till att riksdagens beslut genomförs.</td></tr>
+   <tr><td>Myndig&shy;heterna</td><td>Till exempel Polisen, Skatteverket och Försäkringskassan. De genomför besluten och ska arbeta effektivt och rättssäkert.</td></tr>
+   <tr><td>Domstolarna</td><td>Dömer enligt lagen och är självständiga från politikerna.</td></tr>
+   <tr><td>Kommuner och regioner</td><td>Styr till exempel skola, vård och omsorg nära medborgarna. Sverige har 290 kommuner.</td></tr>
+   <tr><td>Granskarna</td><td>Justitieombudsmannen (JO) och Riksrevisionen granskar att statsförvaltningen sköter sig effektivt och rättssäkert. Riksdagens konstitutionsutskott (KU) granskar regeringen.</td></tr>
+   <tr><td>Partier och val</td><td>Ger väljarna alternativ att välja mellan. Åtta partier sitter i riksdagen.</td></tr>
+  </table>
+  <h4>Medierna</h4>
+  <p>Medierna har tre viktiga uppgifter i en demokrati. De informerar, så att vi kan bilda egna åsikter och rösta. De granskar makthavarna och avslöjar maktmissbruk, och därför kallas de ibland den tredje statsmakten. Och de är ett forum där olika åsikter möts i debatt.</p>
+  <p class="pres"><span class="tag bok">Riksdagen</span> Yttrandefrihet och tryckfrihet är grundlagsskyddade, och makthavare ska kunna granskas även om de är folkvalda. I diktaturer saknas ofta oberoende medier, och journalistik som kritiserar makten är inte tillåten.</p>
+  <p class="tip">Medierna: informera, granska, debattera.</p>`},
+ {t:"Rättsstaten och rättsprinciperna", s:"legalitet, objektivitet, proportionalitet, official", r:{k:["fl","vg","rg"],u:4}, h:`
+  <p>En <span class="term">rättsstat</span> är en stat där den offentliga makten är bunden av lagarna. Lagarna gäller lika för alla, även för dem som styr, och den enskilde skyddas mot godtycke av självständiga domstolar.</p>
+  <p><span class="term">Rättssäkerhet</span> betyder att den enskilde kan lita på att lagarna tillämpas förutsägbart och lika, och att hen skyddas mot övergrepp från staten. Regeringen nämner likhet inför lagen, rätten att få en brottsanklagelse prövad av domstol inom rimlig tid, förbud mot godtyckligt frihetsberövande och rätten till en rättvis och opartisk rättegång.</p>
+  <p><span class="term">Godtycke</span> är när beslut fattas efter eget tycke, utan regler eller sakliga skäl. <span class="term">Opartiskhet</span> betyder att inte ta parti för någon och att inte låta personliga intressen eller relationer påverka ett beslut. Den som har en sådan koppling till ett ärende är jävig och ska inte vara med och besluta.</p>
+  <h4>Rättsprinciperna</h4>
+  <p class="pres"><span class="tag lekt">Förvaltningslagen 5 §</span> En myndighet får endast vidta åtgärder som har stöd i rättsordningen. I sin verksamhet ska myndigheten vara saklig och opartisk.</p>
+  <table class="vit mod">
+   <tr><th>Princip</th><th>Betyder</th></tr>
+   <tr><td>Legalitets&shy;principen</td><td>Den offentliga makten utövas under lagarna. Myndigheter får bara göra det som har stöd i lag, och ingen kan straffas för något som inte var brottsligt när det gjordes. Skatteverket får till exempel inte ta ut en skatt som inte står i lagen.</td></tr>
+   <tr><td>Objektivitets- och likabehandlings&shy;principen</td><td>Myndigheter och domstolar ska vara sakliga och opartiska och behandla alla lika inför lagen. Lika fall ska behandlas lika, oavsett vem du är.</td></tr>
+   <tr><td>Proportionalitets&shy;principen</td><td>Ett ingrepp mot en person får bara göras om det kan leda till det man vill uppnå. Det får aldrig vara mer långtgående än vad som behövs och ska stå i rimligt förhållande till skadan för personen. Polisen får till exempel inte använda mer våld än vad som behövs.</td></tr>
+   <tr><td>Official&shy;principen</td><td>Myndigheten eller domstolen ansvarar själv för att ett ärende blir så utrett som det behöver, så att allt inte hänger på den enskilde. Det står i förvaltningslagen 23 §. Ordet används ibland också om att det är staten, genom åklagaren, som väcker åtal för brott.</td></tr>
+  </table>
+  <h4>Den statliga värdegrunden</h4>
+  <p class="pres"><span class="tag lekt">Värdegrunden</span> Alla som arbetar i staten ska följa sex principer: demokrati, legalitet, objektivitet, fri åsiktsbildning, respekt för allas lika värde, frihet och värdighet samt effektivitet och service.</p>
+  <p>Principerna bygger på regeringsformen. Effektivitet är viktigt, men får aldrig gå före legaliteten.</p>
+  <p><span class="term">Rättssystemet</span> är lagarna och de som tillämpar dem: polis, åklagare, advokater, domstolar och kriminalvård. Regeringen påpekar att lagar inte räcker. Det behövs också ett rättsväsende som fungerar.</p>
+  <p class="tip">LOPO: Legalitet, Objektivitet, Proportionalitet, Official.</p>`},
+ {t:"Diktatur och auktoritärt styre", s:"partidiktatur, militärdiktatur, propaganda", r:{k:["rd","lh"],u:1}, h:`
+  <p>I ett <span class="term">auktoritärt styre</span> är makten samlad hos en ledare eller en liten grupp. Det finns inga fria val, eller bara val där oppositionen inte kan delta på lika villkor, och fri- och rättigheterna är begränsade.</p>
+  <p>I en <span class="term">partidiktatur</span> har ett enda parti all makt och andra partier är förbjudna, som i Kina och Nordkorea. I en <span class="term">militärdiktatur</span> har militären tagit makten, ofta genom en statskupp, som i Myanmar 2021.</p>
+  <p>Diktaturer använder ofta <span class="term">propaganda</span>, alltså medvetet ensidig och ofta vilseledande information som ska få folket att stödja makthavarna.</p>
+  <p class="pres"><span class="tag bok">Riksdagen</span> I diktaturer är censur vanlig, och internet blockeras, särskilt kritik mot makthavarna. Människor kan riskera fängelse, tortyr eller avrättning för sina åsikter eller för att de är med i förbjudna grupper.</p>
+  <h4>Risker med diktatur</h4>
+  <p>Folket kan inte byta makthavare fredligt. Ingen granskar makten, så maktmissbruk och korruption blir vanligt. Domstolarna är inte självständiga, så människor kan gripas godtyckligt. Minoriteter och kritiker förföljs. När en ledare dör eller störtas kan det bli kaos eller krig.</p>
+  <p>Ibland sägs att en diktatur kan fatta snabba och långsiktiga beslut. Problemet är att ingen kan stoppa ledaren om besluten är dåliga, och misstag rättas inte till.</p>
+  <h4>Från demokrati till diktatur</h4>
+  <p class="pres"><span class="tag bok">Levande historia</span> År 1933 avskaffade Hitler och nazisterna demokratin i Tyskland steg för steg och på kort tid, med hjälp av propaganda, hot, våld och terror.</p>
+  <p>Hitler hade utsetts till rikskansler på laglig väg. Det visar att en demokrati kan avskaffas inifrån.</p>`},
+ {t:"Problem i demokratier", s:"underskott, korruption, lobbyism, populism, extremism", r:{k:["rg","bg"],u:[2,3,4]}, h:`
+  <p class="pres"><span class="tag pres">Regeringen</span> Utmaningar för den svenska demokratin är bland annat ojämlikt deltagande, desinformation och propaganda, hot mot opinionsbildare och mer aktiva antidemokratiska aktörer.</p>
+  <h4>Demokratiskt underskott</h4>
+  <p><span class="term">Demokratiskt underskott</span> är när medborgarna har mindre inflytande och insyn än de borde, till exempel för att besluten fattas långt från folket eller av personer som inte är folkvalda. Orsaker kan vara lågt valdeltagande i vissa grupper, att makt flyttas till EU, myndigheter eller företag, eller att politiska rättigheter och rättssäkerhet begränsas.</p>
+  <h4>Korruption och nepotism</h4>
+  <p><span class="term">Korruption</span> är att missbruka makt eller ställning för egen vinning, till exempel genom att ta emot mutor. <span class="term">Nepotism</span> är att gynna släkt och vänner, till exempel med jobb, i stället för den som är mest lämpad. Båda bryter mot att alla ska behandlas lika och gör att människor slutar lita på samhället.</p>
+  <h4>Lobbyism och pengar</h4>
+  <p><span class="term">Lobbyism</span> är när företag och organisationer försöker påverka politiker och tjänstemän. Det kan ge politikerna kunskap och olika perspektiv. Men den som har mycket pengar har råd med mer påverkan, och då kan ekonomisk makt bli politisk makt.</p>
+  <h4>Populism och extremism</h4>
+  <p><span class="term">Populism</span> ställer ”det vanliga folket” mot en ”elit” och lovar enkla lösningar på svåra problem. Populism finns både till höger och till vänster. <span class="term">Politisk extremism</span> vill förändra samhället i grunden och accepterar inte demokratins spelregler. Den våldsbejakande extremismen använder hot, våld och terror.</p>
+  <p>Här uppstår ett <span class="term">demokratiskt dilemma</span>. Yttrandefriheten gäller alla, men hur mycket frihet ska de få som vill avskaffa demokratin?</p>
+  <h4>Majoritetstyranni</h4>
+  <p><span class="term">Majoritetstyranni</span> är när majoriteten använder sin makt för att förtrycka en minoritet. Därför skyddar grundlagar, mänskliga rättigheter och oberoende domstolar även dem som är färre. I Sverige har de nationella minoriteterna ett särskilt skydd: judar, romer, samer, sverigefinnar och tornedalingar.</p>
+  <h4>Aktivism och civil olydnad</h4>
+  <p><span class="term">Aktivism</span> är att engagera sig för en fråga utanför partierna, till exempel genom demonstrationer, kampanjer och bojkotter. <span class="term">Civil olydnad</span> är att öppet och utan våld bryta mot en lag för att protestera mot en orättvisa, och vara beredd att ta straffet. Rosa Parks vägrade 1955 att lämna sin plats på bussen till en vit man i USA, och Gandhi ledde protester mot det brittiska styret i Indien.</p>`},
+ {t:"Är demokrati bäst?", s:"styrkor, svagheter, fredsteorin", r:{k:["bg"],u:1}, h:`
+  <p>Demokrati kan försvaras på två sätt. Den har ett egenvärde, alltså att den är bra i sig, eftersom alla människor har lika värde och rätt att vara med och bestämma. Den har också ett <span class="term">instrumentellt värde</span>, alltså att den är ett medel för att nå andra mål, som fred, välstånd och skydd för de mänskliga rättigheterna.</p>
+  <p>Den <span class="term">demokratiska fredsteorin</span> säger att demokratier sällan eller aldrig krigar mot varandra. Ledarna måste stå till svars inför väljarna, konflikter löses genom förhandling, och demokratier handlar och samarbetar med varandra.</p>
+  <h4>Styrkor</h4>
+  <p>Alla har lika rätt att påverka. Folket kan byta makthavare utan våld. Makten granskas och måste ta ansvar. Rättigheter skyddas, och misstag kan rättas till eftersom kritik är tillåten.</p>
+  <h4>Svagheter</h4>
+  <p>Besluten tar tid och kräver kompromisser. Politikerna kan bli kortsiktiga och tänka på nästa val. Majoriteten kan köra över minoriteter. Väljare kan påverkas av populism, desinformation och pengar. I värsta fall kan demokratin väljas bort.</p>
+  <h4>Ska man tvinga på andra länder demokrati?</h4>
+  <p>Ett argument för är att alla människor har rätt till frihet och mänskliga rättigheter. Ett argument emot är att demokrati bygger på folksuveränitet och måste växa fram ur folket självt. Efter invasionerna av Afghanistan 2001 och Irak 2003 blev det långvariga krig och instabilitet i stället för stabila demokratier.</p>
+  <p class="tip">Egenvärde = bra i sig. Instrumentellt = bra för att det leder till något.</p>`}
+];
+
+/* ===================== LÄRARENS 24 FRÅGOR ===================== */
+const CATS = ["Grunderna","Demokratimodeller","Makt","Problembilder","Rättsstaten"];
+const STUDY = [
+ {c:"Grunderna", q:"Vad menas med begreppen makt, demokrati och rättsstat?", r:{k:["rd","bg"]},
+  a:"Makt är förmågan att få andra att göra något de annars inte skulle ha gjort, eller att kunna påverka beslut och hur samhället styrs. Demokrati betyder folkstyre och kommer från grekiskan. Det innebär att medborgarna kan vara med och bestämma hur landet styrs, till exempel genom fria val, och att alla människor har lika värde och samma rättigheter. En rättsstat är en stat där den offentliga makten utövas under lagarna. Lagarna gäller lika för alla, även för makthavarna, och domstolarna är självständiga så att den enskilde skyddas mot godtycke.",
+  p:[{t:"Makt: få andra att göra något de annars inte skulle ha gjort", g:[["makt"],["få andra","få någon","påverka","bestämma över","styra","förmåga","inflytande","kontroll"]]},
+     {t:"Demokrati betyder folkstyre", g:[["folkstyre","folket styr","folket bestämmer","folkmakt","folket har makten","folkets styre"]]},
+     {t:"Medborgarna kan påverka, till exempel i fria val", g:[["val","rösta","röst","påverka","delta","vara med"]]},
+     {t:"Alla har lika värde och samma rättigheter", g:[["lika värde","lika mycket värda","samma rättigheter","lika rättigheter","jämlik","alla är lika"]]},
+     {t:"Rättsstat: makten utövas under lagarna, som gäller alla", g:[["rättsstat"],["lag"]]},
+     {t:"Självständiga domstolar som skyddar mot godtycke", g:[["domstol","rättssäker","godtyck","rättvis rättegång","opartisk"]]}], need:4},
+ {c:"Grunderna", q:"Vilka är de centrala principerna för en rättsstat?", r:{k:["fl","vg","rg"]},
+  a:"Legalitetsprincipen: den offentliga makten utövas under lagarna, och myndigheter får bara göra det som har stöd i lag. Objektivitets- och likabehandlingsprincipen: myndigheter och domstolar ska vara sakliga och opartiska, och lika fall ska behandlas lika. Alla är lika inför lagen. Proportionalitetsprincipen: ett ingrepp mot en person får inte vara mer långtgående än vad som behövs och ska stå i rimligt förhållande till syftet. Officialprincipen: myndigheten eller domstolen ansvarar själv för att ett ärende blir tillräckligt utrett. Tillsammans ger principerna rättssäkerhet, till exempel rätt till en rättvis och opartisk rättegång inom rimlig tid och skydd mot att bli godtyckligt frihetsberövad.",
+  p:[{t:"Legalitet: makten utövas under lagarna, myndigheter behöver stöd i lag", g:[["legalitet","stöd i lag","under lagarna","följa lagen","följer lagen","enligt lagen","lagstöd"]]},
+     {t:"Objektivitet och likabehandling: sakligt, opartiskt, lika fall lika", g:[["objektiv","likabehandl","lika inför lag","lika fall","behandlas lika","saklig","opartisk","lika för alla"]]},
+     {t:"Proportionalitet: inte mer långtgående än vad som behövs", g:[["proportional","rimlig","inte mer än","mer långtgående","i proportion"]]},
+     {t:"Officialprincipen: myndigheten ansvarar för att ärendet utreds", g:[["official","utred"]]},
+     {t:"Rättssäkerhet: rättvis rättegång, inget godtycke", g:[["rättssäker","rättegång","godtyck","oskyldig","frihetsberöv","överklag","försvar"]]}], need:4},
+ {c:"Grunderna", q:"Förklara begreppet maktdelning och vilka idéer som ligger bakom modellen.", r:{k:["bg"]},
+  a:"Maktdelning betyder att statens makt delas upp i tre delar: lagstiftande, verkställande och dömande makt. Delarna ska vara oberoende av varandra och kontrollera och balansera varandra. Idén kommer från upplysningstiden, främst från den franske filosofen Montesquieu på 1700-talet. Tanken är att makt lätt missbrukas om den samlas hos en person eller en grupp. Om makten är delad kan ingen bli för mäktig, och då skyddas medborgarnas frihet och rättigheter. USA är det tydligaste exemplet, med kongressen, presidenten och Högsta domstolen.",
+  p:[{t:"Makten delas i lagstiftande, verkställande och dömande", g:[["lagstift"],["verkställ"],["döm","domstol"]]},
+     {t:"Delarna är oberoende och kontrollerar och balanserar varandra", g:[["oberoende","kontroll","balans","granska","självständ","varandra"]]},
+     {t:"Idén kommer från Montesquieu och upplysningstiden", g:[["montesquieu","montesqieu","montesque","montesk","upplysning","locke"]]},
+     {t:"Makt som samlas hos en person eller grupp missbrukas lätt", g:[["missbruk","samla","koncentr","för mycket makt","all makt","diktat","för mäktig"]]},
+     {t:"Syftet är att skydda medborgarnas frihet och rättigheter", g:[["frihet","rättighet","skydd"]]}], need:3},
+ {c:"Grunderna", q:"Vad innebär begreppet lagstiftande, dömande och verkställande makt?", r:{k:["rd","bg"]},
+  a:"Lagstiftande makt stiftar lagarna. I Sverige är det riksdagen, som också beslutar om statens budget och skatter. Verkställande makt genomför besluten och styr landet. I Sverige är det regeringen, med hjälp av myndigheterna. Dömande makt dömer enligt lagarna, avgör tvister och prövar om någon har begått brott. Det sköts av domstolarna, som ska vara självständiga.",
+  p:[{t:"Lagstiftande makt stiftar lagarna", g:[["lagstift"],["riksdag","nya lagar","stiftar lag","stifta lag","skapar lag","skriver lag","beslutar om lag","bestämmer lag","bestämmer vilka lag","gör lagar","gör lagarna","parlament","kongress"]]},
+     {t:"I Sverige är det riksdagen", g:[["riksdag"]]},
+     {t:"Verkställande makt genomför besluten och styr", g:[["verkställ"],["genomför","utför","styr","sätter i verket","verklighet","regering"]]},
+     {t:"I Sverige är det regeringen, med myndigheterna", g:[["regering"]]},
+     {t:"Dömande makt: domstolarna dömer enligt lagen", g:[["dömande","dömer","döma"],["domstol","domare","brott","tvist","straff"]]}], need:4},
+ {c:"Grunderna", q:"Vad innebär folksuveränitetsprincipen och varför är den viktig för demokratin i Sverige?", r:{k:["rd"]},
+  a:"Folksuveränitetsprincipen betyder att all makt kommer från folket. Den står i första meningen i regeringsformen: ”All offentlig makt i Sverige utgår från folket.” Folket väljer riksdagen i allmänna val vart fjärde år, och riksdagen är folkets främsta företrädare och den högsta beslutande makten. Riksdagen stiftar lagarna och väljer statsminister, och regeringen måste ha riksdagens stöd. Principen är viktig eftersom den gör makten legitim. Makthavarna styr på folkets uppdrag, och om folket är missnöjt kan det byta makthavare i nästa val.",
+  p:[{t:"All offentlig makt utgår från folket", g:[["folk"],["makt"]]},
+     {t:"Det står i regeringsformen", g:[["regeringsform","grundlag","1 kap"]]},
+     {t:"Folket väljer riksdagen i val", g:[["val","rösta","väljer"]]},
+     {t:"Riksdagen är folkets främsta företrädare och står högst", g:[["riksdag"]]},
+     {t:"Makten blir legitim, och folket kan byta makthavare", g:[["byta","avsätt","rösta bort","legitim","uppdrag","ansvar","nästa val","välja om"]]}], need:4},
+ {c:"Grunderna", q:"Vad är skillnaden mellan folksuveränitetsprincipen och maktdelningsprincipen?", r:{k:["rd","bg"]},
+  a:"Folksuveränitetsprincipen innebär att makten utgår från folket och samlas hos den folkvalda församlingen, i Sverige riksdagen. Riksdagen står över de andra statsmakterna: den stiftar lagarna, väljer statsminister och kan avsätta regeringen. Maktdelningsprincipen innebär i stället att makten delas på tre jämbördiga delar, lagstiftande, verkställande och dömande, som kontrollerar och balanserar varandra. Sverige bygger främst på folksuveränitet, men domstolarna är ändå självständiga. USA bygger på maktdelning: presidenten väljs i ett eget val, och kongressen kan inte avsätta presidenten bara för att den tycker annorlunda.",
+  p:[{t:"Folksuveränitet: makten samlas hos riksdagen, den folkvalda församlingen", g:[["riksdag","folkvald","parlament"]]},
+     {t:"Riksdagen står över de andra statsmakterna", g:[["högst","över","främst","överordnad","viktigast","starkast","avsätt"]]},
+     {t:"Maktdelning: tre delar", g:[["tre","lagstift","verkställ","döm"]]},
+     {t:"Delarna är jämbördiga och balanserar varandra", g:[["jämbördig","balans","kontroll","granska","lika stark","lika mycket makt","oberoende","varandra"]]},
+     {t:"Sverige bygger på folksuveränitet, USA på maktdelning", g:[["usa","amerika","förenta"]]}], need:4},
+ {c:"Grunderna", q:"Vad är skillnaden mellan direktdemokrati och representativ demokrati?", r:{k:["rd"]},
+  a:"I en direktdemokrati bestämmer medborgarna själva direkt i sakfrågor, till exempel genom folkomröstningar. I en representativ demokrati väljer folket representanter i regelbundna val, och de folkvalda fattar sedan besluten i folkets ställe. Sverige är främst en representativ demokrati: vi väljer riksdag, regioner och kommuner vart fjärde år och Europaparlamentet vart femte år. Ibland används direktdemokrati. Sverige har haft folkomröstningar om bland annat kärnkraft och EU-medlemskap, men de är rådgivande, så politikerna måste inte följa resultatet.",
+  p:[{t:"Direktdemokrati: folket bestämmer själva i sakfrågor", g:[["direkt"],["själv","sakfråg","folkomröst","varje fråga","alla röstar","folket bestämmer","folket röstar"]]},
+     {t:"Representativ: folket väljer representanter", g:[["representa","företrädare","politiker","folkvald","ombud"]]},
+     {t:"De folkvalda fattar besluten i folkets ställe", g:[["besluta","bestämmer","fattar beslut","i folkets ställe","åt oss","åt folket","för folket"]]},
+     {t:"Sverige är främst representativt, val vart fjärde år", g:[["sverige"],["fjärde","4 år","val","representa"]]},
+     {t:"Folkomröstningar i Sverige är rådgivande", g:[["rådgivande","inte bindande","måste inte följa","behöver inte följa"]]}], need:4},
+ {c:"Grunderna", q:"Vad menas med demokratiska institutioner och vilken betydelse har dessa i ett demokratiskt samhälle?", r:{k:["rd"]},
+  a:"Demokratiska institutioner är de organisationer och regler som gör att folkstyret fungerar i praktiken. Exempel är riksdagen, regeringen, domstolarna, myndigheterna, kommunerna och regionerna, de politiska partierna, de allmänna valen och grundlagarna. Hit hör också granskande organ som Justitieombudsmannen (JO) och Riksrevisionen, och fria medier. Institutionerna fördelar och begränsar makten, granskar makthavarna, skyddar medborgarnas rättigheter och ser till att besluten genomförs. När institutionerna är starka och opartiska kan medborgarna lita på samhället, och demokratin blir stabil även när makthavare byts ut.",
+  p:[{t:"Organisationer och regler som får demokratin att fungera", g:[["organisation","regel","regler","instans","system","fungera"]]},
+     {t:"Minst två exempel, som riksdag, regering, domstolar, myndigheter", min:2, g:[["riksdag","regering","domstol","myndighet","kommun","region","parti","=val","allmänna val","grundlag","=jo","justitieombudsm","riksrevision","medier","media","polis"]]},
+     {t:"Granskare som JO, Riksrevisionen och medierna", g:[["=jo","justitieombudsm","riksrevision","granska","medier","media","press"]]},
+     {t:"De fördelar och begränsar makten", g:[["fördela","begräns","dela","maktdeln","kontroll","granska","maktmissbruk"]]},
+     {t:"De skyddar rättigheter och ger förtroende och stabilitet", g:[["rättighet","förtroende","lita","stabil","trygg","rättssäker"]]}], need:3},
+ {c:"Grunderna", q:"Vad har medierna för roll i ett demokratiskt samhälle?", r:{k:["rd"]},
+  a:"Medierna har tre viktiga uppgifter i en demokrati. De informerar, så att medborgarna vet vad som händer och kan bilda sig egna åsikter och rösta på ett genomtänkt sätt. De granskar makthavarna, till exempel politiker, myndigheter och företag, och avslöjar maktmissbruk och korruption. Därför kallas medierna ibland den tredje statsmakten. De är också ett forum för debatt där olika åsikter får komma fram. För att medierna ska kunna göra detta behövs pressfrihet och yttrandefrihet, som i Sverige skyddas av tryckfrihetsförordningen och yttrandefrihetsgrundlagen. I diktaturer saknas ofta oberoende medier, och journalistik som kritiserar makten är inte tillåten.",
+  p:[{t:"Informerar, så att vi kan bilda åsikter och rösta", g:[["inform","nyhet","berätta","veta vad som händer","kunskap"]]},
+     {t:"Granskar makthavarna och avslöjar maktmissbruk", g:[["granska","avslöj","kritisera","bevaka","vakthund"]]},
+     {t:"Kallas den tredje statsmakten", g:[["statsmakt"]]},
+     {t:"Forum för debatt och olika åsikter", g:[["debatt","åsikt","diskussion","röst","perspektiv"]]},
+     {t:"Kräver pressfrihet och yttrandefrihet i grundlagarna", g:[["pressfri","tryckfri","yttrandefri","grundlag","censur"]]}], need:3},
+ {c:"Grunderna", q:"Vilka är styrkorna med demokratin som styrelseform? Vilka är dess svagheter?", r:{k:["bg"],u:1},
+  a:"Styrkor: Alla har lika värde och lika rätt att påverka, och folket kan byta makthavare fredligt i val. Makthavarna kan granskas och måste ta ansvar inför väljarna. Fri- och rättigheter som yttrandefrihet skyddas, och misstag kan rättas till eftersom kritik är tillåten. Demokratier krigar sällan mot varandra och har ofta mer välstånd. Svagheter: Besluten kan ta lång tid, eftersom de kräver diskussion och kompromisser. Politikerna kan bli kortsiktiga och tänka på nästa val. En majoritet kan köra över minoriteter. Väljare kan påverkas av populism, propaganda eller desinformation, och de med mycket pengar kan få mer inflytande. Demokratin kan till och med väljas bort, som när Hitler och nazisterna avskaffade demokratin i Tyskland 1933.",
+  p:[{t:"Styrka: alla har lika värde och kan påverka", g:[["lika värde","alla får","alla kan","påverka","lika rätt","rösta","delta"]]},
+     {t:"Styrka: makthavare kan bytas fredligt och måste ta ansvar", g:[["byta","avsätt","rösta bort","fredlig","ansvar","granska"]]},
+     {t:"Styrka: rättigheter skyddas, misstag kan rättas, fred", g:[["yttrandefri","rättighet","frihet","misstag","rätta","kritik","fred","välstånd"]]},
+     {t:"Svaghet: långsamt och kräver kompromisser", g:[["långsam","lång tid","tar tid","kompromiss","segt","dröjer"]]},
+     {t:"Svaghet: kortsiktighet, majoriteten kan köra över minoriteter", g:[["kortsikt","nästa val","majoritet","minoritet"]]},
+     {t:"Svaghet: populism, desinformation, pengar, kan väljas bort", g:[["populis","propaganda","desinform","okunn","kunskap","pengar","lobby","extrem","väljas bort","avskaffa"]]}], need:4},
+ {c:"Demokratimodeller", q:"Vilka olika demokratimodeller finns det och vad är deras huvudsakliga kännetecken?", r:{k:["bg","rd"]},
+  a:"Valdemokrati: det viktigaste är fria och rättvisa val, där medborgarna väljer vilka som ska styra och kan rösta bort dem nästa gång. Mellan valen sköter de folkvalda politiken. Deltagardemokrati: medborgarna ska delta aktivt även mellan valen, till exempel i partier, föreningar, folkomröstningar och demonstrationer. Samtalsdemokrati: besluten ska föregås av öppna och jämlika samtal där argumenten vägs mot varandra och man kan ändra åsikt. Liberal demokrati: utöver fria val skyddas individens fri- och rättigheter mot staten och mot majoriteten, genom rättsstat, maktdelning och oberoende domstolar. Egalitär demokrati: alla grupper ska ha lika möjligheter att delta och påverka, så stora skillnader i inkomst, utbildning eller hälsa får inte ge ojämlik politisk makt. Man skiljer också på direktdemokrati och representativ demokrati.",
+  p:[{t:"Valdemokrati: fria val, folket väljer och kan rösta bort", g:[["valdemokrati"],["rösta","välj","fria val","rättvisa val","byta","röstar"]]},
+     {t:"Deltagardemokrati: aktiva även mellan valen", g:[["deltagardemokrati","deltagande"],["mellan valen","förening","demonstr","engag","aktiv","parti"]]},
+     {t:"Samtalsdemokrati: samtal och argument före beslut", g:[["samtalsdemokrati","deliberativ"],["argument","diskut","debatt","ändra","samförstånd","överens","lyssna","resonera"]]},
+     {t:"Liberal demokrati: individens rättigheter skyddas", g:[["liberal"],["individ","rättighet","frihet","minoritet","rättsstat","domstol"]]},
+     {t:"Egalitär demokrati: lika möjligheter och resurser att påverka", g:[["egalit"],["lika","jämlik","resurs","inkomst","utbildning","grupp","klyft"]]}], need:4},
+ {c:"Demokratimodeller", q:"Förklara vad liberal demokrati innebär och hur den skiljer sig från andra demokratiformer.", r:{k:["bg"]},
+  a:"Liberal demokrati bygger på idén att individen har rättigheter som ingen majoritet får ta ifrån henne. Det räcker alltså inte med fria val. Statens makt ska vara begränsad genom grundlagar, maktdelning, rättsstat och oberoende domstolar, och yttrandefrihet, pressfrihet, religionsfrihet och minoritetsskydd ska garanteras. Skillnaden mot en valdemokrati är att valdemokratin främst handlar om att folket väljer sina ledare, medan den liberala demokratin också skyddar individen mot statens och majoritetens makt. Deltagardemokratin och samtalsdemokratin betonar i stället hur mycket och på vilket sätt medborgarna deltar, och den egalitära demokratin att alla grupper ska ha lika resurser att påverka. Sverige och de flesta västländer räknas som liberala demokratier.",
+  p:[{t:"Individens fri- och rättigheter skyddas", g:[["individ","rättighet","frihet"]]},
+     {t:"Skydd mot både staten och majoriteten", g:[["majoritet","minoritet","staten","statens makt"]]},
+     {t:"Makten begränsas: grundlag, rättsstat, domstolar, maktdelning", g:[["grundlag","rättsstat","domstol","maktdeln","begräns","konstitution"]]},
+     {t:"Mer än bara fria val, som i valdemokratin", g:[["valdemokrati","inte bara","mer än","räcker inte","utöver"]]},
+     {t:"Jämför med deltagar-, samtals- eller egalitär demokrati", g:[["deltagar","samtal","egalit"]]}], need:3},
+ {c:"Demokratimodeller", q:"Vad menas med begreppet demokratiskt underskott, och vilka kan vara orsaker till detta?", r:{k:["bg"],u:4},
+  a:"Demokratiskt underskott betyder att det finns brister i hur demokratin fungerar, så att medborgarna har mindre inflytande och insyn än de borde. Besluten fattas då långt från folket eller av personer som inte är folkvalda, och det blir svårt att utkräva ansvar. Orsaker kan vara lågt eller ojämlikt valdeltagande, att vissa grupper är underrepresenterade, att makt flyttas till myndigheter, företag eller internationella organisationer som EU, att ekonomiskt starka intressen och lobbyister får stort inflytande, eller att politiska rättigheter och rättssäkerhet begränsas. EU brukar nämnas som exempel, eftersom många beslut fattas långt från medborgarna och kommissionen inte är direktvald.",
+  p:[{t:"Brist i demokratin: för lite inflytande eller insyn", g:[["brist","för lite","mindre","saknas","svag","inte tillräck"],["inflytande","makt","påverka","demokrati","insyn"]]},
+     {t:"Beslut långt från folket eller av icke folkvalda", g:[["långt från","inte folkvald","icke folkvald","ej folkvald","inte valda","ansvar","insyn","inte direktvald"]]},
+     {t:"Orsak: lågt valdeltagande, grupper underrepresenterade", g:[["valdeltagande","röstar inte","inte röstar","underrepresent","grupper","deltar inte","lågt deltagande"]]},
+     {t:"Orsak: makt flyttas till EU, myndigheter eller företag", g:[["=eu","europeiska unionen","internationell","företag","myndighet"]]},
+     {t:"Orsak: pengar och lobbyism, begränsade rättigheter", g:[["lobby","pengar","ekonomisk","rättighet","rättssäker","korrupt"]]}], need:3},
+ {c:"Makt", q:"Vilka olika maktmedel kan användas av makthavare för att påverka eller kontrollera andra?", r:{k:["bg"]},
+  a:"Våld och tvång, till exempel militär, polis, hot och fängelse. Pengar och ekonomiska resurser, som kan användas för att belöna, köpa inflytande eller muta. Kunskap och information: den som kontrollerar medierna eller sprider propaganda kan styra vad människor tror. Lagar och regler, alltså formell makt att bestämma, till exempel en regering eller en chef. Organisation och många anhängare, som när ett fackförbund strejkar. Karisma och förtroende, när människor följer en ledare för att de tror på hen. I en demokrati ska makten bygga på lagar och förtroende, medan diktaturer ofta använder våld, rädsla och propaganda.",
+  p:[{t:"Våld, tvång och hot", g:[["våld","tvång","hot","militär","polis","vapen","fängel","rädsla"]]},
+     {t:"Pengar och ekonomiska resurser", g:[["pengar","ekonomi","resurs","muta","mutor","belön","rikedom"]]},
+     {t:"Kunskap, information, propaganda och medier", g:[["information","kunskap","propaganda","medier","media","censur"]]},
+     {t:"Lagar, regler och formell position", g:[["lag","regler","position","formell","auktoritet","titel","chef"]]},
+     {t:"Karisma, förtroende eller organisation", g:[["karisma","förtroende","popul","anhängare","organis","strejk","nätverk","status","legitim"]]}], need:3},
+ {c:"Makt", q:"Ge exempel på maktmissbruk och diskutera dess konsekvenser för demokratin.", r:{k:["rd","bg"]},
+  a:"Maktmissbruk är när någon som har makt använder den på ett sätt som inte är tillåtet, eller för att gynna sig själv eller sina närstående. Exempel är en politiker som använder sin position för att skaffa sig fördelar, en tjänsteman som tar mutor, en polis som använder onödigt våld, en regering som fuskar i val, censurerar medier eller fängslar kritiker, och en chef som utnyttjar sin ställning mot anställda. Konsekvenserna för demokratin är att förtroendet för politiker och myndigheter minskar, att människor inte behandlas lika inför lagen och att rättssäkerheten hotas. Människors rättigheter kan kränkas, och om ingen granskar och stoppar missbruket kan makten samlas hos några få. Därför behövs maktdelning, fria medier och granskare som JO.",
+  p:[{t:"Makt används otillåtet eller för egen vinning", g:[["egen","sig själv","otillåt","olaglig","fel sätt","inte tillåt","gynna","utnyttja"]]},
+     {t:"Minst två exempel, som mutor, valfusk, censur eller våld", min:2, g:[["muta","mutor","valfusk","fuska","censur","fängsla","våld","nepotism","korrupt","polis","förfölj","gynna","utnyttja","släkt"]]},
+     {t:"Förtroendet för politiker och myndigheter minskar", g:[["förtroende","lita","tillit"]]},
+     {t:"Rättssäkerheten och likheten inför lagen hotas", g:[["rättssäker","lika inför","rättighet","orättvis","kränk","behandlas olika"]]},
+     {t:"Därför behövs granskning och maktdelning", g:[["granska","medier","media","=jo","maktdeln","kontroll"]]}], need:3},
+ {c:"Makt", q:"Vad innebär korruption och nepotism, och hur kan dessa hota en demokrati?", r:{k:["rd","vg","bg"]},
+  a:"Korruption är att missbruka sin makt eller sin ställning för egen vinning, till exempel genom att ta emot mutor. Nepotism betyder att man gynnar släktingar och vänner, till exempel ger dem jobb eller uppdrag, i stället för att välja den som är mest lämpad. Båda hotar demokratin. De bryter mot principen att alla ska behandlas lika och att beslut ska vara sakliga och opartiska. Resurser hamnar hos fel personer, de med pengar eller rätt kontakter får mer makt, och vanliga medborgare tappar förtroendet för politiker och myndigheter. När människor slutar lita på systemet minskar viljan att delta, och makt kan samlas hos några få.",
+  p:[{t:"Korruption: missbruk av makt för egen vinning", g:[["korruption"],["egen vinning","sig själv","egen fördel","muta","mutor","pengar","utnyttja","missbruk"]]},
+     {t:"Exempel: mutor", g:[["muta","mutor","mutar"]]},
+     {t:"Nepotism: gynnar släkt och vänner", g:[["släkt","famil","vänner","kompis","anhörig","närstående"]]},
+     {t:"Bryter mot likabehandling, saklighet och opartiskhet", g:[["lika","opartisk","saklig","rättvis","kompetens","mest lämpad"]]},
+     {t:"Förtroendet minskar, makten samlas hos några få", g:[["förtroende","lita","tillit","makt samlas","fåtal","få personer","delta"]]}], need:4},
+ {c:"Problembilder", q:"Vilka är vanliga problem som demokratier kan stå inför idag?", r:{k:["rg","rd"],u:3},
+  a:"Lågt eller ojämlikt valdeltagande, där vissa grupper röstar mycket mindre än andra. Minskat förtroende för politiker och institutioner. Desinformation och propaganda, inte minst i sociala medier, som gör det svårt att veta vad som är sant. Hot och hat mot politiker, journalister och andra som deltar i debatten, vilket kan göra att människor tystnar. Polarisering, populism och politisk extremism. Ekonomisk makt och lobbyism som ger vissa intressen mer inflytande än andra. Dessutom går demokratin tillbaka i flera länder i världen, där fri- och rättigheter begränsas steg för steg.",
+  p:[{t:"Lågt eller ojämlikt valdeltagande", g:[["valdeltagande","röstar inte","inte röstar","deltar inte","deltagande"]]},
+     {t:"Desinformation och propaganda", g:[["desinform","propaganda","falsk","fake","sociala medier","informationspåverkan","lögn"]]},
+     {t:"Hot och hat mot politiker och journalister", g:[["hot","hat","trakasser"]]},
+     {t:"Polarisering, populism och extremism", g:[["polaris","populis","extrem"]]},
+     {t:"Minskat förtroende, lobbyism eller demokratisk tillbakagång", g:[["förtroende","lobby","pengar","tillbakagång","autokrat"]]}], need:3},
+ {c:"Problembilder", q:"Vilka risker och problem är kopplade till auktoritära styren och diktaturer?", r:{k:["rd","lh"],u:1},
+  a:"I ett auktoritärt styre är makten samlad hos en ledare, ett parti eller en liten grupp, till exempel militären. Eftersom det inte finns fria val kan folket inte byta makthavare på ett fredligt sätt. Ingen granskar makten, vilket ökar risken för maktmissbruk och korruption. Yttrandefrihet och pressfrihet begränsas: medier censureras, internet blockeras och makthavarna använder propaganda. Oppositionen och kritiker förföljs, fängslas eller torteras. Domstolarna är inte självständiga, så rättssäkerheten saknas och människor kan gripas godtyckligt. Minoriteter kan förtryckas, och när ledaren dör eller störtas kan det bli oroligt eller krig. Ibland sägs diktaturer kunna fatta snabba och långsiktiga beslut, men det finns inget sätt att rätta till misstag eller stoppa en dålig ledare.",
+  p:[{t:"Makten samlad hos en ledare, ett parti eller en liten grupp", g:[["en person","en ledare","ett parti","få","liten grupp","maktkoncentration","samlad","diktator","militär"]]},
+     {t:"Inga fria val, folket kan inte byta makthavare", g:[["val","byta","avsätt"]]},
+     {t:"Censur och propaganda, ingen yttrandefrihet", g:[["censur","propaganda","yttrandefri","pressfri","medier","internet","blockera"]]},
+     {t:"Opposition och kritiker förföljs, mänskliga rättigheter kränks", g:[["förfölj","fängsla","fängel","tortyr","opposition","kritiker","mänskliga rättigheter","kränk","avrätt"]]},
+     {t:"Ingen rättssäkerhet, godtycke och korruption", g:[["rättssäker","godtyck","domstol","korrupt","maktmissbruk"]]}], need:4},
+ {c:"Problembilder", q:"Vad är lobbyism och vilken roll kan den spela i demokratin?", r:{k:["bg"],u:2},
+  a:"Lobbyism, eller lobbying, är när företag, organisationer eller intressegrupper försöker påverka politiker och tjänstemän att fatta beslut som gynnar dem. Det kan vara branschorganisationer, fackförbund, miljöorganisationer eller stora företag, och de gör det genom möten, rapporter, kampanjer eller anställda lobbyister. Lobbyismen kan vara bra för demokratin: politikerna får kunskap och olika perspektiv, och många intressen kan göra sin röst hörd. Men den kan också vara ett demokratiskt problem. Grupper med mycket pengar har råd med mer påverkan, så ekonomisk makt kan ge politisk makt. Påverkan sker ofta utan insyn, och politiker som blir lobbyister efter sin tid i politiken kan använda sina kontakter. Då kan besluten gynna några få i stället för allmänheten.",
+  p:[{t:"Försök att påverka politiker och beslutsfattare", g:[["påverka","övertyga","lobba"],["politiker","beslut","tjänsteman","makthavare","riksdag","regering"]]},
+     {t:"Görs av företag, organisationer och intressegrupper", g:[["företag","organisation","intresse","fack","bransch","grupp"]]},
+     {t:"Bra: ger kunskap och perspektiv", g:[["kunskap","perspektiv","information","expertis","röst hörd","positiv","fördel"]]},
+     {t:"Problem: den med mycket pengar får mer makt", g:[["pengar","rik","ekonomisk","resurser","råd"]]},
+     {t:"Problem: dålig insyn, gynnar några få", g:[["insyn","dold","hemlig","öppen","få","allmänhet","svängdörr","ojämlik","orättvis"]]}], need:3},
+ {c:"Problembilder", q:"Vad menas med de politiska fenomenen populism och politisk extremism? Hur påverkar de demokratin?", r:{k:["rg","bg"],u:3},
+  a:"Populism är en politisk stil som ställer ”det vanliga folket” mot en elit, till exempel politiker, experter eller medier, som beskrivs som korrupt eller verklighetsfrämmande. Populister säger sig tala för folkets verkliga vilja och erbjuder ofta enkla lösningar på svåra problem. Populism finns både till höger och till vänster. Politisk extremism är idéer och rörelser som vill förändra samhället i grunden och som inte accepterar demokratins spelregler och allas lika värde. Våldsbejakande extremister är beredda att använda våld, hot eller terror. Populism kan fånga upp missnöje och få fler att engagera sig, men den kan också minska förtroendet för medier, domstolar och andra institutioner och leda till att minoriteter körs över. Extremism hotar demokratin direkt, genom våld och hot mot politiker och journalister, genom att människor blir rädda och tystnar, och genom att samhället polariseras. Den skapar också ett demokratiskt dilemma: hur mycket yttrandefrihet ska de få som vill avskaffa demokratin?",
+  p:[{t:"Populism: ”folket” mot ”eliten”", g:[["populis"],["elit","folket mot","vanliga folket","etablissemang","makthavarna"]]},
+     {t:"Populism: enkla lösningar på svåra problem", g:[["enkla lösning","enkel lösning","enkla svar","förenkl","lätta lösning"]]},
+     {t:"Extremism: vill förändra i grunden, odemokratiska metoder eller våld", g:[["extrem"],["våld","odemokrat","avskaffa","inte accepter","terror","hot","grunden"]]},
+     {t:"Påverkan: minskat förtroende, polarisering, minoriteter körs över", g:[["förtroende","polaris","minoritet","splittr","institution"]]},
+     {t:"Påverkan: hot och rädsla gör att folk tystnar, yttrandefrihetens dilemma", g:[["rädd","tystna","självcensur","hot","yttrandefri","dilemma"]]}], need:4},
+ {c:"Problembilder", q:"Vad menas med majoritetstyranni och varför kan det vara en risk för demokratin?", r:{k:["lh","bg"]},
+  a:"Majoritetstyranni betyder att majoriteten använder sin makt för att köra över eller förtrycka en minoritet. I en demokrati avgör majoriteten, men om majoriteten kan bestämma vad som helst kan den till exempel ta ifrån en minoritet dess rättigheter, förbjuda deras språk eller religion eller diskriminera dem. Det är en risk eftersom demokrati också bygger på att alla har lika värde och samma rättigheter. Därför skyddar grundlagar, mänskliga rättigheter, oberoende domstolar och minoritetsskydd även dem som är färre. Levande historia sammanfattar det som att majoriteten bestämmer, men att minoriteten ska respekteras. I Sverige har till exempel de nationella minoriteterna, som samerna, ett särskilt skydd.",
+  p:[{t:"Majoriteten kör över eller förtrycker minoriteten", g:[["majoritet"],["minoritet"]]},
+     {t:"Exempel: tar rättigheter, diskriminerar, förbjuder språk eller religion", g:[["rättighet","diskrimin","förbjud","förtryck","språk","religion","kör över"]]},
+     {t:"Strider mot att alla har lika värde", g:[["lika värde","lika mycket värda","samma rättigheter","alla"]]},
+     {t:"Skydd: grundlagar, mänskliga rättigheter, domstolar, minoritetsskydd", g:[["grundlag","mänskliga rättigheter","domstol","minoritetsskydd","skydd","rättsstat","konstitution"]]}], need:3},
+ {c:"Problembilder", q:"Förklara begreppet civil olydnad och ge exempel på situationer då det kan användas.", r:{k:["bg"]},
+  a:"Civil olydnad är när någon medvetet och öppet bryter mot en lag, utan våld, för att protestera mot något som hen uppfattar som orättvist. Den som gör det döljer sig inte och är beredd att ta straffet, eftersom syftet är att väcka uppmärksamhet och få till en förändring. Kända exempel är Rosa Parks, som 1955 vägrade lämna sin plats på bussen till en vit man i USA, och Mahatma Gandhi, som ledde protester mot det brittiska styret i Indien. I dag använder till exempel klimataktivister civil olydnad när de blockerar vägar. Civil olydnad kan användas när en lag strider mot de mänskliga rättigheterna eller när man anser att de vanliga demokratiska vägarna inte räcker. I en demokrati är det omdiskuterat, eftersom lagarna har beslutats demokratiskt och det finns lagliga sätt att påverka.",
+  p:[{t:"Man bryter medvetet mot en lag", g:[["bryt","bröt","olaglig"],["lag","regel","regler"]]},
+     {t:"Öppet och utan våld", g:[["våld","fredlig","öppet","öppen"]]},
+     {t:"För att protestera mot en orättvisa och få förändring", g:[["protest","orättvis","orätt","förändring","uppmärksam","moralisk"]]},
+     {t:"Beredd att ta straffet", g:[["straff","konsekvens","ta ansvar","gripas","dömas"]]},
+     {t:"Exempel: Rosa Parks, Gandhi, klimataktivister", g:[["parks","gandhi","luther king","klimat","aktivist","greta","blockera"]]},
+     {t:"När: lagen strider mot rättigheterna eller vanliga vägar räcker inte", g:[["mänskliga rättigheter","orättvis lag","vanliga vägar","räcker inte","inte lyssnar","sista utväg","diktatur","omdiskuterat","demokratiskt beslutat"]]}], need:4},
+ {c:"Rättsstaten", q:"Vilka är de viktigaste kriterierna för att en stat ska anses vara en rättsstat?", r:{k:["rg","vg","fl"],u:4},
+  a:"En stat är en rättsstat när den offentliga makten är bunden av lagarna. Lagarna ska vara kända, tydliga och gälla lika för alla, även för makthavarna. Myndigheterna får bara göra det som har stöd i lag, och ingen får straffas för något som inte var olagligt när det hände. Domstolarna ska vara självständiga och opartiska, och ingen, inte ens riksdagen eller regeringen, får bestämma hur en domstol ska döma i ett enskilt fall. Den enskilde ska ha rättssäkerhet: rätt till en rättvis och offentlig rättegång inom rimlig tid, rätt att försvara sig och att överklaga, och skydd mot att bli godtyckligt frihetsberövad. De mänskliga rättigheterna ska respekteras, och det ska finnas insyn, till exempel genom offentlighetsprincipen, så att makten kan granskas.",
+  p:[{t:"Makten är bunden av lagarna, legalitet", g:[["legalitet","under lag","stöd i lag","följa lag","följer lag","bunden","lagarna styr","enligt lag"]]},
+     {t:"Lagarna gäller lika för alla, även makthavarna", g:[["lika för alla","lika inför lag","gäller alla","även makthavar","även för makthavar","alla behandlas lika","behandlas lika","likabehandl","ingen står över"]]},
+     {t:"Självständiga och opartiska domstolar", g:[["domstol"],["självständ","oberoende","opartisk","fri från"]]},
+     {t:"Rättssäkerhet: rättvis rättegång, försvar, överklagande, inget godtycke", g:[["rättegång","försvar","överklag","godtyck","rättssäker","oskyldig"]]},
+     {t:"Kända och tydliga lagar, insyn och mänskliga rättigheter", g:[["kända","tydlig","förutsägbar","förutsebar","offentlig","insyn","mänskliga rättigheter"]]}], need:4},
+ {c:"Rättsstaten", q:"Hur fungerar sambandet mellan demokrati och rättsstat? Kan man ha en utan den andra?", r:{k:["rg","lh"]},
+  a:"Demokrati handlar om vem som har makten, alltså folket genom fria val. Rättsstaten handlar om hur makten får användas, alltså under lagarna, opartiskt och rättssäkert. De förutsätter varandra. Demokratin behöver rättsstaten, eftersom rösträtt, yttrandefrihet och rättvisa val bara fungerar om rättigheterna skyddas av lagar och självständiga domstolar. Utan rättsstat kan en majoritet som vunnit ett val börja använda makten godtyckligt och köra över minoriteter. Rättsstaten behöver demokratin, eftersom lagarna får legitimitet när de är beslutade av folkvalda och kan ändras av folket. Man kan ha en rättsstat utan full demokrati. Sverige hade lagar och domstolar långt innan alla fick rösta 1921. Men en demokrati utan rättsstat blir sårbar. Hitler utsågs till rikskansler på laglig väg 1933, och sedan avskaffades demokratin och rättsstaten steg för steg.",
+  p:[{t:"Demokrati: vem som har makten, folket", g:[["demokrati"],["folket","=val","vem"]]},
+     {t:"Rättsstat: hur makten används, under lagarna", g:[["rättsstat"],["lag","hur makten","rättssäker"]]},
+     {t:"De förutsätter och behöver varandra", g:[["varandra","förutsätt","behöver","beroende","hänger ihop"]]},
+     {t:"Demokratin behöver rättsstaten för att skydda rättigheter och minoriteter", g:[["rättighet","domstol","godtyck","minoritet","majoritet","skydd"]]},
+     {t:"Rättsstat utan full demokrati går, till exempel Sverige före 1921", g:[["utan demokrati","utan full demokrati","inte demokrati","1921","före","kan finnas","kan man ha","rösträtt"]]},
+     {t:"Demokrati utan rättsstat blir sårbar, till exempel Tyskland 1933", g:[["hitler","nazist","1933","tyskland","sårbar","avskaffa"]]}], need:4}
+];
+
+/* ===================== RESONERA ===================== */
+const REASON = [
+ {q:"Är demokrati alltid det bästa styrelseskicket? Resonera om fördelar och nackdelar med demokrati och med diktatur.", r:{k:["bg"],u:1},
+  a:"Demokratins största fördel är att alla har lika värde och rätt att påverka, och att folket kan byta makthavare fredligt i val. Makten granskas, rättigheterna skyddas och misstag kan rättas till eftersom kritik är tillåten. Nackdelen är att besluten kan ta lång tid och kräva kompromisser, att politikerna kan bli kortsiktiga och att väljare kan påverkas av populism och desinformation. En diktatur kan ibland fatta snabba och långsiktiga beslut och verka stabil. Men ingen kan stoppa ledaren om besluten är dåliga, och diktaturer leder ofta till maktmissbruk, korruption, censur och förföljelse. Därför menar de flesta att demokrati är bäst, både för att den har ett egenvärde, alla har lika värde, och ett instrumentellt värde, den ger ofta fred och välstånd. Samtidigt är demokratin inte perfekt och måste skyddas och utvecklas hela tiden.",
+  p:[{t:"Demokratins fördelar: lika värde, fredliga maktskiften, rättigheter", g:[["lika värde","byta","fredlig","rättighet","yttrandefri","påverka","granska"]]},
+     {t:"Demokratins nackdelar: långsam, kortsiktig, populism", g:[["långsam","lång tid","kompromiss","kortsikt","populis","desinform","okunn"]]},
+     {t:"Diktaturens möjliga fördelar: snabba beslut, stabilitet", g:[["snabb","effektiv","långsikt","stabil","ordning"]]},
+     {t:"Diktaturens nackdelar: maktmissbruk, censur, ingen kan stoppa ledaren", g:[["maktmissbruk","korrupt","censur","förfölj","stoppa","inga val","kan inte byta","rättigheter kränks","förtryck"]]},
+     {t:"Slutsats med motivering, gärna egenvärde och instrumentellt värde", g:[["egenvärde","instrumentell","slutsats","därför","jag tycker","jag anser","bäst","mest"]]}], need:4},
+ {q:"Är det rätt att tvinga på andra länder demokrati? Resonera för och emot.", r:{k:["rg","bg"],u:1},
+  a:"Ett argument för är att de mänskliga rättigheterna är universella och gäller alla människor, så omvärlden har ett ansvar när en diktatur förtrycker sitt folk. Enligt den demokratiska fredsteorin skulle fler demokratier också kunna ge en fredligare värld. Ett argument emot är att demokrati bygger på folksuveränitet. Om demokratin tvingas på ett land utifrån är det inte folket som har bestämt, och då kan den sakna legitimitet. Försök med militärt våld har ofta slutat illa, som efter invasionerna av Afghanistan 2001 och Irak 2003, med långvariga krig och instabilitet. Ett mellanläge är att stödja demokrati på fredliga sätt, till exempel genom bistånd, stöd till civilsamhälle och fria medier, valobservatörer och sanktioner mot regimer som kränker rättigheter. Min slutsats är att demokrati är värd att stödja, men att den måste växa fram inifrån för att hålla.",
+  p:[{t:"För: mänskliga rättigheter gäller alla", g:[["mänskliga rättigheter","universell","förtryck","alla människor","ansvar"]]},
+     {t:"För: fler demokratier kan ge fred", g:[["fred","fredsteori","krigar inte","krig"]]},
+     {t:"Emot: demokrati måste komma från folket själv, legitimitet", g:[["folksuverän","folket själv","inifrån","legitim","bestämma själv","inte deras val","egen vilja"]]},
+     {t:"Emot: våld kan ge krig och kaos, till exempel Irak eller Afghanistan", g:[["irak","afghanistan","kaos","instabil","krig","våld"]]},
+     {t:"Alternativ: bistånd, stöd, sanktioner, valobservation", g:[["bistånd","stöd","sanktion","valobserv","civilsamhälle","diplomati","handel"]]},
+     {t:"Egen slutsats med motivering", g:[["slutsats","därför","jag tycker","jag anser","min åsikt","sammanfatt"]]}], need:4},
+ {q:"Yttrandefriheten som ett demokratiskt dilemma: ska en organisation som vill avskaffa demokratin få demonstrera?", r:{k:["rd","vg","bg"],u:3},
+  a:"Yttrandefrihet, mötesfrihet och demonstrationsfrihet är grundlagsskyddade och gäller alla, även den som har åsikter som de flesta tycker är fel. Argument för att tillåta demonstrationen är att demokratin inte ska förbjuda åsikter, att dåliga idéer bäst bemöts med argument och att ett förbud kan göra organisationen till martyrer. Argument emot är att organisationen vill ta bort andras rättigheter och lika värde, att människor kan bli rädda och tystna och att det kan leda till hot och våld. Yttrandefriheten är inte obegränsad. Den kan begränsas genom lag, till exempel är hets mot folkgrupp och olaga hot brott. Därför är det ett dilemma: två demokratiska värden krockar, friheten att yttra sig och skyddet för allas lika värde och säkerhet. Min slutsats är att demonstrationen bör tillåtas så länge ingen bryter mot lagen, men att polisen måste kunna ingripa vid hets, hot och våld.",
+  p:[{t:"Yttrande- och demonstrationsfrihet är grundlagsskyddad och gäller alla", g:[["yttrandefri","demonstrationsfri","mötesfri","grundlag"]]},
+     {t:"För: inte förbjuda åsikter, bemöt med argument", g:[["förbjud","argument","bemöt","martyr","alla åsikter","alla får"]]},
+     {t:"Emot: hotar andras lika värde och säkerhet, människor blir rädda", g:[["lika värde","rädd","hot","våld","säkerhet","minoritet","tystna"]]},
+     {t:"Gränser i lag: hets mot folkgrupp, olaga hot", g:[["hets","olaga hot","begränsa","gräns","brott","olagligt"]]},
+     {t:"Förklarar varför det är ett dilemma: två värden krockar", g:[["dilemma","krock","två värden","både och","svårt"]]},
+     {t:"Egen slutsats med motivering", g:[["slutsats","därför","jag tycker","jag anser","min åsikt","bör"]]}], need:4},
+ {q:"Kan lobbyism vara ett demokratiskt problem? Koppla till sambandet mellan ekonomisk makt och demokrati.", r:{k:["bg"],u:2},
+  a:"Lobbyism är när företag och organisationer försöker påverka politiker och tjänstemän. Det kan vara bra, eftersom politikerna får kunskap och perspektiv och många grupper får göra sin röst hörd. I en demokrati ska alla ha lika mycket att säga till om, en person, en röst. Men pengar ger mer resurser för påverkan. Ett stort företag kan anställa lobbyister, beställa rapporter och träffa beslutsfattare ofta, medan en vanlig medborgare inte kan det. Då kan ekonomisk makt förvandlas till politisk makt, och besluten kan gynna dem som redan har mycket. Om påverkan sker utan insyn blir det svårt för väljarna att veta vem som påverkat besluten. Därför är lobbyism ett demokratiskt problem när den blir ojämlik och dold, men inte när den är öppen och många olika röster får höras.",
+  p:[{t:"Förklarar vad lobbyism är", g:[["påverka"],["politiker","beslut","tjänsteman","makthavare"]]},
+     {t:"Positivt: kunskap, perspektiv, många röster", g:[["kunskap","perspektiv","information","röst","positiv","bra","fördel"]]},
+     {t:"Demokratins idé: alla lika mycket att säga till om", g:[["lika","en röst","jämlik","lika värde","alla"]]},
+     {t:"Pengar ger mer påverkan, ekonomisk makt blir politisk makt", g:[["pengar","ekonomisk","rik","resurs"]]},
+     {t:"Brist på insyn gör det svårt att utkräva ansvar", g:[["insyn","dold","hemlig","öppen","ansvar","vet inte"]]},
+     {t:"Slutsats: när blir det ett problem och när inte", g:[["slutsats","därför","problem när","beror på","jag tycker","jag anser"]]}], need:4},
+ {q:"Varför är självständiga domstolar och rättssäkerhet så viktiga för att demokratin ska fungera?", r:{k:["rg","vg"],u:4},
+  a:"I en demokrati har folket makten, men makthavarna måste ändå följa lagarna. Om domstolarna inte är självständiga kan makthavarna styra domarna och döma kritiker, journalister och oppositionen. Då blir det farligt att använda sin yttrandefrihet, och rättigheterna finns bara på papperet. Rättssäkerhet betyder att alla är lika inför lagen och har rätt till en rättvis och opartisk rättegång, och att ingen kan frihetsberövas godtyckligt. Det skyddar den enskilde mot staten och mot en majoritet som vill köra över minoriteter. Självständiga domstolar kan också pröva om val har gått rätt till och om myndigheter följer lagen. Utan rättssäkerhet slutar människor lita på samhället, och demokratin kan glida mot ett auktoritärt styre.",
+  p:[{t:"Makthavare måste också följa lagen", g:[["makthavar","politiker","regering"],["lag"]]},
+     {t:"Annars kan makthavare styra domarna och straffa kritiker", g:[["styra","kritiker","opposition","journalist","döma","bestämma över"]]},
+     {t:"Rättigheterna blir verkliga först när de kan försvaras i domstol", g:[["rättighet","yttrandefri","papper","skydd"]]},
+     {t:"Rättssäkerhet: lika inför lagen, rättvis rättegång, inget godtycke", g:[["lika inför","rättvis rättegång","rättegång","godtyck","opartisk","rättssäker"]]},
+     {t:"Skyddar individen och minoriteter", g:[["individ","enskild","minoritet","majoritet"]]},
+     {t:"Utan det minskar förtroendet och demokratin kan bli auktoritär", g:[["förtroende","lita","auktoritär","diktatur","glida"]]}], need:4},
+ {q:"Sverige bygger främst på folksuveränitet och USA på maktdelning. Vilka för- och nackdelar har de två modellerna?", r:{k:["rd","bg"]},
+  a:"I Sverige utgår makten från folket och samlas hos riksdagen, som väljer statsminister och kan avsätta regeringen. En fördel är att ansvaret blir tydligt och att en majoritet i riksdagen kan genomföra sin politik. En nackdel är att det finns färre spärrar mot en stark riksdagsmajoritet. Därför är självständiga domstolar, grundlagar som är svåra att ändra och granskare som KU och JO viktiga. I USA är makten delad mellan kongressen, presidenten och Högsta domstolen, som kontrollerar och balanserar varandra. Fördelen är att det är svårt för någon att samla all makt. Nackdelen är att det kan bli låsningar när presidenten och kongressen är oense, så att viktiga beslut inte blir av. Båda modellerna är demokratiska, men de väger effektivitet och maktkontroll på olika sätt.",
+  p:[{t:"Sverige: riksdagen står högst, väljer och kan avsätta regeringen", g:[["riksdag"],["högst","avsätt","väljer statsminister","folksuverän","överst","kedja"]]},
+     {t:"Fördel med folksuveränitet: tydligt ansvar, kan genomföra politik", g:[["tydlig","ansvar","effektiv","snabb","genomföra"]]},
+     {t:"Nackdel: färre spärrar mot en stark majoritet", g:[["spärr","majoritet","för mycket makt","mindre kontroll","kontroll"]]},
+     {t:"USA: kongress, president och domstol balanserar varandra", g:[["usa","amerika"],["kongress","president","domstol","balans","varandra"]]},
+     {t:"Fördel med maktdelning: svårt att samla all makt", g:[["samla all makt","svårt att missbruka","missbruk","maktkoncentration","ingen får all","ingen kan"]]},
+     {t:"Nackdel: låsningar när delarna är oense", g:[["låsning","oense","oeniga","stopp","blockera","inget händer","långsam"]]}], need:4},
+ {q:"Hur kan en demokrati förvandlas till en diktatur steg för steg? Vilka varningstecken finns?", r:{k:["lh","rd"],u:3},
+  a:"En demokrati kan avskaffas inifrån av någon som först kommer till makten på laglig väg, som när Hitler utsågs till rikskansler i Tyskland 1933. Sedan händer det ofta i steg. Makthavaren angriper fria medier och begränsar yttrandefriheten, så att ingen kan granska makten. Domstolarna och myndigheterna fylls med lojala personer, så att rättsstaten försvagas. Oppositionen hotas, förbjuds eller fängslas, och val skjuts upp eller manipuleras. Propaganda pekar ut syndabockar, till exempel minoriteter, och skapar rädsla. Till slut är all makt samlad hos en person eller ett parti. Varningstecken är alltså attacker på medier och domstolar, hot mot opposition och minoriteter, propaganda och att grundlagarna ändras så att makthavaren får mer makt. Levande historia visar hur nazisterna på kort tid avskaffade demokratin med propaganda, hot, våld och terror.",
+  p:[{t:"Kan börja med att någon får makten lagligt", g:[["laglig","valdes","val","1933","hitler"]]},
+     {t:"Medier och yttrandefrihet begränsas", g:[["medier","media","press","yttrandefri","censur","journalist"]]},
+     {t:"Domstolar och rättsstat försvagas", g:[["domstol","rättsstat","domare","rättssäker"]]},
+     {t:"Opposition förbjuds eller förföljs, val manipuleras", g:[["opposition","förbjud","förfölj","fängsla","val skjuts","valfusk","manipul","parti"]]},
+     {t:"Propaganda, syndabockar och rädsla", g:[["propaganda","syndabock","rädsla","hat","minoritet","hot","våld","terror"]]},
+     {t:"Till slut maktkoncentration hos en person eller ett parti", g:[["maktkoncentration","all makt","en person","ett parti","samla"]]}], need:4},
+ {q:"Varför kan ett lågt valdeltagande leda till ett demokratiskt underskott?", r:{k:["rg","bg"]},
+  a:"Demokrati bygger på att folket styr genom val. Om bara en del av folket röstar blir det de som röstar som avgör vilka som får makten. Ofta är valdeltagandet lägre i vissa grupper, till exempel bland unga, i områden med låga inkomster eller bland dem som nyligen flyttat till Sverige. Politikerna vill vinna nästa val, så de lyssnar mest på dem som röstar. Då syns de andra gruppernas intressen mindre i besluten, och de blir underrepresenterade. Besluten speglar inte hela folket, och de som inte röstar kan känna att politiken inte handlar om dem. Då minskar förtroendet, ännu färre röstar, och det blir en ond cirkel. Det är ett demokratiskt underskott, eftersom vissa medborgare får mindre inflytande än andra.",
+  p:[{t:"Bara de som röstar avgör", g:[["de som röstar","bara","avgör","bestämmer"]]},
+     {t:"Valdeltagandet är lägre i vissa grupper", g:[["grupp","unga","inkomst","område","nyanländ","utrikes"]]},
+     {t:"Politikerna lyssnar mest på dem som röstar", g:[["lyssnar","anpassa","nästa val","vinna"]]},
+     {t:"Vissa intressen blir underrepresenterade, besluten speglar inte folket", g:[["underrepresent","intressen","speglar","representativ","syns mindre","inte med"]]},
+     {t:"Förtroendet minskar, en ond cirkel", g:[["förtroende","ond cirkel","ännu färre","lita","bryr sig inte"]]},
+     {t:"Därför ett demokratiskt underskott: ojämlikt inflytande", g:[["underskott","inflytande","ojämlik","mindre makt"]]}], need:4}
+];
+
+/* ===================== QUIZ ===================== */
+const QUIZ = [
+ ["Vad betyder ordet demokrati?", ["Folkstyre","Fåtalsstyre","Lagstyre","Kungastyre"], 0, "Ordet kommer från grekiskan: demos betyder folk och kratos makt.", {k:["rd"]}],
+ ["Hur inleds regeringsformen?", ["All offentlig makt i Sverige utgår från folket","Sverige är ett kungarike","Alla är lika inför lagen","Riksdagen stiftar lagarna"], 0, "Det är folksuveränitetsprincipen. Riksdagen är folkets främsta företrädare.", {k:["rd"]}],
+ ["Hur ofta är det val till riksdagen?", ["Vart fjärde år","Vart femte år","Vart tredje år","Vartannat år"], 0, "Samma dag väljs också kommuner och regioner. Val till Europaparlamentet är vart femte år.", {k:["rd"]}],
+ ["Vem får rösta i riksdagsvalet?", ["Svenska medborgare över 18 som är eller har varit folkbokförda i Sverige","Alla som bor i Sverige","Alla som fyllt 16","Bara den som betalar skatt"], 0, "I kommun- och regionval behöver man inte vara svensk medborgare.", {k:["rd"]}],
+ ["Vilken sorts demokrati har Sverige främst?", ["Representativ demokrati","Direktdemokrati","Ingen demokrati","Bara folkomröstningar"], 0, "Folket väljer företrädare som fattar besluten i folkets ställe.", {k:["rd"]}],
+ ["Vad gäller för nationella folkomröstningar i Sverige?", ["De är rådgivande","De är alltid bindande","De är förbjudna","Bara kungen får utlysa dem"], 0, "Politikerna måste inte följa resultatet. Sverige har haft folkomröstningar om bland annat kärnkraft och EU-medlemskap.", {k:["rd"]}],
+ ["Vilken politisk makt har kungen?", ["Ingen, bara symboliska uppgifter","Kungen utser statsministern","Kungen stiftar lagar","Kungen leder regeringen"], 0, "Kungen öppnar riksmötet varje höst och är ordförande i utrikesnämnden.", {k:["rd"]}],
+ ["Vad är motsatsen till demokrati?", ["Diktatur","Monarki","Republik","Parlament"], 0, "I en diktatur styr ett enda parti eller en enda person. En monarki kan vara demokratisk, som Sverige.", {k:["rd"]}],
+ ["Hur många grundlagar har Sverige?", ["Fyra","En","Tre","Sex"], 0, "Regeringsformen, successionsordningen, tryckfrihetsförordningen och yttrandefrihetsgrundlagen.", {k:["rd"]}],
+ ["Vilken av dessa är inte en grundlag?", ["Förvaltningslagen","Regeringsformen","Tryckfrihetsförordningen","Yttrandefrihetsgrundlagen"], 0, "Förvaltningslagen är en vanlig lag om hur myndigheter ska arbeta. Den fjärde grundlagen är successionsordningen.", {k:["rd","fl"]}],
+ ["Hur ändrar man en grundlag?", ["Riksdagen fattar två likadana beslut med ett riksdagsval emellan","Regeringen beslutar","Det krävs en folkomröstning varje gång","Kungen beslutar"], 0, "Det gör grundlagarna svårare att ändra än vanliga lagar.", {k:["rd"]}],
+ ["När fick Sverige tryckfrihet i grundlag, som första land i världen?", ["1766","1921","1974","1991"], 0, "Den nuvarande tryckfrihetsförordningen är från 1949. Yttrandefrihetsgrundlagen kom 1991.", {k:["rd"]}],
+ ["När hölls det första riksdagsvalet med allmän och lika rösträtt för kvinnor och män?", ["1921","1866","1945","1974"], 0, "Riksdagen beslutade om allmän och lika rösträtt 1919.", {k:["rd"]}],
+ ["Vilken makt har riksdagen?", ["Lagstiftande","Verkställande","Dömande","Ingen"], 0, "Riksdagen stiftar lagar och beslutar om budget och skatter.", {k:["rd"]}],
+ ["Vilken makt har regeringen?", ["Verkställande","Lagstiftande","Dömande","Granskande"], 0, "Regeringen styr landet och genomför besluten med hjälp av myndigheterna.", {k:["rd"]}],
+ ["Vilken makt har domstolarna?", ["Dömande","Lagstiftande","Verkställande","Ingen"], 0, "Domstolarna dömer enligt lagarna och ska vara självständiga.", {k:["rd"]}],
+ ["Vem formulerade idén om att dela makten i tre delar?", ["Montesquieu","Platon","Karl Marx","Gustav Vasa"], 0, "Den franske filosofen skrev om det på 1700-talet, under upplysningstiden.", {k:["bg"]}],
+ ["Vilket land är det tydligaste exemplet på maktdelning?", ["USA","Sverige","Kina","Nordkorea"], 0, "Kongressen, presidenten och Högsta domstolen kontrollerar och balanserar varandra. Sverige bygger främst på folksuveränitet.", {k:["bg"]}],
+ ["Vad kallas det när regeringen måste ha riksdagens stöd för att få sitta kvar?", ["Parlamentarism","Maktdelning","Direktdemokrati","Monarki"], 0, "Riksdagen kan avsätta regeringen. Det hör ihop med folksuveränitetsprincipen.", {k:["rd"]}],
+ ["Vad innebär legalitetsprincipen?", ["Myndigheter får bara göra det som har stöd i lag","Lika fall ska behandlas lika","Ett ingrepp får inte vara större än vad som behövs","Myndigheten ska själv utreda ärendet"], 0, "Den offentliga makten utövas under lagarna. Det står i regeringsformen och i förvaltningslagen 5 §.", {k:["fl","vg"]}],
+ ["Vad innebär proportionalitetsprincipen?", ["Ett ingrepp får inte vara mer långtgående än vad som behövs","Alla ska få lika mycket pengar","Riksdagen ska spegla väljarna","Myndigheter får bara göra det som står i lag"], 0, "Polisen får till exempel inte använda mer våld än vad som behövs.", {k:["fl"]}],
+ ["Vad innebär officialprincipen?", ["Myndigheten eller domstolen ansvarar för att ärendet blir tillräckligt utrett","Alla handlingar är hemliga","Bara tjänstemän får överklaga","Den enskilde måste utreda allt själv"], 0, "Det står i förvaltningslagen 23 §.", {k:["fl"]}],
+ ["Vad innebär objektivitets- och likabehandlingsprincipen?", ["Myndigheter ska vara sakliga och opartiska, och lika fall behandlas lika","Alla myndigheter ska ha samma budget","Politikerna ska tycka lika","Domstolarna ska döma hårt"], 0, "Den som är jävig, till exempel släkt med en part, får inte vara med och besluta.", {k:["fl","vg"]}],
+ ["Vad är godtycke?", ["Beslut efter eget tycke, utan regler eller sakliga skäl","Beslut efter en folkomröstning","Beslut som alla är överens om","Beslut i domstol"], 0, "En rättsstat skyddar den enskilde mot godtycke.", {k:["bg","vg"]}],
+ ["Vem granskar att myndigheterna följer lagarna?", ["Justitieombudsmannen, JO","Kungen","Talmannen","Statsministern"], 0, "JO och Riksrevisionen granskar att statsförvaltningen arbetar effektivt och rättssäkert.", {k:["rd"]}],
+ ["Vilken av dessa är en politisk rättighet?", ["Rösträtt","Rätt till semester","Rätt till gratis bussresor","Rätt till bostad"], 0, "Andra politiska rättigheter är yttrandefrihet och mötesfrihet. De är grundlagsskyddade.", {k:["rd"]}],
+ ["Vilka är exempel på opinionsfriheter?", ["Yttrandefrihet, mötesfrihet och religionsfrihet","Rösträtt och skatteplikt","Rätt till vård och skola","Äganderätt och arvsrätt"], 0, "Opinionsfriheterna står i regeringsformens andra kapitel. Dit hör också informations-, demonstrations- och föreningsfrihet.", {k:["bg"]}],
+ ["Vilket år antog FN den allmänna förklaringen om de mänskliga rättigheterna?", ["1948","1918","1966","2000"], 0, "Det var efter andra världskriget och Förintelsen.", {k:["rg"]}],
+ ["Vad betyder det att de mänskliga rättigheterna är universella?", ["De gäller lika för alla människor","De gäller bara i Europa","De gäller bara vuxna","De gäller bara medborgare"], 0, "Rättigheterna hänger också ihop, och ingen är viktigare än någon annan.", {k:["rg"]}],
+ ["Vem är ytterst ansvarig för att de mänskliga rättigheterna följs i Sverige?", ["Regeringen","FN","EU","Varje enskild person"], 0, "Staten ansvarar, och regeringen gör det bland annat genom att föreslå lagar och styra myndigheterna.", {k:["rg"]}],
+ ["Vart kan en enskild person vända sig om staten brutit mot Europakonventionen?", ["Europadomstolen","Riksdagen","Kungen","FN:s säkerhetsråd"], 0, "Europakonventionen kom 1950 och gäller i alla Europarådets medlemsländer.", {k:["rg"]}],
+ ["Vad är medborgerliga rättigheter?", ["Rättigheter som skyddar individen mot staten, som rätt till rättvis rättegång","Skyldigheten att betala skatt","Rätten att bli medborgare","Rätten att bli politiker"], 0, "Exempel är rätt till liv, skydd mot tortyr, tanke- och religionsfrihet och skydd mot diskriminering.", {k:["rg"]}],
+ ["Vad är nepotism?", ["Att gynna släkt och vänner","Att ta emot mutor","Att fuska i val","Att sprida propaganda"], 0, "Till exempel att ge ett jobb till en släkting i stället för den mest lämpade.", {k:["bg"]}],
+ ["Vad är korruption?", ["Att missbruka sin makt för egen vinning, till exempel genom mutor","Att rösta på fel parti","Att demonstrera utan tillstånd","Att kritisera regeringen"], 0, "Korruption bryter mot principen att alla ska behandlas lika.", {k:["vg","bg"]}],
+ ["Vad är lobbyism?", ["Att försöka påverka politiker för en grupps eller ett företags intressen","Att rösta i ett val","Att arbeta som journalist","Att döma i domstol"], 0, "Det kan ge kunskap, men den med mycket pengar kan få mer inflytande.", {k:["bg"]}],
+ ["Vad kännetecknar populism?", ["Att ställa ”folket” mot en ”elit” och lova enkla lösningar","Att alltid följa experterna","Att bara arbeta med lokala frågor","Att vilja avskaffa alla val"], 0, "Populism finns både till höger och till vänster.", {k:["bg"]}],
+ ["Vad kännetecknar politisk extremism?", ["Att vilja förändra samhället i grunden utan att acceptera demokratins spelregler","Att ha starka åsikter i en fråga","Att vara med i ett parti","Att demonstrera fredligt"], 0, "Våldsbejakande extremism använder hot, våld och terror.", {k:["bg"]}],
+ ["Vad är majoritetstyranni?", ["När majoriteten förtrycker minoriteten","När ett parti har egen majoritet","När alla är överens","När minoriteten bestämmer"], 0, "Därför skyddar grundlagar och mänskliga rättigheter även dem som är färre.", {k:["lh","bg"]}],
+ ["Vad kännetecknar civil olydnad?", ["Man bryter öppet och utan våld mot en lag och är beredd att ta straffet","Man bryter i hemlighet mot lagen","Man använder våld för att protestera","Man röstar blankt"], 0, "Rosa Parks och Gandhi är kända exempel.", {k:["bg"]}],
+ ["Vad säger den demokratiska fredsteorin?", ["Demokratier krigar sällan eller aldrig mot varandra","Demokratier vinner alltid krig","Diktaturer krigar aldrig","Alla länder blir demokratier"], 0, "Ledarna måste stå till svars inför väljarna, och konflikter löses genom förhandling.", {k:["bg"]}],
+ ["Vad är en militärdiktatur?", ["När militären har tagit makten, ofta genom en statskupp","När landet har en stor armé","När landet är i krig","När försvarsministern bestämmer"], 0, "Ett exempel är Myanmar efter statskuppen 2021.", {k:["bg"]}],
+ ["Vad är en partidiktatur?", ["När ett enda parti har all makt och andra partier är förbjudna","När ett parti har flest röster i ett fritt val","När två partier samarbetar","När partierna är överens"], 0, "Kina och Nordkorea är exempel.", {k:["bg"]}],
+ ["Vad menas med att demokrati har ett instrumentellt värde?", ["Demokratin är ett medel för att nå annat, som fred och välstånd","Demokratin är bra i sig själv","Demokratin är gammal","Demokratin är en sorts musik"], 0, "Att demokratin är bra i sig kallas egenvärde.", {k:["bg"]}],
+ ["Vilken demokratimodell betonar öppna samtal och argument före beslut?", ["Samtalsdemokrati","Valdemokrati","Direktdemokrati","Egalitär demokrati"], 0, "Man ska kunna ändra åsikt när man hör bättre argument.", {k:["bg"]}],
+ ["Vilken demokratimodell betonar att medborgarna ska delta aktivt även mellan valen?", ["Deltagardemokrati","Valdemokrati","Liberal demokrati","Representativ demokrati"], 0, "Till exempel i föreningar, partier och demonstrationer.", {k:["bg"]}],
+ ["Vilken demokratimodell betonar skydd för individens rättigheter mot staten och majoriteten?", ["Liberal demokrati","Deltagardemokrati","Samtalsdemokrati","Direktdemokrati"], 0, "Sverige och de flesta västländer räknas som liberala demokratier.", {k:["bg"]}],
+ ["Vilken demokratimodell betonar att alla grupper ska ha lika resurser att påverka?", ["Egalitär demokrati","Valdemokrati","Liberal demokrati","Samtalsdemokrati"], 0, "Stora skillnader i pengar, utbildning eller hälsa ska inte ge ojämlik politisk makt.", {k:["bg"]}],
+ ["Vilket valsystem har Sverige?", ["Proportionella val","Majoritetsval i enmansvalkretsar","Inga val","Lottning"], 0, "Partierna får platser efter sin andel av rösterna. Ett parti behöver minst 4 procent för att komma in i riksdagen.", {k:["rd","bg"]}],
+ ["Vad är typiskt för majoritetsval?", ["Den som får flest röster i valkretsen får hela platsen","Alla partier får platser efter sin andel","Alla röster räknas lika över hela landet","Folket röstar om varje lag"], 0, "Det gynnar stora partier. Storbritannien och USA har majoritetsval.", {k:["bg"]}],
+ ["Vad är pluralism?", ["Att det finns många partier, åsikter, medier och organisationer","Att ett parti har all makt","Att alla tycker lika","Att det finns många myndigheter"], 0, "Ingen enskild grupp har all makt.", {k:["bg"]}],
+ ["Vilken grundregel för demokrati lyfter Levande historia fram?", ["Majoriteten bestämmer, men minoriteten ska respekteras","Den starkaste bestämmer","Bara de som betalar skatt har en röst","Minoriteten bestämmer alltid"], 0, "Andra grundregler är att alla har lika värde, att alla har en röst var och att alla får säga vad de tycker.", {k:["lh"]}],
+ ["Vad kallas medierna ibland, eftersom de granskar makten?", ["Den tredje statsmakten","Den lagstiftande makten","Den dömande makten","Fjärde riksdagen"], 0, "Medierna informerar, granskar och är ett forum för debatt.", {k:["rd"]}],
+ ["Vad är ett demokratiskt underskott?", ["Att medborgarna har för lite inflytande och insyn i besluten","Att staten har för lite pengar","Att det finns för många partier","Att det är för många val"], 0, "Orsaker kan vara lågt valdeltagande eller att beslut fattas långt från folket.", {k:["bg"]}],
+ ["Vad är den offentliga makten?", ["Den makt som stat, regioner och kommuner utövar över medborgarna","Makten som företag har","Makten i familjen","Makten som medierna har"], 0, "Den ska enligt regeringsformen utövas under lagarna.", {k:["rd","vg"]}],
+ ["Vilka sex principer har den statliga värdegrunden?", ["Demokrati, legalitet, objektivitet, fri åsiktsbildning, respekt, effektivitet och service","Frihet, jämlikhet och broderskap","Lag, ordning och straff","Snabbhet, lönsamhet och tillväxt"], 0, "Alla som arbetar i staten ska följa dem.", {k:["vg"]}]
+];
+
+/* ===================== BEGREPPSKORT ===================== */
+/* [kategori, begrepp, förklaring, källa, 1 = inte med i begreppsquizet] */
+const CARDS = [
+ ["Makt","Makt","Förmågan att få andra att göra något de annars inte skulle ha gjort, eller att kunna påverka beslut och samhället.",{k:["bg"]}],
+ ["Makt","Maktmissbruk","När någon använder sin ställning på ett otillåtet sätt eller för att gynna sig själv, till exempel genom mutor, valfusk eller onödigt våld.",{k:["bg"]}],
+ ["Makt","Maktmedel","Det man använder för att påverka eller kontrollera andra: våld och tvång, pengar, information och kunskap, lagar och position, organisation och karisma.",{k:["bg"]}],
+ ["Makt","Maktkoncentration","När all makt samlas hos en person, ett parti eller en liten grupp. Ökar risken för missbruk.",{k:["bg"]}],
+ ["Makt","Pluralism","Mångfald av partier, åsikter, medier och organisationer som konkurrerar, så att ingen grupp har all makt.",{k:["bg"]}],
+ ["Makt","Konsensus","Samförstånd. Alla inblandade är överens om ett beslut.",{k:["bg"]}],
+ ["Makt","Den offentliga makten","Den makt som stat, regioner och kommuner utövar över medborgarna, genom riksdag, regering, myndigheter och domstolar. Ska utövas under lagarna.",{k:["rd","vg"]}],
+ ["Demokrati","Demokrati","Folkstyre. Medborgarna kan påverka hur landet styrs, till exempel genom fria val, och alla har lika värde och samma rättigheter.",{k:["rd"]},1],
+ ["Demokrati","Direktdemokrati","Medborgarna bestämmer själva direkt i en sakfråga, till exempel i en folkomröstning.",{k:["rd"]}],
+ ["Demokrati","Representativ demokrati","Folket väljer företrädare i regelbundna val, och de fattar besluten i folkets ställe. Sverige är ett exempel.",{k:["rd"]}],
+ ["Demokrati","Valdemokrati","Modell där fria och rättvisa val är det viktigaste. Medborgarna väljer vilka som ska styra och kan rösta bort dem.",{k:["bg"]}],
+ ["Demokrati","Deltagardemokrati","Modell där medborgarna ska vara aktiva även mellan valen, i partier, föreningar, folkomröstningar och demonstrationer.",{k:["bg"]}],
+ ["Demokrati","Samtalsdemokrati","Modell där beslut ska föregås av öppna och jämlika samtal där argument vägs och man kan ändra åsikt.",{k:["bg"]}],
+ ["Demokrati","Liberal demokrati","Modell som utöver fria val skyddar individens fri- och rättigheter mot staten och majoriteten, med rättsstat och maktdelning.",{k:["bg"]}],
+ ["Demokrati","Egalitär demokrati","Modell där alla grupper ska ha lika möjligheter att påverka, så att skillnader i pengar, utbildning eller hälsa inte ger ojämlik politisk makt.",{k:["bg"]}],
+ ["Demokrati","Allmän rösträtt","Alla vuxna medborgare får rösta, oavsett kön, inkomst eller förmögenhet. I Sverige hölls det första sådana riksdagsvalet 1921.",{k:["rd"]}],
+ ["Demokrati","Demokratisering","Processen när ett land går från auktoritärt styre till demokrati, som Sverige i början av 1900-talet.",{k:["bg"]}],
+ ["Demokrati","Instrumentellt värde","Att något är bra som ett medel för att nå något annat, som när demokrati ger fred och välstånd. Motsatsen är egenvärde, att något är bra i sig.",{k:["bg"]}],
+ ["Demokrati","Demokratiska fredsteorin","Idén att demokratier sällan eller aldrig krigar mot varandra.",{k:["bg"]}],
+ ["Statsskick","Konstitution (författning)","Ett lands grundläggande regler för hur det ska styras och vilka rättigheter medborgarna har. I Sverige de fyra grundlagarna.",{k:["rd"]}],
+ ["Statsskick","Grundlag","Lag som står över alla andra lagar och är svårare att ändra: två likadana beslut i riksdagen med ett val emellan. Sverige har fyra.",{k:["rd"]}],
+ ["Statsskick","Sveriges fyra grundlagar","Regeringsformen, successionsordningen, tryckfrihetsförordningen och yttrandefrihetsgrundlagen.",{k:["rd"]},1],
+ ["Statsskick","Parlament","Den folkvalda församling som stiftar lagar. I Sverige riksdagen, med 349 ledamöter.",{k:["rd"]}],
+ ["Statsskick","Valsystem","Reglerna för hur rösterna i ett val omvandlas till platser, alltså mandat.",{k:["bg"]}],
+ ["Statsskick","Majoritetsval","Den som får flest röster i en valkrets vinner hela platsen. Gynnar stora partier. Till exempel Storbritannien och USA.",{k:["bg"]}],
+ ["Statsskick","Proportionella val","Partierna får platser i förhållande till hur stor andel av rösterna de fått. Sverige har det, med en spärr på 4 procent.",{k:["bg"]}],
+ ["Statsskick","Folksuveränitetsprincipen","All offentlig makt utgår från folket, och den folkvalda församlingen, i Sverige riksdagen, står högst.",{k:["rd"]}],
+ ["Statsskick","Maktdelningsprincipen","Makten delas på tre jämbördiga delar som kontrollerar och balanserar varandra. Idé från Montesquieu. Tydligast i USA.",{k:["bg"]}],
+ ["Statsskick","Maktdelning","Att makten delas upp i lagstiftande, verkställande och dömande makt, så att ingen blir för mäktig.",{k:["bg"]},1],
+ ["Statsskick","Lagstiftande makt","Stiftar lagarna och beslutar om budget och skatter. I Sverige riksdagen.",{k:["rd"]}],
+ ["Statsskick","Verkställande makt","Genomför besluten och styr landet. I Sverige regeringen och myndigheterna.",{k:["rd"]}],
+ ["Statsskick","Dömande makt","Dömer enligt lagarna och avgör tvister och brottmål. Domstolarna, som ska vara självständiga.",{k:["rd","vg"]}],
+ ["Rättsstat","Rättsstat","En stat där den offentliga makten är bunden av lagarna, lagarna gäller lika för alla och självständiga domstolar skyddar mot godtycke.",{k:["rg","vg"]},1],
+ ["Rättsstat","Rättssäkerhet","Skyddet för den enskilde mot godtycke: likhet inför lagen, rättvis rättegång inom rimlig tid, rätt att försvara sig och att överklaga.",{k:["rg","rd"]}],
+ ["Rättsstat","Godtycke","Beslut efter eget tycke, utan stöd i regler eller sakliga skäl.",{k:["vg"]}],
+ ["Rättsstat","Opartiskhet","Att inte ta parti för någon och inte låta personliga intressen eller relationer påverka ett beslut.",{k:["vg","fl"]}],
+ ["Rättsstat","Legalitetsprincipen","Den offentliga makten utövas under lagarna. Myndigheter får bara göra det som har stöd i lag.",{k:["fl","vg"]}],
+ ["Rättsstat","Proportionalitetsprincipen","Ett ingrepp mot en person får inte vara mer långtgående än vad som behövs och ska stå i rimligt förhållande till syftet.",{k:["fl"]}],
+ ["Rättsstat","Officialprincipen","Myndigheten eller domstolen ansvarar själv för att ett ärende blir så utrett som det behöver.",{k:["fl"]}],
+ ["Rättsstat","Objektivitets- och likabehandlingsprincipen","Myndigheter och domstolar ska vara sakliga och opartiska, och lika fall ska behandlas lika.",{k:["fl","vg"]}],
+ ["Rättsstat","Rättssystem","Lagarna och de som tillämpar dem: polis, åklagare, advokater, domstolar och kriminalvård.",{k:["rg"]}],
+ ["Rättsstat","Statliga värdegrundens sex principer","Demokrati, legalitet, objektivitet, fri åsiktsbildning, respekt för allas lika värde samt effektivitet och service.",{k:["vg"]},1],
+ ["Rättigheter","Politiska rättigheter","Rätten att delta i politiken: rösträtt, rätt att ställa upp i val, yttrandefrihet, mötes- och föreningsfrihet.",{k:["rd","rg"]}],
+ ["Rättigheter","Medborgerliga rättigheter","Skyddar individen mot staten: rätt till liv, frihet och rättvis rättegång, skydd mot tortyr och diskriminering, religionsfrihet.",{k:["rg"]}],
+ ["Rättigheter","Opinionsfriheter","Friheterna i regeringsformens andra kapitel: yttrandefrihet, informationsfrihet, mötesfrihet, demonstrationsfrihet, föreningsfrihet och religionsfrihet.",{k:["bg"]}],
+ ["Rättigheter","Pressfrihet","Rätten att fritt ge ut tidningar och böcker utan censur. Skyddas av tryckfrihetsförordningen, sedan 1766.",{k:["rd"]}],
+ ["Rättigheter","Mänskliga rättigheter","Universella rättigheter som gäller lika för alla. Reglerar förhållandet mellan staten och individen. FN:s allmänna förklaring kom 1948.",{k:["rg"]},1],
+ ["Hot och problem","Korruption","Missbruk av makt eller ställning för egen vinning, till exempel mutor.",{k:["vg","bg"]}],
+ ["Hot och problem","Nepotism","Att gynna släkt och vänner, till exempel med jobb, i stället för att välja den mest lämpade.",{k:["bg"]}],
+ ["Hot och problem","Demokratiskt underskott","När medborgarna har för lite inflytande eller insyn, och beslut fattas långt från folket eller av personer som inte är folkvalda.",{k:["bg"]}],
+ ["Hot och problem","Lobbying/Lobbyism","Att försöka påverka politiker och tjänstemän för en organisations eller ett företags intressen.",{k:["bg"]}],
+ ["Hot och problem","Politisk extremism","Rörelser som vill förändra samhället i grunden och inte accepterar demokratins spelregler. Den våldsbejakande använder våld och hot.",{k:["bg"]}],
+ ["Hot och problem","Populism","Politik som ställer ”folket” mot en ”elit” och lovar enkla lösningar på svåra problem.",{k:["bg"]}],
+ ["Hot och problem","Majoritetstyranni","När de som är flest använder sin makt för att förtrycka dem som är färre.",{k:["bg"]}],
+ ["Hot och problem","Demokratiskt dilemma","När demokratiska värden krockar, till exempel om de som vill avskaffa demokratin ska ha samma yttrandefrihet som andra.",{k:["bg"]}],
+ ["Hot och problem","Aktivism","Att engagera sig aktivt för en fråga utanför partierna, genom demonstrationer, kampanjer, bojkotter eller namninsamlingar.",{k:["bg"]}],
+ ["Hot och problem","Civil olydnad","Att öppet och utan våld bryta mot en lag för att protestera mot en orättvisa, och vara beredd att ta straffet.",{k:["bg"]}],
+ ["Diktatur","Auktoritärt styre","Makten samlad hos en ledare eller en liten grupp, inga fria val och begränsade fri- och rättigheter.",{k:["bg"]}],
+ ["Diktatur","Partidiktatur","Ett enda parti har all makt och andra partier är förbjudna, till exempel Kina och Nordkorea.",{k:["bg"]}],
+ ["Diktatur","Militärdiktatur","Militären har tagit makten, ofta genom en statskupp, till exempel Myanmar efter 2021.",{k:["bg"]}],
+ ["Diktatur","Propaganda","Medvetet ensidig och ofta vilseledande information som ska styra vad människor tycker.",{k:["rd","bg"]}]
+];
+
+/* ===================== MAKTKARTAN ===================== */
+const MAP = [
+ {h:"Folket", tag:"folksuveränitet", cls:"folk", l:["All offentlig makt i Sverige utgår från folket.","I nästa val kan folket byta makthavare."]},
+ {arrow:"väljer vart fjärde år"},
+ {h:"Riksdagen", tag:"lagstiftande", cls:"lag", l:["349 ledamöter. Stiftar lagar, beslutar om","budget och skatter, väljer statsminister","och granskar regeringen."]},
+ {arrow:"kan avsätta regeringen"},
+ {h:"Regeringen", tag:"verkställande", cls:"verk", l:["Styr landet, lägger förslag till lagar","och genomför riksdagens beslut."]},
+ {arrow:"styr genom lagar"},
+ {h:"Myndigheterna", tag:"verkställande", cls:"verk", l:["Till exempel Polisen och Skatteverket.","Följer lagen, sakligt och opartiskt.","Ingen minister styr ett enskilt ärende."]},
+ {gap:"och vid sidan av"},
+ {pair:[
+   {h:"Domstolarna", tag:"dömande", cls:"dom", l:["Självständiga.","Dömer efter lagen.","Ingen får styra","hur de dömer."]},
+   {h:"Granskarna", tag:"kontroll", cls:"gr", l:["Medierna, JO,","Riksrevisionen och","KU granskar","makthavarna."]}
+ ]}
+];
+
+const CHAINS = [
+ ["Varför kan folket i Sverige byta makthavare utan våld?",["All offentlig makt utgår från folket, det är folksuveränitetsprincipen","Folket väljer riksdagen i fria val vart fjärde år","Riksdagen väljer statsminister och kan avsätta regeringen","Regeringen måste därför ha riksdagens stöd, det kallas parlamentarism","Är folket missnöjt röstar det fram en ny riksdag, och makten byts fredligt"]],
+ ["Varför får en minister inte bestämma hur Skatteverket ska besluta i ditt ärende?",["Myndigheterna lyder under regeringen, men regeringen styr genom lagar och allmänna beslut","I ett enskilt ärende ska myndigheten bara följa lagen, det är legalitetsprincipen","Den ska vara saklig och opartisk, så att lika fall behandlas lika","Annars kunde makthavare gynna vänner och straffa kritiker","Då skulle rättssäkerheten och förtroendet försvinna"]],
+ ["Varför behöver demokratin fria medier?",["Folket ska fatta beslut i val","För det behövs information om vad makthavarna gör","Medierna informerar och granskar makten","Tryckfrihetsförordningen och yttrandefrihetsgrundlagen skyddar dem mot censur","Då kan maktmissbruk avslöjas och väljarna utkräva ansvar"]],
+ ["Varför kan korruption göra att färre röstar?",["Makthavare använder makten för egen vinning","Lika fall behandlas inte lika","Medborgarna tappar förtroendet för politiker och myndigheter","De tror inte att deras röst spelar någon roll","Färre deltar, och makten samlas hos några få"]],
+ ["Varför räcker det inte att majoriteten bestämmer?",["I en demokrati avgör majoriteten","Men demokrati bygger också på alla människors lika värde","En majoritet kan vilja ta rättigheter från en minoritet, det är majoritetstyranni","Grundlagar, mänskliga rättigheter och oberoende domstolar sätter gränser","Majoriteten bestämmer, men minoriteten ska respekteras"]],
+ ["Varför ville Montesquieu dela makten i tre delar?",["Makt som samlas hos en person eller grupp missbrukas lätt","Den som både stiftar lagar, verkställer dem och dömer kan göra vad den vill","Därför delas makten i lagstiftande, verkställande och dömande","Delarna kontrollerar och balanserar varandra","Medborgarnas frihet skyddas"]],
+ ["Varför krigar demokratier sällan mot varandra?",["Ledarna måste stå till svars inför väljare som sällan vill ha krig","Konflikter löses vanligen genom förhandling och kompromiss","Demokratier handlar och samarbetar med varandra","De delar värderingar som mänskliga rättigheter och rättsstat","Det kallas den demokratiska fredsteorin"]],
+ ["Varför är det farligt när en regering tar kontroll över domstolarna?",["Domstolarna ska döma enbart efter lagen","Styrs de av regeringen kan kritiker och journalister dömas","Då vågar färre använda sin yttrandefrihet","Rättssäkerheten försvinner och makten kan inte prövas","Steg för steg kan demokratin bli en diktatur"]]
+];
+
+
+/* ===================== HJÄLP ===================== */
+const LS = "sh-demokrati-";
+const load = (k,d) => { try{ const v = localStorage.getItem(LS+k); return v ? JSON.parse(v) : d; }catch(e){ return d; } };
+const store = (k,v) => { try{ localStorage.setItem(LS+k, JSON.stringify(v)); }catch(e){} };
+const esc = s => String(s).replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const urList = r => r && r.u!==undefined ? [].concat(r.u) : [];
+const refTags = (r,noUR) => r ? (r.k||[]).map(k=>`<span class="tag ${SRC[k][1]}">${SRC[k][0]}</span>`).join('') + (noUR?[]:urList(r)).map(u=>`<a class="tag ur" href="${UR[u][1]}" target="_blank" rel="noopener">▶ UR: ${UR[u][0]}</a>`).join('') : '';
+const urBtns = r => { const u=urList(r); return u.length ? `<div class="urrow">${u.map(x=>`<a class="urbtn" href="${UR[x][1]}" target="_blank" rel="noopener">▶ Titta på UR: ${UR[x][0]}</a>`).join('')}</div>` : ''; };
+const refLine = r => {
+  const k=(r.k||[]).map(x=>SRC[x][0]);
+  const u=urList(r).map(x=>'UR-programmet '+UR[x][0]);
+  return (k.length?'Källa: '+k.join(', ')+'.':'') + (u.length?' Titta gärna på '+u.join(' och ')+'.':'');
+};
+function shuffle(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+
+/* Flikar */
+function showTab(id){
+  document.querySelectorAll('nav.tabs button').forEach(x=>x.setAttribute('aria-selected', x.dataset.tab===id));
+  document.querySelectorAll('section.panel').forEach(p=>p.classList.toggle('active', p.id===id));
+  window.scrollTo({top:0});
+}
+document.querySelectorAll('nav.tabs button').forEach(b=>b.addEventListener('click',()=>showTab(b.dataset.tab)));
+
+/* ===================== LÄS ===================== */
+document.getElementById('topics').innerHTML = TOPICS.map((t,i)=>
+  `<details class="topic"><summary><span>${i+1}. ${t.t}</span><small>${t.s}</small></summary><div class="tbody"><div class="where" style="margin:8px 0 2px">${refTags(t.r,1)}</div>${urBtns(t.r)}${t.h}</div></details>`).join('');
+
+/* ===================== RÄTTNING ===================== */
+const L = 'a-z0-9åäöéü';
+const fold = s => s.replace(/[åä]/g,'a').replace(/ö/g,'o').replace(/[éè]/g,'e').replace(/ü/g,'u');
+const norm = s => String(s).toLowerCase().replace(/[–—]/g,'-').replace(/\s+/g,' ');
+function reFor(a){
+  let mode='sub';
+  if(a[0]==='^'){ mode='start'; a=a.slice(1); } else if(a[0]==='='){ mode='word'; a=a.slice(1); }
+  const e=a.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+  if(mode==='sub') return new RegExp(e);
+  if(mode==='start') return new RegExp('(^|[^'+L+'])'+e);
+  return new RegExp('(^|[^'+L+'])'+e+'(?=$|[^'+L+'])');
+}
+function prep(text){
+  const raw=norm(text);
+  return {raw, fold: /[åäö]/.test(raw) ? null : fold(raw)};
+}
+function has(T,a){
+  const al=a.toLowerCase();
+  if(reFor(al).test(T.raw)) return true;
+  if(T.fold!==null) return reFor(fold(al)).test(T.fold);
+  return false;
+}
+function pointHit(T,p){
+  if(p.min){ let c=0; for(const a of p.g[0]) if(has(T,a)) c++; return c>=p.min; }
+  return p.g.every(grp=>grp.some(a=>has(T,a)));
+}
+function gradeText(s,text){
+  const T=prep(text);
+  const hits=[]; s.p.forEach((p,i)=>{ if(pointHit(T,p)) hits.push(i); });
+  return {hits};
+}
+const needOf = s => s.need || Math.ceil(s.p.length*2/3);
+function verdictOf(s,c){
+  if(c.length>=needOf(s)) return 0;
+  if(c.length>=1) return 1;
+  return 2;
+}
+const VERD=['Rätt','Delvis rätt','Inte rätt än'];
+
+/* Gemensam rendering för frågor och resonemang */
+function sqHTML(s,i,n,label,showLabel,ph){
+  const c=n.c||[];
+  const v = n.g ? verdictOf(s,c) : -1;
+  return `<div class="sq ${v===0?'done':''}" data-i="${i}">
+      <div class="where"><span>${label}</span>${refTags(s.r,1)}</div>
+      <div class="qt">${s.q}</div>
+      ${urBtns(s.r)}
+      <textarea aria-label="Ditt svar: ${esc(label)}" placeholder="${ph}">${esc(n.t||'')}</textarea>
+      <div class="row"><button class="btn primary" data-act="grade">${n.g?'Rätta igen':'Rätta'}</button><button class="btn" data-act="show">${n.open?'Dölj svaret':showLabel}</button></div>
+      ${n.err?`<div class="fb"><p style="margin:0">${esc(n.err)}</p></div>`:''}
+      ${n.g?`<div class="fb"><p class="verdict v${v}">${VERD[v]}</p>
+        <p class="small" style="margin:0 0 4px">Det här ska finnas med, minst ${needOf(s)} av ${s.p.length}. Har du skrivit något med egna ord, bocka i det själv.</p>
+        <ul class="checks">${s.p.map((p,j)=>`<li><label><input type="checkbox" data-j="${j}" ${c.includes(j)?'checked':''}><span class="${c.includes(j)?'hit':''}">${p.t}</span></label></li>`).join('')}</ul></div>`:''}
+      ${n.open?`<div class="ans"><p>${s.a}</p><p class="small" style="margin:0">${refLine(s.r)}</p></div>`:''}
+    </div>`;
+}
+function wireList(el, DATA, notesRef, keyFn, save, render){
+  el.addEventListener('input',e=>{
+    if(e.target.tagName!=='TEXTAREA') return;
+    const k=keyFn(+e.target.closest('.sq').dataset.i); const N=notesRef(); N[k]=N[k]||{}; N[k].t=e.target.value; save();
+  });
+  el.addEventListener('click',e=>{
+    const card=e.target.closest('.sq'); if(!card) return;
+    const i=+card.dataset.i, k=keyFn(i), act=e.target.dataset.act; if(!act) return;
+    const N=notesRef(); N[k]=N[k]||{};
+    if(act==='show'){ N[k].open=!N[k].open; }
+    if(act==='grade'){
+      const t=card.querySelector('textarea').value.trim();
+      N[k].t=t;
+      if(!t){ N[k].err='Skriv ett svar först, sedan kan det rättas.'; }
+      else { delete N[k].err; N[k].c=gradeText(DATA[i],t).hits; N[k].g=true; }
+    }
+    save(); render();
+    const again=el.querySelector(`.sq[data-i="${i}"]`); if(again && act==='grade'){ const fb=again.querySelector('.fb'); if(fb) fb.scrollIntoView({block:'nearest'}); }
+  });
+  el.addEventListener('change',e=>{
+    if(e.target.type!=='checkbox') return;
+    const i=+e.target.closest('.sq').dataset.i, k=keyFn(i), j=+e.target.dataset.j;
+    const N=notesRef(); const c=new Set(N[k].c||[]); e.target.checked?c.add(j):c.delete(j); N[k].c=[...c].sort((a,b)=>a-b); save(); render();
+  });
+}
+
+/* ===================== FRÅGOR ===================== */
+let notes = load('notes', {});
+const saveNotes = ()=>store('notes',notes);
+let qcat = 'Alla';
+const key = i => 'q'+(i+1);
+const isDone = i => { const n=notes[key(i)]; return !!(n && n.g && verdictOf(STUDY[i], n.c||[])===0); };
+function renderQFilter(){
+  const cats=['Alla',...CATS,'Inte klara'];
+  document.getElementById('qfilter').innerHTML = cats.map(c=>`<button class="chip" aria-pressed="${c===qcat}" data-c="${esc(c)}">${c}</button>`).join('');
+}
+document.getElementById('qfilter').addEventListener('click',e=>{
+  const c=e.target.dataset.c; if(!c) return; qcat=c; renderQFilter(); renderQ();
+});
+const ql=document.getElementById('qlist');
+function renderQ(){
+  const shown = STUDY.map((s,i)=>i).filter(i=> qcat==='Alla' || (qcat==='Inte klara' ? !isDone(i) : STUDY[i].c===qcat));
+  ql.innerHTML = shown.length ? shown.map(i=>sqHTML(STUDY[i],i,notes[key(i)]||{},`Fråga ${i+1} · ${STUDY[i].c}`,'Visa svaret','Skriv ditt svar med egna ord …')).join('')
+    : `<div class="box"><p style="margin:0">Alla frågor här sitter. Snyggt!</p></div>`;
+  const done = STUDY.filter((s,i)=>isDone(i)).length;
+  document.getElementById('qprog').textContent = `${done} av ${STUDY.length} frågor är rätt.`;
+}
+wireList(ql, STUDY, ()=>notes, key, saveNotes, renderQ);
+document.getElementById('qreset').onclick=()=>{ notes={}; saveNotes(); renderQ(); };
+renderQFilter(); renderQ();
+
+/* ===================== RESONERA ===================== */
+let rnotes = load('rnotes', {});
+const saveR = ()=>store('rnotes',rnotes);
+const rkey = i => 'r'+(i+1);
+const rDone = i => { const n=rnotes[rkey(i)]; return !!(n && n.g && verdictOf(REASON[i], n.c||[])===0); };
+const rl=document.getElementById('rlist');
+function renderR(){
+  rl.innerHTML = REASON.map((s,i)=>sqHTML(s,i,rnotes[rkey(i)]||{},`Resonemang ${i+1}`,'Visa ett bra svar','Förklara steg för steg med egna ord …')).join('');
+  document.getElementById('rprog').textContent = `${REASON.filter((s,i)=>rDone(i)).length} av ${REASON.length} resonemang är klara.`;
+}
+wireList(rl, REASON, ()=>rnotes, rkey, saveR, renderR);
+document.getElementById('rreset').onclick=()=>{ rnotes={}; saveR(); renderR(); };
+renderR();
+
+/* ===================== QUIZ ===================== */
+const QCARDS = CARDS.map((c,i)=>i).filter(i=>!CARDS[i][4]);
+function buildBegrepp(){
+  return QCARDS.map(ci=>{
+    const c=CARDS[ci];
+    const same=shuffle(QCARDS.filter(j=>j!==ci && CARDS[j][0]===c[0]));
+    const other=shuffle(QCARDS.filter(j=>j!==ci && CARDS[j][0]!==c[0]));
+    const pick=[ci, ...same.slice(0,3)];
+    while(pick.length<4) pick.push(other[pick.length]);
+    return [`<span class="small" style="display:block;font-weight:400;margin-bottom:4px">Vilket begrepp passar?</span>${c[2]}`, pick.map(j=>CARDS[j][1]), 0, "", c[3], pick.map(j=>CARDS[j][2])];
+  });
+}
+const QSETS = {fr:{name:"Kunskapsfrågor"}, beg:{name:"Begreppen"}};
+let qset = load('qset','fr'); if(!QSETS[qset]) qset='fr';
+let QZ = [];
+function renderQSet(){
+  document.getElementById('quizset').innerHTML = Object.entries(QSETS).map(([k,v])=>`<button class="chip" aria-pressed="${k===qset}" data-s="${k}">${v.name}</button>`).join('');
+}
+document.getElementById('quizset').addEventListener('click',e=>{
+  const k=e.target.dataset.s; if(!k || k===qset) return;
+  qset=k; store('qset',k); renderQSet(); startQuiz();
+});
+let qorder=[], qi=0, qscore=0, wrong=[];
+function startQuiz(){ QZ = qset==='beg' ? buildBegrepp() : QUIZ; qorder=shuffle(QZ.map((q,i)=>i)); qi=0; qscore=0; wrong=[]; renderQuiz(); }
+function renderQuiz(){
+  const box=document.getElementById('quizbox');
+  if(qi>=qorder.length){
+    const pct=qscore/qorder.length;
+    const msg = pct>=0.9 ? "Riktigt starkt. Du är redo." : pct>=0.7 ? "Bra grund. Titta på det du missade." : "Läs sammanfattningen en gång till och kör igen.";
+    box.innerHTML = `<div class="qbox"><p class="qnum">Resultat</p><p class="score">${qscore} / ${qorder.length}</p><p>${msg}</p>
+      ${wrong.length?'<p><strong>Repetera:</strong></p>'+wrong.map(i=>`<div class="expl">${QZ[i][0]}<br><strong>${QZ[i][1][QZ[i][2]]}</strong><div class="where">${refTags(QZ[i][4])}</div></div>`).join(''):''}
+      <p style="margin-top:14px"><button class="btn primary" id="qagain">Kör igen</button></p></div>`;
+    document.getElementById('qagain').onclick=startQuiz; return;
+  }
+  const q=QZ[qorder[qi]];
+  const opts=shuffle(q[1].map((o,i)=>i));
+  box.innerHTML = `<div class="qbox"><div class="qnum">Fråga ${qi+1} av ${qorder.length}, ${qscore} rätt hittills</div>
+    <div class="where">${refTags(q[4])}</div>
+    <div class="qtext">${q[0]}</div>
+    ${opts.map(i=>`<button class="opt" data-i="${i}">${q[1][i]}</button>`).join('')}
+    <div id="qafter"></div></div>`;
+  box.querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(+b.dataset.i));
+}
+function answer(i){
+  const q=QZ[qorder[qi]], box=document.getElementById('quizbox');
+  box.querySelectorAll('.opt').forEach(b=>{ b.disabled=true; const n=+b.dataset.i; if(n===q[2]) b.classList.add('right'); else if(n===i) b.classList.add('wrong'); });
+  if(i===q[2]) qscore++; else wrong.push(qorder[qi]);
+  let ex = q[3] ? `<p class="expl">${q[3]}</p>` : '';
+  if(i!==q[2] && q[5]) ex += `<p class="expl"><b>${q[1][i]}</b> betyder: ${q[5][i]}</p>`;
+  if(i===q[2] && q[5]) ex += `<p class="expl">Rätt, det är <b>${q[1][i]}</b>.</p>`;
+  document.getElementById('qafter').innerHTML = `${ex}<p style="margin-top:12px"><button class="btn primary" id="qnext">${qi+1<qorder.length?'Nästa fråga':'Se resultat'}</button></p>`;
+  const n=document.getElementById('qnext'); n.onclick=()=>{ qi++; renderQuiz(); }; n.focus();
+}
+renderQSet(); startQuiz();
+
+/* ===================== KORT ===================== */
+let known = new Set(load('known', []));
+const saveKnown = ()=>store('known',[...known]);
+const ccats = ["Alla", ...new Set(CARDS.map(c=>c[0]))];
+let ccat="Alla", deck=[], idx=0, flipped=false;
+const cf=document.getElementById('cardfilter');
+cf.innerHTML = ccats.map(c=>`<button class="chip" aria-pressed="${c==='Alla'}" data-c="${esc(c)}">${c}</button>`).join('');
+cf.addEventListener('click',e=>{
+  const c=e.target.dataset.c; if(!c) return; ccat=c;
+  cf.querySelectorAll('.chip').forEach(x=>x.setAttribute('aria-pressed', x.dataset.c===c));
+  buildDeck();
+});
+function buildDeck(){
+  const all=CARDS.map((c,i)=>i).filter(i=>ccat==="Alla"||CARDS[i][0]===ccat);
+  deck = shuffle(all.filter(i=>!known.has(i))).concat(shuffle(all.filter(i=>known.has(i))));
+  idx=0; flipped=false; renderCard();
+}
+function renderCard(){
+  const c=CARDS[deck[idx]];
+  document.getElementById('fside').textContent = flipped ? "Svar" : `Begrepp · ${c[0].toLowerCase()}`;
+  document.getElementById('fcontent').innerHTML = flipped ? `<div class="fa">${c[2]}</div><div class="where">${refTags(c[3])}</div>` : `<div class="fq">${c[1]}?</div>`;
+  const nk=deck.filter(i=>known.has(i)).length;
+  document.getElementById('fcount').textContent = `${idx+1} av ${deck.length}, ${nk} kan du`;
+  document.getElementById('fknow').textContent = known.has(deck[idx]) ? "Kan den ✓" : "Jag kan den";
+}
+const flip=()=>{ flipped=!flipped; renderCard(); };
+document.getElementById('flash').addEventListener('click',e=>{ if(e.target.closest('a')) return; flip(); });
+document.getElementById('flash').addEventListener('keydown',e=>{ if(e.key===' '||e.key==='Enter'){ e.preventDefault(); flip(); } });
+document.getElementById('fnext').onclick=()=>{ idx=(idx+1)%deck.length; flipped=false; renderCard(); };
+document.getElementById('fprev').onclick=()=>{ idx=(idx-1+deck.length)%deck.length; flipped=false; renderCard(); };
+document.getElementById('fknow').onclick=()=>{ const k=deck[idx]; known.has(k)?known.delete(k):known.add(k); saveKnown(); renderCard(); };
+document.getElementById('freset').onclick=()=>{ known.clear(); saveKnown(); buildDeck(); };
+buildDeck();
+
+/* ===================== MAKTKARTAN ===================== */
+(function(){
+  const svg=document.getElementById('mapsvg');
+  const LH=15.5, X=14, W=332, PW=158, PX2=X+W-PW;
+  const tagCol={folk:'var(--red)',lag:'var(--lek)',verk:'var(--ok)',dom:'var(--warn)',gr:'var(--lk)'};
+  let y=12; const parts=[`<defs><marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" style="fill:var(--ink)"/></marker></defs>`];
+  const box=(b,x,w,yy,h,small)=>{
+    parts.push(`<rect x="${x}" y="${yy}" width="${w}" height="${h}" rx="6" class="bx ${b.cls}"/>`);
+    parts.push(`<text x="${x+12}" y="${yy+22}" class="t-h">${b.h}</text>`);
+    if(small) parts.push(`<text x="${x+12}" y="${yy+38}" class="t-tag" style="fill:${tagCol[b.cls]}">${b.tag}</text>`);
+    else parts.push(`<text x="${x+w-10}" y="${yy+21}" class="t-tag" text-anchor="end" style="fill:${tagCol[b.cls]}">${b.tag}</text>`);
+    const off = small ? 56 : 40;
+    b.l.forEach((line,m)=>parts.push(`<text x="${x+12}" y="${yy+off+m*LH}" class="t-s">${line}</text>`));
+  };
+  MAP.forEach(m=>{
+    if(m.arrow){
+      parts.push(`<line x1="64" y1="${y+2}" x2="64" y2="${y+38}" style="stroke:var(--ink);stroke-width:2" marker-end="url(#ah)"/>`);
+      parts.push(`<text x="80" y="${y+26}" class="t-lab">${m.arrow}</text>`);
+      y+=42; return;
+    }
+    if(m.gap){
+      parts.push(`<text x="180" y="${y+26}" class="t-lab" text-anchor="middle">${m.gap}</text>`);
+      y+=38; return;
+    }
+    if(m.pair){
+      const h=50+Math.max(...m.pair.map(b=>b.l.length))*LH;
+      box(m.pair[0],X,PW,y,h,1); box(m.pair[1],PX2,PW,y,h,1);
+      y+=h+12; return;
+    }
+    const h=34+m.l.length*LH; box(m,X,W,y,h); y+=h;
+  });
+  svg.setAttribute('viewBox',`0 0 360 ${y+4}`);
+  svg.insertAdjacentHTML('beforeend', parts.join(''));
+})();
+const ch=document.getElementById('chains');
+ch.innerHTML = CHAINS.map((c,i)=>`<div class="chain"><p class="cq">${c[0]}</p><button class="btn" data-ch="${i}">Visa kedjan</button><div id="chain${i}" hidden><ol>${c[1].map(x=>`<li>${x}</li>`).join('')}</ol></div></div>`).join('');
+ch.addEventListener('click',e=>{
+  const i=e.target.dataset.ch; if(i===undefined) return;
+  const d=document.getElementById('chain'+i); d.hidden=!d.hidden;
+  e.target.textContent = d.hidden ? 'Visa kedjan' : 'Dölj kedjan';
+});
+
+</script>
+</body>
+</html>
